@@ -18,4 +18,11 @@ public class MessageTest {
 
         assertEquals("Hola Mundo!", message.greet());
     }
+
+    @Test
+    public void messageGreetingDefaultLanguage2() {
+        Message message = new Message("Hola Mundo!", "Hello world!");
+
+        assertEquals("Hola Mundo!", message.greet());
+    }
 }
