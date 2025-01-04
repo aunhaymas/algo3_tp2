@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestJson {
+public class JsonTest {
 
     public static final String JSON_MESSAGES_JSON = "json/messages.json";
 
