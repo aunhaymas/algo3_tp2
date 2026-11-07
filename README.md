@@ -5,14 +5,16 @@
 
 Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA
 
-## Grupo {N}
+## Grupo {6}
 
-* **Integrante 1** - [integrante1](https://github.com/integrante1)
-* **Integrante 2** - [integrante2](https://github.com/integrante2)
-* **Integrante 3** - [integrante3](https://github.com/integrante3)
-* **Integrante 4** - [integrante4](https://github.com/integrante4)
+* **Alfredo Godoy** - [integrante1](https://github.com/aunhaymas)
+* **Integrante 2** - [integrante2](https://github.com/giuspepo)
+* **Integrante 3** - [integrante3](https://github.com/limtnez)
+* **Integrante 4** - [integrante4](https://github.com/llanquirobin)
+* **Integrante 5** - [integrante5](https://github.com/mcortizas)
 
-Corrector: **{Corrector}**
+
+Corrector: **{Diego Sánchez}**
 
 ## Aplicación
 
