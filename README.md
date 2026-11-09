@@ -11,7 +11,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Integrante 2** - [integrante2](https://github.com/giuspepo)
 * **Integrante 3** - [integrante3](https://github.com/limtnez)
 * **Integrante 4** - [integrante4](https://github.com/llanquirobin)
-* **Integrante 5** - [integrante5](https://github.com/mcortizas)
+* **Integrante 5** - [Matias Cortizas](https://github.com/mcortizas)
 
 
 Corrector: **{Diego Sánchez}**
