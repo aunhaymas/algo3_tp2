@@ -53,4 +53,22 @@ public class ParserTableroTest {
             parser.parsear(List.of());
         });
     }
+    
+    @Test
+    public void parserCreaTableroConTerrenosCorrectamenteUbicados() {
+        ParserTablero parser = new ParserTablero(new TerrenosFactory());
+        
+        Tablero tablero = parser.parsear(List.of(
+                "ESSSEESE",
+                "EESEEESE",
+                "EESESESE",
+                "EESEEESE",
+                "SESESESE",
+                "EESEEESE",
+                "EESEEESE",
+                "EESESESE"
+        ));
+
+        assertTrue(tablero.obtenerCasilla(new Coordenada(2, 0)).getTerreno() instanceof Suelo);
+    }
 }
