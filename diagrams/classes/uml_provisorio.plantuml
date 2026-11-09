@@ -1,0 +1,119 @@
+@startuml
+class Tablero {
+  - casillas: Casilla[64]
+  + colocarUnidad(u:Unidad,pos:Posicion)
+}
+Tablero "1" *-- "64" Casilla
+
+class Casilla {
+  + Casilla(t:Terreno)
+  + estaLibre(): boolean
+  + recibirAtaque(ataque: Ataque)
+  + aplicarEfecto(u: Unidad)
+  + recibirPieza(p:Pieza)
+  + removerPieza():Pieza
+}
+interface Pieza{
+    +recibirAtaque(at:Ataque)
+    +entrarEn(c:Casilla)
+    +esEmpujable():bool
+}
+abstract class Unidad implements Pieza{
+  - def: Defensa
+  + mov: Movimiento
+  +contaminar()
+  +sumergir()
+  
+}
+
+interface Terreno {
+  + aplicarEfecto(unidad: Unidad)
+}
+
+class Suelo implements Terreno {
+
+}
+
+class Edificio implements Pieza {
+  - vida: int = 1
+  - defensa: Defensa
+}
+
+class Montana implements Pieza {
+}
+
+class Agua implements Terreno {
+
+}
+
+class Acido implements Terreno {
+}
+
+
+
+class PiezaNula implements Pieza{
+}
+
+class Mech {
++arma :Arma
+}
+
+
+class Vek {
+}
+
+
+
+
+
+
+Casilla "1" o-- "1" Terreno
+Casilla "1" o--"0...1" Pieza
+
+
+Vek --|> Unidad
+Mech --|> Unidad
+
+
+
+note left of Casilla
+  Aplica el efecto de la casilla
+  al colocarla en recibirPieza.
+  haciendo p.entrarEn(this)
+
+end note
+note left of Pieza
+  Las piezas ocupan lugares
+  y pueden ser impactadas
+end note
+note as N1
+  Ambos frenan ataques
+  y reaccionan a las fisicas del
+  empuje. No aplican efectos. 
+  No dejarse empujar
+  es parte de su comportamiento.
+end note
+Montana -- N1
+Edificio -- N1
+note right of Casilla
+El estado libre se maneja
+con el comportamiento de la
+casilla (Colocar, Remover)
+endnote
+note as N2
+Hay ataques que viajan por el mapa. 
+Para evitar (if null) si se ataca 
+una casilla vacia
+end note
+PiezaNula -- N2
+note as N3
+Jugador es quien tiene
+referencias concretas de mech
+Le dice a tablero que mueva al mech
+usando colocar unidad
+endnote
+note top of Mech
+en sumergir(), cambia su EstadoMech 
+a EstadoSumergido.
+endnote
+@enduml
