@@ -5,6 +5,7 @@ public class Casilla {
     Pieza pieza;
     public Casilla(Efecto terreno) {
         this.estaLibre=true;
+        limpiarCasilla();
     }
 
     public boolean estaLibre() {
@@ -20,10 +21,15 @@ public class Casilla {
 
     public void removerPieza() {
         this.estaLibre=true;
+        limpiarCasilla();
         // this.pieza= piezaNula
     }
 
     public void recibirAtaque(Ataque ataque) {
         this.pieza.recibirAtaque(ataque);
+    }
+
+    private void limpiarCasilla(){
+        this.pieza=new PiezaNula();
     }
 }
