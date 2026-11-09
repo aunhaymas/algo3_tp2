@@ -5,8 +5,10 @@ import edu.fiuba.algo3.modelo.excepciones.CasillaVaciaException;
 public class Casilla {
     boolean estaLibre;
     Pieza pieza;
+    Efecto terrenoCasilla;
     public Casilla(Efecto terreno) {
         this.estaLibre=true;
+        this.terrenoCasilla=terreno;
         limpiarCasilla();
     }
 
@@ -40,5 +42,9 @@ public class Casilla {
     private void limpiarCasilla(){
         this.estaLibre = true;
         this.pieza=new PiezaNula();
+    }
+
+    public void aplicarEfecto(Unidad unidadMoquito) {
+        this.terrenoCasilla.aplicarEfecto(unidadMoquito);
     }
 }

@@ -87,4 +87,16 @@ public class CasillaTest {
         Casilla casilla = new Casilla(efectoNulo);
         assertThrows(CasillaVaciaException.class, casilla::removerPieza);
     }
+
+    @Test
+    public void casillaDelegaAplicacionDeEfectoEnSuTerreno() {
+        Efecto terrenoMock = Mockito.mock(Efecto.class);
+        Casilla casilla = new Casilla(terrenoMock);
+        Unidad unidadMoquito = Mockito.mock(Unidad.class);
+
+        casilla.aplicarEfecto(unidadMoquito);
+
+
+        Mockito.verify(terrenoMock).aplicarEfecto(unidadMoquito);
+    }
 }
