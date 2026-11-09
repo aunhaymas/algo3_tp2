@@ -55,4 +55,14 @@ public class CasillaTest {
         casilla.recibirAtaque(ataque);
         Mockito.verify(moquitoDePieza).recibirAtaque(ataque);
     }
+
+    @Test
+    public void casillaSinPiezasPuedeRecibirAtaques() {
+        Efecto efectoNulo = Mockito.mock(Efecto.class);
+        Casilla casilla = new Casilla(efectoNulo);
+        Ataque ataque = Mockito.mock(Ataque.class);
+        casilla.recibirAtaque(ataque);
+        // deberia ser un assert de que no lanzo error
+        casilla.recibirAtaque(ataque);
+    }
 }
