@@ -12,5 +12,11 @@ public class Casilla {
 
     public void recibirPieza(Pieza pieza) {
         this.estaLibre=false;
+        // pieza.entrarEn(this) para aplicar efecto
+    }
+
+    public void removerPieza() {
+        this.estaLibre=true;
+        // this.pieza= piezaNula
     }
 }

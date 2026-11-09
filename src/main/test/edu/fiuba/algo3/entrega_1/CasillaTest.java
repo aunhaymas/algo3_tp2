@@ -27,4 +27,15 @@ public class CasillaTest {
         casilla.recibirPieza(moquitoDePieza);
         assertFalse(casilla.estaLibre());
     }
+
+    @Test
+    public void casillaOcupadaSeLiberaCuandoUnaPiezaEsQuitada() {
+        Efecto suelo = Mockito.mock(Efecto.class);
+        Casilla casilla = new Casilla(suelo);
+        Pieza moquitoDePieza = Mockito.mock(Pieza.class);
+        casilla.recibirPieza(moquitoDePieza);
+
+        casilla.removerPieza();
+        assertTrue(casilla.estaLibre());
+    }
 }
