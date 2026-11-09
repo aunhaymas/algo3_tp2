@@ -1,12 +1,12 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.excepciones.CasillaVaciaException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CasillaTest {
 
@@ -80,5 +80,11 @@ public class CasillaTest {
         assertDoesNotThrow(() -> {
             casilla.recibirAtaque(ataque);
         });
+    }
+    @Test
+    public void removerPiezaDeUnaCasillaVaciaNoEstaPermitido() {
+        Efecto efectoNulo = Mockito.mock(Efecto.class);
+        Casilla casilla = new Casilla(efectoNulo);
+        assertThrows(CasillaVaciaException.class, casilla::removerPieza);
     }
 }
