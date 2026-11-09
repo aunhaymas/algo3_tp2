@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.excepciones.CasillaVaciaException;
+
 public class Casilla {
     boolean estaLibre;
     Pieza pieza;
@@ -19,17 +21,24 @@ public class Casilla {
         // pieza.entrarEn(this) para aplicar efecto
     }
 
-    public void removerPieza() {
-        this.estaLibre=true;
+    public Pieza removerPieza() {
+        if (estaLibre()){
+            throw new CasillaVaciaException("");
+        }
+        Pieza piezaGuardada =this.pieza;
         limpiarCasilla();
-        // this.pieza= piezaNula
+
+        return piezaGuardada;
     }
 
     public void recibirAtaque(Ataque ataque) {
         this.pieza.recibirAtaque(ataque);
     }
 
+
+
     private void limpiarCasilla(){
+        this.estaLibre = true;
         this.pieza=new PiezaNula();
     }
 }
