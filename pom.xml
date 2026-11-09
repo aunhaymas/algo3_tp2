@@ -19,7 +19,7 @@
     -->
     <javafx-version>17.0.2</javafx-version>
     <pitest-plugin-version>1.17.3</pitest-plugin-version>
-    <pitest-junit5-plugin-version>1.0.0</pitest-junit5-plugin-version>
+    <pitest-junit5-plugin-version>1.2.1</pitest-junit5-plugin-version>
     <main-class>edu.fiuba.algo3.Main</main-class>
   </properties>
   <dependencies>
@@ -101,9 +101,10 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
+        <version>3.11.0</version>
         <configuration>
-          <release>11</release>
+          <source>11</source>
+          <target>11</target>
         </configuration>
       </plugin>
       <plugin>
@@ -137,15 +138,15 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>${maven-surefire-version}</version>
+        <version>3.2.5</version>
         <configuration>
-          <argLine>${argLine} -XX:MaxPermSize=256m</argLine>
+          <argLine>${argLine}</argLine>
         </configuration>
       </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.2</version>
+        <version>0.8.11</version>
         <executions>
           <execution>
             <goals>
