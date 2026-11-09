@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CasillaTest {
@@ -62,7 +63,9 @@ public class CasillaTest {
         Casilla casilla = new Casilla(efectoNulo);
         Ataque ataque = Mockito.mock(Ataque.class);
         // deberia ser un assert de que no lanzo error
-        casilla.recibirAtaque(ataque);
+        assertDoesNotThrow(() -> {
+            casilla.recibirAtaque(ataque);
+        });
     }
 
     @Test
@@ -74,6 +77,8 @@ public class CasillaTest {
         casilla.removerPieza();
         Ataque ataque = Mockito.mock(Ataque.class);
         // deberia ser un assert de que no lanzo error
-        casilla.recibirAtaque(ataque);
+        assertDoesNotThrow(() -> {
+            casilla.recibirAtaque(ataque);
+        });
     }
 }
