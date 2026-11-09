@@ -97,7 +97,7 @@
           <targetTests>
             <param>edu.fiuba.algo3.*</param>
           </targetTests>
-          <!-- Esto evita que el minion herede el agente de JaCoCO y falle por UNKNOWN_ERROR -->
+          <!-- Agregá esto para anular el argLine de JaCoCO que rompe el minion de Pitest -->
           <argLine></argLine>
         </configuration>
         <dependencies>
