@@ -61,7 +61,18 @@ public class CasillaTest {
         Efecto efectoNulo = Mockito.mock(Efecto.class);
         Casilla casilla = new Casilla(efectoNulo);
         Ataque ataque = Mockito.mock(Ataque.class);
+        // deberia ser un assert de que no lanzo error
         casilla.recibirAtaque(ataque);
+    }
+
+    @Test
+    public void casillaQuitaSuPiezaYTodaviaPuedeRecibirAtaques() {
+        Efecto efectoNulo = Mockito.mock(Efecto.class);
+        Casilla casilla = new Casilla(efectoNulo);
+        Pieza moquitoDePieza = Mockito.mock(Pieza.class);
+        casilla.recibirPieza(moquitoDePieza);
+        casilla.removerPieza();
+        Ataque ataque = Mockito.mock(Ataque.class);
         // deberia ser un assert de que no lanzo error
         casilla.recibirAtaque(ataque);
     }
