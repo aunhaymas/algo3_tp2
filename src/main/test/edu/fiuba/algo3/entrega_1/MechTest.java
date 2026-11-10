@@ -5,19 +5,25 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MechTest {
+    private Tablero tablero = new Tablero();
+
     @Test
     public void mechDeCombateSoloPuedeAtacarCasillaAdyacente() {
         // Arrange
         Mech mech = new MechDeCombate();
-        // Aca tiene que ir la logica para ubicar al mech en una casilla
-        Casilla casillaAdyacente = new Casilla();
-        // La casilla adyacente debe incluir un enemigo al que el mech pueda atacar
-        Casilla casillaLejana = new Casilla();
-        // Casilla lejana debe incluir un enemigo al que el mech no pueda atacar
+        Vek enemigoAdyacente = new Vek();
+        // Aca tiene que ir la logica para ubicar al mech y el enemigo en una casilla
+        // Casilla casillaAdyacente = new Casilla();
+        tablero.agregarCasilla(new Coordenada(0, 0), new Casilla(new Suelo()));
+        tablero.agregarCasilla(new Coordenada(0, 1), new Casilla(new Suelo()));
+
+        // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
+        // tablero.posicionarUnidad(mech, new Coordenada(0, 0));
+        // tablero.posicionarUnidad(enemigoAdyacente, new Coordenada(0, 1));
     
         // Act
-        mech.atacar(casillaAdyacente);
-        mech.atacar(casillaLejana);
+        // Atacar deberia emplear direcciones relativas, no casillas directamente
+        // mech.atacar(casillaAdyacente); 
 
         // Assert
         // el enemigo en la casilla adyacente debe haber recibido 2 de daño, y ser empujado una casilla atras
