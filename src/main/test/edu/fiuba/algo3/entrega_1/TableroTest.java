@@ -124,5 +124,4 @@ class TableroTest {
         Ataque ataqueMoco = Mockito.mock(Ataque.class);
         tablero.atacarPosicion(objetivo, ataqueMoco);
     }
-
 }
