@@ -122,6 +122,20 @@ class TableroTest {
         Tablero tablero = crearTableroBase();
         Coordenada objetivo = new Coordenada(1, 1);
         Ataque ataqueMoco = Mockito.mock(Ataque.class);
-        tablero.atacarPosicion(objetivo, ataqueMoco);
+        assertDoesNotThrow(() ->
+        {
+            tablero.atacarPosicion(objetivo, ataqueMoco);
+        });
+        assertTrue(tablero.estaLibre(objetivo));
+    }
+    @Test
+    public void quitarPiezaRetornaUnaPiezaDejandoLaPosicionLibre() {
+        Tablero tablero = crearTableroBase();
+        Coordenada objetivo = new Coordenada(1, 1);
+        Pieza pieza = Mockito.mock(Pieza.class);
+        tablero.colocarPieza(pieza,objetivo);
+        Pieza piezaQuitada=tablero.quitarPieza(objetivo);
+        assertEquals(pieza,piezaQuitada);
+        assertTrue(tablero.estaLibre(objetivo));
     }
 }
