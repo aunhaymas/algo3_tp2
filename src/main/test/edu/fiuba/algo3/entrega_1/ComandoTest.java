@@ -1,6 +1,5 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.excepciones.CasillaVaciaException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -20,10 +19,14 @@ public class ComandoTest {
     @Test
     public void ejecutarComandoMoverMuevePiezaEnTableroYNotificaAUnidad() {
         Tablero tablero = crearTableroBase();
-        Unidad unidadMock = Mockito.mock(Unidad.class);
+        Unidad unidadMoquito = Mockito.mock(Unidad.class);
         Coordenada origen = new Coordenada(0, 0);
         Coordenada destino = new Coordenada(0, 1);
-        tablero.colocarPieza(unidadMock, origen);
-
+        tablero.colocarPieza(unidadMoquito, origen);
+        Comando comando = new ComandoMover(unidadMoquito, tablero,origen, destino);
+        comando.ejecutar();
+        assertEquals(unidadMoquito, tablero.obtenerPiezaEn(destino));
+        assertTrue(tablero.estaLibre(origen));
+        Mockito.verify(unidadMoquito).mover();
     }
 }
