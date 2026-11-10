@@ -117,4 +117,12 @@ class TableroTest {
             tablero.moverPieza(origen,destinoInvalido);
         });
     }
+    @Test
+    public void atacarUnaPosicionVaciaEstaPermitido() {
+        Tablero tablero = crearTableroBase();
+        Coordenada objetivo = new Coordenada(1, 1);
+        Ataque ataqueMoco = Mockito.mock(Ataque.class);
+        tablero.atacarPosicion(objetivo, ataqueMoco);
+    }
+
 }
