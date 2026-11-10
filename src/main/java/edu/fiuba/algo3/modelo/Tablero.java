@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.CoordenadaInvalidaException;
 import edu.fiuba.algo3.modelo.excepciones.PosicionOcupadaException;
+import edu.fiuba.algo3.modelo.excepciones.PosicionVaciaException;
 
 public class Tablero {
     //private final Map<Coordenada, Casilla> casillas;
@@ -54,4 +55,11 @@ public class Tablero {
         return obtenerCasilla(coordenada).estaLibre();
     }
 
+    public void moverPieza(Coordenada origen, Coordenada destino) {
+        if (estaLibre(origen)){
+            throw new PosicionVaciaException("No hay una pieza que mover");
+        }
+        Pieza pieza = obtenerCasilla(origen).removerPieza();
+        colocarPieza(pieza,destino);
+    }
 }
