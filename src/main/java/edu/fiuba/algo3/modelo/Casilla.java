@@ -47,4 +47,8 @@ public class Casilla {
     public void aplicarEfecto(Unidad unidadMoquito) {
         this.terrenoCasilla.aplicarEfecto(unidadMoquito);
     }
+
+    public Efecto getTerreno() {
+        return this.terrenoCasilla;
+    }
 }
