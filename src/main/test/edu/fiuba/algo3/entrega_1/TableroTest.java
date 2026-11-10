@@ -89,4 +89,32 @@ class TableroTest {
             tablero.moverPieza(origen,destino);
         });
     }
+    @Test
+    public void moverPiezaACoordenadaOcupadaLanzaException() {
+        Tablero tablero = crearTableroBase();
+        Coordenada origen = new Coordenada(0,0);
+        Coordenada destino = new Coordenada(1,1);
+        Pieza moquitoDePieza = Mockito.mock(Pieza.class);
+        Pieza piezaOcupante = Mockito.mock(Pieza.class);
+
+        tablero.colocarPieza(moquitoDePieza,origen);
+        tablero.colocarPieza(piezaOcupante,destino);
+
+        assertThrows(PosicionOcupadaException.class, () ->{
+            tablero.moverPieza(origen,destino);
+        });
+    }
+    @Test
+    public void moverPiezaFueraDelTableroLanzaEXception() {
+        Tablero tablero = crearTableroBase();
+        Coordenada origen = new Coordenada(0,0);
+        Coordenada destinoInvalido = new Coordenada(1,9);
+        Pieza moquitoDePieza = Mockito.mock(Pieza.class);
+
+        tablero.colocarPieza(moquitoDePieza,origen);
+
+        assertThrows(CoordenadaInvalidaException.class, () ->{
+            tablero.moverPieza(origen,destinoInvalido);
+        });
+    }
 }
