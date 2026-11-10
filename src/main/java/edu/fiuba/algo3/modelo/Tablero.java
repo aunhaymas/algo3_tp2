@@ -67,4 +67,8 @@ public class Tablero {
         Casilla casillaObjetivo = obtenerCasilla(objetivo);
         casillaObjetivo.recibirAtaque(ataque);
     }
+
+    public Pieza quitarPieza(Coordenada objetivo) {
+        return obtenerCasilla(objetivo).removerPieza();
+    }
 }
