@@ -29,4 +29,7 @@ public abstract class Unidad implements Pieza {
 	public void sumergir() {
 		this.estadoUnidad = new EstadoSumergido();
 	}
+
+	public void cancelarMovimiento() {
+	}
 }

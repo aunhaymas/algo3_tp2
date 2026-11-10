@@ -16,7 +16,13 @@ public class ComandoMover extends Comando{
 
     @Override
     public void ejecutar() {
-        tablero.moverPieza(origen,destino);
-        unidad.mover();
+        tablero.moverPieza(origen,destino); // Muevo a la unidad en el tablero
+        unidad.mover(); // le dice a unidad que se mueva (cambia su State)
+    }
+
+    @Override
+    public void cancelar() {
+        tablero.moverPieza(destino,origen);
+        unidad.cancelarMovimiento();
     }
 }
