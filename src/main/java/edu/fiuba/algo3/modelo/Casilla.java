@@ -37,6 +37,14 @@ public class Casilla {
         this.pieza.recibirAtaque(ataque);
     }
 
+    public boolean recibirAtaque(Arma arma, Direccion direccion) {
+        boolean hit = arma.atacar(this.pieza, direccion);
+        // Si la pieza es destruida, la casilla queda libre
+        if (this.pieza.estaDestruida()) {
+            limpiarCasilla();
+        }
+        return hit;
+    }
 
 
     private void limpiarCasilla(){

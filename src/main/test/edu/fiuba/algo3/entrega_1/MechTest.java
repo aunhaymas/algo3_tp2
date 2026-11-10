@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 
 public class MechTest {
-    private ParserTablero parserTablero = new ParserTablero();
+    private ParserTablero parserTablero = new ParserTablero(new TerrenosFactory());
     private Tablero tablero = parserTablero.parsear(List.of(
             "SSSSSSSS",
             "SSSSSSSS",
@@ -28,12 +28,12 @@ public class MechTest {
         Coordenada coordenadaEnemigoAdyacente = new Coordenada(5, 4);
         int vidaInicialEnemigoAdyacente = enemigoAdyacente.getVida();
         // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
-        tablero.posicionarUnidad(mech, coordenadaMech);
-        tablero.posicionarUnidad(enemigoAdyacente, coordenadaEnemigoAdyacente);
+        tablero.colocarPieza(mech, coordenadaMech);
+        tablero.colocarPieza(enemigoAdyacente, coordenadaEnemigoAdyacente);
 
         // Act
         // Atacar deberia emplear direcciones relativas, no casillas directamente
-        // mech.atacar(casillaAdyacente); 
+        mech.atacar(tablero, Direccion.ARRIBA); 
 
         // Assert
         // el enemigo en la casilla adyacente debe haber recibido 2 de daño,
