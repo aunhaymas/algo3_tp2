@@ -9,7 +9,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 
 * **Integrante 1** - [Alfredo Godoy](https://github.com/aunhaymas)
 * **Integrante 2** - [Guiseppe Prieto Bonilla](https://github.com/giuspepo)
-* **Integrante 3** - [integrante3](https://github.com/limtnez)
+* **Integrante 3** - [Leonel Ignacio Martinez](https://github.com/limtnez)
 * **Integrante 4** - [integrante4](https://github.com/llanquirobin)
 * **Integrante 5** - [Matias Cortizas](https://github.com/mcortizas)
 
