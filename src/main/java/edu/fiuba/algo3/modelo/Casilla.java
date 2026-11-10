@@ -44,8 +44,8 @@ public class Casilla {
         this.pieza=new PiezaNula();
     }
 
-    public void aplicarEfecto(Unidad unidadMoquito) {
-        this.terrenoCasilla.aplicarEfecto(unidadMoquito);
+    public void aplicarEfecto(Unidad unidad) {
+        this.terrenoCasilla.aplicarEfecto(unidad);
     }
 
     public Efecto getTerreno() {
