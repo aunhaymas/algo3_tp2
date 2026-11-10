@@ -20,6 +20,7 @@ public abstract class Unidad implements Pieza {
 		this.movimientos = movimientos;
 		this.estadoUnidad = new EstadoNormal();
 	}
+	public void mover(){}
 
 	public void contaminar() {
 		this.estadoUnidad = new EstadoContaminado();
