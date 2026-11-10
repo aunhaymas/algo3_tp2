@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.CoordenadaInvalidaException;
+import edu.fiuba.algo3.modelo.excepciones.PosicionOcupadaException;
 
 public class Tablero {
     //private final Map<Coordenada, Casilla> casillas;
@@ -42,6 +43,9 @@ public class Tablero {
         if (!this.esPosicionValida(coordenada))
         {
             throw new CoordenadaInvalidaException("La coordenada esta fuera de los limites del tablero!");
+        }
+        if (!this.estaLibre(coordenada)){
+            throw new PosicionOcupadaException("La posicion ya esta siendo ocupada");
         }
         this.obtenerCasilla(coordenada).recibirPieza(pieza);
     }
