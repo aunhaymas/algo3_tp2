@@ -148,4 +148,15 @@ class TableroTest {
             tablero.quitarPieza(objetivo);
         });
     }
+
+    @Test
+    public void tableroPermiteConsultarQuePiezaHayEnUnaPosicion() {
+        // Esto puede ser usado por el jugador para verificar "jugador.posee(pieza)"
+        Tablero tablero = crearTableroBase();
+        Coordenada coordenada = new Coordenada(1, 1);
+        Pieza piezaMoquito = Mockito.mock(Pieza.class);
+        tablero.colocarPieza(piezaMoquito,coordenada);
+        Pieza piezaConsultada=tablero.obtenerPiezaEn(coordenada);
+        assertEquals(piezaConsultada,piezaMoquito);
+    }
 }

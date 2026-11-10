@@ -24,12 +24,9 @@ public class Casilla {
     }
 
     public Pieza removerPieza() {
-        if (estaLibre()){
-            throw new CasillaVaciaException("");
-        }
-        Pieza piezaGuardada =this.pieza;
-        limpiarCasilla();
 
+        Pieza piezaGuardada =this.obtenerPieza();
+        limpiarCasilla();
         return piezaGuardada;
     }
 
@@ -50,5 +47,12 @@ public class Casilla {
 
     public Efecto getTerreno() {
         return this.terrenoCasilla;
+    }
+
+    public Pieza obtenerPieza() {
+        if (estaLibre()){
+            throw new CasillaVaciaException("");
+        }
+        return this.pieza;
     }
 }

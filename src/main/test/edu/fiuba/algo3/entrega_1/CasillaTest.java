@@ -99,4 +99,13 @@ public class CasillaTest {
 
         Mockito.verify(terrenoMock).aplicarEfecto(unidadMoquito);
     }
+
+    @Test
+    public void casillaPermiteConsultarSuPiezaSinQuitarla() {
+        Pieza piezaMoquito = Mockito.mock(Pieza.class);
+        Casilla casilla = new Casilla(new Suelo());
+        casilla.recibirPieza(piezaMoquito);
+        Pieza piezaConsultada= casilla.obtenerPieza();
+        assertEquals(piezaConsultada,piezaMoquito);
+    }
 }
