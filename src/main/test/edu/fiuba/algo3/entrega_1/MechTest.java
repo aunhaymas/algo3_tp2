@@ -4,30 +4,41 @@ import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.List;
+
 public class MechTest {
-    private Tablero tablero = new Tablero();
+    private ParserTablero parserTablero = new ParserTablero();
+    private Tablero tablero = parserTablero.parsear(List.of(
+            "SSSSSSSS",
+            "SSSSSSSS",
+            "SSSSSSSS",
+            "SSSSSSSS",
+            "SSSSSSSS",
+            "SSSSSSSS",
+            "SSSSSSSS",
+            "SSSSSSSS"
+    ));
 
     @Test
     public void mechDeCombateSoloPuedeAtacarCasillaAdyacente() {
         // Arrange
         Mech mech = new MechDeCombate();
+        Coordenada coordenadaMech = new Coordenada(5, 5);
         Vek enemigoAdyacente = new Vek();
-        // Aca tiene que ir la logica para ubicar al mech y el enemigo en una casilla
-        // Casilla casillaAdyacente = new Casilla();
-        tablero.agregarCasilla(new Coordenada(0, 0), new Casilla(new Suelo()));
-        tablero.agregarCasilla(new Coordenada(0, 1), new Casilla(new Suelo()));
-
+        Coordenada coordenadaEnemigoAdyacente = new Coordenada(5, 4);
+        int vidaInicialEnemigoAdyacente = enemigoAdyacente.getVida();
         // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
-        // tablero.posicionarUnidad(mech, new Coordenada(0, 0));
-        // tablero.posicionarUnidad(enemigoAdyacente, new Coordenada(0, 1));
-    
+        tablero.posicionarUnidad(mech, coordenadaMech);
+        tablero.posicionarUnidad(enemigoAdyacente, coordenadaEnemigoAdyacente);
+
         // Act
         // Atacar deberia emplear direcciones relativas, no casillas directamente
         // mech.atacar(casillaAdyacente); 
 
         // Assert
-        // el enemigo en la casilla adyacente debe haber recibido 2 de daño, y ser empujado una casilla atras
-        // el enemigo en la casilla lejana no debe haber recibido daño
+        // el enemigo en la casilla adyacente debe haber recibido 2 de daño,
+        assertEquals(vidaInicialEnemigoAdyacente - 2, enemigoAdyacente.getVida());
+        // el enemigo debe ser empujado una casilla atras
 
     }
 
@@ -35,19 +46,18 @@ public class MechTest {
     public void mechDeCanonAtacaEnLineaRecta() {
         // Arrange
         Mech mech = new MechDeCanon();
-        // Aca tiene que ir la logica para ubicar al mech en una casilla
-        Casilla casillaLineaRecta = new Casilla();
-        // La casilla linea recta debe ubicarse en la misma fila o columna que el mech y debe incluir un enemigo al que el mech pueda atacar
-        Casilla casillaDiagonal = new Casilla();
-        // Casilla diagonal debe incluir un enemigo al que el mech no pueda atacar
+        Coordenada coordenadaMech = new Coordenada(5, 5);
+        Vek enemigoLineaRecta = new Vek();
+        Coordenada coordenadaEnemigoLineaRecta = new Coordenada(5, 2);
+        int vidaInicialEnemigoLineaRecta = enemigoLineaRecta.getVida();
     
         // Act
-        mech.atacar(casillaLineaRecta);
-        mech.atacar(casillaDiagonal);
+        // mech.atacar(casillaLineaRecta);
 
         // Assert
-        // el enemigo en la casilla linea recta debe haber recibido 1 de daño, y ser empujado una casilla atras
-        // el enemigo en la casilla diagonal no debe haber recibido daño
+        // el enemigo en la casilla linea recta debe haber recibido 1 de daño,
+        assertEquals(vidaInicialEnemigoLineaRecta - 1, enemigoLineaRecta.getVida());
+        // el enemigo debe ser empujado una casilla atras
     }
 
     @Test
