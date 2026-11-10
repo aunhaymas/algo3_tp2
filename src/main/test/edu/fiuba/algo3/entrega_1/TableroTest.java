@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.excepciones.CoordenadaInvalidaException;
 import edu.fiuba.algo3.modelo.excepciones.PosicionOcupadaException;
+import edu.fiuba.algo3.modelo.excepciones.PosicionVaciaException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -65,6 +66,27 @@ class TableroTest {
 
         assertThrows(PosicionOcupadaException.class, () ->{
             tablero.colocarPieza(moquitoDePieza,coordenada);
+        });
+    }
+    @Test
+    public void tableroMueveUnaPiezaAotraPosicion() {
+        Pieza moquitoDePieza = Mockito.mock(Pieza.class);
+        Tablero tablero = crearTableroBase();
+
+        Coordenada origen = new Coordenada(0,0);
+        Coordenada destino = new Coordenada(1,1);
+        tablero.colocarPieza(moquitoDePieza,origen);
+        tablero.moverPieza(origen,destino);
+        assertTrue(tablero.estaLibre(origen));
+        assertFalse(tablero.estaLibre(destino));
+    }
+    @Test
+    public void moverPiezaDesdeUnaCoordenadaVaciaLanzaException() {
+        Tablero tablero = crearTableroBase();
+        Coordenada origen = new Coordenada(0,0);
+        Coordenada destino = new Coordenada(1,1);
+        assertThrows(PosicionVaciaException.class, () ->{
+            tablero.moverPieza(origen,destino);
         });
     }
 }
