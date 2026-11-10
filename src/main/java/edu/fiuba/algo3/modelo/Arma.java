@@ -1,3 +1,5 @@
+package edu.fiuba.algo3.modelo;
+
 public interface Arma {
 	public void atacar();
 }
