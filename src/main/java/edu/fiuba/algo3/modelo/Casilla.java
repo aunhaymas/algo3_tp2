@@ -3,9 +3,9 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.excepciones.CasillaVaciaException;
 
 public class Casilla {
-    boolean estaLibre;
-    Pieza pieza;
-    Efecto terrenoCasilla;
+    private boolean estaLibre;
+    private Pieza pieza;
+    private Efecto terrenoCasilla;
     public Casilla(Efecto terreno) {
         this.estaLibre=true;
         this.terrenoCasilla=terreno;
@@ -24,12 +24,9 @@ public class Casilla {
     }
 
     public Pieza removerPieza() {
-        if (estaLibre()){
-            throw new CasillaVaciaException("");
-        }
-        Pieza piezaGuardada =this.pieza;
-        limpiarCasilla();
 
+        Pieza piezaGuardada =this.obtenerPieza();
+        limpiarCasilla();
         return piezaGuardada;
     }
 
@@ -52,11 +49,18 @@ public class Casilla {
         this.pieza=new PiezaNula();
     }
 
-    public void aplicarEfecto(Unidad unidadMoquito) {
-        this.terrenoCasilla.aplicarEfecto(unidadMoquito);
+    public void aplicarEfecto(Unidad unidad) {
+        this.terrenoCasilla.aplicarEfecto(unidad);
     }
 
     public Efecto getTerreno() {
         return this.terrenoCasilla;
+    }
+
+    public Pieza obtenerPieza() {
+        if (estaLibre()){
+            throw new CasillaVaciaException("");
+        }
+        return this.pieza;
     }
 }
