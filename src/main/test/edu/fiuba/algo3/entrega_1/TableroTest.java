@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.excepciones.CasillaVaciaException;
 import edu.fiuba.algo3.modelo.excepciones.CoordenadaInvalidaException;
 import edu.fiuba.algo3.modelo.excepciones.PosicionOcupadaException;
 import edu.fiuba.algo3.modelo.excepciones.PosicionVaciaException;
@@ -116,5 +117,46 @@ class TableroTest {
         assertThrows(CoordenadaInvalidaException.class, () ->{
             tablero.moverPieza(origen,destinoInvalido);
         });
+    }
+    @Test
+    public void atacarUnaPosicionVaciaEstaPermitido() {
+        Tablero tablero = crearTableroBase();
+        Coordenada objetivo = new Coordenada(1, 1);
+        Ataque ataqueMoco = Mockito.mock(Ataque.class);
+        assertDoesNotThrow(() ->
+        {
+            tablero.atacarPosicion(objetivo, ataqueMoco);
+        });
+        assertTrue(tablero.estaLibre(objetivo));
+    }
+    @Test
+    public void quitarPiezaRetornaUnaPiezaDejandoLaPosicionLibre() {
+        Tablero tablero = crearTableroBase();
+        Coordenada objetivo = new Coordenada(1, 1);
+        Pieza pieza = Mockito.mock(Pieza.class);
+        tablero.colocarPieza(pieza,objetivo);
+        Pieza piezaQuitada=tablero.quitarPieza(objetivo);
+        assertEquals(pieza,piezaQuitada);
+        assertTrue(tablero.estaLibre(objetivo));
+    }
+    @Test
+    public void quitarPiezaEnPosicionVaciaLanzaException() {
+        Tablero tablero = crearTableroBase();
+        Coordenada objetivo = new Coordenada(1, 1);
+
+        assertThrows(CasillaVaciaException.class, () ->{
+            tablero.quitarPieza(objetivo);
+        });
+    }
+
+    @Test
+    public void tableroPermiteConsultarQuePiezaHayEnUnaPosicion() {
+        // Esto puede ser usado por el jugador para verificar "jugador.posee(pieza)"
+        Tablero tablero = crearTableroBase();
+        Coordenada coordenada = new Coordenada(1, 1);
+        Pieza piezaMoquito = Mockito.mock(Pieza.class);
+        tablero.colocarPieza(piezaMoquito,coordenada);
+        Pieza piezaConsultada=tablero.obtenerPiezaEn(coordenada);
+        assertEquals(piezaConsultada,piezaMoquito);
     }
 }
