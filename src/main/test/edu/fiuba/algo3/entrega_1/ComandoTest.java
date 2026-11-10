@@ -44,6 +44,6 @@ public class ComandoTest {
         comando.cancelar();
         assertFalse(tablero.estaLibre(origen));
         assertEquals(unidadMoquito, tablero.obtenerPiezaEn(origen));
-
+        Mockito.verify(unidadMoquito).cancelarMovimiento();
     }
 }
