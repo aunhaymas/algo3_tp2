@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.excepciones.CantidadMovimientosInvalidaException;
 import edu.fiuba.algo3.modelo.excepciones.PuntosVidaInvalidoException;
 
-public abstract class Unidad {
+public abstract class Unidad implements Pieza {
 	private int vida;
 	private int movimientos;
 	private EstadoUnidad estadoUnidad;
