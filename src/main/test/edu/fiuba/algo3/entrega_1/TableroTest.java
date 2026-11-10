@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.excepciones.CasillaVaciaException;
 import edu.fiuba.algo3.modelo.excepciones.CoordenadaInvalidaException;
 import edu.fiuba.algo3.modelo.excepciones.PosicionOcupadaException;
 import edu.fiuba.algo3.modelo.excepciones.PosicionVaciaException;
@@ -137,5 +138,14 @@ class TableroTest {
         Pieza piezaQuitada=tablero.quitarPieza(objetivo);
         assertEquals(pieza,piezaQuitada);
         assertTrue(tablero.estaLibre(objetivo));
+    }
+    @Test
+    public void quitarPiezaEnPosicionVaciaLanzaException() {
+        Tablero tablero = crearTableroBase();
+        Coordenada objetivo = new Coordenada(1, 1);
+
+        assertThrows(CasillaVaciaException.class, () ->{
+            tablero.quitarPieza(objetivo);
+        });
     }
 }
