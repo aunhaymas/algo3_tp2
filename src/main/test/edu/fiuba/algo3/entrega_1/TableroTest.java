@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
-import org.hamcrest.CoreMatchers;
+import edu.fiuba.algo3.modelo.excepciones.CoordenadaInvalidaException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -37,7 +37,22 @@ class TableroTest {
 
         tablero.colocarPieza(moquitoDePieza,coordenada);
         assertFalse(tablero.estaLibre(coordenada));
+    }
+    @Test
+    public void tableroCordenadaSinPiezaEstaLibre() {
+        Tablero tablero = crearTableroBase();
+        Coordenada coordenada = new Coordenada(1,1);
+        assertTrue(tablero.estaLibre(coordenada));
+    }
+    @Test
+    public void colocarPiezaEnUnaCoordenadaInvalidaLanzaException() {
+        Pieza moquitoDePieza = Mockito.mock(Pieza.class);
+        Tablero tablero = crearTableroBase();
+        Coordenada coordenada_invalida = new Coordenada(-1,-1);
 
+        assertThrows(CoordenadaInvalidaException.class, () ->{
+            tablero.colocarPieza(moquitoDePieza,coordenada_invalida);
+        });
 
     }
 

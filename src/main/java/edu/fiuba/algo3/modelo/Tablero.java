@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.HashMap;
-import java.util.Map;
+import edu.fiuba.algo3.modelo.excepciones.CoordenadaInvalidaException;
 
 public class Tablero {
     //private final Map<Coordenada, Casilla> casillas;
@@ -31,10 +30,19 @@ public class Tablero {
     }
 
     public boolean esPosicionValida(Coordenada coordenada) {
+        int x = coordenada.getX();
+        int y = coordenada.getY();
+        if (x<0 || y<0) {
+            return false;
+        }
         return (coordenada.getY()< ANCHO_PREDEFINIDO && coordenada.getX() < LARGO_PREDEFINIDO);
     }
 
     public void colocarPieza(Pieza pieza, Coordenada coordenada) {
+        if (!this.esPosicionValida(coordenada))
+        {
+            throw new CoordenadaInvalidaException("La coordenada esta fuera de los limites del tablero!");
+        }
         this.obtenerCasilla(coordenada).recibirPieza(pieza);
     }
 
