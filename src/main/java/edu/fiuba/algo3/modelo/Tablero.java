@@ -11,7 +11,15 @@ public class Tablero {
 
     public Tablero(){this.casillas = new Casilla[ANCHO_PREDEFINIDO][LARGO_PREDEFINIDO]; }
     public Tablero(Casilla[][] casillas) {
-        this.casillas = casillas;
+        this.casillas = new Casilla[ANCHO_PREDEFINIDO][LARGO_PREDEFINIDO];
+        for (int y = 0; y < LARGO_PREDEFINIDO; y++) {
+            for (int x = 0; x < ANCHO_PREDEFINIDO; x++) {
+                if (casillas[y][x]==null) {
+                    //Deberia lanzar un error
+                    }
+                this.casillas[y][x] = casillas[y][x];
+                }
+            }
     }
 
     public void agregarCasilla(Coordenada coordenada, Casilla casilla) {
@@ -25,4 +33,13 @@ public class Tablero {
     public boolean esPosicionValida(Coordenada coordenada) {
         return (coordenada.getY()< ANCHO_PREDEFINIDO && coordenada.getX() < LARGO_PREDEFINIDO);
     }
+
+    public void colocarPieza(Pieza pieza, Coordenada coordenada) {
+        this.obtenerCasilla(coordenada).recibirPieza(pieza);
+    }
+
+    public boolean estaLibre(Coordenada coordenada) {
+        return obtenerCasilla(coordenada).estaLibre();
+    }
+
 }

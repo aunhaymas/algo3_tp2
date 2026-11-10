@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -31,7 +32,11 @@ class TableroTest {
     @Test
     public void tableroColocaPiezaEnUnaCoordenadaYOcupaEsaCasilla() {
         Pieza moquitoDePieza = Mockito.mock(Pieza.class);
-        Tablero tablero = new Tablero();
+        Tablero tablero = crearTableroBase();
+        Coordenada coordenada = new Coordenada(1,1);
+
+        tablero.colocarPieza(moquitoDePieza,coordenada);
+        assertFalse(tablero.estaLibre(coordenada));
 
 
     }
