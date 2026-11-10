@@ -62,4 +62,17 @@ public class Tablero {
         Pieza pieza = obtenerCasilla(origen).removerPieza();
         colocarPieza(pieza,destino);
     }
+
+    public void atacarPosicion(Coordenada objetivo, Ataque ataque) {
+        Casilla casillaObjetivo = obtenerCasilla(objetivo);
+        casillaObjetivo.recibirAtaque(ataque);
+    }
+
+    public Pieza quitarPieza(Coordenada objetivo) {
+        return obtenerCasilla(objetivo).removerPieza();
+    }
+
+    public Pieza obtenerPiezaEn(Coordenada coordenada) {
+        return obtenerCasilla(coordenada).obtenerPieza();
+    }
 }
