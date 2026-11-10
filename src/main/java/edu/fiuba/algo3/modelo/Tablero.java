@@ -71,4 +71,8 @@ public class Tablero {
     public Pieza quitarPieza(Coordenada objetivo) {
         return obtenerCasilla(objetivo).removerPieza();
     }
+
+    public Pieza obtenerPiezaEn(Coordenada coordenada) {
+        return obtenerCasilla(coordenada).obtenerPieza();
+    }
 }
