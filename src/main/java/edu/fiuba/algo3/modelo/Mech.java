@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.MovimientoExcedidoException;
+import edu.fiuba.algo3.modelo.excepciones.MovimientoInvalidoException;
 
 public class Mech extends Unidad {
 	private final Arma arma;
@@ -33,9 +34,15 @@ public class Mech extends Unidad {
 
 	public void moverseA(Casilla destino,Trayectoria trayectoria) {
 		//El Proximo Test me va a pedir que valide el movimiento segun distancia
+		validarMovimiento(trayectoria);
+		trayectoria.ejecutarTraslado();
+	}
+	private void validarMovimiento(Trayectoria trayectoria){
 		if (trayectoria.logitud()>this.movimientos){
 			throw new MovimientoExcedidoException("El movimiento requerido excede el movimiento maximo del Mech");
 		}
-		trayectoria.ejecutarTraslado();
+		if (trayectoria.tieneObstaculos()){
+			throw new MovimientoInvalidoException("Hay obstaculos en el camino!");
+		}
 	}
 }
