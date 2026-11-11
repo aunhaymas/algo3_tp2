@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.excepciones.MovimientoExcedidoException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -21,7 +22,7 @@ public class CasosDeUso {
         Mech mech = new Mech();
 
         casilla_origen.recibirPieza(mech);
-        mech.moverseA(casilla_destino,caminoNormal);
+        mech.moverseA(caminoNormal);
 
         assertFalse(casilla_destino.estaLibre());
         assertTrue(casilla_origen.estaLibre());
@@ -39,9 +40,30 @@ public class CasosDeUso {
                 casilla_destino);
         Mech mech = new Mech();
         casilla_origen.recibirPieza(mech);
-        mech.moverseA(casilla_destino,caminoNormal);
+        mech.moverseA(caminoNormal);
         assertFalse(casilla_destino.estaLibre());
         assertTrue(casilla_origen.estaLibre());
+
+    }
+    @Test
+    public void MechIntentaExcederSuRangoDeMovimiento() {
+        Casilla casilla_origen = new Casilla(new Coordenada(0, 0));
+        Casilla casilla_1 = new Casilla(new Coordenada(1, 0));
+        Casilla casilla_2 = new Casilla(new Coordenada(2, 0));
+        Casilla casilla_3 = new Casilla(new Coordenada(3, 0));
+        Casilla casilla_destino = new Casilla(new Coordenada(4, 0));
+
+        List<Casilla> caminoExcedido = List.of(
+                casilla_origen,
+                casilla_1,
+                casilla_2,
+                casilla_3,
+                casilla_destino);
+        Mech mech = new Mech();
+        casilla_origen.recibirPieza(mech);
+        assertThrows(MovimientoExcedidoException.class, () -> {
+            mech.moverseA(caminoExcedido);
+        });
 
     }
 }

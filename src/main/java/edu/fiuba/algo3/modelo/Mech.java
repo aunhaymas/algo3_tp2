@@ -31,8 +31,9 @@ public class Mech extends Unidad {
 
 
 
-	public void moverseA(Casilla casillaDestino, List<Casilla> camino) {
+	public void moverseA(List<Casilla> camino) {
 		//El Proximo Test me va a pedir que valide el movimiento segun distancia
+
 		camino.getFirst().moverContenidoA(camino.getLast());
 	}
 }
