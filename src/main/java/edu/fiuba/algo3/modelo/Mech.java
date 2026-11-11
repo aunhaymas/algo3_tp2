@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.List;
+
 public class Mech extends Unidad {
 	private final Arma arma;
 
@@ -19,5 +21,18 @@ public class Mech extends Unidad {
 
 	@Override
 	public void recibirAtaque(Ataque ataque) {
+	}
+
+
+
+
+
+
+
+
+
+	public void moverseA(Casilla casillaDestino, List<Casilla> camino) {
+		//El Proximo Test me va a pedir que valide el movimiento segun distancia
+		camino.getFirst().moverContenidoA(camino.getLast());
 	}
 }
