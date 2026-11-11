@@ -8,7 +8,12 @@ public class Casilla {
     private Tablero tablero;
     private Coordenada coordenada;
     private Efecto terrenoCasilla;
-    public Casilla(Efecto terreno) {
+    public Casilla(Coordenada coordenada) {
+        this.estaLibre=true;
+        this.terrenoCasilla=new Suelo();
+        limpiarCasilla();
+    }
+    public Casilla(Coordenada coordenada, Efecto terreno) {
         this.estaLibre=true;
         this.terrenoCasilla=terreno;
         limpiarCasilla();
@@ -68,5 +73,16 @@ public class Casilla {
             throw new CasillaVaciaException("");
         }
         return this.pieza;
+    }
+
+
+
+
+
+
+
+
+    public void moverContenidoA(Casilla destino) {
+        destino.recibirPieza(this.removerPieza());
     }
 }
