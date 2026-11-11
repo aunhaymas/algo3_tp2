@@ -90,4 +90,7 @@ public class CasosDeUsoTest {
             mech.moverseA(casilla_destino,camino);
         });
     }
+    //////////////////////////////////////////////////////////////////////////////////
+    //Verificar que el Puño cause 2 de daño a una unidad adyacente
+    // y la empuje 1 casilla en la dirección del golpe.
 }
