@@ -6,7 +6,12 @@ public class Casilla {
     private boolean estaLibre;
     private Pieza pieza;
     private Efecto terrenoCasilla;
-    public Casilla(Efecto terreno) {
+    public Casilla(Coordenada coordenada) {
+        this.estaLibre=true;
+        this.terrenoCasilla=new Suelo();
+        limpiarCasilla();
+    }
+    public Casilla(Coordenada coordenada, Efecto terreno) {
         this.estaLibre=true;
         this.terrenoCasilla=terreno;
         limpiarCasilla();
