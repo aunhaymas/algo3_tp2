@@ -21,4 +21,10 @@ public class Trayectoria {
     public int logitud() {
         return this.casillas.size()-1;
     }
+
+    public boolean tieneObstaculos() {
+        if (casillas.size() <= 2) return false;
+        List<Casilla> casillasIntermedias = casillas.subList(1, casillas.size() - 1);
+        return casillasIntermedias.stream().anyMatch(casilla -> !casilla.estaLibre());
+    }
 }
