@@ -1,16 +1,15 @@
 package edu.fiuba.algo3.entrega_1;
-
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.excepciones.MovimientoExcedidoException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
-
-public class CasosDeUso {
+public class CasosDeUsoTest {
 
     //Verificar que un Mech solo pueda moverse a casillas dentro de su rango de movimiento,
     // sin atravesar obstáculos ni otras unidades.
@@ -21,8 +20,10 @@ public class CasosDeUso {
         List<Casilla> caminoNormal = List.of(casilla_origen, casilla_destino);
         Mech mech = new Mech();
 
+        Trayectoria camino = new Trayectoria(caminoNormal);
+
         casilla_origen.recibirPieza(mech);
-        mech.moverseA(caminoNormal);
+        mech.moverseA(casilla_destino,camino);
 
         assertFalse(casilla_destino.estaLibre());
         assertTrue(casilla_origen.estaLibre());
@@ -40,7 +41,8 @@ public class CasosDeUso {
                 casilla_destino);
         Mech mech = new Mech();
         casilla_origen.recibirPieza(mech);
-        mech.moverseA(caminoNormal);
+        Trayectoria camino = new Trayectoria(caminoNormal);
+        mech.moverseA(casilla_destino,camino);
         assertFalse(casilla_destino.estaLibre());
         assertTrue(casilla_origen.estaLibre());
 
@@ -53,17 +55,19 @@ public class CasosDeUso {
         Casilla casilla_3 = new Casilla(new Coordenada(3, 0));
         Casilla casilla_destino = new Casilla(new Coordenada(4, 0));
 
+
         List<Casilla> caminoExcedido = List.of(
                 casilla_origen,
                 casilla_1,
                 casilla_2,
                 casilla_3,
                 casilla_destino);
+        Trayectoria camino = new Trayectoria(caminoExcedido);
         Mech mech = new Mech();
         casilla_origen.recibirPieza(mech);
         assertThrows(MovimientoExcedidoException.class, () -> {
-            mech.moverseA(caminoExcedido);
+            mech.moverseA(casilla_destino,camino);
         });
-
     }
+
 }
