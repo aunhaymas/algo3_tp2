@@ -60,4 +60,15 @@ public class Casilla {
         }
         return this.pieza;
     }
+
+
+
+
+
+
+
+
+    public void moverContenidoA(Casilla destino) {
+        destino.recibirPieza(this.removerPieza());
+    }
 }
