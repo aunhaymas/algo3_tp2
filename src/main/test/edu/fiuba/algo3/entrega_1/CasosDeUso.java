@@ -1,18 +1,33 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.Casilla;
-import edu.fiuba.algo3.modelo.Coordenada;
-import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.Unidad;
+import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CasosDeUso {
 
     //Verificar que un Mech solo pueda moverse a casillas dentro de su rango de movimiento,
     // sin atravesar obstáculos ni otras unidades.
     @Test
-    public void MechSeMueveSegunSuRangoDeMovimientoYNoAtraviesaObstaculosNiUnidades() {
-        Casilla origen = new Casilla(new Coordenada(0,0));
+    public void MechSeMueveAUnaCasillaSegunSuRangoDeMovimiento() {
+        Casilla casilla_origen = new Casilla(new Coordenada(0, 0));
+        Casilla casilla_1 = new Casilla(new Coordenada(1, 0));
+        Casilla casilla_2 = new Casilla(new Coordenada(2, 0));
+        Casilla casilla_destino = new Casilla(new Coordenada(3, 0));
+        Casilla casilla_alejada = new Casilla(new Coordenada(4, 0));
+
+        List<Casilla> caminoNormal = List.of(casilla_origen, casilla_1, casilla_2, casilla_destino);
+        List<Casilla> caminoLargo = List.of(casilla_origen, casilla_1, casilla_2, casilla_destino,casilla_alejada);
+
+        Mech mech = new Mech(); // rango de movimiento 3
+        casilla_origen.recibirPieza(mech);
+        mech.moverseA(casilla_destino,caminoNormal);
+
+        assertFalse(casilla_destino.estaLibre());
+        assertTrue(casilla_origen.estaLibre());
     }
 }
