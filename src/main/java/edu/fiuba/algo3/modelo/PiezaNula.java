@@ -7,7 +7,7 @@ public class PiezaNula implements Pieza{
     }
 
     @Override
-    public boolean recibirAtaque(int danio) {
+    public boolean recibirAtaque(Ataque ataque) {
         return false;
     }
 

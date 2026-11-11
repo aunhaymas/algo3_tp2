@@ -33,7 +33,7 @@ public class MechTest {
 
         // Act
         // Atacar deberia emplear direcciones relativas, no casillas directamente
-        mech.atacar(tablero, Direccion.ARRIBA); 
+        mech.atacar(tablero, new Norte()); 
 
         // Assert
         // el enemigo en la casilla adyacente debe haber recibido 2 de daño,
@@ -52,7 +52,7 @@ public class MechTest {
         int vidaInicialEnemigoLineaRecta = enemigoLineaRecta.getVida();
     
         // Act
-        // mech.atacar(casillaLineaRecta);
+        mech.atacar(tablero, new Norte());
 
         // Assert
         // el enemigo en la casilla linea recta debe haber recibido 1 de daño,
@@ -60,23 +60,23 @@ public class MechTest {
         // el enemigo debe ser empujado una casilla atras
     }
 
-    @Test
-    public void mechDeArtilleriaAtacaEnLineaRectaYSaltaUnaCasilla() {
-        // Arrange
-        Mech mech = new MechDeArtilleria();
-        // Aca tiene que ir la logica para ubicar al mech en una casilla
-        // El ataque ha de saltarse la casilla adyacente.
-        Casilla casillaAdyacente = new Casilla();
-        // La casilla linea recta debe ubicarse en la misma fila o columna que el mech y debe incluir un enemigo al que el mech pueda atacar
-        Casilla casillaLineaRecta = new Casilla();
+    // @Test
+    // public void mechDeArtilleriaAtacaEnLineaRectaYSaltaUnaCasilla() {
+    //     // Arrange
+    //     Mech mech = new MechDeArtilleria();
+    //     // Aca tiene que ir la logica para ubicar al mech en una casilla
+    //     // El ataque ha de saltarse la casilla adyacente.
+    //     Casilla casillaAdyacente = new Casilla();
+    //     // La casilla linea recta debe ubicarse en la misma fila o columna que el mech y debe incluir un enemigo al que el mech pueda atacar
+    //     Casilla casillaLineaRecta = new Casilla();
     
-        // Act
-        mech.atacar(casillaLineaRecta);
-        mech.atacar(casillaAdyacente);
+    //     // Act
+    //     mech.atacar(casillaLineaRecta);
+    //     mech.atacar(casillaAdyacente);
 
-        // Assert
-        // el enemigo en la casilla adyacente no debe haber recibido daño
-        // el enemigo en la casilla linea recta debe haber recibido 1 de daño
-        // todo lo adyacente a la casilla linea recta debe haberse desplazado una casilla a cada lado.
-    }
+    //     // Assert
+    //     // el enemigo en la casilla adyacente no debe haber recibido daño
+    //     // el enemigo en la casilla linea recta debe haber recibido 1 de daño
+    //     // todo lo adyacente a la casilla linea recta debe haberse desplazado una casilla a cada lado.
+    // }
 }

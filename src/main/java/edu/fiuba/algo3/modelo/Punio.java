@@ -1,7 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
 public class Punio extends Arma {
-    public boolean atacar(Pieza pieza, Tablero tablero, Direccion direccion) {
-        return pieza.recibirAtaque(2);
+    public boolean atacar(Casilla casilla, Direccion direccion) {
+        Casilla casillaAdyacente = casilla.casillaAdyacente(direccion);
+        Ataque ataque = new Ataque(2);
+        return casillaAdyacente.recibirAtaque(ataque);
     }
 }
