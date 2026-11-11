@@ -24,7 +24,7 @@ public class CasosDeUsoTest {
         Trayectoria camino = new Trayectoria(caminoNormal);
 
         casilla_origen.recibirPieza(mech);
-        mech.moverseA(casilla_destino,camino);
+        mech.moverseA(camino);
 
         assertFalse(casilla_destino.estaLibre());
         assertTrue(casilla_origen.estaLibre());
@@ -43,7 +43,7 @@ public class CasosDeUsoTest {
         Mech mech = new Mech();
         casilla_origen.recibirPieza(mech);
         Trayectoria camino = new Trayectoria(caminoNormal);
-        mech.moverseA(casilla_destino,camino);
+        mech.moverseA(camino);
         assertFalse(casilla_destino.estaLibre());
         assertTrue(casilla_origen.estaLibre());
 
@@ -67,7 +67,7 @@ public class CasosDeUsoTest {
         Mech mech = new Mech();//Su rango maximo es 3
         casilla_origen.recibirPieza(mech);
         assertThrows(MovimientoExcedidoException.class, () -> {
-            mech.moverseA(casilla_destino,camino);
+            mech.moverseA(camino);
         });
     }
 
@@ -79,15 +79,15 @@ public class CasosDeUsoTest {
 
         casilla_obstaculo.recibirPieza(new Mech());
 
-        List<Casilla> caminoExcedido = List.of(
+        List<Casilla> caminoBloqueado = List.of(
                 casilla_origen,
                 casilla_obstaculo,
                 casilla_destino);
-        Trayectoria camino = new Trayectoria(caminoExcedido);
+        Trayectoria camino = new Trayectoria(caminoBloqueado);
         Mech mech = new Mech();
         casilla_origen.recibirPieza(mech);
         assertThrows(MovimientoInvalidoException.class, () -> {
-            mech.moverseA(casilla_destino,camino);
+            mech.moverseA(camino);
         });
     }
     //////////////////////////////////////////////////////////////////////////////////
