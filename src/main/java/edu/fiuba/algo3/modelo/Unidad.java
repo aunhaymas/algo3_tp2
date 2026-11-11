@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.excepciones.PuntosVidaInvalidoException;
 
 public abstract class Unidad implements Pieza {
 	private int vida;
-	private int movimientos;
+	protected int movimientos;
 	private EstadoUnidad estadoUnidad;
 
 	public Unidad(int vida, int movimientos) {
