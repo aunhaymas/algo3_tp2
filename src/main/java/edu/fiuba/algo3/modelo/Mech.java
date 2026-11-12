@@ -33,7 +33,6 @@ public class Mech extends Unidad {
 
 
 	public void moverseA(Trayectoria trayectoria) {
-		//El Proximo Test me va a pedir que valide el movimiento segun distancia
 		validarMovimiento(trayectoria);
 		trayectoria.ejecutarTraslado();
 	}
