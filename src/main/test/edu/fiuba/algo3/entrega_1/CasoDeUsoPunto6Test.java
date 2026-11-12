@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Coordenada;
 import edu.fiuba.algo3.modelo.Mech;
 import edu.fiuba.algo3.modelo.Trayectoria;
 import edu.fiuba.algo3.modelo.excepciones.MovimientoExcedidoException;
+import edu.fiuba.algo3.modelo.excepciones.UnidadYaAtacoException;
 import edu.fiuba.algo3.modelo.excepciones.UnidadYaSeMovioException;
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +28,15 @@ public class CasoDeUsoPunto6Test {
         mech.moverseA(camino1);
         assertThrows(UnidadYaSeMovioException.class, () -> {
             mech.moverseA(camino2);
+        });
+    }
+
+    @Test
+    void mechAtacaUnaSolaVezPorTurno(){
+        Mech mech = new Mech();
+        mech.atacar(null);
+        assertThrows(UnidadYaAtacoException.class, () -> {
+            mech.atacar(null);
         });
     }
 }
