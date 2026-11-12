@@ -7,8 +7,8 @@ public class PiezaNula implements Pieza{
     }
 
     @Override
-    public boolean recibirAtaque(Ataque ataque) {
-        return false;
+    public void recibirAtaque(Ataque ataque) {
+        return;
     }
 
     @Override

@@ -129,23 +129,28 @@ public class MechTest {
         assertEquals(casillaEnemigo.obtenerDistanciaY(coordenadaEnemigoLineaRecta), -1);
     }
 
-    // @Test
-    // public void mechDeArtilleriaAtacaEnLineaRectaYSaltaUnaCasilla() {
-    //     // Arrange
-    //     Mech mech = new MechDeArtilleria();
-    //     // Aca tiene que ir la logica para ubicar al mech en una casilla
-    //     // El ataque ha de saltarse la casilla adyacente.
-    //     Casilla casillaAdyacente = new Casilla();
-    //     // La casilla linea recta debe ubicarse en la misma fila o columna que el mech y debe incluir un enemigo al que el mech pueda atacar
-    //     Casilla casillaLineaRecta = new Casilla();
+    @Test
+    public void mechDeArtilleriaAtacaEnLineaRectaYSaltaUnaCasilla() {
+        // Arrange
+        Mech mech = new MechDeCanon();
+        Coordenada coordenadaMech = new Coordenada(5, 5);
+        Vek enemigoLineaRecta = new Vek();
+        Coordenada coordenadaEnemigoLineaRecta = new Coordenada(5, 2);
+        int vidaInicialEnemigoLineaRecta = enemigoLineaRecta.getVida();
+        // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
+        tablero.colocarPieza(mech, coordenadaMech);
+        tablero.colocarPieza(enemigoLineaRecta, coordenadaEnemigoLineaRecta);
     
-    //     // Act
-    //     mech.atacar(casillaLineaRecta);
-    //     mech.atacar(casillaAdyacente);
+        // Act
+        mech.atacar(tablero, coordenadaEnemigoLineaRecta);
 
-    //     // Assert
-    //     // el enemigo en la casilla adyacente no debe haber recibido daño
-    //     // el enemigo en la casilla linea recta debe haber recibido 1 de daño
-    //     // todo lo adyacente a la casilla linea recta debe haberse desplazado una casilla a cada lado.
-    // }
+        // Assert
+        // el enemigo en la casilla linea recta debe haber recibido 1 de daño,
+        assertEquals(vidaInicialEnemigoLineaRecta - 1, enemigoLineaRecta.getVida());
+
+        // Assert
+        // el enemigo en la casilla adyacente no debe haber recibido daño
+        // el enemigo en la casilla linea recta debe haber recibido 1 de daño
+        // todo lo adyacente a la casilla linea recta debe haberse desplazado una casilla a cada lado.
+    }
 }
