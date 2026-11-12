@@ -35,7 +35,7 @@ public class Trayectoria {
     }
 
     public boolean tieneObstaculos() {
-        if (casillas.size() <= 2) return false;
+        if (this.esTrayectoriaCorta()) return false;
         List<Casilla> casillasIntermedias = casillas.subList(1, casillas.size() - 1);
         return casillasIntermedias.stream().anyMatch(casilla -> !casilla.estaLibre());
     }
