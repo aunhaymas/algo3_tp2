@@ -4,7 +4,7 @@ import edu.fiuba.algo3.modelo.excepciones.SimboloInvalidoException;
 
 public class TerrenosFactory {
     
-    public Efecto crearTerreno(String simbolo) {
+    public TipoTerreno crearTerreno(String simbolo) {
         switch (simbolo) {
             case "S":
                 return new Suelo();
