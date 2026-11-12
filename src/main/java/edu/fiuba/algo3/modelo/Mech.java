@@ -2,10 +2,11 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.MovimientoExcedidoException;
 import edu.fiuba.algo3.modelo.excepciones.MovimientoInvalidoException;
+import edu.fiuba.algo3.modelo.excepciones.UnidadYaSeMovioException;
 
 public class Mech extends Unidad {
     protected Arma arma;
-
+	private boolean yaSeMovio=false;
 	public Mech() {
 		super(3,3);
 		arma = null;
@@ -26,9 +27,13 @@ public class Mech extends Unidad {
 
 	public void moverseA(Trayectoria trayectoria) {
 		validarMovimiento(trayectoria);
+		yaSeMovio=true;
 		trayectoria.ejecutarTraslado();
 	}
 	private void validarMovimiento(Trayectoria trayectoria){
+		if (yaSeMovio){
+			throw new UnidadYaSeMovioException("El Mech ya se movio!");
+		}
 		if (trayectoria.logitud()>this.movimientos){
 			throw new MovimientoExcedidoException("El movimiento requerido excede el movimiento maximo del Mech");
 		}
