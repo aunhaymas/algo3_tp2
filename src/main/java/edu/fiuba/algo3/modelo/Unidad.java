@@ -3,8 +3,8 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.excepciones.CantidadMovimientosInvalidaException;
 import edu.fiuba.algo3.modelo.excepciones.PuntosVidaInvalidoException;
 
-public abstract class Unidad implements Pieza {
-	private int vida;
+public abstract class Unidad implements Dañable, Pieza {
+	protected int vida;
 	protected int movimientos;
 	private EstadoUnidad estadoUnidad;
 
@@ -24,6 +24,23 @@ public abstract class Unidad implements Pieza {
 
 	public void contaminar() {
 		this.estadoUnidad = new EstadoContaminado();
+	}
+
+	public int getVida() {
+		return this.vida;
+	}
+
+	public boolean recibirAtaque(Ataque ataque) {
+		this.vida -= ataque.getDanio();
+		return true; // Impacto
+	}
+
+	public void recibirDaño(int puntos) {
+		this.vida -= puntos;
+	}
+
+	public boolean estaDestruida() {
+		return this.vida <= 0;
 	}
 
 	public void sumergir() {

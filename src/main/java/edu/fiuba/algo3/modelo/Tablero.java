@@ -25,6 +25,7 @@ public class Tablero {
 
     public void agregarCasilla(Coordenada coordenada, Casilla casilla) {
         this.casillas[coordenada.getY()][coordenada.getX()] = casilla;
+        casilla.setPosicion(this, coordenada);
     }
 
     public Casilla obtenerCasilla(Coordenada coordenada) {
