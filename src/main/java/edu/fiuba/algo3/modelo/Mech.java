@@ -2,15 +2,19 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.MovimientoExcedidoException;
 import edu.fiuba.algo3.modelo.excepciones.MovimientoInvalidoException;
+import edu.fiuba.algo3.modelo.excepciones.UnidadYaAtacoException;
 import edu.fiuba.algo3.modelo.excepciones.UnidadYaSeMovioException;
 
 public class Mech extends Unidad {
     protected Arma arma;
 	private boolean yaSeMovio=false;
+	private boolean yaAtaco;
+
 	public Mech() {
 		super(3,3);
-		arma = null;
+		arma = new ArmaNula();
 	}
+
 	public Mech(int vida, int movimientos, Arma arma) {
 		super(vida, movimientos);
 		this.arma = arma;
@@ -43,6 +47,10 @@ public class Mech extends Unidad {
 	}
 
 	public void atacar(Dañable objetivo) {
+		if (yaAtaco){
+			throw new UnidadYaAtacoException("Mech ya ataco");
+		}
+		yaAtaco=true;
 		arma.atacar(objetivo);
 	}
 
