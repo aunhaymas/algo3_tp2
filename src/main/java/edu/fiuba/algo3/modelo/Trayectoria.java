@@ -10,8 +10,8 @@ public class Trayectoria {
 
     public Trayectoria(List<Casilla> casillas) {
         this.casillas = casillas;
-        this.origen=casillas.getFirst();
-        this.destino=casillas.getLast();
+        this.origen=casillas.get(0);
+        this.destino=casillas.get(casillas.size() - 1);
     }
 
     public void ejecutarTraslado() {
