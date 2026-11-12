@@ -5,6 +5,8 @@ import edu.fiuba.algo3.modelo.excepciones.CasillaVaciaException;
 public class Casilla {
     private boolean estaLibre;
     private Pieza pieza;
+    private Tablero tablero;
+    private Coordenada coordenada;
     private Efecto terrenoCasilla;
     public Casilla(Coordenada coordenada) {
         this.estaLibre=true;
@@ -15,6 +17,15 @@ public class Casilla {
         this.estaLibre=true;
         this.terrenoCasilla=terreno;
         limpiarCasilla();
+    }
+
+    public void setPosicion(Tablero tablero, Coordenada coordenada) {
+        this.tablero=tablero;
+        this.coordenada=coordenada;
+    }
+
+    public Casilla casillaAdyacente(Direccion direccion) {
+        return this.tablero.obtenerCasilla(direccion.obtenerCoordenadaAdyacente(this.coordenada));
     }
 
     public boolean estaLibre() {
@@ -35,10 +46,13 @@ public class Casilla {
         return piezaGuardada;
     }
 
-    public void recibirAtaque(Ataque ataque) {
-        this.pieza.recibirAtaque(ataque);
+    public boolean recibirAtaque(Ataque ataque) {
+        boolean hit = this.pieza.recibirAtaque(ataque);
+        if (this.pieza.estaDestruida()) {
+            limpiarCasilla();
+        }
+        return hit;
     }
-
 
 
     private void limpiarCasilla(){

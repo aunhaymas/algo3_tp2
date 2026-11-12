@@ -4,7 +4,7 @@ import edu.fiuba.algo3.modelo.excepciones.MovimientoExcedidoException;
 import edu.fiuba.algo3.modelo.excepciones.MovimientoInvalidoException;
 
 public class Mech extends Unidad {
-	private final Arma arma;
+    protected Arma arma;
 
 	public Mech() {
 		super(3,3);
@@ -24,14 +24,6 @@ public class Mech extends Unidad {
 	public void recibirAtaque(Ataque ataque) {
 	}
 
-
-
-
-
-
-
-
-
 	public void moverseA(Trayectoria trayectoria) {
 		validarMovimiento(trayectoria);
 		trayectoria.ejecutarTraslado();
@@ -44,4 +36,9 @@ public class Mech extends Unidad {
 			throw new MovimientoInvalidoException("Hay obstaculos en el camino!");
 		}
 	}
+
+	public void atacar(Dañable objetivo) {
+		arma.atacar(objetivo);
+	}
+
 }
