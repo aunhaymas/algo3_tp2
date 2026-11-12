@@ -3,14 +3,13 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.excepciones.MovimientoExcedidoException;
 import edu.fiuba.algo3.modelo.excepciones.MovimientoInvalidoException;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.List;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
-public class CasosDeUsoTest {
+public class CasosDeUsoPunto2Test {
 
     //Verificar que un Mech solo pueda moverse a casillas dentro de su rango de movimiento,
     // sin atravesar obstáculos ni otras unidades.
