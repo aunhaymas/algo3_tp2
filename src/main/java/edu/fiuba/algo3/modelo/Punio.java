@@ -6,4 +6,8 @@ public class Punio extends Arma {
         Ataque ataque = new Ataque(2);
         return casillaAdyacente.recibirAtaque(ataque);
     }
+
+    public void atacar(Dañable objetivo) {
+        objetivo.recibirDaño(2);
+    }
 }
