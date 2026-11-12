@@ -1,6 +1,10 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.CasillaVaciaException;
+import edu.fiuba.algo3.modelo.excepciones.TrayectoriaInvalidaException;
+
+import java.util.List;
+import java.util.ArrayList;
 
 public class Casilla {
     private boolean estaLibre;
@@ -26,6 +30,49 @@ public class Casilla {
 
     public Casilla casillaAdyacente(Direccion direccion) {
         return this.tablero.obtenerCasilla(direccion.obtenerCoordenadaAdyacente(this.coordenada));
+    }
+
+    public int obtenerDistanciaX(Coordenada coordenada) {
+        return coordenada.getX() - this.coordenada.getX();
+    }
+
+    public int obtenerDistanciaY(Coordenada coordenada) {
+        return coordenada.getY() - this.coordenada.getY();
+    }
+
+    public boolean tiene(Pieza pieza) {
+        return this.pieza == pieza;
+    }
+
+    public Trayectoria obtenerTrayectoria(Casilla destino) {
+        int distanciaX = destino.obtenerDistanciaX(this.coordenada);
+        int distanciaY = destino.obtenerDistanciaY(this.coordenada);
+        if (distanciaX != 0) {
+
+            if (distanciaY != 0) {
+                throw new TrayectoriaInvalidaException();
+            }
+            Direccion direccion = distanciaX < 0 ? new Oeste() : new Este();
+            List<Casilla> casillas = List.of(this);
+            for (int i = 1; i < Math.abs(distanciaX); i++) {
+                casillas.add(this.casillaAdyacente(direccion));
+            }
+            return new Trayectoria(casillas, direccion);
+
+        } else {
+
+            if (distanciaY != 0) {
+                Direccion direccion = distanciaY < 0 ? new Norte() : new Sur();
+                List<Casilla> casillas = List.of(this);
+                for (int i = 1; i < Math.abs(distanciaY); i++) {
+                    casillas.add(this.casillaAdyacente(direccion));
+                }
+                return new Trayectoria(casillas, direccion);
+            } else {
+                throw new TrayectoriaInvalidaException();
+            }
+
+        }
     }
 
     public boolean estaLibre() {
@@ -76,13 +123,12 @@ public class Casilla {
     }
 
 
-
-
-
-
-
-
     public void moverContenidoA(Casilla destino) {
         destino.recibirPieza(this.removerPieza());
+    }
+
+    public void empujar(Direccion direccion) {
+        Casilla adyacente = this.casillaAdyacente(direccion);
+        this.moverContenidoA(adyacente);
     }
 }

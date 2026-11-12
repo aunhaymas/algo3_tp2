@@ -42,6 +42,13 @@ public class Mech extends Unidad {
 		}
 	}
 
+	public void atacar(Tablero tablero, Coordenada coordenada) {
+		Casilla casilla = tablero.obtenerCasilla(coordenada);
+		Casilla origen = tablero.obtenerCasilla(this);
+		Trayectoria trayectoria = origen.obtenerTrayectoria(casilla);
+		arma.atacar(trayectoria);
+	}
+
 	public void atacar(Dañable objetivo) {
 		arma.atacar(objetivo);
 	}
