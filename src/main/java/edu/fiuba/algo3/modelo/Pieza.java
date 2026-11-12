@@ -5,5 +5,5 @@ public interface Pieza {
     public void entrarEn(Casilla casilla);
     public boolean recibirAtaque(Ataque ataque);
     public boolean estaDestruida();
-    public boolean mover(int fila, int columna);
+    // public boolean mover(int fila, int columna);
 }

@@ -20,9 +20,9 @@ public class Mech extends Unidad {
 		casilla.aplicarEfecto(this);
 	}
 
-	@Override
-	public void recibirAtaque(Ataque ataque) {
-	}
+	// @Override
+	// public void recibirAtaque(Ataque ataque) {
+	// }
 
 	public void moverseA(Trayectoria trayectoria) {
 		validarMovimiento(trayectoria);

@@ -35,6 +35,10 @@ public abstract class Unidad implements Dañable, Pieza {
 		return true; // Impacto
 	}
 
+	public void recibirDaño(int puntos) {
+		this.vida -= puntos;
+	}
+
 	public boolean estaDestruida() {
 		return this.vida <= 0;
 	}
