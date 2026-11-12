@@ -7,8 +7,9 @@ public class Vek extends Unidad {
 		super(3,3);
 	}
 
-    public boolean recibirAtaque(Ataque ataque) {
-        return super.recibirAtaque(ataque);
+	@Override 
+    public void recibirAtaque(Ataque ataque) {
+        super.recibirAtaque(ataque);
     }
 
 	@Override
