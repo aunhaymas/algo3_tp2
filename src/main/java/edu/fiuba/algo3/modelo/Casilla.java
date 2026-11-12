@@ -9,19 +9,20 @@ public class Casilla {
     private Coordenada coordenada;
     private TipoTerreno terrenoCasilla;
     public Casilla(Coordenada coordenada) {
+        this.coordenada=coordenada;
         this.estaLibre=true;
         this.terrenoCasilla=new Suelo();
         limpiarCasilla();
     }
     public Casilla(Coordenada coordenada, TipoTerreno terreno) {
+        this.coordenada=coordenada;
         this.estaLibre=true;
         this.terrenoCasilla=terreno;
         limpiarCasilla();
     }
 
-    public void setPosicion(Tablero tablero, Coordenada coordenada) {
+    public void setTablero(Tablero tablero) {
         this.tablero=tablero;
-        this.coordenada=coordenada;
     }
 
     public Casilla casillaAdyacente(Direccion direccion) {
@@ -75,12 +76,9 @@ public class Casilla {
         return this.pieza;
     }
 
-
-
-
-
-
-
+    public Coordenada getCoordenada() {
+        return this.coordenada;
+    }
 
     public void moverContenidoA(Casilla destino) {
         destino.recibirPieza(this.removerPieza());
