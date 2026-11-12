@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.excepciones.PosicionOcupadaException;
 import edu.fiuba.algo3.modelo.excepciones.PosicionVaciaException;
 
 public class Tablero {
-    //private final Map<Coordenada, Casilla> casillas;
+    
     private Casilla[][] casillas;
     private static final int LARGO_PREDEFINIDO = 8;
     private static final int ANCHO_PREDEFINIDO = 8;
