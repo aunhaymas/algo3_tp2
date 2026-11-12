@@ -37,38 +37,49 @@ public class Casilla {
         return coordenada.getX() - this.coordenada.getX();
     }
 
+    public int obtenerDistanciaX(Casilla destino) {
+        return - destino.obtenerDistanciaX(this.coordenada);
+    }
+
     public int obtenerDistanciaY(Coordenada coordenada) {
         return coordenada.getY() - this.coordenada.getY();
+    }
+
+    public int obtenerDistanciaY(Casilla destino) {
+        return - destino.obtenerDistanciaY(this.coordenada);
     }
 
     public boolean tiene(Pieza pieza) {
         return this.pieza == pieza;
     }
 
+    private Trayectoria obtenerTrayectoriaPorDistanciaYDireccion(Direccion direccion, int distancia) {
+        List<Casilla> casillas = new ArrayList<Casilla>(Arrays.asList(this));
+        Casilla previa = this;
+        for (int i = 1; i <= Math.abs(distancia); i++) {
+            Casilla siguiente = previa.casillaAdyacente(direccion);
+            casillas.add(siguiente);
+            previa = siguiente;
+        }
+        return new Trayectoria(casillas, direccion);
+    }
+
     public Trayectoria obtenerTrayectoria(Casilla destino) {
-        int distanciaX = destino.obtenerDistanciaX(this.coordenada);
-        int distanciaY = destino.obtenerDistanciaY(this.coordenada);
+        int distanciaX = this.obtenerDistanciaX(destino);
+        int distanciaY = this.obtenerDistanciaY(destino);
         if (distanciaX != 0) {
 
             if (distanciaY != 0) {
                 throw new TrayectoriaInvalidaException();
             }
             Direccion direccion = distanciaX < 0 ? new Oeste() : new Este();
-            List<Casilla> casillas = new ArrayList<Casilla>(Arrays.asList(this));
-            for (int i = 1; i < Math.abs(distanciaX); i++) {
-                casillas.add(this.casillaAdyacente(direccion));
-            }
-            return new Trayectoria(casillas, direccion);
+            return this.obtenerTrayectoriaPorDistanciaYDireccion(direccion, distanciaX);
 
         } else {
 
             if (distanciaY != 0) {
                 Direccion direccion = distanciaY < 0 ? new Norte() : new Sur();
-                List<Casilla> casillas = new ArrayList<Casilla>(Arrays.asList(this));
-                for (int i = 1; i < Math.abs(distanciaY); i++) {
-                    casillas.add(this.casillaAdyacente(direccion));
-                }
-                return new Trayectoria(casillas, direccion);
+                return this.obtenerTrayectoriaPorDistanciaYDireccion(direccion, distanciaY);
             } else {
                 throw new TrayectoriaInvalidaException();
             }
@@ -128,6 +139,7 @@ public class Casilla {
     }
 
     public void empujar(Direccion direccion) {
+        if (this.estaLibre()) return;
         Casilla adyacente = this.casillaAdyacente(direccion);
         this.moverContenidoA(adyacente);
     }

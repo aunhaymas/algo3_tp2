@@ -7,11 +7,6 @@ public class Vek extends Unidad {
 		super(3,3);
 	}
 
-	@Override 
-    public void recibirAtaque(Ataque ataque) {
-        super.recibirAtaque(ataque);
-    }
-
 	@Override
 	public void entrarEn(Casilla casilla) {
 		casilla.aplicarEfecto(this);
