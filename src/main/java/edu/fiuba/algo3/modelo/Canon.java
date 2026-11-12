@@ -11,4 +11,8 @@ public class Canon extends Arma {
         }
         return hit;
     }
+
+    public void atacar(Dañable objetivo) {
+        objetivo.recibirDaño(1);
+    }
 }

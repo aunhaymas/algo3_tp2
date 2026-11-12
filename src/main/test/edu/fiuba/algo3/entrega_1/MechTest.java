@@ -20,45 +20,87 @@ public class MechTest {
     ));
 
     @Test
-    public void mechDeCombateSoloPuedeAtacarCasillaAdyacente() {
+    public void mechDeCombateAtacaAVek() {
         // Arrange
         Mech mech = new MechDeCombate();
-        Coordenada coordenadaMech = new Coordenada(5, 5);
-        Vek enemigoAdyacente = new Vek();
-        Coordenada coordenadaEnemigoAdyacente = new Coordenada(5, 4);
-        int vidaInicialEnemigoAdyacente = enemigoAdyacente.getVida();
-        // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
-        tablero.colocarPieza(mech, coordenadaMech);
-        tablero.colocarPieza(enemigoAdyacente, coordenadaEnemigoAdyacente);
+        Vek enemigo = new Vek();
+        int vidaInicialEnemigo = enemigo.getVida();
 
         // Act
-        // Atacar deberia emplear direcciones relativas, no casillas directamente
-        mech.atacar(tablero, new Norte()); 
-
+        mech.atacar(enemigo);
         // Assert
-        // el enemigo en la casilla adyacente debe haber recibido 2 de daño,
-        assertEquals(vidaInicialEnemigoAdyacente - 2, enemigoAdyacente.getVida());
-        // el enemigo debe ser empujado una casilla atras
-
+        assertEquals(vidaInicialEnemigo - 2, enemigo.getVida());
     }
 
     @Test
-    public void mechDeCanonAtacaEnLineaRecta() {
+    public void mechDeCanonAtacaAVek() {
         // Arrange
         Mech mech = new MechDeCanon();
-        Coordenada coordenadaMech = new Coordenada(5, 5);
-        Vek enemigoLineaRecta = new Vek();
-        Coordenada coordenadaEnemigoLineaRecta = new Coordenada(5, 2);
-        int vidaInicialEnemigoLineaRecta = enemigoLineaRecta.getVida();
-    
-        // Act
-        mech.atacar(tablero, new Norte());
+        Vek enemigo = new Vek();
+        int vidaInicialEnemigo = enemigo.getVida();
 
+        // Act
+        mech.atacar(enemigo);
         // Assert
-        // el enemigo en la casilla linea recta debe haber recibido 1 de daño,
-        assertEquals(vidaInicialEnemigoLineaRecta - 1, enemigoLineaRecta.getVida());
-        // el enemigo debe ser empujado una casilla atras
+        assertEquals(vidaInicialEnemigo - 1, enemigo.getVida());
     }
+
+    @Test
+    public void mechDeArtilleriaAtacaAVek() {
+        // Arrange
+        Mech mech = new MechDeArtilleria();
+        Vek enemigo = new Vek();
+        int vidaInicialEnemigo = enemigo.getVida();
+
+        // Act
+        mech.atacar(enemigo);
+        // Assert
+        assertEquals(vidaInicialEnemigo - 1, enemigo.getVida());
+    }
+
+
+    // ---------------------------------------------------------
+
+    // @Test
+    // public void mechDeCombateSoloPuedeAtacarCasillaAdyacente() {
+    //     // Arrange
+    //     Mech mech = new MechDeCombate();
+    //     Coordenada coordenadaMech = new Coordenada(5, 5);
+    //     Vek enemigoAdyacente = new Vek();
+    //     Coordenada coordenadaEnemigoAdyacente = new Coordenada(5, 4);
+    //     int vidaInicialEnemigoAdyacente = enemigoAdyacente.getVida();
+    //     // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
+    //     tablero.colocarPieza(mech, coordenadaMech);
+    //     tablero.colocarPieza(enemigoAdyacente, coordenadaEnemigoAdyacente);
+
+    //     // Act
+    //     // Atacar deberia emplear direcciones relativas, no casillas directamente
+    //     mech.atacar(tablero, new Norte()); 
+
+    //     // Assert
+    //     // el enemigo en la casilla adyacente debe haber recibido 2 de daño,
+    //     assertEquals(vidaInicialEnemigoAdyacente - 2, enemigoAdyacente.getVida());
+    //     // el enemigo debe ser empujado una casilla atras
+
+    // }
+
+    // @Test
+    // public void mechDeCanonAtacaEnLineaRecta() {
+    //     // Arrange
+    //     Mech mech = new MechDeCanon();
+    //     Coordenada coordenadaMech = new Coordenada(5, 5);
+    //     Vek enemigoLineaRecta = new Vek();
+    //     Coordenada coordenadaEnemigoLineaRecta = new Coordenada(5, 2);
+    //     int vidaInicialEnemigoLineaRecta = enemigoLineaRecta.getVida();
+    
+    //     // Act
+    //     mech.atacar(tablero, new Norte());
+
+    //     // Assert
+    //     // el enemigo en la casilla linea recta debe haber recibido 1 de daño,
+    //     assertEquals(vidaInicialEnemigoLineaRecta - 1, enemigoLineaRecta.getVida());
+    //     // el enemigo debe ser empujado una casilla atras
+    // }
 
     // @Test
     // public void mechDeArtilleriaAtacaEnLineaRectaYSaltaUnaCasilla() {

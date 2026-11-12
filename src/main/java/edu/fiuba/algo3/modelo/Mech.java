@@ -24,14 +24,6 @@ public class Mech extends Unidad {
 	public void recibirAtaque(Ataque ataque) {
 	}
 
-
-
-
-
-
-
-
-
 	public void moverseA(Trayectoria trayectoria) {
 		//El Proximo Test me va a pedir que valide el movimiento segun distancia
 		validarMovimiento(trayectoria);
@@ -45,4 +37,9 @@ public class Mech extends Unidad {
 			throw new MovimientoInvalidoException("Hay obstaculos en el camino!");
 		}
 	}
+
+	public void atacar(Dañable objetivo) {
+		arma.atacar(objetivo);
+	}
+
 }
