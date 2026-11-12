@@ -7,13 +7,13 @@ public class Casilla {
     private Pieza pieza;
     private Tablero tablero;
     private Coordenada coordenada;
-    private Efecto terrenoCasilla;
+    private TipoTerreno terrenoCasilla;
     public Casilla(Coordenada coordenada) {
         this.estaLibre=true;
         this.terrenoCasilla=new Suelo();
         limpiarCasilla();
     }
-    public Casilla(Coordenada coordenada, Efecto terreno) {
+    public Casilla(Coordenada coordenada, TipoTerreno terreno) {
         this.estaLibre=true;
         this.terrenoCasilla=terreno;
         limpiarCasilla();
@@ -64,7 +64,7 @@ public class Casilla {
         this.terrenoCasilla.aplicarEfecto(unidad);
     }
 
-    public Efecto getTerreno() {
+    public TipoTerreno getTerreno() {
         return this.terrenoCasilla;
     }
 
