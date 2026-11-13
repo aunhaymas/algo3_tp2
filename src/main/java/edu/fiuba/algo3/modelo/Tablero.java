@@ -3,33 +3,43 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.excepciones.CoordenadaInvalidaException;
 import edu.fiuba.algo3.modelo.excepciones.PosicionOcupadaException;
 import edu.fiuba.algo3.modelo.excepciones.PosicionVaciaException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Tablero {
     
-    private Casilla[][] casillas;
+    private List<Casilla> casillas;
     private static final int LARGO_PREDEFINIDO = 8;
     private static final int ANCHO_PREDEFINIDO = 8;
 
-    public Tablero(){this.casillas = new Casilla[ANCHO_PREDEFINIDO][LARGO_PREDEFINIDO]; }
-    public Tablero(Casilla[][] casillas) {
-        this.casillas = new Casilla[ANCHO_PREDEFINIDO][LARGO_PREDEFINIDO];
-        for (int y = 0; y < LARGO_PREDEFINIDO; y++) {
-            for (int x = 0; x < ANCHO_PREDEFINIDO; x++) {
-                if (casillas[y][x]==null) {
-                    //Deberia lanzar un error
-                    }
-                this.casillas[y][x] = casillas[y][x];
-                }
+    public Tablero(){
+        this.casillas = new ArrayList<>();
+        for (int i = 0; i < LARGO_PREDEFINIDO; i++) {
+            for (int j = 0; j < ANCHO_PREDEFINIDO; j++) {
+                Coordenada coordenada = new Coordenada(j, i);
+                Casilla casilla = new Casilla(coordenada);
+                this.agregarCasilla(casilla);
             }
+        }
+    }
+    public Tablero(List<Casilla> casillas) {
+        this.casillas = new ArrayList<>();
+        for (Casilla casilla : casillas) {
+            this.agregarCasilla(casilla);
+        }
     }
 
-    public void agregarCasilla(Coordenada coordenada, Casilla casilla) {
-        this.casillas[coordenada.getY()][coordenada.getX()] = casilla;
-        casilla.setPosicion(this, coordenada);
+    public void agregarCasilla(Casilla casilla) {
+        this.casillas.add(casilla);
+        casilla.setTablero(this);
     }
 
     public Casilla obtenerCasilla(Coordenada coordenada) {
-        return casillas[coordenada.getY()][coordenada.getX()];
+        return this.casillas.stream()
+            .filter(c -> c.getCoordenada().equals(coordenada))
+            .findFirst()
+            .orElseThrow(() -> new CoordenadaInvalidaException("La coordenada pedida está fuera de los límites 8x8 del tablero."));
+            
     }
 
     public Casilla obtenerCasilla(Pieza pieza) {
@@ -45,21 +55,19 @@ public class Tablero {
     public boolean esPosicionValida(Coordenada coordenada) {
         int x = coordenada.getX();
         int y = coordenada.getY();
-        if (x<0 || y<0) {
-            return false;
-        }
-        return (coordenada.getY()< ANCHO_PREDEFINIDO && coordenada.getX() < LARGO_PREDEFINIDO);
+        return (x >= 0 && y >= 0 && x < LARGO_PREDEFINIDO && y < ANCHO_PREDEFINIDO);
     }
 
     public void colocarPieza(Pieza pieza, Coordenada coordenada) {
-        if (!this.esPosicionValida(coordenada))
-        {
+        
+        if (!esPosicionValida(coordenada)) {
             throw new CoordenadaInvalidaException("La coordenada esta fuera de los limites del tablero!");
         }
-        if (!this.estaLibre(coordenada)){
-            throw new PosicionOcupadaException("La posicion ya esta siendo ocupada");
+        Casilla casillaObjetivo = obtenerCasilla(coordenada);
+        if (!casillaObjetivo.estaLibre()) {
+            throw new PosicionOcupadaException("No se puede colocar la pieza, la posición ya está ocupada.");
         }
-        this.obtenerCasilla(coordenada).recibirPieza(pieza);
+        casillaObjetivo.recibirPieza(pieza);
     }
 
     public boolean estaLibre(Coordenada coordenada) {
@@ -67,11 +75,12 @@ public class Tablero {
     }
 
     public void moverPieza(Coordenada origen, Coordenada destino) {
-        if (estaLibre(origen)){
-            throw new PosicionVaciaException("No hay una pieza que mover");
+        Casilla coordenadaOrigen = obtenerCasilla(origen);
+        Casilla coordenadaDestino = obtenerCasilla(destino);
+        if (!coordenadaDestino.estaLibre()) {
+            throw new PosicionOcupadaException("No se puede mover la pieza, la posición de destino está ocupada.");
         }
-        Pieza pieza = obtenerCasilla(origen).removerPieza();
-        colocarPieza(pieza,destino);
+        coordenadaOrigen.moverContenidoA(coordenadaDestino);
     }
 
     public void atacarPosicion(Coordenada objetivo, Ataque ataque) {
