@@ -19,12 +19,11 @@ public abstract class Unidad implements Dañable, Pieza {
 
 		this.vida = vida;
 		this.movimientos = movimientos;
-		this.estadoUnidad = new EstadoNormal();
+		this.estadoUnidad = new Estable();
 	}
-	public void mover(){}
 
 	public void contaminar() {
-		this.estadoUnidad = new EstadoContaminado();
+		this.estadoUnidad = new Contaminado();
 	}
 
 	public int getVida() {
@@ -32,7 +31,7 @@ public abstract class Unidad implements Dañable, Pieza {
 	}
 
 	public boolean recibirAtaque(Ataque ataque) {
-		this.vida -= ataque.getDanio();
+		this.vida -= estadoUnidad.calcularDañoRecibido(ataque.getDanio());
 		
         if (!this.estaDestruida() && ataque.tieneEmpuje()) {
             Casilla destino = this.casillaActual.casillaAdyacente(ataque.getDireccionEmpuje());
@@ -46,18 +45,22 @@ public abstract class Unidad implements Dañable, Pieza {
         return true;
 	}
 
-	public void recibirDaño(int puntos) {
-		this.vida -= puntos;
-	}
-
 	public boolean estaDestruida() {
 		return this.vida <= 0;
 	}
 
 	public void sumergir() {
-		this.estadoUnidad = new EstadoSumergido();
+		this.estadoUnidad = new Sumergido();
 	}
 
 	public void cancelarMovimiento() {
+	}
+
+	public void actualizarEstado(EstadoUnidad estadoUnidad) {
+		this.estadoUnidad = estadoUnidad;
+	}
+
+	public EstadoUnidad obtenerEstado() {
+		return this.estadoUnidad;
 	}
 }
