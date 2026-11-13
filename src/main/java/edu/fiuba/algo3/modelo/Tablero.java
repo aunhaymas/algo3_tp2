@@ -12,16 +12,6 @@ public class Tablero {
     private static final int LARGO_PREDEFINIDO = 8;
     private static final int ANCHO_PREDEFINIDO = 8;
 
-    public Tablero(){
-        this.casillas = new ArrayList<>();
-        for (int i = 0; i < LARGO_PREDEFINIDO; i++) {
-            for (int j = 0; j < ANCHO_PREDEFINIDO; j++) {
-                Coordenada coordenada = new Coordenada(j, i);
-                Casilla casilla = new Casilla(coordenada);
-                this.agregarCasilla(casilla);
-            }
-        }
-    }
     public Tablero(List<Casilla> casillas) {
         this.casillas = new ArrayList<>();
         for (Casilla casilla : casillas) {
@@ -40,6 +30,13 @@ public class Tablero {
             .findFirst()
             .orElseThrow(() -> new CoordenadaInvalidaException("La coordenada pedida está fuera de los límites 8x8 del tablero."));
             
+    }
+
+    public Casilla obtenerCasilla(Pieza pieza) {
+        for (Casilla casilla : casillas) {
+            if (casilla.tiene(pieza)) return casilla;
+        }
+        throw new RuntimeException("Pieza no encontrada");
     }
 
     public boolean esPosicionValida(Coordenada coordenada) {

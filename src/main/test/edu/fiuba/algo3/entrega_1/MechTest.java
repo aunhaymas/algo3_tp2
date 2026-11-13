@@ -1,8 +1,11 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.excepciones.TrayectoriaInvalidaException;
+import edu.fiuba.algo3.modelo.excepciones.ObjetoFueraDeRangoException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 
@@ -61,64 +64,232 @@ public class MechTest {
 
     // ---------------------------------------------------------
 
-    // @Test
-    // public void mechDeCombateSoloPuedeAtacarCasillaAdyacente() {
-    //     // Arrange
-    //     Mech mech = new MechDeCombate();
-    //     Coordenada coordenadaMech = new Coordenada(5, 5);
-    //     Vek enemigoAdyacente = new Vek();
-    //     Coordenada coordenadaEnemigoAdyacente = new Coordenada(5, 4);
-    //     int vidaInicialEnemigoAdyacente = enemigoAdyacente.getVida();
-    //     // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
-    //     tablero.colocarPieza(mech, coordenadaMech);
-    //     tablero.colocarPieza(enemigoAdyacente, coordenadaEnemigoAdyacente);
+    @Test
+    public void mechDeCombateAtacaCasillaAdyacente() {
+        // Arrange
+        Mech mech = new MechDeCombate();
+        Coordenada coordenadaMech = new Coordenada(5, 5);
+        Vek enemigoAdyacente = new Vek();
+        Coordenada coordenadaEnemigoAdyacente = new Coordenada(5, 4);
+        int vidaInicialEnemigoAdyacente = enemigoAdyacente.getVida();
+        // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
+        tablero.colocarPieza(mech, coordenadaMech);
+        tablero.colocarPieza(enemigoAdyacente, coordenadaEnemigoAdyacente);
 
-    //     // Act
-    //     // Atacar deberia emplear direcciones relativas, no casillas directamente
-    //     mech.atacar(tablero, new Norte()); 
+        // Act
+        // Atacar deberia emplear direcciones relativas, no casillas directamente
+        mech.atacar(tablero, coordenadaEnemigoAdyacente); 
 
-    //     // Assert
-    //     // el enemigo en la casilla adyacente debe haber recibido 2 de daño,
-    //     assertEquals(vidaInicialEnemigoAdyacente - 2, enemigoAdyacente.getVida());
-    //     // el enemigo debe ser empujado una casilla atras
+        // Assert
+        // el enemigo en la casilla adyacente debe haber recibido 2 de daño,
+        assertEquals(vidaInicialEnemigoAdyacente - 2, enemigoAdyacente.getVida());
+        // el enemigo debe ser empujado una casilla atras
+        Casilla casillaEnemigo = tablero.obtenerCasilla(enemigoAdyacente);
+        assertEquals(0, casillaEnemigo.obtenerDistanciaX(coordenadaEnemigoAdyacente));
+        assertEquals(1, casillaEnemigo.obtenerDistanciaY(coordenadaEnemigoAdyacente));
+    }
 
-    // }
+    @Test
+    public void mechDeCombateNoPuedeAtacarCasillaNoAdyacente() {
+        // Arrange
+        Mech mech = new MechDeCombate();
+        Coordenada coordenadaMech = new Coordenada(5, 5);
+        Vek enemigoNoAdyacente = new Vek();
+        Coordenada coordenadaEnemigoNoAdyacente = new Coordenada(4, 4);
+        // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
+        tablero.colocarPieza(mech, coordenadaMech);
+        tablero.colocarPieza(enemigoNoAdyacente, coordenadaEnemigoNoAdyacente);
 
-    // @Test
-    // public void mechDeCanonAtacaEnLineaRecta() {
-    //     // Arrange
-    //     Mech mech = new MechDeCanon();
-    //     Coordenada coordenadaMech = new Coordenada(5, 5);
-    //     Vek enemigoLineaRecta = new Vek();
-    //     Coordenada coordenadaEnemigoLineaRecta = new Coordenada(5, 2);
-    //     int vidaInicialEnemigoLineaRecta = enemigoLineaRecta.getVida();
+        // Act y Assert
+        assertThrows(TrayectoriaInvalidaException.class, () -> {
+            mech.atacar(tablero, coordenadaEnemigoNoAdyacente);
+        });
+
+    }
+
+    @Test
+    public void mechDeCombateNoAlcanzaATocarCasillasLejanas() {
+        // Arrange
+        Mech mech = new MechDeCombate();
+        Coordenada coordenadaMech = new Coordenada(5, 5);
+        Vek enemigoLejano = new Vek();
+        Coordenada coordenadaEnemigoLejano = new Coordenada(3, 5);
+        // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
+        tablero.colocarPieza(mech, coordenadaMech);
+        tablero.colocarPieza(enemigoLejano, coordenadaEnemigoLejano);
+
+        // Act y Assert
+        // Atacar un enemigo lejano debe devolver excepcion "Objeto fuera de rango"
+        assertThrows(ObjetoFueraDeRangoException.class, () -> {
+            mech.atacar(tablero, coordenadaEnemigoLejano);
+        });
+
+    }
+
+    @Test
+    public void trayectoriaDebeDevolverContinua() {
+        // Arrange
+        Coordenada coordenadaSur = new Coordenada(5, 5);
+        Coordenada coordenadaNorte = new Coordenada(5, 2);
+        Casilla casillaSur = tablero.obtenerCasilla(coordenadaSur);
+        Casilla casillaNorte = tablero.obtenerCasilla(coordenadaNorte);
+
+        // Act
+        Trayectoria trayectoria = casillaSur.obtenerTrayectoria(casillaNorte);
+        
+        // Assert
+        // Trayectoria debe tener 4 (5-4-3-2) de distancia
+        assertEquals(3, trayectoria.logitud());
+        assert(trayectoria.sonCasillasAdyacentes(new Norte()));
+
+    }
+
+    @Test
+    public void mechDeCanonAtacaEnLineaRecta() {
+        // Arrange
+        Mech mech = new MechDeCanon();
+        Coordenada coordenadaMech = new Coordenada(5, 5);
+        Vek enemigoLineaRecta = new Vek();
+        Coordenada coordenadaEnemigoLineaRecta = new Coordenada(5, 2);
+        int vidaInicialEnemigoLineaRecta = enemigoLineaRecta.getVida();
+        // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
+        tablero.colocarPieza(mech, coordenadaMech);
+        tablero.colocarPieza(enemigoLineaRecta, coordenadaEnemigoLineaRecta);
     
-    //     // Act
-    //     mech.atacar(tablero, new Norte());
+        // Act
+        mech.atacar(tablero, coordenadaEnemigoLineaRecta);
 
-    //     // Assert
-    //     // el enemigo en la casilla linea recta debe haber recibido 1 de daño,
-    //     assertEquals(vidaInicialEnemigoLineaRecta - 1, enemigoLineaRecta.getVida());
-    //     // el enemigo debe ser empujado una casilla atras
-    // }
+        // Assert
+        // el enemigo en la casilla linea recta debe haber recibido 1 de daño,
+        assertEquals(vidaInicialEnemigoLineaRecta - 1, enemigoLineaRecta.getVida());
+        // el enemigo debe ser empujado una casilla atras
+        Casilla casillaEnemigo = tablero.obtenerCasilla(enemigoLineaRecta);
+        assertEquals(0, casillaEnemigo.obtenerDistanciaX(coordenadaEnemigoLineaRecta));
+        assertEquals(1, casillaEnemigo.obtenerDistanciaY(coordenadaEnemigoLineaRecta));
+    }
 
-    // @Test
-    // public void mechDeArtilleriaAtacaEnLineaRectaYSaltaUnaCasilla() {
-    //     // Arrange
-    //     Mech mech = new MechDeArtilleria();
-    //     // Aca tiene que ir la logica para ubicar al mech en una casilla
-    //     // El ataque ha de saltarse la casilla adyacente.
-    //     Casilla casillaAdyacente = new Casilla();
-    //     // La casilla linea recta debe ubicarse en la misma fila o columna que el mech y debe incluir un enemigo al que el mech pueda atacar
-    //     Casilla casillaLineaRecta = new Casilla();
+    @Test
+    public void mechDeCanonGolpeaUnObstaculo() {
+        // Arrange
+        Mech mech = new MechDeCanon();
+        Coordenada coordenadaMech = new Coordenada(5, 5);
+        Vek enemigoLineaRecta = new Vek();
+        Coordenada coordenadaEnemigoLineaRecta = new Coordenada(5, 1);
+        int vidaInicialEnemigoLineaRecta = enemigoLineaRecta.getVida();
+        Vek enemigoObstaculo = new Vek();
+        Coordenada coordenadaObstaculo = new Coordenada(5, 4);
+        int vidaInicialEnemigoObstaculo = enemigoLineaRecta.getVida();
+        // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
+        tablero.colocarPieza(mech, coordenadaMech);
+        tablero.colocarPieza(enemigoLineaRecta, coordenadaEnemigoLineaRecta);
+        tablero.colocarPieza(enemigoObstaculo, coordenadaObstaculo);
     
-    //     // Act
-    //     mech.atacar(casillaLineaRecta);
-    //     mech.atacar(casillaAdyacente);
+        // Act
+        mech.atacar(tablero, coordenadaEnemigoLineaRecta);
 
-    //     // Assert
-    //     // el enemigo en la casilla adyacente no debe haber recibido daño
-    //     // el enemigo en la casilla linea recta debe haber recibido 1 de daño
-    //     // todo lo adyacente a la casilla linea recta debe haberse desplazado una casilla a cada lado.
-    // }
+        // Assert
+        // el enemigo en la casilla linea recta debe estar normal,
+        assertEquals(vidaInicialEnemigoLineaRecta, enemigoLineaRecta.getVida());
+        // el enemigo en la casilla obstaculo dee recibir el impacto,
+        assertEquals(vidaInicialEnemigoObstaculo - 1, enemigoObstaculo.getVida());
+        // el enemigo debe ser empujado una casilla atras
+    }
+
+    @Test
+    public void mechDeCombateNoPuedeAtacarEnDiagonal() {
+        // Arrange
+        Mech mech = new MechDeCombate();
+        Coordenada coordenadaMech = new Coordenada(5, 5);
+        Vek enemigoDiagonal = new Vek();
+        Coordenada coordenadaEnemigoDiagonal = new Coordenada(3, 2);
+        // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
+        tablero.colocarPieza(mech, coordenadaMech);
+        tablero.colocarPieza(enemigoDiagonal, coordenadaEnemigoDiagonal);
+
+        // Act y Assert
+        assertThrows(TrayectoriaInvalidaException.class, () -> {
+            mech.atacar(tablero, coordenadaEnemigoDiagonal);
+        });
+
+    }
+
+    @Test
+    public void mechDeArtilleriaSeSaltaLosObstaculos() {
+        // Arrange
+        Mech mech = new MechDeArtilleria();
+        Coordenada coordenadaMech = new Coordenada(5, 5);
+        Vek enemigoLineaRecta = new Vek();
+        Coordenada coordenadaEnemigoLineaRecta = new Coordenada(2, 5);
+        int vidaInicialEnemigoLineaRecta = enemigoLineaRecta.getVida();
+        Vek enemigoObstaculo = new Vek();
+        Coordenada coordenadaObstaculo = new Coordenada(4, 5);
+        int vidaInicialEnemigoObstaculo = enemigoLineaRecta.getVida();
+        // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
+        tablero.colocarPieza(mech, coordenadaMech);
+        tablero.colocarPieza(enemigoLineaRecta, coordenadaEnemigoLineaRecta);
+        tablero.colocarPieza(enemigoObstaculo, coordenadaObstaculo);
+    
+        // Act
+        mech.atacar(tablero, coordenadaEnemigoLineaRecta);
+
+        // Assert
+        // el enemigo en la casilla linea recta debe estar normal,
+        assertEquals(vidaInicialEnemigoLineaRecta - 1, enemigoLineaRecta.getVida());
+        // el enemigo en la casilla obstaculo dee recibir el impacto,
+        assertEquals(vidaInicialEnemigoObstaculo, enemigoObstaculo.getVida());
+        // el enemigo debe ser empujado una casilla atras
+
+    }
+
+    @Test
+    public void mechDeArtilleriaEmpujaLosAdyacentes() {
+        // Arrange
+        Mech mech = new MechDeArtilleria();
+        Coordenada coordenadaMech = new Coordenada(7, 5);
+        tablero.colocarPieza(mech, coordenadaMech);
+        Vek enemigo = new Vek();
+        Coordenada coordenadaEnemigo = new Coordenada(3, 5);
+        tablero.colocarPieza(enemigo, coordenadaEnemigo);
+        
+        Vek obstaculoNorte = new Vek();
+        Coordenada coordenadaObstaculoNorte = new Coordenada(3, 4);
+        tablero.colocarPieza(obstaculoNorte, coordenadaObstaculoNorte);
+        
+        Vek obstaculoSur = new Vek();
+        Coordenada coordenadaObstaculoSur = new Coordenada(3, 6);
+        tablero.colocarPieza(obstaculoSur, coordenadaObstaculoSur);
+        
+        Vek obstaculoEste = new Vek();
+        Coordenada coordenadaObstaculoEste = new Coordenada(4, 5);
+        tablero.colocarPieza(obstaculoEste, coordenadaObstaculoEste);
+        
+        Vek obstaculoOeste = new Vek();
+        Coordenada coordenadaObstaculoOeste = new Coordenada(2, 5);
+        tablero.colocarPieza(obstaculoOeste, coordenadaObstaculoOeste);
+    
+        // Act
+        mech.atacar(tablero, coordenadaEnemigo);
+
+        // Assert
+        // El enemigo debe estar en la misma posicion,
+        Casilla casillaEnemigo = tablero.obtenerCasilla(enemigo);
+        assertEquals(tablero.obtenerCasilla(coordenadaEnemigo), casillaEnemigo);
+
+        // Los Adyacentes deben estar desplazados,
+        Casilla originalNorte = tablero.obtenerCasilla(coordenadaObstaculoNorte);
+        Casilla actualNorte = tablero.obtenerCasilla(obstaculoNorte);
+        assert(originalNorte.esAdyacente(actualNorte, new Norte()));
+
+        Casilla originalEste = tablero.obtenerCasilla(coordenadaObstaculoEste);
+        Casilla actualEste = tablero.obtenerCasilla(obstaculoEste);
+        assert(originalEste.esAdyacente(actualEste, new Este()));
+
+        Casilla originalSur = tablero.obtenerCasilla(coordenadaObstaculoSur);
+        Casilla actualSur = tablero.obtenerCasilla(obstaculoSur);
+        assert(originalSur.esAdyacente(actualSur, new Sur()));
+
+        Casilla originalOeste = tablero.obtenerCasilla(coordenadaObstaculoOeste);
+        Casilla actualOeste = tablero.obtenerCasilla(obstaculoOeste);
+        assert(originalOeste.esAdyacente(actualOeste, new Oeste()));
+    }
 }

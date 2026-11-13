@@ -18,7 +18,10 @@ interface Pieza{
     +entrarEn(c:Casilla)
     +esEmpujable():bool
 }
-abstract class Unidad implements Pieza{
+interface Dañable{
+    +recibirDaño(puntos:int)
+}
+abstract class Unidad implements Pieza , Dañable{
   - def: Defensa
   + mov: Movimiento
   +contaminar()
@@ -55,7 +58,12 @@ class PiezaNula implements Pieza{
 }
 
 class Mech {
-+arma :Arma
+   +arma :Arma
+   + atacar(objetivo: Dañable)
+}
+
+class Arma {
+   + atacar(objetivo: Dañable)
 }
 
 
@@ -73,6 +81,8 @@ Casilla "1" o--"0...1" Pieza
 
 Vek --|> Unidad
 Mech --|> Unidad
+
+Mech "1" o--"1" Arma
 
 
 
