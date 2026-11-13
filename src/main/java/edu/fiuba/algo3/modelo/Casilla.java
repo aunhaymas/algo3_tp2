@@ -169,5 +169,10 @@ public class Casilla {
     public void empujarA(Casilla destino) {
         // TODO Refactorizar para eliminar if
         if (destino.estaLibre()) moverContenidoA(destino);
+        else{
+            DanioColision colision = new DanioColision();
+            destino.recibirAtaque(colision);
+            recibirAtaque(colision);
+        }
     }
 }
