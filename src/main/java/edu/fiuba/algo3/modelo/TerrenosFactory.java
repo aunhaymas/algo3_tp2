@@ -4,14 +4,19 @@ import edu.fiuba.algo3.modelo.excepciones.SimboloInvalidoException;
 
 public class TerrenosFactory {
     
-    public Efecto crearTerreno(String simbolo) {
+    public TipoTerreno crearTerreno(String simbolo) {
         switch (simbolo) {
             case "S":
                 return new Suelo();
             case "E":
                 return new Edificio();
-            //Hay que agregar los demas casos de terreno, por ahora solo se implementa el caso de Suelo
-
+            case "A":
+                return new Agua();
+            case "M":
+                return new Montaña();
+            case "Á":
+                return new Acido();
+                
             default:
                 throw new SimboloInvalidoException("Tipo de terreno desconocido: " + simbolo);
         }

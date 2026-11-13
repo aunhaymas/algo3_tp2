@@ -24,7 +24,7 @@ public class ParserTablero {
             String linea = lineas.get(i);
             for (int j = 0; j < columnas; j++) {
                 char simbolo = linea.charAt(j);
-                Efecto terreno = fabricaTerrenos.crearTerreno(String.valueOf(simbolo));
+                TipoTerreno terreno = fabricaTerrenos.crearTerreno(String.valueOf(simbolo));
                 Coordenada coordenada = new Coordenada(j, i);
                 Casilla casilla = new Casilla(coordenada,terreno);
                 tablero.agregarCasilla(coordenada, casilla);
