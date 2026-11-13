@@ -127,6 +127,24 @@ public class MechTest {
     }
 
     @Test
+    public void trayectoriaDebeDevolverContinua() {
+        // Arrange
+        Coordenada coordenadaSur = new Coordenada(5, 5);
+        Coordenada coordenadaNorte = new Coordenada(5, 2);
+        Casilla casillaSur = tablero.obtenerCasilla(coordenadaSur);
+        Casilla casillaNorte = tablero.obtenerCasilla(coordenadaNorte);
+
+        // Act
+        Trayectoria trayectoria = casillaSur.obtenerTrayectoria(casillaNorte);
+        
+        // Assert
+        // Trayectoria debe tener 4 (5-4-3-2) de distancia
+        assertEquals(3, trayectoria.logitud());
+        assert(trayectoria.sonCasillasAdyacentes(new Norte()));
+
+    }
+
+    @Test
     public void mechDeCanonAtacaEnLineaRecta() {
         // Arrange
         Mech mech = new MechDeCanon();
