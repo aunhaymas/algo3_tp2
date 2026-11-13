@@ -5,5 +5,7 @@ public class Agua implements TipoTerreno{
     @Override
     public void aplicarEfecto(Unidad unidad){
 
+        unidad.sumergir();
+
     }
 }

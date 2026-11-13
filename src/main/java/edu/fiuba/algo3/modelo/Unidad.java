@@ -32,7 +32,7 @@ public abstract class Unidad implements Dañable, Pieza {
 	}
 
 	public void recibirAtaque(Ataque ataque) {
-		this.vida -= ataque.getDanio();
+		this.recibirDaño(ataque.getDanio());
 		
 		// Pepo: Vamos por otro camino: delegamos a Casilla la responsabilidad de destruir o mover.
         // if (!this.estaDestruida() && ataque.tieneEmpuje()) {
@@ -47,6 +47,9 @@ public abstract class Unidad implements Dañable, Pieza {
         // return true;
 	}
 
+	// Deberia ser privado, unidad no sabe que tipo de arma la ataco y no puedo aplicar polimorfismo
+	// tampoco puede recibir el efecto del arma, por ejemplo la contaminacion
+	// https://docs.google.com/presentation/d/1lf1sGq9iIxYKDetrzGbqh8L9fd5YhxZXutqcoW9jrlM/edit?slide=id.g52d1aa7109_0_15#slide=id.g52d1aa7109_0_15
 	public void recibirDaño(int puntos) {
 		this.vida -= puntos;
 	}
@@ -61,4 +64,8 @@ public abstract class Unidad implements Dañable, Pieza {
 
 	public void cancelarMovimiento() {
 	}
+
+	public boolean puedeAtacar() {
+        return this.estadoUnidad.puedeAtacar();
+    }
 }

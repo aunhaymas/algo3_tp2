@@ -7,4 +7,7 @@ public class EstadoUnidad {
 	public int calcularDañoAtaque(int dañoBase) {
 		return dañoBase;
 	}
+	public boolean puedeAtacar() { 
+        return true; 
+    }
 }
