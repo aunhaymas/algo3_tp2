@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.excepciones.MovimientoExcedidoException;
 import edu.fiuba.algo3.modelo.excepciones.MovimientoInvalidoException;
 import edu.fiuba.algo3.modelo.excepciones.UnidadYaAtacoException;
 import edu.fiuba.algo3.modelo.excepciones.UnidadYaSeMovioException;
+import edu.fiuba.algo3.modelo.excepciones.UnidadSumergidaException;
 
 public class Mech extends Unidad {
     protected Arma arma;
@@ -57,6 +58,9 @@ public class Mech extends Unidad {
 		if (yaAtaco){
 			throw new UnidadYaAtacoException("Mech ya ataco");
 		}
+		if (!this.puedeAtacar()) {
+            throw new UnidadSumergidaException("El Mech no puede atacar mientras está en el Agua.");
+        }
 		yaAtaco=true;
 		arma.atacar(objetivo);
 	}

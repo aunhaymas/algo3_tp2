@@ -14,10 +14,22 @@ import java.util.List;
 
 class TableroTest {
 
+    private ParserTablero parserTablero = new ParserTablero(new TerrenosFactory());
+    private Tablero tablero = parserTablero.parsear(List.of(
+            "SSSSSSSS",
+            "SSSSSSSS",
+            "SSSSSSSS",
+            "SSSSSSSS",
+            "SSSSSSSS",
+            "SSSSSSSS",
+            "SSSSSSSS",
+            "SSSSSSSS"
+    ));
+
     @Test
     public void EsPosicionValidaRechazaCoordenadasFueraDelTablero8x8() {
 
-        Tablero tablero = new Tablero();
+        
 
         assertFalse(tablero.esPosicionValida(new Coordenada(-1, 0)));
     }
@@ -25,7 +37,7 @@ class TableroTest {
     @Test
     public void ColocarPiezaModificaElEstadoDeLaCasilla() {
 
-        Tablero tablero = new Tablero();
+        
         Coordenada posicion = new Coordenada(3, 3);
         Unidad mech = new Mech();
 
@@ -38,7 +50,7 @@ class TableroTest {
     @Test
     public void SacarPiezaModificaElEstadoDeLaCasillaYQuedaLibre() {
         
-        Tablero tablero = new Tablero();
+
         Coordenada posicion = new Coordenada(3, 3);
         Unidad mech = new Mech();
 
@@ -53,7 +65,7 @@ class TableroTest {
     @Test
     public void SacarUnaPiezaDeUnaCasillaDevuelveLaPiezaCorrectamente() {
         
-        Tablero tablero = new Tablero();
+        
         Coordenada posicion = new Coordenada(3, 3);
         Unidad mech = new Mech();
 
@@ -68,7 +80,7 @@ class TableroTest {
     @Test
     public void MoverPiezaLiberaElOrigen() {
         
-        Tablero tablero = new Tablero();
+        
         Coordenada origen = new Coordenada(1, 1);
         Coordenada destino = new Coordenada(2, 1);
         Unidad unidad = new Mech();
@@ -84,7 +96,7 @@ class TableroTest {
     @Test
     public void MoverPiezaLlegaAlDestino() {
         
-        Tablero tablero = new Tablero();
+       
         Coordenada origen = new Coordenada(1, 1);
         Coordenada destino = new Coordenada(2, 1);
         Unidad unidad = new Mech();
@@ -100,7 +112,7 @@ class TableroTest {
     @Test
     public void MoverPiezaOcupaElDestino() {
         
-        Tablero tablero = new Tablero();
+       
         Coordenada origen = new Coordenada(1, 1);
         Coordenada destino = new Coordenada(2, 1);
         Unidad unidad = new Mech();
@@ -116,7 +128,7 @@ class TableroTest {
     @Test
     public void testMoverPiezaACasillaOcupadaLanzaPosicionOcupadaException() {
         
-        Tablero tablero = new Tablero();
+        
         Coordenada origen = new Coordenada(0, 0);
         Coordenada destino = new Coordenada(0, 1);
         
