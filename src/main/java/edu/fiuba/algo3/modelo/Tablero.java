@@ -43,11 +43,8 @@ public class Tablero {
     }
 
     public Casilla obtenerCasilla(Pieza pieza) {
-        for (int y = 0; y < LARGO_PREDEFINIDO; y++) {
-            for (int x = 0; x < ANCHO_PREDEFINIDO; x++) {
-                Casilla casilla = casillas[y][x];
-                if (casilla.tiene(pieza)) return casilla;
-            }
+        for (Casilla casilla : casillas) {
+            if (casilla.tiene(pieza)) return casilla;
         }
         throw new RuntimeException("Pieza no encontrada");
     }
