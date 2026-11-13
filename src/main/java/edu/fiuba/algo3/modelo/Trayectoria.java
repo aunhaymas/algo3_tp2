@@ -45,7 +45,13 @@ public class Trayectoria {
     }
 
     public Casilla devolverPrimeraCasillaNoLibre(){
+        boolean primero = true;
         for (Casilla casilla : casillas) {
+            if (primero) {
+                // Saltar el primero
+                primero = false;
+                continue;
+            }
             if (!casilla.estaLibre()) {
                 return casilla;
             }
