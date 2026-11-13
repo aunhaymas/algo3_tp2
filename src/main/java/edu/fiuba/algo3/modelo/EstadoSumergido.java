@@ -10,4 +10,9 @@ public class EstadoSumergido extends EstadoUnidad {
 	public int calcularDañoAtaque(int dañoBase) {
 		return 0;
 	}
+
+	@Override
+    public boolean puedeAtacar() {
+        return false;
+    }
 }
