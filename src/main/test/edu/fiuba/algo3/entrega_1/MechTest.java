@@ -214,27 +214,29 @@ public class MechTest {
     }
 
     @Test
-    public void mechDeArtilleriaAtacaEnLineaRectaYSaltaUnaCasilla() {
+    public void mechDeArtilleriaSeSaltaLosObstaculos() {
         // Arrange
         Mech mech = new MechDeArtilleria();
         Coordenada coordenadaMech = new Coordenada(5, 5);
         Vek enemigoLineaRecta = new Vek();
-        Coordenada coordenadaEnemigoLineaRecta = new Coordenada(5, 2);
+        Coordenada coordenadaEnemigoLineaRecta = new Coordenada(2, 5);
         int vidaInicialEnemigoLineaRecta = enemigoLineaRecta.getVida();
+        Vek enemigoObstaculo = new Vek();
+        Coordenada coordenadaObstaculo = new Coordenada(4, 5);
+        int vidaInicialEnemigoObstaculo = enemigoLineaRecta.getVida();
         // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
         tablero.colocarPieza(mech, coordenadaMech);
         tablero.colocarPieza(enemigoLineaRecta, coordenadaEnemigoLineaRecta);
+        tablero.colocarPieza(enemigoObstaculo, coordenadaObstaculo);
     
         // Act
         mech.atacar(tablero, coordenadaEnemigoLineaRecta);
 
         // Assert
-        // el enemigo en la casilla linea recta debe haber recibido 1 de daño,
+        // el enemigo en la casilla linea recta debe estar normal,
         assertEquals(vidaInicialEnemigoLineaRecta - 1, enemigoLineaRecta.getVida());
-
-        // Assert
-        // el enemigo en la casilla adyacente no debe haber recibido daño
-        // el enemigo en la casilla linea recta debe haber recibido 1 de daño
-        // todo lo adyacente a la casilla linea recta debe haberse desplazado una casilla a cada lado.
+        // el enemigo en la casilla obstaculo dee recibir el impacto,
+        assertEquals(vidaInicialEnemigoObstaculo, enemigoObstaculo.getVida());
+        // el enemigo debe ser empujado una casilla atras
     }
 }
