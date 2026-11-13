@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.List;
 import edu.fiuba.algo3.modelo.excepciones.MapaInvalidoException;
+import java.util.ArrayList;
 
 public class ParserTablero {
     private final TerrenosFactory fabricaTerrenos;
@@ -18,7 +19,7 @@ public class ParserTablero {
         
         int filas = LARGO_PREDEFINIDO;
         int columnas = ANCHO_PREDEFINIDO;
-        Tablero tablero = new Tablero();
+        List<Casilla> casillas = new ArrayList<>();
 
         for (int i = 0; i < filas; i++) {
             String linea = lineas.get(i);
@@ -27,11 +28,11 @@ public class ParserTablero {
                 TipoTerreno terreno = fabricaTerrenos.crearTerreno(String.valueOf(simbolo));
                 Coordenada coordenada = new Coordenada(j, i);
                 Casilla casilla = new Casilla(coordenada,terreno);
-                tablero.agregarCasilla(casilla);
+                casillas.add(casilla);
             }
         }
 
-        return tablero;
+        return new Tablero(casillas);
     }
 
     private void validarVacio(List<String> lineas) {
