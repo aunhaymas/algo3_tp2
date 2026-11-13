@@ -53,6 +53,17 @@ public class Trayectoria {
         return destino;
     }
 
+    public boolean sonCasillasAdyacentes(Direccion direccion){
+        Casilla previo = null;
+        for (Casilla casilla: casillas) {
+            if ((previo != null) && (!previo.esAdyacente(casilla, direccion))) {
+                return false;
+            }
+            previo = casilla;
+        }
+        return true;
+    }
+
     public boolean esTrayectoriaCorta() {
         return casillas.size() <= 2;
     }

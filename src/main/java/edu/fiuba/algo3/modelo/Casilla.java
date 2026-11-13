@@ -33,6 +33,10 @@ public class Casilla {
         return this.tablero.obtenerCasilla(direccion.obtenerCoordenadaAdyacente(this.coordenada));
     }
 
+    public boolean esAdyacente(Casilla otraCasilla, Direccion direccion) {
+        return otraCasilla == this.casillaAdyacente(direccion);
+    }
+
     public int obtenerDistanciaX(Coordenada coordenada) {
         return coordenada.getX() - this.coordenada.getX();
     }
