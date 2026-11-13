@@ -12,16 +12,6 @@ public class Tablero {
     private static final int LARGO_PREDEFINIDO = 8;
     private static final int ANCHO_PREDEFINIDO = 8;
 
-    public Tablero(){
-        this.casillas = new ArrayList<>();
-        for (int i = 0; i < LARGO_PREDEFINIDO; i++) {
-            for (int j = 0; j < ANCHO_PREDEFINIDO; j++) {
-                Coordenada coordenada = new Coordenada(j, i);
-                Casilla casilla = new Casilla(coordenada);
-                this.agregarCasilla(casilla);
-            }
-        }
-    }
     public Tablero(List<Casilla> casillas) {
         this.casillas = new ArrayList<>();
         for (Casilla casilla : casillas) {
