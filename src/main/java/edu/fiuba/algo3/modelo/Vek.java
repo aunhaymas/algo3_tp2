@@ -7,8 +7,17 @@ public class Vek extends Unidad {
 		super(3,3);
 	}
 
+	public Vek(int vida, int movimientos) {
+        super(vida, movimientos);
+    }
+
 	@Override
 	public void entrarEn(Casilla casilla) {
 		casilla.aplicarEfecto(this);
 	}
+
+	@Override
+    public void sumergir() {
+        this.recibirDaño(this.vida); 
+    }
 }
