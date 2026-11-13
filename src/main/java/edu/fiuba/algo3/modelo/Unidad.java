@@ -64,4 +64,8 @@ public abstract class Unidad implements Dañable, Pieza {
 
 	public void cancelarMovimiento() {
 	}
+
+	public boolean puedeAtacar() {
+        return this.estadoUnidad.puedeAtacar();
+    }
 }
