@@ -1,13 +1,11 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.excepciones.MovimientoInvalidoException;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static junit.framework.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
 //Verificar que al empujar una unidad contra otra unidad u obstáculo,
 // la unidad no se mueva y se aplique el daño de colisión.
 public class CasoDeUso1Test {
@@ -20,8 +18,8 @@ public class CasoDeUso1Test {
         Mech mech = new MechDeCombate();
         casilla_origen.recibirPieza(mech);
         casilla_origen.empujarA(casilla_colision);
-        assertEquals(casilla_origen.obtenerPieza(),mech);
-        assertEquals(casilla_colision.obtenerPieza(),mechColision);
+        assertEquals(mech,casilla_origen.obtenerPieza());
+        assertEquals(mechColision,casilla_colision.obtenerPieza());
     }
 
     @Test
@@ -35,7 +33,7 @@ public class CasoDeUso1Test {
         //ACT
         casilla_origen.empujarA(casilla_colision); // Colision 1 de Danio
 
-        assertEquals(mech.getVida(),2);
-        assertEquals(mechColision.getVida(),2);
+        assertEquals(2, mech.getVida());
+        assertEquals(2,mechColision.getVida());
     }
 }
