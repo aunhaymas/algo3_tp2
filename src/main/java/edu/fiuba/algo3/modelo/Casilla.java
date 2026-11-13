@@ -162,4 +162,17 @@ public class Casilla {
         Oeste oeste = new Oeste();
         this.casillaAdyacente(oeste).empujar(oeste);
     }
+
+    // Casilla conoce su espacio fisico
+    // La precondicion es que, quien llame a este metodo,
+    // le envie una casilla valida
+    public void empujarA(Casilla destino) {
+        // TODO Refactorizar para eliminar if
+        if (destino.estaLibre()) moverContenidoA(destino);
+        else{
+            DanioColision colision = new DanioColision();
+            destino.recibirAtaque(colision);
+            recibirAtaque(colision);
+        }
+    }
 }
