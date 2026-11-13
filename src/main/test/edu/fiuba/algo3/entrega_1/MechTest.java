@@ -238,5 +238,58 @@ public class MechTest {
         // el enemigo en la casilla obstaculo dee recibir el impacto,
         assertEquals(vidaInicialEnemigoObstaculo, enemigoObstaculo.getVida());
         // el enemigo debe ser empujado una casilla atras
+
+    }
+
+    @Test
+    public void mechDeArtilleriaEmpujaLosAdyacentes() {
+        // Arrange
+        Mech mech = new MechDeArtilleria();
+        Coordenada coordenadaMech = new Coordenada(7, 5);
+        tablero.colocarPieza(mech, coordenadaMech);
+        Vek enemigo = new Vek();
+        Coordenada coordenadaEnemigo = new Coordenada(3, 5);
+        tablero.colocarPieza(enemigo, coordenadaEnemigo);
+        
+        Vek obstaculoNorte = new Vek();
+        Coordenada coordenadaObstaculoNorte = new Coordenada(3, 4);
+        tablero.colocarPieza(obstaculoNorte, coordenadaObstaculoNorte);
+        
+        Vek obstaculoSur = new Vek();
+        Coordenada coordenadaObstaculoSur = new Coordenada(3, 6);
+        tablero.colocarPieza(obstaculoSur, coordenadaObstaculoSur);
+        
+        Vek obstaculoEste = new Vek();
+        Coordenada coordenadaObstaculoEste = new Coordenada(4, 5);
+        tablero.colocarPieza(obstaculoEste, coordenadaObstaculoEste);
+        
+        Vek obstaculoOeste = new Vek();
+        Coordenada coordenadaObstaculoOeste = new Coordenada(2, 5);
+        tablero.colocarPieza(obstaculoOeste, coordenadaObstaculoOeste);
+    
+        // Act
+        mech.atacar(tablero, coordenadaEnemigo);
+
+        // Assert
+        // El enemigo debe estar en la misma posicion,
+        Casilla casillaEnemigo = tablero.obtenerCasilla(enemigo);
+        assertEquals(tablero.obtenerCasilla(coordenadaEnemigo), casillaEnemigo);
+
+        // Los Adyacentes deben estar desplazados,
+        Casilla originalNorte = tablero.obtenerCasilla(coordenadaObstaculoNorte);
+        Casilla actualNorte = tablero.obtenerCasilla(obstaculoNorte);
+        assert(originalNorte.esAdyacente(actualNorte, new Norte()));
+
+        Casilla originalEste = tablero.obtenerCasilla(coordenadaObstaculoEste);
+        Casilla actualEste = tablero.obtenerCasilla(obstaculoEste);
+        assert(originalEste.esAdyacente(actualEste, new Este()));
+
+        Casilla originalSur = tablero.obtenerCasilla(coordenadaObstaculoSur);
+        Casilla actualSur = tablero.obtenerCasilla(obstaculoSur);
+        assert(originalSur.esAdyacente(actualSur, new Sur()));
+
+        Casilla originalOeste = tablero.obtenerCasilla(coordenadaObstaculoOeste);
+        Casilla actualOeste = tablero.obtenerCasilla(obstaculoOeste);
+        assert(originalOeste.esAdyacente(actualOeste, new Oeste()));
     }
 }
