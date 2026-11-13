@@ -7,6 +7,7 @@ public abstract class Unidad implements Dañable, Pieza {
 	protected int vida;
 	protected int movimientos;
 	private EstadoUnidad estadoUnidad;
+	private Casilla casillaActual;
 
 	public Unidad(int vida, int movimientos) {
 		if (vida <= 0) {
@@ -32,6 +33,17 @@ public abstract class Unidad implements Dañable, Pieza {
 
 	public void recibirAtaque(Ataque ataque) {
 		this.vida -= ataque.getDanio();
+		
+        if (!this.estaDestruida() && ataque.tieneEmpuje()) {
+            Casilla destino = this.casillaActual.casillaAdyacente(ataque.getDireccionEmpuje());
+            
+            if (destino.estaLibre()) {
+                this.casillaActual.moverContenidoA(destino);
+            } else {
+                this.vida -= 1; // por choque
+            }
+        }
+        return true;
 	}
 
 	public void recibirDaño(int puntos) {
