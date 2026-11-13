@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-public class EstadoSumergido extends EstadoUnidad {
+public class Sumergido extends EstadoUnidad {
 	@Override
 	public int calcularDañoRecibido(int dañoBase) {
 		return super.calcularDañoRecibido(dañoBase);
