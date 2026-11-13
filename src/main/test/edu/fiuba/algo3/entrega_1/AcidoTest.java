@@ -15,5 +15,5 @@ public class AcidoTest {
         acidoMock.aplicarEfecto(unidadMock);
 
         Mockito.verify(acidoMock).aplicarEfecto(unidadMock);
-    }
+   }
 }
