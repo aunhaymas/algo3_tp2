@@ -15,7 +15,7 @@ public class RegistroMovimientoJugador implements RegistroMovimiento {
 
 	@Override 
 	public void restaurar() {
-		mech.actualizarEstado(estadoUnidad);
+		estadoUnidad.aplicarA(mech);
 		destino.moverContenidoA(origen);
 	}
 }

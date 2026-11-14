@@ -61,10 +61,18 @@ public abstract class Unidad implements Dañable, Pieza {
 		this.estadoUnidad = new Sumergido();
 	}
 
+	public void estabilizar() {
+		this.estadoUnidad = new Estable();
+	}
+
 	public void cancelarMovimiento() {
 	}
 
 	public boolean puedeAtacar() {
         return this.estadoUnidad.puedeAtacar();
     }
+
+	public EstadoUnidad obtenerEstado() {
+		return this.estadoUnidad;
+	}
 }

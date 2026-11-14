@@ -32,7 +32,6 @@ public class GestorMovimientoTest {
 	 */
 	@Test 
 	public void mechPuedeDeshacerMovimientoSiNoAtaco() {
-		Tablero tablero = new Tablero();
 		MechDeArtilleria mech = new MechDeArtilleria();
 
 		GestorFaseJugador gestor = new GestorFaseJugador(tablero);
@@ -45,7 +44,7 @@ public class GestorMovimientoTest {
 
 		tablero.colocarPieza(mech, coordenadaOrigen);
 		gestor.seleccionarMech(mech);
-		gestor.moverMech(casillaOrigen, casillaDestino);
+		gestor.moverMechSeleccionado(casillaOrigen, casillaDestino);
 
 		assertTrue(casillaOrigen.estaLibre());
 		assertEquals(mech, casillaDestino.obtenerPieza());
