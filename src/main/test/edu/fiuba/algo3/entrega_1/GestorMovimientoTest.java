@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.excepciones.MovimientoInvalidoException;
+import edu.fiuba.algo3.modelo.excepciones.MovimientoNoCancelable;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -73,8 +75,21 @@ public class GestorMovimientoTest {
 		assertEquals(mechCombate, origen.obtenerPieza());
 	}
 
+	@Test
 	public void mechNoPuedeDeshacerMovimientoDespuesDeAtacar() {
-		return;
+		Casilla origen = new Casilla(new Coordenada(0,0));
+		Casilla destino = new Casilla(new Coordenada(1,1));
+		Trayectoria trayectoria = new Trayectoria(List.of(origen, destino));
+		Mech mechCombate = new MechDeCombate();
+		origen.recibirPieza(mechCombate);
+		ComandoMover comando = new ComandoMover(mechCombate, trayectoria);
+
+		comando.ejecutar();
+		mechCombate.atacar(null);
+
+		assertThrows(MovimientoNoCancelable.class, () -> {
+			comando.deshacer();
+		});
 	}
 
 	public void mechNoPuedeDeshacerMovimientoMasDeUnaVezPorTurno() {
