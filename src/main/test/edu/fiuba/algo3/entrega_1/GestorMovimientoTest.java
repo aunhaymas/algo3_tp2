@@ -1,16 +1,14 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.excepciones.MovimientoInvalidoException;
+import edu.fiuba.algo3.modelo.excepciones.MovimientoNoCancelable;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import com.tngtech.archunit.lang.ArchRule.Assertions;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GestorMovimientoTest {
@@ -50,6 +48,10 @@ public class GestorMovimientoTest {
 		assertEquals(mech, casillaOrigen.obtenerPieza());
 	}
 
+	public void mechVuelveAPosicionAnteriorTrasDeshacerMovimiento() {
+		return;
+	}
+
 	@Test 
 	public void mechSoloPuedeDeshacerMovimientoUnaVezPorTurno() {
 		MechDeCanon mech = new MechDeCanon();
@@ -71,9 +73,36 @@ public class GestorMovimientoTest {
 		assertTrue(casillaDestino.estaLibre());
 		assertEquals(mech, casillaOrigen.obtenerPieza());
 	}
+	
+	@Test
+	public void comandoEjecutaMovimiento() {
+		Casilla origen = new Casilla(new Coordenada(0,0));
+		Casilla destino = new Casilla(new Coordenada(0,1));
+		Trayectoria trayectoria = new Trayectoria(List.of(origen,destino));
+		Mech mechCombate = new MechDeCombate();
+		origen.recibirPieza(mechCombate);
 
+		ComandoMover comando= new ComandoMover(mechCombate,trayectoria);
+		comando.ejecutar();
+		assertTrue(origen.estaLibre());
+		assertEquals(mechCombate, destino.obtenerPieza());
+	}
+	@Test
 	public void mechNoPuedeDeshacerMovimientoDespuesDeAtacar() {
-		return;
+		Casilla origen = new Casilla(new Coordenada(0,0));
+		Casilla destino = new Casilla(new Coordenada(1,1));
+		Trayectoria trayectoria = new Trayectoria(List.of(origen, destino));
+		Mech mechCombate = new MechDeCombate();
+		origen.recibirPieza(mechCombate);
+		ComandoMover comando = new ComandoMover(mechCombate, trayectoria);
+		Vek vek = new Vek(3,3);
+
+		comando.ejecutar();
+		mechCombate.atacar(vek);
+
+		assertThrows(MovimientoNoCancelable.class, () -> {
+			comando.deshacer();
+		});
 	}
 
 	public void mechNoPuedeDeshacerMovimientoMasDeUnaVezPorTurno() {

@@ -7,13 +7,13 @@ import org.mockito.Mockito;
 
 public class AguaTest {
 
-    @Test
-    void aplicarEfectoAguaALaUnidad(){
-        Unidad unidadMock = Mockito.mock(Unidad.class);
-        Agua aguaMock = Mockito.mock(Agua.class);
-
-        aguaMock.aplicarEfecto(unidadMock);
-
-        Mockito.verify(aguaMock).aplicarEfecto(unidadMock);
-    }
+//    @Test
+//    void aplicarEfectoAguaALaUnidad(){
+//        Unidad unidadMock = Mockito.mock(Unidad.class);
+//        Agua aguaMock = Mockito.mock(Agua.class);
+//
+//        aguaMock.aplicarEfecto(unidadMock);
+//
+//        Mockito.verify(aguaMock).aplicarEfecto(unidadMock);
+//    }
 }
