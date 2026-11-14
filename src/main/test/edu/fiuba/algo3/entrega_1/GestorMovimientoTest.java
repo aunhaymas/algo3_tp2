@@ -65,7 +65,7 @@ public class GestorMovimientoTest {
 		gestor.seleccionarMech(mech);
 		gestor.moverMechSeleccionado(casillaOrigen, casillaDestino);
 
-		gestor.deshacerMovimiento();		
+		gestor.deshacerMovimiento();
 		gestor.deshacerMovimiento(); // No cambia nada respecto a la posición restaurada antes
 
 		assertTrue(casillaDestino.estaLibre());
