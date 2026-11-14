@@ -2,15 +2,11 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import com.tngtech.archunit.lang.ArchRule.Assertions;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GestorMovimientoTest {
@@ -72,7 +68,7 @@ public class GestorMovimientoTest {
 
 		ComandoMover comando= new ComandoMover(mechCombate,trayectoria);
 		comando.ejecutar();
-		comando.cancelar();
+		comando.deshacer();
 		assertTrue(destino.estaLibre());
 		assertEquals(mechCombate, origen.obtenerPieza());
 	}

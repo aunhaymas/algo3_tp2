@@ -12,7 +12,7 @@ public class ComandoMover {
         mech.moverseA(trayectoria);
     }
 
-    public void cancelar() {
+    public void deshacer() {
         mech.restaurarMovimiento();
         mech.moverseA(trayectoria.invertir());
         mech.restaurarMovimiento();
