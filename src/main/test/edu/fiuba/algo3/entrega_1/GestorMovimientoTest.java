@@ -52,7 +52,11 @@ public class GestorMovimientoTest {
 		assertEquals(mech, casillaOrigen.obtenerPieza());
 	}
 
-	@Test 
+	public void mechVuelveAPosicionAnteriorTrasDeshacerMovimiento() {
+		return;
+	}
+
+	@Test
 	public void mechSoloPuedeDeshacerMovimientoUnaVezPorTurno() {
 		MechDeCanon mech = new MechDeCanon();
 		GestorFaseJugador gestor = new GestorFaseJugador(tablero);
@@ -74,6 +78,19 @@ public class GestorMovimientoTest {
 		assertEquals(mech, casillaOrigen.obtenerPieza());
 	}
 
+	@Test
+	public void comandoEjecutaMovimiento() {
+		Casilla origen = new Casilla(new Coordenada(0,0));
+		Casilla destino = new Casilla(new Coordenada(0,1));
+		Trayectoria trayectoria = new Trayectoria(List.of(origen,destino));
+		Mech mechCombate = new MechDeCombate();
+		origen.recibirPieza(mechCombate);
+
+		ComandoMover comando= new ComandoMover(mechCombate,trayectoria);
+		comando.ejecutar();
+		assertTrue(origen.estaLibre());
+		assertEquals(mechCombate, destino.obtenerPieza());
+	}
 	@Test
 	public void mechNoPuedeDeshacerMovimientoDespuesDeAtacar() {
 		Casilla origen = new Casilla(new Coordenada(0,0));
