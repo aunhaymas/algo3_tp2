@@ -6,6 +6,7 @@ public class Mech extends Unidad {
     protected Arma arma;
 	private boolean yaSeMovio=false;
 	private boolean yaAtaco;
+	private boolean yaCanceloMovimiento;
 
 	public Mech() {
 		super(3,3);
@@ -67,6 +68,11 @@ public class Mech extends Unidad {
 		if(yaAtaco){
 			throw new MovimientoNoCancelable("mech no pudo deshacer su mov si ya ataco");
 		}
+		if (yaCanceloMovimiento){
+			throw new MovimientoYaCancelado("Mech ya restauro su movimiento en este turno");
+		}
+		yaCanceloMovimiento = true;
+
 		regreso.ejecutarTraslado();
 
 	}
