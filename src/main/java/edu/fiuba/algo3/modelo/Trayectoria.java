@@ -73,4 +73,8 @@ public class Trayectoria {
     public boolean esTrayectoriaCorta() {
         return casillas.size() <= 2;
     }
+
+    public Trayectoria invertir() {
+        return new Trayectoria(casillas.reversed());
+    }
 }

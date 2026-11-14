@@ -19,12 +19,11 @@ public abstract class Unidad implements Dañable, Pieza {
 
 		this.vida = vida;
 		this.movimientos = movimientos;
-		this.estadoUnidad = new EstadoNormal();
+		this.estadoUnidad = new Estable();
 	}
-	public void mover(){}
 
 	public void contaminar() {
-		this.estadoUnidad = new EstadoContaminado();
+		this.estadoUnidad = new Contaminado();
 	}
 
 	public int getVida() {
@@ -59,7 +58,11 @@ public abstract class Unidad implements Dañable, Pieza {
 	}
 
 	public void sumergir() {
-		this.estadoUnidad = new EstadoSumergido();
+		this.estadoUnidad = new Sumergido();
+	}
+
+	public void estabilizar() {
+		this.estadoUnidad = new Estable();
 	}
 
 	public void cancelarMovimiento() {
@@ -68,4 +71,8 @@ public abstract class Unidad implements Dañable, Pieza {
 	public boolean puedeAtacar() {
         return this.estadoUnidad.puedeAtacar();
     }
+
+	public EstadoUnidad obtenerEstado() {
+		return this.estadoUnidad;
+	}
 }
