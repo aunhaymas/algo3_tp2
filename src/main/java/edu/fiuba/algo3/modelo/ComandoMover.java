@@ -11,4 +11,10 @@ public class ComandoMover {
     public void ejecutar() {
         mech.moverseA(trayectoria);
     }
+
+    public void cancelar() {
+        mech.restaurarMovimiento();
+        mech.moverseA(trayectoria.invertir());
+        mech.restaurarMovimiento();
+    }
 }
