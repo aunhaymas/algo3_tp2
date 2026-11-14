@@ -4,6 +4,6 @@ public class Acido implements TipoTerreno{
 
     @Override
     public void aplicarEfecto(Unidad unidad) {
-        unidad.actualizarEstado(new Contaminado());
+        unidad.contaminar();
     }
 }
