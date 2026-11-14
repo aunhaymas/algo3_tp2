@@ -50,8 +50,26 @@ public class GestorMovimientoTest {
 		assertEquals(mech, casillaOrigen.obtenerPieza());
 	}
 
-	public void mechVuelveAPosicionAnteriorTrasDeshacerMovimiento() {
-		return;
+	@Test 
+	public void mechSoloPuedeDeshacerMovimientoUnaVezPorTurno() {
+		MechDeCanon mech = new MechDeCanon();
+		GestorFaseJugador gestor = new GestorFaseJugador(tablero);
+
+		Coordenada coordenadaOrigen = new Coordenada(1, 1);
+		Coordenada coordenadaDestino = new Coordenada(1, 2);
+
+		Casilla casillaOrigen = tablero.obtenerCasilla(coordenadaOrigen);
+		Casilla casillaDestino = tablero.obtenerCasilla(coordenadaDestino);
+
+		tablero.colocarPieza(mech, coordenadaOrigen);
+		gestor.seleccionarMech(mech);
+		gestor.moverMechSeleccionado(casillaOrigen, casillaDestino);
+
+		gestor.deshacerMovimiento();		
+		gestor.deshacerMovimiento(); // No cambia nada respecto a la posición restaurada antes
+
+		assertTrue(casillaDestino.estaLibre());
+		assertEquals(mech, casillaOrigen.obtenerPieza());
 	}
 
 	public void mechNoPuedeDeshacerMovimientoDespuesDeAtacar() {
