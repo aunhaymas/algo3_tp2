@@ -62,14 +62,17 @@ public class GestorMovimientoTest {
 		assertFalse(destino.estaLibre());
 		assertEquals(mechCombate, destino.obtenerPieza());
 	}
+	@Test
 	public void mechVuelveAPosicionAnteriorTrasDeshacerMovimiento() {
 		Casilla origen = new Casilla(new Coordenada(0,0));
 		Casilla destino = new Casilla(new Coordenada(0,1));
 		Trayectoria trayectoria = new Trayectoria(List.of(origen,destino));
 		Mech mechCombate = new MechDeCombate();
+		origen.recibirPieza(mechCombate);
+
 		ComandoMover comando= new ComandoMover(mechCombate,trayectoria);
 		comando.ejecutar();
-		//comando.cancelar();
+		comando.cancelar();
 		assertTrue(destino.estaLibre());
 		assertEquals(mechCombate, origen.obtenerPieza());
 	}
