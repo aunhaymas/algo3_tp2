@@ -1,10 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.excepciones.MovimientoExcedidoException;
-import edu.fiuba.algo3.modelo.excepciones.MovimientoInvalidoException;
-import edu.fiuba.algo3.modelo.excepciones.UnidadYaAtacoException;
-import edu.fiuba.algo3.modelo.excepciones.UnidadYaSeMovioException;
-import edu.fiuba.algo3.modelo.excepciones.UnidadSumergidaException;
+import edu.fiuba.algo3.modelo.excepciones.*;
 
 public class Mech extends Unidad {
     protected Arma arma;
@@ -65,4 +61,13 @@ public class Mech extends Unidad {
 		arma.atacar(objetivo);
 	}
 
+	public void restaurarMovimiento(Trayectoria regreso) {
+		// TDD: refactor a State
+		yaSeMovio=false;
+		if(yaAtaco){
+			throw new MovimientoNoCancelable("mech no pudo deshacer su mov si ya ataco");
+		}
+		regreso.ejecutarTraslado();
+
+	}
 }
