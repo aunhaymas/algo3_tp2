@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class Trayectoria {
@@ -75,6 +78,8 @@ public class Trayectoria {
     }
 
     public Trayectoria invertir() {
-        return new Trayectoria(casillas.reversed());
+        List<Casilla> casillasInvertidas = new ArrayList<>(casillas);
+        Collections.reverse(casillasInvertidas);
+        return new Trayectoria(casillasInvertidas);
     }
 }
