@@ -35,5 +35,6 @@ public class GestorFaseJugador {
 
 	public void deshacerMovimiento() {
 		ultimoMovimiento.restaurar();
+		this.ultimoMovimiento = new RegistroMovimientoNulo();
 	}
 }
