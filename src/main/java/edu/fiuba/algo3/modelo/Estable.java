@@ -1,13 +1,23 @@
 package edu.fiuba.algo3.modelo;
 
-public class Estable extends EstadoUnidad {
+public class Estable implements EstadoUnidad {
 	@Override
 	public int calcularDañoRecibido(int dañoBase) {
-		return super.calcularDañoRecibido(dañoBase);
+		return dañoBase;
 	}
 
 	@Override
 	public int calcularDañoAtaque(int dañoBase) {
-		return super.calcularDañoAtaque(dañoBase);
+		return dañoBase;
+	}
+
+	@Override
+	public boolean puedeAtacar() {
+		return true;
+	}
+
+	@Override
+	public void aplicarA(Unidad unidad) {
+		unidad.estabilizar();
 	}
 }
