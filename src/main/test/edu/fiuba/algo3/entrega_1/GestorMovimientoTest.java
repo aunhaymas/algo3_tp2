@@ -83,9 +83,10 @@ public class GestorMovimientoTest {
 		Mech mechCombate = new MechDeCombate();
 		origen.recibirPieza(mechCombate);
 		ComandoMover comando = new ComandoMover(mechCombate, trayectoria);
+		Vek vek = new Vek(3,3);
 
 		comando.ejecutar();
-		mechCombate.atacar(null);
+		mechCombate.atacar(vek);
 
 		assertThrows(MovimientoNoCancelable.class, () -> {
 			comando.deshacer();
