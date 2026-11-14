@@ -55,7 +55,7 @@ public class GestorMovimientoTest {
 
 		ComandoMover comando= new ComandoMover(mechCombate,trayectoria);
 		comando.ejecutar();
-		assertFalse(destino.estaLibre());
+		assertTrue(origen.estaLibre());
 		assertEquals(mechCombate, destino.obtenerPieza());
 	}
 	@Test

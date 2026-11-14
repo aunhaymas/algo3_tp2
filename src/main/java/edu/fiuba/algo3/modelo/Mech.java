@@ -65,8 +65,9 @@ public class Mech extends Unidad {
 		arma.atacar(objetivo);
 	}
 
-	public void restaurarMovimiento() {
+	public void restaurarMovimiento(Trayectoria regreso) {
 		// TDD: refactor a State
 		yaSeMovio=false;
+		regreso.ejecutarTraslado();
 	}
 }

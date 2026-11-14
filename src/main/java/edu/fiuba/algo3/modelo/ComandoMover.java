@@ -13,8 +13,6 @@ public class ComandoMover {
     }
 
     public void deshacer() {
-        mech.restaurarMovimiento();
-        mech.moverseA(trayectoria.invertir());
-        mech.restaurarMovimiento();
+        mech.restaurarMovimiento(trayectoria.invertir());
     }
 }
