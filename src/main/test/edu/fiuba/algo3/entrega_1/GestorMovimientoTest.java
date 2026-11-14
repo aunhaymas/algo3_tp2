@@ -26,14 +26,9 @@ public class GestorMovimientoTest {
             "SSSSSSSS"
     ));
 
-	/**
-	 * Verificar que se pueda deshacer el movimiento de un Mech que todavía no atacó 
-	 * y que vuelva a su posición anterior.
-	 */
 	@Test 
 	public void mechPuedeDeshacerMovimientoSiNoAtaco() {
 		MechDeArtilleria mech = new MechDeArtilleria();
-
 		GestorFaseJugador gestor = new GestorFaseJugador(tablero);
 
 		Coordenada coordenadaOrigen = new Coordenada(1, 1);
