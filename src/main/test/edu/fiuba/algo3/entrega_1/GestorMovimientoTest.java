@@ -52,7 +52,7 @@ public class GestorMovimientoTest {
 		return;
 	}
 
-	@Test 
+	@Test
 	public void mechSoloPuedeDeshacerMovimientoUnaVezPorTurno() {
 		MechDeCanon mech = new MechDeCanon();
 		GestorFaseJugador gestor = new GestorFaseJugador(tablero);
@@ -73,7 +73,7 @@ public class GestorMovimientoTest {
 		assertTrue(casillaDestino.estaLibre());
 		assertEquals(mech, casillaOrigen.obtenerPieza());
 	}
-	
+
 	@Test
 	public void comandoEjecutaMovimiento() {
 		Casilla origen = new Casilla(new Coordenada(0,0));
