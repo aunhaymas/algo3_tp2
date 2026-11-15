@@ -7,6 +7,11 @@ public class ArmaNula extends Arma {
     }
 
     @Override
+    public void atacar(Atacable objetivo) {
+        
+    }
+
+    @Override
     public void atacar(Dañable objetivo) {
 
     }
