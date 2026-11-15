@@ -76,5 +76,7 @@ private void recibirDanio(int danio){this.vida -= danio;}
 		return this.estadoUnidad;
 	}
 
-    public abstract void atacar(Atacable objetivo);
+	public void atacar(Atacable objetivo) {
+		arma.atacar(objetivo);
+	}
 }

@@ -7,6 +7,5 @@ public abstract class Arma {
 
     public abstract void atacar(Dañable objetivo);
     public abstract void atacar(Trayectoria trayectoria);
-
     public abstract void atacar(Atacable objetivo);
 }
