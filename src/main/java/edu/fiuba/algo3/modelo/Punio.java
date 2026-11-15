@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.ataques.AtaquePunio;
 import edu.fiuba.algo3.modelo.excepciones.ObjetoFueraDeRangoException;
 
 public class Punio extends Arma {
@@ -17,5 +18,10 @@ public class Punio extends Arma {
             destino.recibirAtaque(new Ataque(2));
             destino.empujar(trayectoria.getDireccion());
         }
+    }
+
+    @Override
+    public void atacar(Atacable objetivo) {
+        objetivo.recibirAtaque(new AtaquePunio());
     }
 }

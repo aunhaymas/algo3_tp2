@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.ataques.AtaqueCanon;
+
 public class Canon extends Arma {
 
     public void atacar(Dañable objetivo) {
@@ -11,5 +13,10 @@ public class Canon extends Arma {
         Casilla hit = trayectoria.devolverPrimeraCasillaNoLibre();
         hit.recibirAtaque(new Ataque(1));
         hit.empujar(trayectoria.getDireccion());
+    }
+
+    @Override
+    public void atacar(Atacable objetivo) {
+        objetivo.recibirAtaque(new AtaqueCanon());
     }
 }
