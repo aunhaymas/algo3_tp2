@@ -75,4 +75,6 @@ public abstract class Unidad implements Dañable, Pieza {
 	public EstadoUnidad obtenerEstado() {
 		return this.estadoUnidad;
 	}
+
+    public abstract void atacar(Atacable objetivo);
 }
