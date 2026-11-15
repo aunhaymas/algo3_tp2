@@ -57,6 +57,6 @@ public class CasoDeUso7Test {
         registroDeAtaques.registrarAtaque(anuncioDeAtaque);
 
         registroDeAtaques.ejecutarSiguienteAtaque();
-        assertEquals(3,mech.getVida());
+        assertEquals(1,mech.getVida());
     }
 }
