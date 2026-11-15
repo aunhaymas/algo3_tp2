@@ -44,14 +44,35 @@ public class CasoDeUso9Test {
             "SSSSSSSS"
     ));
 
+	/**
+	 * Si ya hay un edificio en rango de ataque, 
+	 * el Vek ataca sin necesidad de moverse.
+	 */
+	@Test 
+	public void vekAtacaEdificioSinMoverseSiYaEstaEnAlcance() {
+
+	}
+
+	/**
+	 * Si no hay edificio inmediato pero hay posicion en alcance que me permita atacar uno,
+	 * el Vek se mueve a dicha posicion y entonces lo ataca. No hay mech en alcance.
+	 */
+	@Test 
+	public void vekPriorizaAcercarseAEdificioParaAtacarSinMechEnAlcance() {
+
+	}
+
+	/**
+	 * Si no hay edificio inmediato pero hay posicion en alcance que me permita atacar uno,
+	 * el Vek se mueve a dicha posicion y entonces lo ataca, sin importar si hay mech inmediato.
+	 */
 	@Test
-	public void vekPriorizaAtacarEdificioSobreAtacarMech() {
+	public void vekPriorizaAcercarseAEdificioParaAtacarInclusoSiHayMechEnAlcance() {
 		Vek vek = new Saltador();
 		Mech mech = new MechDeCombate();
 		int vidaEsperada = mech.getVida();
 		RedElectrica redElectrica = new RedElectrica();
 		Pieza edificio = new PiezaEdificio(redElectrica);
-
 
 		Coordenada vekPos = new Coordenada(2, 2);
 
@@ -73,18 +94,44 @@ public class CasoDeUso9Test {
 		assertEquals(mech.getVida(), vidaEsperada);
 	}
 
+	/**
+	 * Si no encuentro una posicion que me permita atacar un edificio, si hay mech inmediato,
+	 * el Vek lo ataca sin necesidad de moverse.
+	 */
 	@Test
-	public void vekPriorizaAtacarMechSiNoHayEdificioCercano() {}
+	public void vekAtacaMechSinMoverseSiNoHayPosicionParaAtacarEdificio() {}
 
+	/**
+	 * Si no encuentro una posicion que me permita atacar un edificio, 
+	 * si no hay mech inmediato pero hay posicion en alcance que me permita atacar uno,
+	 * el Vek se mueve a dicha posicion y entonces lo ataca.
+	 */
+	@Test
+	public void vekPriorizaAcercarseAMechParaAtacarSiNoHayPosicionParaAtacarEdificio() {}
+
+	/**
+	 * Si no hay edificio o mech que atacar aunque me mueva a otra posicion,
+	 * entonces me acerco al edificio mas cercano, sin anunciar ataque.
+	 */
 	@Test 
-	public void vekSeAcercaAlEdificioMasCercanoSiNoPuedeAtacarANadie() {}
+	public void vekSeAcercaAlEdificioMasCercanoSinAtacarSiNoHayPosicionDondePuedaAtacarAMechOEdificio() {}
 
+	/**
+	 * Al caer en decision de prioridad 3, si hay dos edificios a la misma distancia del Vek,
+	 * el Vek desempata por coordenada de menor fila y columna.
+	 */
+	@Test 
+	public void vekTieneDosEdificiosAMismaDistanciaDesempataPorCoordenadaMenorFilaYColumna() {}
+	
+	/**
+	 * Verifico que el ultimo movimiento de Vek no termina en Agua.
+	 */
 	@Test 
 	public void vekTerrestreEvitaTerminarMovimientoEnAgua() {}
 
+	/**
+	 * Verifico que el ultimo movimiento de Vek no termina en Acido.
+	 */
 	@Test 
 	public void vekTerrestreEvitaTerminarMovimientoEnAcido() {}
-
-	@Test 
-	public void vekTieneDosEdificiosAMismaDistanciaDesempataPorCoordenadaMenorFilaYColumna() {}
 }
