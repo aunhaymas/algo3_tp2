@@ -9,5 +9,10 @@ public class Avispon extends Vek {
     public void sumergir() {
         // Se sobrescribe vacío para que no reciba daño ni cambie de estado
     }
+
+    @Override
+    public void contaminar(){
+        //al ser volador el acido no lo contamina
+    }
     
 }

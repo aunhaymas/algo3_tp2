@@ -31,7 +31,9 @@ public abstract class Unidad implements Dañable, Pieza {
 	}
 
 	public void recibirAtaque(Ataque ataque) {
-		this.recibirDaño(ataque.getDanio());
+		int danioFinal = this.estadoUnidad.calcularDañoRecibido(ataque.getDanio());
+		this.recibirDaño(danioFinal);
+		//this.recibirDaño(ataque.getDanio()); -comenté esto Robin-
 		
 		// Pepo: Vamos por otro camino: delegamos a Casilla la responsabilidad de destruir o mover.
         // if (!this.estaDestruida() && ataque.tieneEmpuje()) {

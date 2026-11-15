@@ -15,7 +15,7 @@ public class CasoDeUso4Test {
     void unidadTerminaEnAcidoQuedaConntaminadaYRecibe2DeDanio(){
         Casilla casilla = new Casilla(new Coordenada(1,1), new Acido());
         Mech mech = new MechDeCombate(); //mech de combate tiene 3 de vida
-        Ataque ataqueCanion = new AtaqueCanion();
+        Ataque ataqueCanion = new Ataque(1);
         casilla.recibirPieza(mech);
 
         int vidaEsperada = 1;
@@ -27,8 +27,8 @@ public class CasoDeUso4Test {
     @Test
     void avisponSobreAcidoNoSeContamina(){
         Casilla casilla = new Casilla(new Coordenada(1,1), new Acido());
-        Avispon avispon = new Avispon(); //mech de combate tiene 3 de vida
-        Ataque ataqueCanion = new AtaqueCanion();
+        Vek avispon = new Avispon(); //avispon tiene 2 de vida
+        Ataque ataqueCanion = new Ataque(1);
         casilla.recibirPieza(avispon);
 
         int vidaEsperada = 1;
