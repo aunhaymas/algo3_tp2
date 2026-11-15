@@ -30,7 +30,7 @@ Emergencia: aparece el nuevo Vek en la casilla marcada.
 // 2) Todos los vek anuncian su ataque
 public class CasoDeUso7Test {
     @Test
-    public void AnuncioDeAtaqueDelVekNoDaniaAlMech(){
+    public void anuncioDeAtaqueDelVekNoDaniaAlMech(){
         Vek saltador = new Saltador(); // 2 de daño
         Mech mech = new MechDeCanon(); // 3 de vida
         Casilla casillaMech = new Casilla(new Coordenada(1,1));
@@ -44,7 +44,7 @@ public class CasoDeUso7Test {
         assertEquals(3,mech.getVida());
     }
     @Test
-    public void AnuncioDeAtaqueDelVekDaniaAlMechEnFaseDeResolucion(){
+    public void anuncioDeAtaqueDelVekDaniaAlMechEnFaseDeResolucion(){
         Vek saltador = new Saltador(); // 2 de daño
         Mech mech = new MechDeCanon(); // 3 de vida
         Casilla casillaMech = new Casilla(new Coordenada(1,1));
