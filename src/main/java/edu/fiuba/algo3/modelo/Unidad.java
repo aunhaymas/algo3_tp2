@@ -8,7 +8,7 @@ public abstract class Unidad implements Dañable, Pieza,Atacable {
 	protected int movimientos;
 	private EstadoUnidad estadoUnidad;
 	private Casilla casillaActual;
-
+	protected Arma arma;
 	public Unidad(int vida, int movimientos) {
 		if (vida <= 0) {
 			throw new PuntosVidaInvalidoException("No se pudo crear la unidad. Los puntos de vida deben ser mayores a 0.");
