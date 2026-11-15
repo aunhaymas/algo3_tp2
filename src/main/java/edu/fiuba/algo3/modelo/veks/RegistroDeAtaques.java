@@ -13,4 +13,10 @@ public class RegistroDeAtaques {
     public void registrarAtaque(AnuncioDeAtaque anuncioDeAtaque) {
         this.ataques.add(anuncioDeAtaque);
     }
+
+    public void ejecutarSiguienteAtaque() {
+        AnuncioDeAtaque ataque = this.ataques.poll();
+        ataque.ejecutar();
+
+    }
 }

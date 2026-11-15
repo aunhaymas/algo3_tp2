@@ -51,7 +51,7 @@ public class Mech extends Unidad {
 		arma.atacar(trayectoria);
 	}
 
-	public void atacar(Dañable objetivo) {
+	public void atacar(Atacable objetivo) {
 		if (yaAtaco){
 			throw new UnidadYaAtacoException("Mech ya ataco");
 		}

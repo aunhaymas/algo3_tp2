@@ -1,4 +1,9 @@
 package edu.fiuba.algo3.modelo.ataques;
 
-public class AtaqueArtilleria {
+import edu.fiuba.algo3.modelo.Ataque;
+
+public class AtaqueArtilleria extends Ataque {
+    public AtaqueArtilleria() {
+        super(1);
+    }
 }
