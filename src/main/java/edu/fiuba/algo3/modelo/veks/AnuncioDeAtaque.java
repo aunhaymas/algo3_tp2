@@ -9,7 +9,7 @@ public class AnuncioDeAtaque {
     private Atacable objetivo; //no es final, dado que debe poder modificarse
     public AnuncioDeAtaque(Vek vek, Atacable objetivo) {
         this.vek=vek;
-        objetivo=objetivo;
+        this.objetivo=objetivo;
     }
     public void ejecutarAtaque(){
         vek.atacar(objetivo);

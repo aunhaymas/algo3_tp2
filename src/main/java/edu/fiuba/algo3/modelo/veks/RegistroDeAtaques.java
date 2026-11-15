@@ -17,6 +17,5 @@ public class RegistroDeAtaques {
     public void ejecutarSiguienteAtaque() {
         AnuncioDeAtaque ataque = this.ataques.poll();
         ataque.ejecutarAtaque();
-
     }
 }
