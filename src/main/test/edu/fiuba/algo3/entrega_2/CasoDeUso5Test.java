@@ -33,4 +33,43 @@ public class CasoDeUso5Test {
         assertEquals(5, blanco.getVida());
         assertTrue(blanco.estaContaminado());
     }
+
+    @Test
+    public void luciernagaAtacaUnMechContaminadoDebeRecibirElDobleDeDanoYElEstadoNoSeSobrepone() {
+        // Arrange
+        Coordenada coordenadaLuciernaga = new Coordenada(4, 2);
+        Coordenada coordenadaBlanco = new Coordenada(4, 5);
+
+        Luciernaga luciernaga = new Luciernaga();
+        Mech blanco = new Mech(6, 3, new Punio());
+
+        Casilla casillaLuciernaga = new Casilla(coordenadaLuciernaga);
+        casillaLuciernaga.recibirPieza(luciernaga);
+        Casilla casillaBlanco = new Casilla(coordenadaBlanco);
+        casillaBlanco.recibirPieza(blanco);
+
+        // Act: Luciernaga ataca al blanco
+        luciernaga.anunciarAtaque(casillaBlanco);
+        luciernaga.atacar(casillaBlanco);
+
+        // Assert: Blanco debe recibir el dano y ser contaminado.
+        assertEquals(5, blanco.getVida());
+        assertTrue(blanco.estaContaminado());
+
+        // Act: Luciernaga ataca al blanco
+        luciernaga.anunciarAtaque(casillaBlanco);
+        luciernaga.atacar(casillaBlanco);
+
+        // Assert: Blanco debe recibir el doble de dano y seguir contaminado.
+        assertEquals(3, blanco.getVida());
+        assertTrue(blanco.estaContaminado());
+
+        // Act: Luciernaga ataca al blanco
+        luciernaga.anunciarAtaque(casillaBlanco);
+        luciernaga.atacar(casillaBlanco);
+
+        // Assert: Blanco debe solo recibir el doble de dano y seguir contaminado.
+        assertEquals(1, blanco.getVida());
+        assertTrue(blanco.estaContaminado());
+    }
 }
