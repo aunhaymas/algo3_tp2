@@ -11,8 +11,7 @@ public class AnuncioDeAtaque {
         this.vek=vek;
         objetivo=objetivo;
     }
-
-    public void ejecutar() {
+    public void ejecutarAtaque(){
         vek.atacar(objetivo);
     }
     // TDD: en otro caso de uso, se requiere modificar casilla objetivo
