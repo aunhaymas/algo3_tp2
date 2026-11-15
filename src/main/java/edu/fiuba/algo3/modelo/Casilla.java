@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Casilla {
+public class Casilla implements Atacable{
     private boolean estaLibre;
     private Pieza pieza;
     private Tablero tablero;
