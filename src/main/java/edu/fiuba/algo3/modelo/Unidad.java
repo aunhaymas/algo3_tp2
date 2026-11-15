@@ -8,6 +8,7 @@ public abstract class Unidad implements Dañable, Pieza {
 	protected int movimientos;
 	private EstadoUnidad estadoUnidad;
 	private Casilla casillaActual;
+	private Arma arma;
 
 	public Unidad(int vida, int movimientos) {
 		if (vida <= 0) {
@@ -74,5 +75,9 @@ public abstract class Unidad implements Dañable, Pieza {
 
 	public EstadoUnidad obtenerEstado() {
 		return this.estadoUnidad;
+	}
+
+	public void atacar(Atacable objetivo) {
+		arma.atacar(objetivo);
 	}
 }

@@ -44,4 +44,20 @@ public class CasoDeUso7Test {
         assertEquals(3,mech.getVida());
     }
 
+    @Test
+    public void AnuncioDeAtaqueDaniaAlMechDeCanonAlEjecutarse(){
+        Vek saltador = new Saltador(); // 2 de daño
+        Mech mech = new MechDeCanon(); // 3 de vida
+        Casilla casillaMech = new Casilla(new Coordenada(1,1));
+        casillaMech.recibirPieza(mech);
+
+        // Esta entidad puede ser modificada en fase Jugador
+        RegistroDeAtaques registroDeAtaques= new RegistroDeAtaques();
+        // FaseVek
+        AnuncioDeAtaque anuncioDeAtaque = saltador.anunciarAtaque(casillaMech);
+        registroDeAtaques.registrarAtaque(anuncioDeAtaque);
+        registroDeAtaques.ejecutarSiguienteAtaque(anuncioDeAtaque);
+        assertEquals(1,mech.getVida());
+    }
+
 }
