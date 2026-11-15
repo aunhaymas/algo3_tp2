@@ -54,6 +54,14 @@ public class Casilla implements Atacable{
         return - destino.obtenerDistanciaY(this.coordenada);
     }
 
+    public int calcularDistanciaCon(Casilla casilla) {
+        return coordenada.distanciaA(casilla.getCoordenada());
+    }
+
+    public boolean precedeEnOrdenLectura(Casilla otra) {
+        return this.coordenada.precedeEnOrdenLectura(otra.getCoordenada());
+    }
+
     public boolean tiene(Pieza pieza) {
         return this.pieza == pieza;
     }
@@ -117,7 +125,6 @@ public class Casilla implements Atacable{
         }
     }
 
-
     private void limpiarCasilla(){
         this.estaLibre = true;
         this.pieza=new PiezaNula();
@@ -174,5 +181,9 @@ public class Casilla implements Atacable{
             destino.recibirAtaque(colision);
             recibirAtaque(colision);
         }
+    }
+
+    public void reportarA(LocalizadorEntidad localizador) {
+        this.pieza.reportarA(localizador, this);
     }
 }

@@ -28,6 +28,17 @@ public class Coordenada {
         return new Coordenada(this.x + movX, this.y + movY);
     }
 
+    /**
+     * Determina si la coordenada precede la otra en un orden de lectura,
+     * es decir, de arriba a abajo y de izquierda a derecha.
+     */
+    public boolean precedeEnOrdenLectura(Coordenada otra) {
+        if (this.y != otra.getY()) {
+            return this.y < otra.getY();
+        }
+       return this.x < otra.getX();
+    }
+
     //obligatorio para usar el hashmap
     @Override
     public boolean equals(Object o) {
