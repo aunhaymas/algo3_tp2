@@ -31,7 +31,7 @@ public abstract class Unidad implements Dañable, Pieza,Atacable {
 	}
 
 	public void recibirAtaque(Ataque ataque) {
-		this.recibirDaño(ataque.getDanio());
+		ataque.efectuarAtaque(this);
 		
 		// Pepo: Vamos por otro camino: delegamos a Casilla la responsabilidad de destruir o mover.
         // if (!this.estaDestruida() && ataque.tieneEmpuje()) {

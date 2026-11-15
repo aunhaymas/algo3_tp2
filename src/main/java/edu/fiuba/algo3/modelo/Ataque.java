@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 public class Ataque {
-    private int danio;
+    protected int danio;
     private Direccion direccionEmpuje;
 
     public Ataque(int danio) {
@@ -24,5 +24,9 @@ public class Ataque {
 
     public boolean tieneEmpuje() {
         return this.direccionEmpuje != null;
+    }
+
+    public void efectuarAtaque(Unidad unidad) {
+        unidad.recibirDaño(danio);
     }
 }
