@@ -20,4 +20,9 @@ public class Sumergido implements EstadoUnidad {
 	public void aplicarA(Unidad unidad) {
 		unidad.sumergir();
 	}
+
+	@Override
+	public boolean estaContaminado() {
+		return false;
+	}
 }

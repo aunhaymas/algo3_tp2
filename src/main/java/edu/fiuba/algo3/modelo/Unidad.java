@@ -76,6 +76,10 @@ private void recibirDanio(int danio){this.vida -= danio;}
 		return this.estadoUnidad;
 	}
 
+	public boolean estaContaminado() {
+		return this.estadoUnidad.estaContaminado();
+	}
+
 	public void atacar(Atacable objetivo) {
 		arma.atacar(objetivo);
 	}

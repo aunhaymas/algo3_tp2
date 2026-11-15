@@ -19,4 +19,9 @@ public class Contaminado implements EstadoUnidad {
 	public void aplicarA(Unidad unidad) {
 		unidad.contaminar();
 	}
+
+	@Override
+	public boolean estaContaminado() {
+		return true;
+	}
 }

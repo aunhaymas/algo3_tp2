@@ -8,4 +8,6 @@ public interface EstadoUnidad {
 	public boolean puedeAtacar();
 
 	public void aplicarA(Unidad unidad);
+
+	public boolean estaContaminado();
 }

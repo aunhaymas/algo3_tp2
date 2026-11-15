@@ -20,4 +20,9 @@ public class Estable implements EstadoUnidad {
 	public void aplicarA(Unidad unidad) {
 		unidad.estabilizar();
 	}
+
+	@Override
+	public boolean estaContaminado() {
+		return false;
+	}
 }
