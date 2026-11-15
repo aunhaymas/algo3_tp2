@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo;
 public class Avispon extends Vek {
     public Avispon() {
         super(2, 4);
+        this.arma = new ArmaAguijon();
     }
 
     @Override

@@ -23,12 +23,7 @@ public class Vek extends Unidad {
         this.recibirDaño(this.vida); 
     }
 
-	@Override
-	public void atacar(Atacable objetivo) {
-
-	}
-
-	public AnuncioDeAtaque anunciarAtaque(Casilla casillaMech) {
+    public AnuncioDeAtaque anunciarAtaque(Casilla casillaMech) {
 		// TDD: Proximo caso de uso me obligaria a guardar este anuncio?
 		return new AnuncioDeAtaque(this,casillaMech);
 	}
