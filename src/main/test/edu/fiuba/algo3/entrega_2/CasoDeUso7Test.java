@@ -86,6 +86,31 @@ public class CasoDeUso7Test {
         assertEquals(3,mech2.getVida());
     }
 
+    @Test
+    public void ejecutarSiguienteDosVecesEjecutaElPrimerYultimoAtaque(){
+        //Arrange
+        Vek avispon1 = new Avispon(); // 2 de daño
+        Vek avispon2 = new Avispon(); // 2 de daño
+        Mech mech1 = new MechDeCanon(); // 3 de vida
+        Mech mech2 = new MechDeCanon(); // 3 de vida
+        Casilla casillaMech = new Casilla(new Coordenada(1,1));
+        Casilla casillaMech2 = new Casilla(new Coordenada(1,2));
+        casillaMech.recibirPieza(mech1);
+        casillaMech2.recibirPieza(mech2);
 
+        // Esta entidad puede ser modificada en fase Jugador
+        RegistroDeAtaques registroDeAtaques= new RegistroDeAtaques();
+        // FaseVek
+        AnuncioDeAtaque anuncioDeAtaque1 = avispon1.anunciarAtaque(casillaMech);
+        AnuncioDeAtaque anuncioDeAtaque2 = avispon2.anunciarAtaque(casillaMech2);
+        registroDeAtaques.registrarAtaque(anuncioDeAtaque1);
+        registroDeAtaques.registrarAtaque(anuncioDeAtaque2);
+        //Act
+        registroDeAtaques.ejecutarSiguienteAtaque();
+        registroDeAtaques.ejecutarSiguienteAtaque();
+        //Assert
+        assertEquals(2,mech1.getVida());
+        assertEquals(2,mech2.getVida());
+    }
 
 }
