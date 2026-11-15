@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.excepciones.MovimientoYaCancelado;
 import edu.fiuba.algo3.modelo.excepciones.MovimientoInvalidoException;
 import edu.fiuba.algo3.modelo.excepciones.MovimientoNoCancelable;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -110,7 +111,6 @@ public class GestorMovimientoTest {
 
 		comando.ejecutar();
 		mechCombate.atacar(vek);
-
 		assertThrows(MovimientoNoCancelable.class, () -> {
 			comando.deshacer();
 		});
