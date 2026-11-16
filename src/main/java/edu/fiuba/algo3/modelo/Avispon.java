@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.veks.Vek;
+
 public class Avispon extends Vek {
     public Avispon() {
         super(2, 4);

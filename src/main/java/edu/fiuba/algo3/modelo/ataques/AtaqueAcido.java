@@ -13,4 +13,7 @@ public class AtaqueAcido extends Ataque {
         unidad.recibirDaño(danio);
         unidad.contaminar();
     }
+    public void aplicarEfecto(Unidad unidad){
+        unidad.contaminar();
+    }
 }

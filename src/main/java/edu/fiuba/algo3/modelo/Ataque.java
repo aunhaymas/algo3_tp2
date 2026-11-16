@@ -25,7 +25,7 @@ public class Ataque {
     public int getDanio() {
         return this.danio;
     }
-
+    public void aplicarEfecto(Unidad unidad){}
     public void efectuarAtaque(Unidad unidad) {
         unidad.recibirDaño(danio);
     }

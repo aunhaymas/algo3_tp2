@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.empujes.Oeste;
 import edu.fiuba.algo3.modelo.empujes.Sur;
 import edu.fiuba.algo3.modelo.excepciones.TrayectoriaInvalidaException;
 import edu.fiuba.algo3.modelo.excepciones.ObjetoFueraDeRangoException;
+import edu.fiuba.algo3.modelo.veks.Vek;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

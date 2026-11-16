@@ -8,7 +8,7 @@ import org.junit.Test;
 import edu.fiuba.algo3.modelo.Agua;
 import edu.fiuba.algo3.modelo.Casilla;
 import edu.fiuba.algo3.modelo.Coordenada;
-import edu.fiuba.algo3.modelo.Vek;
+import edu.fiuba.algo3.modelo.veks.Vek;
 import edu.fiuba.algo3.modelo.excepciones.UnidadSumergidaException;
 import edu.fiuba.algo3.modelo.Avispon;
 import edu.fiuba.algo3.modelo.Mech;

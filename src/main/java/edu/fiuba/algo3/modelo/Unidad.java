@@ -36,10 +36,12 @@ public abstract class Unidad implements Dañable, Pieza,Atacable {
 
 	public void recibirAtaque(Ataque ataque) {
 		this.recibirAtaque(ataque,new Coordenada(0,0));
+
 	}
 	@Override
 	public Empuje recibirAtaque(Ataque ataque, Coordenada origen) {
 		this.recibirDaño(ataque.getDanio());
+		ataque.aplicarEfecto(this);
 		return this.estadoUnidad.calcularEmpuje(ataque,origen);
 	};
 

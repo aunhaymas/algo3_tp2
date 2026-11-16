@@ -4,9 +4,8 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.veks.AnuncioDeAtaque;
 import edu.fiuba.algo3.modelo.veks.RegistroDeAtaques;
 import edu.fiuba.algo3.modelo.veks.Saltador;
+import edu.fiuba.algo3.modelo.veks.Vek;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 //Verificar que cada Vek anuncie su ataque en la Fase Vek

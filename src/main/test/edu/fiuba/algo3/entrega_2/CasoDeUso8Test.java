@@ -1,10 +1,9 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.ataques.AtaqueAguijon;
 import edu.fiuba.algo3.modelo.veks.AnuncioDeAtaque;
+import edu.fiuba.algo3.modelo.veks.Vek;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 

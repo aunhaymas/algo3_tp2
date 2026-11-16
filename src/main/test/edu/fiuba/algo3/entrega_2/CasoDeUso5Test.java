@@ -9,7 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CasoDeUso5Test {
-    
+    //Verificar que la Luciérnaga contamine a la unidad que impacta y que la contaminación no se acumule.
     @Test
     public void luciernagaAtacaUnMechYEsContaminado() {
         // Arrange
