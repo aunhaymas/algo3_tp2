@@ -6,7 +6,7 @@ import edu.fiuba.algo3.modelo.excepciones.PuntosVidaInvalidoException;
 public abstract class Unidad implements Dañable, Pieza,Atacable {
 	protected int vida;
 	protected int movimientos;
-	private EstadoUnidad estadoUnidad;
+	protected EstadoUnidad estadoUnidad;
 	private Casilla casillaActual;
 	protected Arma arma;
 	public Unidad(int vida, int movimientos) {

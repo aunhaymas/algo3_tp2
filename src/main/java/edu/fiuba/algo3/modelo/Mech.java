@@ -7,7 +7,16 @@ public class Mech extends Unidad {
 	private boolean yaSeMovio=false;
 	private boolean yaAtaco;
 	private boolean yaCanceloMovimiento;
-
+	private static  class MementoMech implements Memento{
+		private final EstadoUnidad estadoUnidad;
+		private MementoMech(EstadoUnidad estadoUnidad){
+			this.estadoUnidad = estadoUnidad;
+		}
+		@Override
+		public void restaurarEstadoEn(Mech mech) {
+			mech.estadoUnidad = this.estadoUnidad;
+		}
+	}
 	public Mech() {
 		super(3,3);
 		arma = new ArmaNula();
@@ -75,5 +84,11 @@ public class Mech extends Unidad {
 
 		regreso.ejecutarTraslado();
 
+	}
+	public Memento guardarEstado(){
+		return new MementoMech(this.estadoUnidad);
+	}
+	public void restaurarEstado(Memento memento){
+		memento.restaurarEstadoEn(this);
 	}
 }
