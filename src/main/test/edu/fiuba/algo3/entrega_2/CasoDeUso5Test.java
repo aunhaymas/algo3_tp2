@@ -1,13 +1,12 @@
 package edu.fiuba.algo3.entrega_2;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.Test;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.veks.Luciernaga;
+import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CasoDeUso5Test {
     

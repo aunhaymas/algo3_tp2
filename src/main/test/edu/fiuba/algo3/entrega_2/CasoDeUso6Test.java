@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 //Verificar que al deshacer el movimiento de un Mech que terminó sobre Ácido,
 // el Mech deje de estar Contaminado.
