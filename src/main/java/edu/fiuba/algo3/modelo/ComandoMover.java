@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-public class ComandoMover {
+public class ComandoMover implements Comando{
     private final Mech mech;
     private final Trayectoria trayectoria;
     private Memento memento;
