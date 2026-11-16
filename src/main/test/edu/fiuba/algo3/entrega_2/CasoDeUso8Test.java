@@ -1,16 +1,21 @@
 package edu.fiuba.algo3.entrega_2;
 
+import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 //Verificar que al empujar a un Vek su ataque anunciado se desplace con él,
 // y que si queda apuntando a otro Vek, lo dañe.
 public class CasoDeUso8Test {
     @Test
-    public void vekEsEmpujado(){
-        // instancio 1 vek y dos casillas
-        // meto a vek en una casilla
-        // empujo a vek
-        // compruebo que vek esta en la otra casilla
+    public void vekAvisponEsEmpujado(){
+        Casilla casilla1 = new Casilla(new Coordenada(0,0));
+        Casilla casilla2 = new Casilla(new Coordenada(0,1));
+        Vek vek = new Avispon();
+        casilla1.recibirPieza(vek);
+        casilla1.empujarA(casilla2);
+        assertFalse(casilla2.estaLibre());
     }
 
     @Test
