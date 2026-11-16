@@ -1,7 +1,10 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.ataques.AtaqueAguijon;
+import edu.fiuba.algo3.modelo.veks.AnuncioDeAtaque;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,10 +23,16 @@ public class CasoDeUso8Test {
 
     @Test
     public void vekEmpujadoDesplazaSuAtaqueAnunciadoJuntoConEl(){
-        //Instancio vek y mech
-        //Vek anuncia su ataque en la casilla mech
-        //empujo vek a una casilla adyacente
-        //verifico que mech no recibio el ataque
+        Casilla casilla1 = new Casilla(new Coordenada(0,0));
+        Casilla casilla2 = new Casilla(new Coordenada(1,0));
+
+        Casilla casilla3 = new Casilla(new Coordenada(0,1));//objetivo
+        Casilla casilla4 = new Casilla(new Coordenada(1,1));//victima
+        Vek vek = new Avispon();
+        casilla1.recibirPieza(vek);
+        AnuncioDeAtaque anuncio=vek.anunciarAtaque(casilla3);
+        casilla1.empujarA(casilla2);
+        anuncio.ejecutarAtaque();
     }
     @Test
     public void vekEmpujadoEjecutaSuAtaqueAnunciadoYdaniaAOtroVek(){

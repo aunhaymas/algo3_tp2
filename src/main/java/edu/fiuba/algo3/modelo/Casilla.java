@@ -1,5 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.empujes.*;
+import edu.fiuba.algo3.modelo.estadoCasilla.EstadoCasilla;
+import edu.fiuba.algo3.modelo.estadoCasilla.EstadoOcupada;
+import edu.fiuba.algo3.modelo.estadoCasilla.EstadoVacia;
 import edu.fiuba.algo3.modelo.excepciones.CasillaVaciaException;
 import edu.fiuba.algo3.modelo.excepciones.TrayectoriaInvalidaException;
 
@@ -13,8 +17,10 @@ public class Casilla implements Atacable{
     private Tablero tablero;
     private Coordenada coordenada;
     private TipoTerreno terrenoCasilla;
+    private EstadoCasilla estado;
     public Casilla(Coordenada coordenada) {
         this.coordenada=coordenada;
+        this.estado = new EstadoVacia();
         this.estaLibre=true;
         this.terrenoCasilla=new Suelo();
         limpiarCasilla();
@@ -55,7 +61,7 @@ public class Casilla implements Atacable{
     }
 
     public boolean tiene(Pieza pieza) {
-        return this.pieza == pieza;
+        return estado.tienePieza(pieza);
     }
 
     private Trayectoria obtenerTrayectoriaPorDistanciaYDireccion(Direccion direccion, int distancia) {
@@ -93,13 +99,13 @@ public class Casilla implements Atacable{
     }
 
     public boolean estaLibre() {
-        return estaLibre;
+        return this.estado.estaLibre();
     }
 
     public void recibirPieza(Pieza pieza) {
-        this.estaLibre=false;
-        this.pieza=pieza;
         pieza.entrarEn(this);
+        this.pieza=pieza;
+        this.estado = new EstadoOcupada(pieza);
         // pieza.entrarEn(this) para aplicar efecto
     }
 
@@ -110,16 +116,15 @@ public class Casilla implements Atacable{
         return piezaGuardada;
     }
 
-    public void recibirAtaque(Ataque ataque) {
-        this.pieza.recibirAtaque(ataque);
-        if (this.pieza.estaDestruida()) {
-            limpiarCasilla();
-        }
+    public void recibirAtaque(Ataque ataque, Tablero contexto) {
+
+        Empuje empuje = this.estado.recibirAtaque(ataque,this.coordenada);
+        empuje.empujar(this, contexto);
     }
 
 
     private void limpiarCasilla(){
-        this.estaLibre = true;
+        this.estado = new EstadoVacia();
         this.pieza=new PiezaNula();
     }
 
@@ -132,10 +137,7 @@ public class Casilla implements Atacable{
     }
 
     public Pieza obtenerPieza() {
-        if (estaLibre()){
-            throw new CasillaVaciaException("");
-        }
-        return this.pieza;
+        return this.estado.obtenerPieza();
     }
 
     public Coordenada getCoordenada() {
@@ -143,7 +145,9 @@ public class Casilla implements Atacable{
     }
 
     public void moverContenidoA(Casilla destino) {
+
         destino.recibirPieza(this.removerPieza());
+        this.limpiarCasilla();
     }
 
     public void empujar(Direccion direccion) {
@@ -167,12 +171,16 @@ public class Casilla implements Atacable{
     // La precondicion es que, quien llame a este metodo,
     // le envie una casilla valida
     public void empujarA(Casilla destino) {
-        // TODO Refactorizar para eliminar if
-        if (destino.estaLibre()) moverContenidoA(destino);
-        else{
-            DanioColision colision = new DanioColision();
-            destino.recibirAtaque(colision);
-            recibirAtaque(colision);
-        }
+        // TODO Refactorizar para eliminar if LISTO!
+        this.estado.empujarA(this,destino);
+    }
+
+    public void recibirEmpuje(Casilla origen, Pieza pieza) {
+        this.estado=this.estado.recibirEmpuje(origen,this,pieza);
+    }
+
+    @Override
+    public void recibirAtaque(Ataque ataque) {
+        this.estado.recibirAtaque(ataque,this.coordenada);
     }
 }

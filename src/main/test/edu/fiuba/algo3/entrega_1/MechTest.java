@@ -1,6 +1,10 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.empujes.Este;
+import edu.fiuba.algo3.modelo.empujes.Norte;
+import edu.fiuba.algo3.modelo.empujes.Oeste;
+import edu.fiuba.algo3.modelo.empujes.Sur;
 import edu.fiuba.algo3.modelo.excepciones.TrayectoriaInvalidaException;
 import edu.fiuba.algo3.modelo.excepciones.ObjetoFueraDeRangoException;
 import org.junit.jupiter.api.Test;

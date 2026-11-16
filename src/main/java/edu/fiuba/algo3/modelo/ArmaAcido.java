@@ -9,9 +9,9 @@ public class ArmaAcido extends Arma{
     }
 
     @Override
-    public void atacar(Trayectoria trayectoria) {
+    public void atacar(Trayectoria trayectoria, Tablero contexto) {
         Casilla hit = trayectoria.devolverPrimeraCasillaNoLibre();
-        hit.recibirAtaque(new Ataque(1));
+        hit.recibirAtaque(new AtaqueAcido(),contexto);
         hit.empujar(trayectoria.getDireccion());
     }
 

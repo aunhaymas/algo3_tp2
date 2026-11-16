@@ -6,6 +6,6 @@ public abstract class Arma {
     // public abstract boolean atacar(Casilla casilla, Direccion direccion);
 
     public abstract void atacar(Dañable objetivo);
-    public abstract void atacar(Trayectoria trayectoria);
+    public abstract void atacar(Trayectoria trayectoria,Tablero contexto);
     public abstract void atacar(Atacable objetivo);
 }

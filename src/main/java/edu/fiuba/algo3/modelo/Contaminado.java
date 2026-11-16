@@ -1,6 +1,10 @@
 package edu.fiuba.algo3.modelo;
 
-public class Contaminado implements EstadoUnidad {
+import edu.fiuba.algo3.modelo.empujes.Empuje;
+import edu.fiuba.algo3.modelo.empujes.EmpujeEfectivo;
+import edu.fiuba.algo3.modelo.estadosUnidad.EstadoUnidad;
+
+public class Contaminado extends EstadoUnidad {
 	@Override
 	public int calcularDañoRecibido(int dañoBase) {
 		return 2 * dañoBase;

@@ -1,32 +1,36 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.empujes.Empuje;
+import edu.fiuba.algo3.modelo.empujes.EmpujeEfectivo;
+import edu.fiuba.algo3.modelo.empujes.EmpujeNulo;
+
 public class Ataque {
     protected int danio;
-    private Direccion direccionEmpuje;
+    private final Empuje empuje;
 
     public Ataque(int danio) {
         this.danio = danio;
-        this.direccionEmpuje = null;
+        this.empuje = new EmpujeNulo();
+    }
+    public Ataque(int danio, Empuje empuje) {
+        this.danio = danio;
+        this.empuje = empuje;
     }
 
     public Ataque(int danio, Direccion direccionEmpuje) {
         this.danio = danio;
-        this.direccionEmpuje = direccionEmpuje;
+        this.empuje = new EmpujeEfectivo(direccionEmpuje.obtenerDireccion());
     }
 
     public int getDanio() {
         return this.danio;
     }
 
-    public Direccion getDireccionEmpuje() {
-        return this.direccionEmpuje;
-    }
-
-    public boolean tieneEmpuje() {
-        return this.direccionEmpuje != null;
-    }
-
     public void efectuarAtaque(Unidad unidad) {
         unidad.recibirDaño(danio);
+    }
+
+    public Empuje generarEmpujeDesde(Coordenada origen) {
+        return this.empuje.prepararDesde(origen);
     }
 }

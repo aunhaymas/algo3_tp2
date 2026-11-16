@@ -111,9 +111,7 @@ public class GestorMovimientoTest {
 
 		comando.ejecutar();
 		mechCombate.atacar(vek);
-		assertThrows(MovimientoNoCancelable.class, () -> {
-			comando.deshacer();
-		});
+		assertThrows(MovimientoNoCancelable.class, comando::deshacer);
 	}
 	@Test
 	public void comandoNoPuedeDeshacerMovimientoMasDeUnaVezPorTurno() {

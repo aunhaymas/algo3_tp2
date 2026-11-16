@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.empujes.Empuje;
+import edu.fiuba.algo3.modelo.empujes.EmpujeNulo;
+
 public class PiezaEdificio implements Pieza {
     private final RedElectrica red;
     private int vida = 1;
@@ -13,9 +16,15 @@ public class PiezaEdificio implements Pieza {
     }
 
     @Override
-    public void recibirAtaque(Ataque ataque) {
+    public Empuje recibirAtaque(Ataque ataque, Coordenada origen) {
         this.red.edificioDestruido();
         this.vida--; //
+        return new EmpujeNulo();
+    }
+
+    @Override
+    public void recibirAtaque(Ataque ataque) {
+        this.recibirAtaque(ataque,new Coordenada(0,0));
     }
 
     @Override

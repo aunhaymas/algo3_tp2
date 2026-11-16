@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.excepciones.PosicionOcupadaException;
 import edu.fiuba.algo3.modelo.excepciones.PosicionVaciaException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Tablero {
     
@@ -81,5 +82,13 @@ public class Tablero {
 
     public Pieza obtenerPiezaEn(Coordenada coordenada) {
         return obtenerCasilla(coordenada).obtenerPieza();
+    }
+
+    public Trayectoria crearTrayectoria(Coordenada origen, Coordenada destino) {
+        List<Coordenada> trayectoria = origen.trayectoriaA(destino);
+        List<Casilla> casillas = trayectoria.stream().map(this::obtenerCasilla).collect(Collectors.toList());
+        Direccion direccion = new Direccion(origen.direccionA(destino));
+        return new Trayectoria(casillas,direccion );
+
     }
 }

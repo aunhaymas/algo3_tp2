@@ -1,6 +1,12 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.estadosUnidad;
 
-public class Sumergido implements EstadoUnidad {
+import edu.fiuba.algo3.modelo.Ataque;
+import edu.fiuba.algo3.modelo.Coordenada;
+import edu.fiuba.algo3.modelo.Unidad;
+import edu.fiuba.algo3.modelo.empujes.Empuje;
+import edu.fiuba.algo3.modelo.empujes.EmpujeEfectivo;
+
+public class Sumergido extends EstadoUnidad {
 	@Override
 	public int calcularDañoRecibido(int dañoBase) {
 		return dañoBase;

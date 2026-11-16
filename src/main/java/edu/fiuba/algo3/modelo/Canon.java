@@ -8,10 +8,10 @@ public class Canon extends Arma {
         objetivo.recibirDaño(1);
     }
 
-    public void atacar(Trayectoria trayectoria) {
+    public void atacar(Trayectoria trayectoria, Tablero contexto) {
         // Deberia recorrer todas las casillas hasta que una NO este libre, De ahi hit!. 
         Casilla hit = trayectoria.devolverPrimeraCasillaNoLibre();
-        hit.recibirAtaque(new Ataque(1));
+        hit.recibirAtaque(new AtaqueCanon(),contexto);
         hit.empujar(trayectoria.getDireccion());
     }
 

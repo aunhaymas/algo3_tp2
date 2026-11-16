@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.empujes.Empuje;
 import edu.fiuba.algo3.modelo.veks.AnuncioDeAtaque;
 
 public class Vek extends Unidad {
@@ -17,6 +18,9 @@ public class Vek extends Unidad {
 	public void entrarEn(Casilla casilla) {
 		casilla.aplicarEfecto(this);
 	}
+
+
+
 
 	@Override
     public void sumergir() {

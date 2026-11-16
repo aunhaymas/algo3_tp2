@@ -1,5 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.empujes.Empuje;
+import edu.fiuba.algo3.modelo.estadosUnidad.Estable;
+import edu.fiuba.algo3.modelo.estadosUnidad.EstadoUnidad;
+import edu.fiuba.algo3.modelo.estadosUnidad.Sumergido;
 import edu.fiuba.algo3.modelo.excepciones.CantidadMovimientosInvalidaException;
 import edu.fiuba.algo3.modelo.excepciones.PuntosVidaInvalidoException;
 
@@ -31,14 +35,20 @@ public abstract class Unidad implements Dañable, Pieza,Atacable {
 	}
 
 	public void recibirAtaque(Ataque ataque) {
-		ataque.efectuarAtaque(this);
+		this.recibirAtaque(ataque,new Coordenada(0,0));
 	}
+	@Override
+	public Empuje recibirAtaque(Ataque ataque, Coordenada origen) {
+		this.recibirDaño(ataque.getDanio());
+		return this.estadoUnidad.calcularEmpuje(ataque,origen);
+	};
 
 	// Deberia ser privado, unidad no sabe que tipo de arma la ataco y no puedo aplicar polimorfismo
 	// tampoco puede recibir el efecto del arma, por ejemplo la contaminacion
 	// https://docs.google.com/presentation/d/1lf1sGq9iIxYKDetrzGbqh8L9fd5YhxZXutqcoW9jrlM/edit?slide=id.g52d1aa7109_0_15#slide=id.g52d1aa7109_0_15
 	public void recibirDaño(int puntos) {
 		this.vida -= this.estadoUnidad.calcularDañoRecibido(puntos);
+		//this.estadoUnidad = this.estadoUnidad.recibirDanio(puntos);
 	}
 private void recibirDanio(int danio){this.vida -= danio;}
 	public boolean estaDestruida() {

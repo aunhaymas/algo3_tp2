@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.ataques.AtaqueAcido;
 import edu.fiuba.algo3.modelo.ataques.AtaqueAguijon;
 import edu.fiuba.algo3.modelo.ataques.AtaqueMordida;
 
@@ -10,8 +11,9 @@ public class ArmaAguijon extends Arma{
     }
 
     @Override
-    public void atacar(Trayectoria trayectoria) {
-
+    public void atacar(Trayectoria trayectoria, Tablero contexto) {
+        Casilla hit = trayectoria.devolverPrimeraCasillaNoLibre();
+        hit.recibirAtaque(new AtaqueAcido(),contexto);
     }
 
     @Override

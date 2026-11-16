@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.estadosUnidad.EstadoUnidad;
 import edu.fiuba.algo3.modelo.excepciones.*;
 
 public class Mech extends Unidad {
@@ -54,10 +55,9 @@ public class Mech extends Unidad {
 	}
 
 	public void atacar(Tablero tablero, Coordenada coordenada) {
-		Casilla casilla = tablero.obtenerCasilla(coordenada);
 		Casilla origen = tablero.obtenerCasilla(this);
-		Trayectoria trayectoria = origen.obtenerTrayectoria(casilla);
-		arma.atacar(trayectoria);
+		Trayectoria trayectoria = tablero.crearTrayectoria(origen.getCoordenada(), coordenada);
+		arma.atacar(trayectoria,tablero);
 	}
 
 	public void atacar(Atacable objetivo) {
