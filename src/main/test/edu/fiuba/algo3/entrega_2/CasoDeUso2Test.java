@@ -15,7 +15,6 @@ public class CasoDeUso2Test {
        DanioColision danio = new DanioColision(); //1 de danio
        edificio.recibirAtaque(danio);
        assertEquals(4,redElectrica.integridadActual());
-
    }
 
 }

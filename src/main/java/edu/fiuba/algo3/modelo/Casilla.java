@@ -145,7 +145,6 @@ public class Casilla implements Atacable{
     }
 
     public void moverContenidoA(Casilla destino) {
-
         destino.recibirPieza(this.removerPieza());
         this.limpiarCasilla();
     }
