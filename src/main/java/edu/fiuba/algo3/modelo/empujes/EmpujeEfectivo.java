@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.empujes;
 
 import edu.fiuba.algo3.modelo.Casilla;
 import edu.fiuba.algo3.modelo.Coordenada;
-import edu.fiuba.algo3.modelo.Tablero;
+import edu.fiuba.algo3.modelo.Direccion;
 
 public class EmpujeEfectivo implements Empuje{
     private final Coordenada destino;
@@ -11,8 +11,8 @@ public class EmpujeEfectivo implements Empuje{
     }
 
     @Override
-    public void empujar(Casilla casilla, Tablero contexto) {
-        casilla.empujarA(contexto.obtenerCasilla(destino));
+    public void empujar(Casilla casilla) {
+        casilla.empujar(new Direccion(destino));
     }
 
     @Override

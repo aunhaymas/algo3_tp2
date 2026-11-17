@@ -1,7 +1,8 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.Acido;
-import edu.fiuba.algo3.modelo.Unidad;
+import edu.fiuba.algo3.modelo.terrenos.Acido;
+import edu.fiuba.algo3.modelo.unidades.Unidad;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 

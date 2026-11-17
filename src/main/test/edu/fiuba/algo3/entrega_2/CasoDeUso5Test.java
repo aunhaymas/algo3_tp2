@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.armas.Punio;
+import edu.fiuba.algo3.modelo.mechs.Mech;
 import edu.fiuba.algo3.modelo.veks.Luciernaga;
 import org.junit.jupiter.api.Test;
 

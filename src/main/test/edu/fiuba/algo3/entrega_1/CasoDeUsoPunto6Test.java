@@ -2,11 +2,12 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.Casilla;
 import edu.fiuba.algo3.modelo.Coordenada;
-import edu.fiuba.algo3.modelo.Mech;
 import edu.fiuba.algo3.modelo.Trayectoria;
 import edu.fiuba.algo3.modelo.excepciones.MovimientoExcedidoException;
 import edu.fiuba.algo3.modelo.excepciones.UnidadYaAtacoException;
 import edu.fiuba.algo3.modelo.excepciones.UnidadYaSeMovioException;
+import edu.fiuba.algo3.modelo.mechs.Mech;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

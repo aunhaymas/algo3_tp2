@@ -2,11 +2,11 @@ package edu.fiuba.algo3.modelo.empujes;
 
 import edu.fiuba.algo3.modelo.Casilla;
 import edu.fiuba.algo3.modelo.Coordenada;
-import edu.fiuba.algo3.modelo.Tablero;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
 
 public class EmpujeNulo implements Empuje {
     @Override
-    public void empujar(Casilla casilla, Tablero contexto) {
+    public void empujar(Casilla casilla) {
         // no empuja!
     }
 
