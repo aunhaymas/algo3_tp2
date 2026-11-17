@@ -1,8 +1,20 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.empujes.Este;
+import edu.fiuba.algo3.modelo.empujes.Norte;
+import edu.fiuba.algo3.modelo.empujes.Oeste;
+import edu.fiuba.algo3.modelo.empujes.Sur;
 import edu.fiuba.algo3.modelo.excepciones.TrayectoriaInvalidaException;
+import edu.fiuba.algo3.modelo.mechs.Mech;
+import edu.fiuba.algo3.modelo.mechs.MechDeArtilleria;
+import edu.fiuba.algo3.modelo.mechs.MechDeCanon;
+import edu.fiuba.algo3.modelo.mechs.MechDeCombate;
+import edu.fiuba.algo3.modelo.tablero.ParserTablero;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
+import edu.fiuba.algo3.modelo.terrenos.TerrenosFactory;
 import edu.fiuba.algo3.modelo.excepciones.ObjetoFueraDeRangoException;
+import edu.fiuba.algo3.modelo.veks.Vek;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

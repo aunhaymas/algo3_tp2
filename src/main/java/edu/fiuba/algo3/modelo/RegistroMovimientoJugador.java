@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.estadosUnidad.EstadoUnidad;
+import edu.fiuba.algo3.modelo.mechs.Mech;
+
 public class RegistroMovimientoJugador implements RegistroMovimiento {
 	private final Mech mech;
 	private final Casilla destino;

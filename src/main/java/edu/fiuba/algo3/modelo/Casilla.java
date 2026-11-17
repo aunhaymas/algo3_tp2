@@ -1,7 +1,19 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.ataques.Ataque;
+import edu.fiuba.algo3.modelo.empujes.*;
+import edu.fiuba.algo3.modelo.estadoCasilla.EstadoCasilla;
+import edu.fiuba.algo3.modelo.estadoCasilla.EstadoOcupada;
+import edu.fiuba.algo3.modelo.estadoCasilla.EstadoVacia;
 import edu.fiuba.algo3.modelo.excepciones.CasillaVaciaException;
 import edu.fiuba.algo3.modelo.excepciones.TrayectoriaInvalidaException;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
+import edu.fiuba.algo3.modelo.terrenos.Suelo;
+import edu.fiuba.algo3.modelo.terrenos.TipoTerreno;
+import edu.fiuba.algo3.modelo.unidades.Atacable;
+import edu.fiuba.algo3.modelo.unidades.Pieza;
+import edu.fiuba.algo3.modelo.unidades.PiezaNula;
+import edu.fiuba.algo3.modelo.unidades.Unidad;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,8 +25,10 @@ public class Casilla implements Atacable{
     private Tablero tablero;
     private Coordenada coordenada;
     private TipoTerreno terrenoCasilla;
+    private EstadoCasilla estado;
     public Casilla(Coordenada coordenada) {
         this.coordenada=coordenada;
+        this.estado = new EstadoVacia();
         this.estaLibre=true;
         this.terrenoCasilla=new Suelo();
         limpiarCasilla();
@@ -63,7 +77,7 @@ public class Casilla implements Atacable{
     }
 
     public boolean tiene(Pieza pieza) {
-        return this.pieza == pieza;
+        return estado.tienePieza(pieza);
     }
 
     private Trayectoria obtenerTrayectoriaPorDistanciaYDireccion(Direccion direccion, int distancia) {
@@ -101,13 +115,13 @@ public class Casilla implements Atacable{
     }
 
     public boolean estaLibre() {
-        return estaLibre;
+        return this.estado.estaLibre();
     }
 
     public void recibirPieza(Pieza pieza) {
-        this.estaLibre=false;
-        this.pieza=pieza;
         pieza.entrarEn(this);
+        this.pieza=pieza;
+        this.estado = new EstadoOcupada(pieza);
         // pieza.entrarEn(this) para aplicar efecto
     }
 
@@ -118,15 +132,15 @@ public class Casilla implements Atacable{
         return piezaGuardada;
     }
 
+    @Override
     public void recibirAtaque(Ataque ataque) {
-        this.pieza.recibirAtaque(ataque);
-        if (this.pieza.estaDestruida()) {
-            limpiarCasilla();
-        }
+
+        Empuje empuje = this.estado.recibirAtaque(ataque);
+        empuje.empujar(this);
     }
 
     private void limpiarCasilla(){
-        this.estaLibre = true;
+        this.estado = new EstadoVacia();
         this.pieza=new PiezaNula();
     }
 
@@ -139,10 +153,7 @@ public class Casilla implements Atacable{
     }
 
     public Pieza obtenerPieza() {
-        if (estaLibre()){
-            throw new CasillaVaciaException("");
-        }
-        return this.pieza;
+        return this.estado.obtenerPieza();
     }
 
     public Coordenada getCoordenada() {
@@ -151,6 +162,7 @@ public class Casilla implements Atacable{
 
     public void moverContenidoA(Casilla destino) {
         if (!this.equals(destino)) {
+            this.limpiarCasilla();
             destino.recibirPieza(this.removerPieza());
         }
     }
