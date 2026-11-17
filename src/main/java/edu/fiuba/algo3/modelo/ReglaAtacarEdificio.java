@@ -20,7 +20,8 @@ public class ReglaAtacarEdificio extends ReglaIA {
 		// Me fijo si ya hay un edificio en rango de ataque
 		for (Casilla casilla : casillasConEdificios) {
 			if (vek.puedoAtacarDesde(origen, casilla, tablero)) {
-				return new AccionIA(origen, casilla, new AnuncioNulo(), registro);
+				AnuncioDeAtaque anuncio = new AnuncioDeAtaqueReal(vek, casilla);
+				return new AccionIA(origen, origen, anuncio, registro);
 			}
 		}
 

@@ -30,6 +30,11 @@ public abstract class Unidad implements Dañable, Pieza,Atacable {
 		this.estadoUnidad = new Estable();
 	}
 
+	@Override 
+    public void bloquearEmergencia() {
+        this.recibirDanio(1);
+    }
+
 	public void contaminar() {
 		this.estadoUnidad = new Contaminado();
 	}

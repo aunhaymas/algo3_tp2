@@ -14,4 +14,6 @@ public interface Pieza {
     public int getVida();
     // public boolean mover(int fila, int columna);
     public void reportarA(LocalizadorEntidad localizador, Casilla casilla);
+    public void bloquearEmergencia();
+
 }

@@ -16,7 +16,12 @@ public class PiezaEdificio implements Pieza {
 
     @Override
     public void entrarEn(Casilla casilla) {
-        casilla.recibirPieza(this);
+        // casilla.recibirPieza(this);
+    }
+
+    @Override 
+    public void bloquearEmergencia() {
+        // Nada
     }
 
     @Override

@@ -26,6 +26,10 @@ public class PiezaNula implements Pieza{
     public int getVida(){
         throw new RuntimeException("No se puede obtener vida de Casilla vacia.");
     }
+    @Override 
+    public void bloquearEmergencia() {
+        // Nada
+    }
 
 
     @Override

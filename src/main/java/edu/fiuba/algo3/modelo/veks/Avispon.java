@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.veks;
 
+import edu.fiuba.algo3.modelo.Casilla;
 import edu.fiuba.algo3.modelo.armas.ArmaAguijon;
 
 public class Avispon extends Vek {
@@ -18,4 +19,8 @@ public class Avispon extends Vek {
         //al ser volador el acido no lo contamina
     }
     
+    @Override 
+    public boolean puedeAtravesar(Casilla casilla) {
+        return true;
+    }
 }

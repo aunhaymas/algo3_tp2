@@ -50,20 +50,35 @@ public abstract class Vek extends Unidad {
 
             for (int i = 0; i < this.movimientos; i++) {
                 Coordenada siguientePosicion = direccion.obtenerCoordenadaAdyacente(actual.getCoordenada());
-                Casilla siguienteCasilla = tablero.obtenerCasilla(siguientePosicion);
                 
-                if (tablero.esPosicionValida(siguientePosicion) && siguienteCasilla.estaLibre()) {
-                    destinosValidos.add(siguienteCasilla);
-                    actual = siguienteCasilla;
+                if (!tablero.esPosicionValida(siguientePosicion)) {
+                    break;
                 }
+                
+                Casilla siguienteCasilla = tablero.obtenerCasilla(siguientePosicion);
+
+                if (!puedeAtravesar(siguienteCasilla)) {
+                    break;
+                }
+                
+                if (siguienteCasilla.estaLibre()) {
+                    destinosValidos.add(siguienteCasilla);
+                }
+                actual = siguienteCasilla;
             }
         }
         tablero.ordenarCasillasEnOrdenLectura(destinosValidos);
         return destinosValidos;
     }
+
+    public boolean puedeAtravesar(Casilla casilla) {
+        return casilla.estaLibre();
+    }
     
     public boolean puedoAtacarDesde(Casilla origen, Casilla destino, Tablero tablero) {
-        List<Casilla> destinosPosibles = hallarDestinosValidosDesde(origen, tablero);
-        return destinosPosibles.contains(origen);
+        int distancia = origen.calcularDistanciaCon(destino);
+        return distancia == 1;
+        // List<Casilla> destinosPosibles = hallarDestinosValidosDesde(origen, tablero);
+        // return destinosPosibles.contains(origen);
     }
 }

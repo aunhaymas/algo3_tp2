@@ -15,6 +15,10 @@ public class PiezaMontania implements Pieza{
     public Empuje recibirAtaqueConEmpuje(Ataque ataque) {
         return new EmpujeNulo();
     }
+    @Override 
+    public void bloquearEmergencia() {
+        // Nada
+    }
 
     @Override
     public void recibirAtaque(Ataque ataque) {

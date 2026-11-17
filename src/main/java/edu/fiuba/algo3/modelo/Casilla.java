@@ -1,21 +1,16 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.ataques.Ataque;
-import edu.fiuba.algo3.modelo.ataques.DanioColision;
-import edu.fiuba.algo3.modelo.empujes.*;
 import edu.fiuba.algo3.modelo.tablero.*;
-import edu.fiuba.algo3.modelo.estadoCasilla.EstadoCasilla;
-import edu.fiuba.algo3.modelo.estadoCasilla.EstadoOcupada;
-import edu.fiuba.algo3.modelo.estadoCasilla.EstadoVacia;
-import edu.fiuba.algo3.modelo.excepciones.CasillaVaciaException;
-import edu.fiuba.algo3.modelo.excepciones.TrayectoriaInvalidaException;
-import edu.fiuba.algo3.modelo.tablero.Tablero;
-import edu.fiuba.algo3.modelo.terrenos.Suelo;
-import edu.fiuba.algo3.modelo.terrenos.TipoTerreno;
-import edu.fiuba.algo3.modelo.unidades.Atacable;
-import edu.fiuba.algo3.modelo.unidades.Pieza;
-import edu.fiuba.algo3.modelo.unidades.PiezaNula;
-import edu.fiuba.algo3.modelo.unidades.Unidad;
+import edu.fiuba.algo3.modelo.estadosUnidad.*;
+import edu.fiuba.algo3.modelo.mechs.*;
+import edu.fiuba.algo3.modelo.unidades.*;
+import edu.fiuba.algo3.modelo.empujes.*;
+import edu.fiuba.algo3.modelo.terrenos.*;
+import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.ataques.*;
+import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.veks.*;
+import edu.fiuba.algo3.modelo.estadoCasilla.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,12 +22,16 @@ public class Casilla implements Atacable{
     private Tablero tablero;
     private Coordenada coordenada;
     private TipoTerreno terrenoCasilla;
+    private boolean tieneEmergenciaActiva;
+    private EstadoEmergencia estadoEmergencia;
     private EstadoCasilla estado;
+
     public Casilla(Coordenada coordenada) {
         this.coordenada=coordenada;
         this.estado = new EstadoVacia();
         this.estaLibre=true;
         this.terrenoCasilla=new Suelo();
+        this.estadoEmergencia = null;
         limpiarCasilla();
     }
     public Casilla(Coordenada coordenada, TipoTerreno terreno) {
@@ -116,6 +115,22 @@ public class Casilla implements Atacable{
         }
     }
 
+    public void activarEmergencia() {
+        this.estadoEmergencia = new EmergenciaActiva();
+    }
+
+    public void resolverEmergencia(Vek nuevoVek) {
+        this.estadoEmergencia = this.estadoEmergencia.resolver(this, nuevoVek);
+    }
+
+    public boolean tieneEmergenciaActiva() {
+        return this.estadoEmergencia.estaActiva();
+    }
+
+    void notificarBloqueoDeEmergencia() {
+        this.pieza.bloquearEmergencia();
+    }
+
     public boolean estaLibre() {
         return this.estado.estaLibre();
     }
@@ -164,8 +179,8 @@ public class Casilla implements Atacable{
 
     public void moverContenidoA(Casilla destino) {
         if (!this.equals(destino)) {
-            this.limpiarCasilla();
             destino.recibirPieza(this.removerPieza());
+            this.limpiarCasilla();
         }
     }
 
