@@ -45,6 +45,7 @@ public class Tablero {
         return (x >= 0 && y >= 0 && x < LARGO_PREDEFINIDO && y < ANCHO_PREDEFINIDO);
     }
 
+
     public void colocarPieza(Pieza pieza, Coordenada coordenada) {
         
         if (!esPosicionValida(coordenada)) {
@@ -81,5 +82,15 @@ public class Tablero {
 
     public Pieza obtenerPiezaEn(Coordenada coordenada) {
         return obtenerCasilla(coordenada).obtenerPieza();
+    }
+
+    public void reportarA(LocalizadorEntidad localizador) {
+        for (Casilla casilla : casillas) {
+            casilla.reportarA(localizador);
+        }
+    }
+
+    public void ordenarCasillasEnOrdenLectura(List<Casilla> casillas) {
+        casillas.sort(new ComparadorOrdenDeLectura());
     }
 }

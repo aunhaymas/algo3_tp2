@@ -150,7 +150,21 @@ public class Casilla implements Atacable{
     }
 
     public void moverContenidoA(Casilla destino) {
-        destino.recibirPieza(this.removerPieza());
+        if (!this.equals(destino)) {
+            destino.recibirPieza(this.removerPieza());
+        }
+    }
+
+    @Override 
+    public boolean equals(Object otro) {
+        if (this == otro) {
+            return true;
+        }
+        if (!(otro instanceof Casilla)) {
+            return false;
+        }
+        Casilla casillaOtro = (Casilla)otro;
+        return this.coordenada.equals(casillaOtro.getCoordenada());
     }
 
     public void empujar(Direccion direccion) {
