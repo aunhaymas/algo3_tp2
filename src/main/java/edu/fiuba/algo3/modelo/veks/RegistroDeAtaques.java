@@ -12,8 +12,8 @@ public class RegistroDeAtaques {
         this.ataques = new LinkedList<>();
     }
 
-    public void registrarAtaque(AnuncioDeAtaque anuncioDeAtaque) {
-        this.ataques.add(anuncioDeAtaque);
+    public void registrarAtaque(AnuncioDeAtaque anuncioReal) {
+        this.ataques.add(anuncioReal);
     }
 
     public void ejecutarSiguienteAtaque(Tablero contexto) {

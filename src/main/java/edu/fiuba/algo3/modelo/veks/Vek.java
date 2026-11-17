@@ -5,14 +5,17 @@ import edu.fiuba.algo3.modelo.Coordenada;
 import edu.fiuba.algo3.modelo.unidades.Unidad;
 
 public class Vek extends Unidad {
-
+	AnuncioDeAtaque anuncioAtaque;
     // Temporal
 	public Vek() {
 		super(3,3);
+		this.anuncioAtaque=new AnuncioNulo();
 	}
 
 	public Vek(int vida, int movimientos) {
-        super(vida, movimientos);
+
+		super(vida, movimientos);
+		this.anuncioAtaque=new AnuncioNulo();
     }
 
 	@Override
@@ -22,7 +25,7 @@ public class Vek extends Unidad {
 
 	@Override
 	public void notificarEmpuje(Coordenada direccion) {
-
+		anuncioAtaque.desplazarAtaque(direccion);
 	}
 
 
@@ -32,7 +35,7 @@ public class Vek extends Unidad {
     }
 
     public AnuncioDeAtaque anunciarAtaque(Coordenada objetivo) {
-		// TDD: Proximo caso de uso me obligaria a guardar este anuncio?
-		return new AnuncioDeAtaque(this,objetivo);
+		this.anuncioAtaque = new AnuncioReal(this,objetivo);
+		return this.anuncioAtaque;
 	}
 }

@@ -72,8 +72,8 @@ public class CasoDeUso7Test {
         // Esta entidad puede ser modificada en fase Jugador
         RegistroDeAtaques registroDeAtaques= new RegistroDeAtaques();
         // FaseVek
-        AnuncioDeAtaque anuncioDeAtaque = saltador.anunciarAtaque(objetivo);
-        registroDeAtaques.registrarAtaque(anuncioDeAtaque);
+        AnuncioDeAtaque anuncioReal = saltador.anunciarAtaque(objetivo);
+        registroDeAtaques.registrarAtaque(anuncioReal);
         assertEquals(3,mech.getVida());
     }
     @Test
@@ -89,8 +89,8 @@ public class CasoDeUso7Test {
         // Esta entidad puede ser modificada en fase Jugador
         RegistroDeAtaques registroDeAtaques= new RegistroDeAtaques();
         // FaseVek
-        AnuncioDeAtaque anuncioDeAtaque = saltador.anunciarAtaque(objetivo);
-        registroDeAtaques.registrarAtaque(anuncioDeAtaque);
+        AnuncioDeAtaque anuncioReal = saltador.anunciarAtaque(objetivo);
+        registroDeAtaques.registrarAtaque(anuncioReal);
         registroDeAtaques.ejecutarSiguienteAtaque(contexto);
         assertEquals(1,mech.getVida());
     }
@@ -151,11 +151,11 @@ public class CasoDeUso7Test {
         casillaMech2.recibirPieza(mech2);
         // Esta entidad puede ser modificada en fase Jugador
         // FaseVek
-        AnuncioDeAtaque anuncioDeAtaque1 = avispon1.anunciarAtaque(coordenada11);
-        AnuncioDeAtaque anuncioDeAtaque2 = avispon2.anunciarAtaque(coordenada12);
+        AnuncioDeAtaque anuncioReal1 = avispon1.anunciarAtaque(coordenada11);
+        AnuncioDeAtaque anuncioReal2 = avispon2.anunciarAtaque(coordenada12);
         Tablero contexto = new Tablero(List.of(casillaMech, casillaMech2,casillaAvispon1,casillaAvispon2));
-        registroDeAtaques.registrarAtaque(anuncioDeAtaque1);
-        registroDeAtaques.registrarAtaque(anuncioDeAtaque2);
+        registroDeAtaques.registrarAtaque(anuncioReal1);
+        registroDeAtaques.registrarAtaque(anuncioReal2);
         //Act
         registroDeAtaques.ejecutarSiguienteAtaque(contexto);
         registroDeAtaques.ejecutarSiguienteAtaque(contexto);

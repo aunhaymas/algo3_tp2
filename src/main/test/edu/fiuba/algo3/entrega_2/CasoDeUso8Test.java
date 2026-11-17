@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.mechs.Mech;
 import edu.fiuba.algo3.modelo.mechs.MechDeCanon;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.veks.AnuncioDeAtaque;
+import edu.fiuba.algo3.modelo.veks.AnuncioReal;
 import edu.fiuba.algo3.modelo.veks.Avispon;
 import edu.fiuba.algo3.modelo.veks.Vek;
 import org.junit.jupiter.api.Test;
@@ -43,7 +44,7 @@ public class CasoDeUso8Test {
 
         AnuncioDeAtaque anuncio=vek.anunciarAtaque(new Coordenada(0,1));
         casilla1.empujarA(casilla2);
-        anuncio.desplazarAtaque(new Coordenada(1,0));
+        //anuncio.desplazarAtaque(new Coordenada(1,0));
         anuncio.ejecutarAtaque(contexto);
     }
     @Test
