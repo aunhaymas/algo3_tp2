@@ -1,6 +1,9 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.mechs.Mech;
+import edu.fiuba.algo3.modelo.mechs.MechDeCanon;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.veks.AnuncioDeAtaque;
 import edu.fiuba.algo3.modelo.veks.Avispon;
 import edu.fiuba.algo3.modelo.veks.Vek;
@@ -38,8 +41,9 @@ public class CasoDeUso8Test {
         casilla3.recibirPieza(mechObjetivo);
         casilla4.recibirPieza(mechVictima);
 
-        AnuncioDeAtaque anuncio=vek.anunciarAtaque(new Coordenada(0,0),new Coordenada(0,1));
+        AnuncioDeAtaque anuncio=vek.anunciarAtaque(new Coordenada(0,1));
         casilla1.empujarA(casilla2);
+        anuncio.desplazarAtaque(new Coordenada(1,0));
         anuncio.ejecutarAtaque(contexto);
     }
     @Test

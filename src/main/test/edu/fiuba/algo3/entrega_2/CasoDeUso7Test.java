@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_2;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.mechs.Mech;
 import edu.fiuba.algo3.modelo.mechs.MechDeCanon;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.veks.AnuncioDeAtaque;
 import edu.fiuba.algo3.modelo.veks.Avispon;
 import edu.fiuba.algo3.modelo.veks.RegistroDeAtaques;
@@ -71,7 +72,7 @@ public class CasoDeUso7Test {
         // Esta entidad puede ser modificada en fase Jugador
         RegistroDeAtaques registroDeAtaques= new RegistroDeAtaques();
         // FaseVek
-        AnuncioDeAtaque anuncioDeAtaque = saltador.anunciarAtaque(origen,objetivo);
+        AnuncioDeAtaque anuncioDeAtaque = saltador.anunciarAtaque(objetivo);
         registroDeAtaques.registrarAtaque(anuncioDeAtaque);
         assertEquals(3,mech.getVida());
     }
@@ -80,6 +81,7 @@ public class CasoDeUso7Test {
         Vek saltador = new Saltador(); // 2 de daño
         Mech mech = new MechDeCanon(); // 3 de vida
         Casilla casillaOrigen = new Casilla(coordenada01);
+        casillaOrigen.recibirPieza(saltador);
         Coordenada objetivo = coordenada11;
         Casilla casillaMech = new Casilla(objetivo);
         casillaMech.recibirPieza(mech);
@@ -87,7 +89,7 @@ public class CasoDeUso7Test {
         // Esta entidad puede ser modificada en fase Jugador
         RegistroDeAtaques registroDeAtaques= new RegistroDeAtaques();
         // FaseVek
-        AnuncioDeAtaque anuncioDeAtaque = saltador.anunciarAtaque(coordenada01,objetivo);
+        AnuncioDeAtaque anuncioDeAtaque = saltador.anunciarAtaque(objetivo);
         registroDeAtaques.registrarAtaque(anuncioDeAtaque);
         registroDeAtaques.ejecutarSiguienteAtaque(contexto);
         assertEquals(1,mech.getVida());
@@ -111,6 +113,8 @@ public class CasoDeUso7Test {
         Casilla casillaMech1 = new Casilla(objetivo1);
         Casilla casillaMech2 = new Casilla(objetivo2);
 
+        casillaOrigen1.recibirPieza(avispon1);
+        casillaOrigen2.recibirPieza(avispon2);
         casillaMech1.recibirPieza(mech1);
         casillaMech2.recibirPieza(mech2);
 
@@ -118,8 +122,8 @@ public class CasoDeUso7Test {
         RegistroDeAtaques registroDeAtaques= new RegistroDeAtaques();
 
         // FaseVek
-        AnuncioDeAtaque anuncio1 = avispon1.anunciarAtaque(origen1, objetivo1);
-        AnuncioDeAtaque anuncio2 = avispon2.anunciarAtaque(origen2, objetivo2);
+        AnuncioDeAtaque anuncio1 = avispon1.anunciarAtaque(objetivo1);
+        AnuncioDeAtaque anuncio2 = avispon2.anunciarAtaque(objetivo2);
 
         registroDeAtaques.registrarAtaque(anuncio1);
         registroDeAtaques.registrarAtaque(anuncio2);
@@ -131,29 +135,33 @@ public class CasoDeUso7Test {
     }
 
     @Test
-    public void ejecutarSiguienteDosVecesEjecutaElPrimerYultimoAtaque(){
+    public void ejecutarSiguienteDosVecesEjecutaElPrimerYultimoAtaque() {
         //Arrange
         Vek avispon1 = new Avispon(); // 2 de daño
         Vek avispon2 = new Avispon(); // 2 de daño
         Mech mech1 = new MechDeCanon(); // 3 de vida
         Mech mech2 = new MechDeCanon(); // 3 de vida
+        Casilla casillaAvispon1 = new Casilla(coordenada01);
+        Casilla casillaAvispon2 = new Casilla(coordenada02);
         Casilla casillaMech = new Casilla(coordenada11);
         Casilla casillaMech2 = new Casilla(coordenada12);
+        casillaAvispon1.recibirPieza(avispon1);
+        casillaAvispon2.recibirPieza(avispon2);
         casillaMech.recibirPieza(mech1);
         casillaMech2.recibirPieza(mech2);
         // Esta entidad puede ser modificada en fase Jugador
         // FaseVek
-        AnuncioDeAtaque anuncioDeAtaque1 = avispon1.anunciarAtaque(coordenada01,coordenada11);
-        AnuncioDeAtaque anuncioDeAtaque2 = avispon2.anunciarAtaque(coordenada02,coordenada12);
-        Tablero contexto = new Tablero(List.of(casillaMech,casillaMech2));
+        AnuncioDeAtaque anuncioDeAtaque1 = avispon1.anunciarAtaque(coordenada11);
+        AnuncioDeAtaque anuncioDeAtaque2 = avispon2.anunciarAtaque(coordenada12);
+        Tablero contexto = new Tablero(List.of(casillaMech, casillaMech2,casillaAvispon1,casillaAvispon2));
         registroDeAtaques.registrarAtaque(anuncioDeAtaque1);
         registroDeAtaques.registrarAtaque(anuncioDeAtaque2);
         //Act
         registroDeAtaques.ejecutarSiguienteAtaque(contexto);
         registroDeAtaques.ejecutarSiguienteAtaque(contexto);
         //Assert
-        assertEquals(2,mech1.getVida());
-        assertEquals(2,mech2.getVida());
+        assertEquals(2, mech1.getVida());
+        assertEquals(2, mech2.getVida());
     }
 
 }

@@ -8,6 +8,8 @@ import edu.fiuba.algo3.modelo.excepciones.UnidadYaAtacoException;
 import edu.fiuba.algo3.modelo.excepciones.UnidadYaSeMovioException;
 import edu.fiuba.algo3.modelo.mechs.Mech;
 
+import edu.fiuba.algo3.modelo.veks.Saltador;
+import edu.fiuba.algo3.modelo.veks.Vek;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -35,9 +37,10 @@ public class CasoDeUsoPunto6Test {
     @Test
     void mechAtacaUnaSolaVezPorTurno(){
         Mech mech = new Mech();
-        mech.atacar(null);
+        Casilla objetivo = new Casilla(new Coordenada(0,0));
+        mech.atacar(objetivo);
         assertThrows(UnidadYaAtacoException.class, () -> {
-            mech.atacar(null);
+            mech.atacar(objetivo);
         });
     }
 }

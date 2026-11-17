@@ -42,6 +42,11 @@ public class Mech extends Unidad {
 		casilla.aplicarEfecto(this);
 	}
 
+	@Override
+	public void notificarEmpuje(Coordenada direccion) {
+
+	}
+
 	// @Override
 	// public void recibirAtaque(Ataque ataque) {
 	// }

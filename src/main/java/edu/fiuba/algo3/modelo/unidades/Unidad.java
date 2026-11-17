@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.unidades;
 
 import edu.fiuba.algo3.modelo.Casilla;
+import edu.fiuba.algo3.modelo.Coordenada;
+import edu.fiuba.algo3.modelo.Trayectoria;
 import edu.fiuba.algo3.modelo.armas.Arma;
 import edu.fiuba.algo3.modelo.ataques.Ataque;
 import edu.fiuba.algo3.modelo.empujes.Empuje;
@@ -10,6 +12,7 @@ import edu.fiuba.algo3.modelo.estadosUnidad.EstadoUnidad;
 import edu.fiuba.algo3.modelo.estadosUnidad.Sumergido;
 import edu.fiuba.algo3.modelo.excepciones.CantidadMovimientosInvalidaException;
 import edu.fiuba.algo3.modelo.excepciones.PuntosVidaInvalidoException;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
 
 public abstract class Unidad implements Dañable, Pieza,Atacable {
 	protected int vida;
@@ -18,9 +21,8 @@ public abstract class Unidad implements Dañable, Pieza,Atacable {
 	private Casilla casillaActual;
 	protected Arma arma;
 	public Unidad(int vida, int movimientos) {
-		if (vida <= 0) {
-			throw new PuntosVidaInvalidoException("No se pudo crear la unidad. Los puntos de vida deben ser mayores a 0.");
-		}
+		if (vida <= 0)
+            throw new PuntosVidaInvalidoException("No se pudo crear la unidad. Los puntos de vida deben ser mayores a 0.");
 		if (movimientos <= 0) {
 			throw new CantidadMovimientosInvalidaException("No se pudo crear la unidad. Los movimientos disponibles deben ser mayores a 0.");
 		}
@@ -67,9 +69,6 @@ private void recibirDanio(int danio){this.vida -= danio;}
 		this.estadoUnidad = new Estable();
 	}
 
-	public void cancelarMovimiento() {
-	}
-
 	public boolean puedeAtacar() {
         return this.estadoUnidad.puedeAtacar();
     }
@@ -81,11 +80,17 @@ private void recibirDanio(int danio){this.vida -= danio;}
 	public boolean estaContaminado() {
 		return this.estadoUnidad.estaContaminado();
 	}
+
+	// viola lod
 	public void atacar(Tablero tablero, Coordenada coordenada) {
 		Casilla origen = tablero.obtenerCasilla(this);
 		Trayectoria trayectoria = tablero.crearTrayectoria(origen.getCoordenada(), coordenada);
-		arma.atacar(trayectoria,tablero);
+		atacar(trayectoria);
 	}
+	public void atacar(Trayectoria trayectoria) {
+		arma.recorrer(trayectoria);
+	}
+
 	public void atacar(Atacable objetivo) {
 		arma.atacar(objetivo);
 	}

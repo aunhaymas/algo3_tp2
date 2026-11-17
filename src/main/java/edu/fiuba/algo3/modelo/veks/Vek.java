@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.veks;
 
 import edu.fiuba.algo3.modelo.Casilla;
+import edu.fiuba.algo3.modelo.Coordenada;
 import edu.fiuba.algo3.modelo.unidades.Unidad;
 
 public class Vek extends Unidad {
@@ -19,7 +20,10 @@ public class Vek extends Unidad {
 		casilla.aplicarEfecto(this);
 	}
 
+	@Override
+	public void notificarEmpuje(Coordenada direccion) {
 
+	}
 
 
 	@Override
@@ -27,8 +31,8 @@ public class Vek extends Unidad {
         this.recibirDaño(this.vida); 
     }
 
-    public AnuncioDeAtaque anunciarAtaque(Casilla casillaMech) {
+    public AnuncioDeAtaque anunciarAtaque(Coordenada objetivo) {
 		// TDD: Proximo caso de uso me obligaria a guardar este anuncio?
-		return new AnuncioDeAtaque(this,casillaMech);
+		return new AnuncioDeAtaque(this,objetivo);
 	}
 }
