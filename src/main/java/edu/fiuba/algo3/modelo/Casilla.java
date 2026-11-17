@@ -81,6 +81,10 @@ public class Casilla implements Atacable{
         return estado.tienePieza(pieza);
     }
 
+    public boolean esSeguroParaTerrestre() {
+        return this.terrenoCasilla.esSeguroParaTerrestre();
+    }
+
     private Trayectoria obtenerTrayectoriaPorDistanciaYDireccion(Direccion direccion, int distancia) {
         List<Casilla> casillas = new ArrayList<Casilla>(Arrays.asList(this));
         Casilla previa = this;

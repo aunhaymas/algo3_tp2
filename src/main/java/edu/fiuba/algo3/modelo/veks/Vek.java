@@ -72,7 +72,7 @@ public abstract class Vek extends Unidad {
     }
 
     public boolean puedeAtravesar(Casilla casilla) {
-        return casilla.estaLibre();
+        return casilla.estaLibre() && casilla.esSeguroParaTerrestre();
     }
     
     public boolean puedoAtacarDesde(Casilla origen, Casilla destino, Tablero tablero) {

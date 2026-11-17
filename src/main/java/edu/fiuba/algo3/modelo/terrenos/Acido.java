@@ -8,4 +8,9 @@ public class Acido implements TipoTerreno{
     public void aplicarEfecto(Unidad unidad) {
         unidad.contaminar();
     }
+
+    @Override 
+    public boolean esSeguroParaTerrestre() {
+        return false;
+    }
 }

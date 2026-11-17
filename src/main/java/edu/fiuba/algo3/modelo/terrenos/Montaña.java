@@ -8,4 +8,9 @@ public class Montaña implements TipoTerreno {
     public void aplicarEfecto(Unidad unidad){
 
     }
+    
+    @Override 
+    public boolean esSeguroParaTerrestre() {
+        return true;
+    }
 }

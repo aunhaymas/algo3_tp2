@@ -51,80 +51,57 @@ public class CasoDeUso9Test {
 	@Test 
 	public void vekAtacaEdificioSinMoverseSiYaEstaEnAlcance() {
 		RegistroDeAtaques registroDeAtaques = new RegistroDeAtaques();
-		Vek vek = new Saltador();
-		Mech mech = new MechDeCombate();
-		int vidaEsperada = mech.getVida();
 		RedElectrica redElectrica = new RedElectrica();
-		Pieza edificio = new PiezaEdificio(redElectrica);
-		MotorIA motor = new MotorIA(tablero, vek, registroDeAtaques);
-
+		
+		Vek vek = new Saltador();
 		Coordenada vekPos = new Coordenada(2, 2);
 
 		// Edificio en rango de ataque del Vek
+		Pieza edificio = new PiezaEdificio(redElectrica);
 		Coordenada edificioPos = new Coordenada(2, 3);
+		
+		tablero.colocarPieza(edificio, edificioPos);
+		tablero.colocarPieza(vek, vekPos);
 
+		MotorIA motor = new MotorIA(tablero, vek, registroDeAtaques);
 		AccionIA vekDecision = motor.resolverProximaAccion();
 		vekDecision.ejecutar();
 
-		// vekDecision.ejecutar()
-		// -> Coordenada vekDestino = vekDecision.destinoMovimiento();
-		//    > No necesita moverse, la posicion destino es la misma, pues ya puede atacar.
-		// -> Coordenada casillaPorAtacar = vekDecision.casillaAtacada();
-		// 	  > Ataca al edificio por prioridad 1
-
+		registroDeAtaques.ejecutarSiguienteAtaque();
 		assertTrue(edificio.estaDestruida());
-		assertEquals(mech.getVida(), vidaEsperada);
 	}
 
 	/**
 	 * Si no hay edificio inmediato pero hay posicion en alcance que me permita atacar uno,
 	 * el Vek se mueve a dicha posicion y entonces lo ataca. No hay mech en alcance.
 	 */
-	/* @Test 
+	@Test 
 	public void vekPriorizaAcercarseAEdificioParaAtacarSinMechEnAlcance() {
 		RegistroDeAtaques registroDeAtaques = new RegistroDeAtaques();
-		Vek vek = new Saltador();
-		Mech mech = new MechDeCombate();
-		int vidaEsperada = mech.getVida();
-		RedElectrica redElectrica = new RedElectrica();
-		Pieza edificio = new PiezaEdificio(redElectrica);
-		MotorIA motorIA = new MotorIA(tablero, vek, registroDeAtaques);
+        RedElectrica redElectrica = new RedElectrica();
 
-		Coordenada vekPos = new Coordenada(2, 2);
-		Casilla casillaVek = tablero.obtenerCasilla(vekPos);
-		casillaVek.recibirPieza(vek);
+        Vek vek = new Saltador();
+        Coordenada vekPos = new Coordenada(2, 1);
 
-		// Mech fuera rango de ataque del Vek
-		Coordenada mechPos = new Coordenada(4, 5);
-		Casilla casillaMech = tablero.obtenerCasilla(mechPos);
-		casillaMech.recibirPieza(mech);
-		
-		// Como es Saltarin (solo ataca adyacentes), una idea es moverse a (2, 3) 
-		// y ahi podra anunciar el ataque. La verdad no tengo idea como voy a implementar esto todavia.
-		// Pues depende del alcance del Vek y que un solo movimiento baste para que el objetivo este al alcance.
+        // Un edificio a distancia 3 en la misma fila
+		// El vek debe moverse a (2, 3) para atacarlo
+        Pieza edificio = new PiezaEdificio(redElectrica);
+        Coordenada edificioPos = new Coordenada(2, 4);
 
-		// Una idea es delegarle al Vek cada casilla objetivo (por separado, iterando)
-		// que el Vek vea segun su rango de ataque si existe una casilla (segun movimientos posibles)
-		// que le permite, tras moverse ahi, recien poder atacar, entonces podria devolver algo...
-		// o anunciar el ataque sin mas, aprovechando que si puede atacar, pues lo hara
-		// si no asumo que voy a tener que consultar informacion para decidir al final lo mismo: que ataque.
-		Coordenada edificioPos = new Coordenada(1, 3);
-		Casilla casillaEdificio = tablero.obtenerCasilla(edificioPos);
-		casillaEdificio.recibirPieza(edificio);
+        tablero.colocarPieza(vek, vekPos);
+        tablero.colocarPieza(edificio, edificioPos);
 
-		// El nombre puede cambiar o sus responsabilidades
-		AccionIA vekDecision = motorIA.resolverProximaAccion();
-		vekDecision.ejecutar();
+        MotorIA motor = new MotorIA(tablero, vek, registroDeAtaques);
+        AccionIA vekDecision = motor.resolverProximaAccion();
+        vekDecision.ejecutar();
 
-		// vekDecision.ejecutar()
-		// -> Coordenada vekDestino = vekDecision.destinoMovimiento();
-		//    > Debe moverse, la posicion destino es la que permite anunciar el ataque.
-		// -> Coordenada casillaPorAtacar = vekDecision.casillaAtacada();
-		// 	  > Ataca al edificio por prioridad 1
+        // Verifico que se movio a la casilla adyacente al edificio
+        assertEquals(vek, tablero.obtenerCasilla(new Coordenada(2, 3)).obtenerPieza());
+        assertTrue(tablero.obtenerCasilla(vekPos).estaLibre());
 
-		assertTrue(edificio.estaDestruida());
-		assertEquals(mech.getVida(), vidaEsperada);
-	} */
+        registroDeAtaques.ejecutarSiguienteAtaque();
+        assertTrue(edificio.estaDestruida());
+	}
 
 	/**
 	 * Si no hay edificio inmediato pero hay posicion en alcance que me permita atacar uno,
@@ -132,6 +109,35 @@ public class CasoDeUso9Test {
 	 */
 	@Test
 	public void vekPriorizaAcercarseAEdificioParaAtacarInclusoSiHayMechEnAlcance() {
+		RegistroDeAtaques registroDeAtaques = new RegistroDeAtaques();
+        RedElectrica redElectrica = new RedElectrica();
+
+        Vek vek = new Saltador();
+        Coordenada vekPos = new Coordenada(2, 1);
+
+        // Mech adyacente al vek (pero es prioridad 2)
+        Mech mech = new MechDeCombate();
+        int vidaInicialMech = mech.getVida();
+        Coordenada mechPos = new Coordenada(1, 1);
+
+        // Edificio alcanzable por vek moviéndose a (2, 3) (es prioridad 1)
+        Pieza edificio = new PiezaEdificio(redElectrica);
+        Coordenada edificioPos = new Coordenada(2, 4);
+
+        tablero.colocarPieza(vek, vekPos);
+        tablero.colocarPieza(mech, mechPos);
+        tablero.colocarPieza(edificio, edificioPos);
+
+        MotorIA motor = new MotorIA(tablero, vek, registroDeAtaques);
+        AccionIA vekDecision = motor.resolverProximaAccion();
+        vekDecision.ejecutar();
+
+        registroDeAtaques.ejecutarSiguienteAtaque();
+
+        // El Vek ignoró al Mech adyacente para moverse y atacar al edificio
+        assertEquals(vek, tablero.obtenerCasilla(new Coordenada(2, 3)).obtenerPieza());
+        assertTrue(edificio.estaDestruida());
+        assertEquals(vidaInicialMech, mech.getVida());
 	}
 
 	/**
@@ -139,7 +145,37 @@ public class CasoDeUso9Test {
 	 * el Vek lo ataca sin necesidad de moverse.
 	 */
 	@Test
-	public void vekAtacaMechSinMoverseSiNoHayPosicionParaAtacarEdificio() {}
+	public void vekAtacaMechSinMoverseSiNoHayPosicionParaAtacarEdificio() {
+		RegistroDeAtaques registroDeAtaques = new RegistroDeAtaques();
+        RedElectrica redElectrica = new RedElectrica();
+
+        Vek vek = new Saltador();
+        Coordenada vekPos = new Coordenada(2, 2);
+
+        // Mech adyacente al vek
+        Mech mech = new MechDeCombate();
+        int vidaInicialMech = mech.getVida();
+        Coordenada mechPos = new Coordenada(2, 3);
+
+        // Edificio esta demasiado lejos para alcanzarlo incluso si muevo al vek
+        Pieza edificio = new PiezaEdificio(redElectrica);
+        Coordenada edificioPos = new Coordenada(7, 7);
+
+        tablero.colocarPieza(vek, vekPos);
+        tablero.colocarPieza(mech, mechPos);
+        tablero.colocarPieza(edificio, edificioPos);
+
+        MotorIA motor = new MotorIA(tablero, vek, registroDeAtaques);
+        AccionIA vekDecision = motor.resolverProximaAccion();
+        vekDecision.ejecutar();
+
+        // El Vek no se mueve de (2, 2)
+        assertEquals(vek, tablero.obtenerCasilla(vekPos).obtenerPieza());
+
+        registroDeAtaques.ejecutarSiguienteAtaque();
+        assertTrue(mech.getVida() < vidaInicialMech);
+        assertFalse(edificio.estaDestruida());
+	}
 
 	/**
 	 * Si no encuentro una posicion que me permita atacar un edificio, 
@@ -147,21 +183,108 @@ public class CasoDeUso9Test {
 	 * el Vek se mueve a dicha posicion y entonces lo ataca.
 	 */
 	@Test
-	public void vekPriorizaAcercarseAMechParaAtacarSiNoHayPosicionParaAtacarEdificio() {}
+	public void vekPriorizaAcercarseAMechParaAtacarSiNoHayPosicionParaAtacarEdificio() {
+		RegistroDeAtaques registroDeAtaques = new RegistroDeAtaques();
+        RedElectrica redElectrica = new RedElectrica();
+
+        Vek vek = new Saltador();
+        Coordenada vekPos = new Coordenada(2, 1);
+
+        // Mech alcanzable si muevo vek a (2, 3)
+        Mech mech = new MechDeCombate();
+        int vidaInicialMech = mech.getVida();
+        Coordenada mechPos = new Coordenada(2, 4);
+
+        // Edificio no alcanzable en (7, 7)
+        Pieza edificio = new PiezaEdificio(redElectrica);
+        Coordenada edificioPos = new Coordenada(7, 7);
+
+        tablero.colocarPieza(vek, vekPos);
+        tablero.colocarPieza(mech, mechPos);
+        tablero.colocarPieza(edificio, edificioPos);
+
+        MotorIA motor = new MotorIA(tablero, vek, registroDeAtaques);
+        AccionIA vekDecision = motor.resolverProximaAccion();
+        vekDecision.ejecutar();
+
+        assertEquals(vek, tablero.obtenerCasilla(new Coordenada(2, 3)).obtenerPieza());
+
+        registroDeAtaques.ejecutarSiguienteAtaque();
+        assertTrue(mech.getVida() < vidaInicialMech);
+        assertFalse(edificio.estaDestruida());
+	}
 
 	/**
 	 * Si no hay edificio o mech que atacar aunque me mueva a otra posicion,
 	 * entonces me acerco al edificio mas cercano, sin anunciar ataque.
 	 */
 	@Test 
-	public void vekSeAcercaAlEdificioMasCercanoSinAtacarSiNoHayPosicionDondePuedaAtacarAMechOEdificio() {}
+	public void vekSeAcercaAlEdificioMasCercanoSinAtacarSiNoHayPosicionDondePuedaAtacarAMechOEdificio() {
+		RegistroDeAtaques registroDeAtaques = new RegistroDeAtaques();
+        RedElectrica redElectrica = new RedElectrica();
+
+        Vek vek = new Saltador();
+        Coordenada vekPos = new Coordenada(0, 0);
+
+        // Edificio lejos en (0, 6)
+		// El vek avanza 3 casillas hacia el Este hasta (0, 3) pero no llega a atacar
+        Pieza edificio = new PiezaEdificio(redElectrica);
+        Coordenada edificioPos = new Coordenada(0, 6);
+
+        tablero.colocarPieza(vek, vekPos);
+        tablero.colocarPieza(edificio, edificioPos);
+
+        MotorIA motor = new MotorIA(tablero, vek, registroDeAtaques);
+        AccionIA vekDecision = motor.resolverProximaAccion();
+        vekDecision.ejecutar();
+
+        assertEquals(vek, tablero.obtenerCasilla(new Coordenada(0, 3)).obtenerPieza());
+
+        // Se registra el anuncio de ataque pero ejecutarlo no causa daño
+        registroDeAtaques.ejecutarSiguienteAtaque();
+        assertFalse(edificio.estaDestruida());
+	}
 
 	/**
 	 * Al caer en decision de prioridad 3, si hay dos edificios a la misma distancia del Vek,
 	 * el Vek desempata por coordenada de menor fila y columna.
 	 */
 	@Test 
-	public void vekTieneDosEdificiosAMismaDistanciaDesempataPorCoordenadaMenorFilaYColumna() {}
+	public void vekTieneDosEdificiosAMismaDistanciaDesempataPorCoordenadaMenorFilaYColumna() {
+		RegistroDeAtaques registroDeAtaques = new RegistroDeAtaques();
+        RedElectrica redElectrica = new RedElectrica();
+		
+		// Por las dudas, un tablero limpio
+        tablero = parserTablero.parsear(List.of(
+			"SSSSSSSS",
+			"SSSSSSSS",
+			"SSSSSSSS",
+			"SSSSSSSS",
+			"SSSSSSSS",
+			"SSSSSSSS",
+			"SSSSSSSS",
+			"SSSSSSSS"
+        ));
+
+        Vek vek = new Saltador();
+        Coordenada origen = new Coordenada(4, 4);
+        
+        Pieza edificioMenorFila = new PiezaEdificio(redElectrica);
+        Pieza edificioMayorFila = new PiezaEdificio(redElectrica);
+
+        tablero.colocarPieza(vek, origen);
+        tablero.colocarPieza(edificioMenorFila, new Coordenada(4, 0)); // Columna 4, Fila 0 (distancia 4)
+        tablero.colocarPieza(edificioMayorFila, new Coordenada(0, 4)); // Columna 0, Fila 4 (distancia 4)
+
+        MotorIA motor = new MotorIA(tablero, vek, registroDeAtaques);
+        AccionIA vekDecision = motor.resolverProximaAccion();
+        vekDecision.ejecutar();
+
+        // El vek elige acercarse al edificio en (4, 0) por tener menor fila (y = 0 < y = 4)
+        assertEquals(vek, tablero.obtenerCasilla(new Coordenada(4, 1)).obtenerPieza());
+        assertFalse(edificioMenorFila.estaDestruida());
+        assertFalse(edificioMayorFila.estaDestruida());
+	}
 	
 	/**
 	 * Verifico que el ultimo movimiento de Vek no termina en Agua.

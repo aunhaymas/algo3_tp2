@@ -8,4 +8,9 @@ public class Agua implements TipoTerreno{
     public void aplicarEfecto(Unidad unidad){
         unidad.sumergir();
     }
+
+    @Override 
+    public boolean esSeguroParaTerrestre() {
+        return false;
+    }
 }
