@@ -5,6 +5,8 @@ import edu.fiuba.algo3.modelo.veks.AnuncioDeAtaque;
 import edu.fiuba.algo3.modelo.veks.Vek;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 //Verificar que al empujar a un Vek su ataque anunciado se desplace con él,
@@ -27,11 +29,17 @@ public class CasoDeUso8Test {
 
         Casilla casilla3 = new Casilla(new Coordenada(0,1));//objetivo
         Casilla casilla4 = new Casilla(new Coordenada(1,1));//victima
+        Tablero contexto = new Tablero(List.of(casilla1,casilla2,casilla3,casilla4));
         Vek vek = new Avispon();
+        Mech mechObjetivo = new MechDeCanon();
+        Mech mechVictima = new MechDeCanon();
         casilla1.recibirPieza(vek);
-        AnuncioDeAtaque anuncio=vek.anunciarAtaque(casilla3);
+        casilla3.recibirPieza(mechObjetivo);
+        casilla4.recibirPieza(mechVictima);
+
+        AnuncioDeAtaque anuncio=vek.anunciarAtaque(new Coordenada(0,0),new Coordenada(0,1));
         casilla1.empujarA(casilla2);
-        anuncio.ejecutarAtaque();
+        anuncio.ejecutarAtaque(contexto);
     }
     @Test
     public void vekEmpujadoEjecutaSuAtaqueAnunciadoYdaniaAOtroVek(){

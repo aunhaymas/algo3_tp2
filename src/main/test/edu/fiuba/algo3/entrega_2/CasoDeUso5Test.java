@@ -25,7 +25,6 @@ public class CasoDeUso5Test {
         casillaBlanco.recibirPieza(blanco);
 
         // Act: Luciernaga ataca al blanco
-        luciernaga.anunciarAtaque(casillaBlanco);
         luciernaga.atacar(casillaBlanco);
 
         // Assert: Blanco debe recibir el dano y ser contaminado.
@@ -48,7 +47,7 @@ public class CasoDeUso5Test {
         casillaBlanco.recibirPieza(blanco);
 
         // Act: Luciernaga ataca al blanco
-        luciernaga.anunciarAtaque(casillaBlanco);
+
         luciernaga.atacar(casillaBlanco);
 
         // Assert: Blanco debe recibir el dano y ser contaminado.
@@ -56,7 +55,7 @@ public class CasoDeUso5Test {
         assertTrue(blanco.estaContaminado());
 
         // Act: Luciernaga ataca al blanco
-        luciernaga.anunciarAtaque(casillaBlanco);
+
         luciernaga.atacar(casillaBlanco);
 
         // Assert: Blanco debe recibir el doble de dano y seguir contaminado.
@@ -64,7 +63,7 @@ public class CasoDeUso5Test {
         assertTrue(blanco.estaContaminado());
 
         // Act: Luciernaga ataca al blanco
-        luciernaga.anunciarAtaque(casillaBlanco);
+
         luciernaga.atacar(casillaBlanco);
 
         // Assert: Blanco debe solo recibir el doble de dano y seguir contaminado.

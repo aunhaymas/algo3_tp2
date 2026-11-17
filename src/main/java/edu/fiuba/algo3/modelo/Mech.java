@@ -33,6 +33,11 @@ public class Mech extends Unidad {
 		casilla.aplicarEfecto(this);
 	}
 
+	@Override
+	public void notificarEmpuje(Coordenada direccion) {
+		// por ahora, un mech no recibe
+	}
+
 	// @Override
 	// public void recibirAtaque(Ataque ataque) {
 	// }
@@ -54,11 +59,7 @@ public class Mech extends Unidad {
 		}
 	}
 
-	public void atacar(Tablero tablero, Coordenada coordenada) {
-		Casilla origen = tablero.obtenerCasilla(this);
-		Trayectoria trayectoria = tablero.crearTrayectoria(origen.getCoordenada(), coordenada);
-		arma.atacar(trayectoria,tablero);
-	}
+
 
 	public void atacar(Atacable objetivo) {
 		if (yaAtaco){

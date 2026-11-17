@@ -9,5 +9,7 @@ public interface Pieza {
     public void recibirAtaque(Ataque ataque);
     public boolean estaDestruida();
     public int getVida();
+
+    void notificarEmpuje(Coordenada direccion);
     // public boolean mover(int fila, int columna);
 }

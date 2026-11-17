@@ -28,4 +28,9 @@ public class PiezaMontania implements Pieza{
     public int getVida() {
         return 1;
     }
+
+    @Override
+    public void notificarEmpuje(Coordenada direccion) {
+
+    }
 }

@@ -24,6 +24,11 @@ public class PiezaNula implements Pieza{
         throw new RuntimeException("No se puede obtener vida de Casilla vacia.");
     }
 
+    @Override
+    public void notificarEmpuje(Coordenada direccion) {
+
+    }
+
 
     @Override
     public boolean estaDestruida() {

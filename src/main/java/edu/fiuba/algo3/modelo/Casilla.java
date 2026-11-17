@@ -122,7 +122,12 @@ public class Casilla implements Atacable{
         empuje.empujar(this, contexto);
     }
 
-
+    public Coordenada direccionA(Casilla destino){
+        return destino.calcularDireccionDesde(this.coordenada);
+    }
+    private Coordenada calcularDireccionDesde(Coordenada origen){
+        return origen.direccionA(this.coordenada);
+    }
     private void limpiarCasilla(){
         this.estado = new EstadoVacia();
         this.pieza=new PiezaNula();

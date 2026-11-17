@@ -12,6 +12,7 @@ public class EstadoVacia implements EstadoCasilla{
     @Override
     public EstadoCasilla recibirEmpuje(Casilla origen, Casilla destino, Pieza pieza) {
         origen.moverContenidoA(destino);
+        pieza.notificarEmpuje(origen.direccionA(destino));
         return new EstadoOcupada(pieza);
     }
 

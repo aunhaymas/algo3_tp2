@@ -79,8 +79,13 @@ private void recibirDanio(int danio){this.vida -= danio;}
 	public boolean estaContaminado() {
 		return this.estadoUnidad.estaContaminado();
 	}
-
+	public void atacar(Tablero tablero, Coordenada coordenada) {
+		Casilla origen = tablero.obtenerCasilla(this);
+		Trayectoria trayectoria = tablero.crearTrayectoria(origen.getCoordenada(), coordenada);
+		arma.atacar(trayectoria,tablero);
+	}
 	public void atacar(Atacable objetivo) {
 		arma.atacar(objetivo);
 	}
+
 }

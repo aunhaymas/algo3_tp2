@@ -36,4 +36,9 @@ public class PiezaEdificio implements Pieza {
     public int getVida() {
         return this.vida;
     }
+
+    @Override
+    public void notificarEmpuje(Coordenada direccion) {
+
+    }
 }
