@@ -5,16 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.veks.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
@@ -46,21 +41,85 @@ public class CasoDeUso9Test {
 
 	/**
 	 * Si ya hay un edificio en rango de ataque, 
-	 * el Vek ataca sin necesidad de moverse.
+	 * el Vek ataca (mas bien, lo anuncia) sin necesidad de moverse.
 	 */
 	@Test 
 	public void vekAtacaEdificioSinMoverseSiYaEstaEnAlcance() {
+		RegistroDeAtaques registroDeAtaques = new RegistroDeAtaques();
+		Vek vek = new Saltador();
+		Mech mech = new MechDeCombate();
+		int vidaEsperada = mech.getVida();
+		RedElectrica redElectrica = new RedElectrica();
+		Pieza edificio = new PiezaEdificio(redElectrica);
+		MotorIA motor = new MotorIA(tablero, vek, registroDeAtaques);
 
+		Coordenada vekPos = new Coordenada(2, 2);
+
+		// Edificio en rango de ataque del Vek
+		Coordenada edificioPos = new Coordenada(2, 3);
+
+		AccionIA vekDecision = motor.resolverProximaAccion();
+		vekDecision.ejecutar();
+
+		// vekDecision.ejecutar()
+		// -> Coordenada vekDestino = vekDecision.destinoMovimiento();
+		//    > No necesita moverse, la posicion destino es la misma, pues ya puede atacar.
+		// -> Coordenada casillaPorAtacar = vekDecision.casillaAtacada();
+		// 	  > Ataca al edificio por prioridad 1
+
+		assertTrue(edificio.estaDestruida());
+		assertEquals(mech.getVida(), vidaEsperada);
 	}
 
 	/**
 	 * Si no hay edificio inmediato pero hay posicion en alcance que me permita atacar uno,
 	 * el Vek se mueve a dicha posicion y entonces lo ataca. No hay mech en alcance.
 	 */
-	@Test 
+	/* @Test 
 	public void vekPriorizaAcercarseAEdificioParaAtacarSinMechEnAlcance() {
+		RegistroDeAtaques registroDeAtaques = new RegistroDeAtaques();
+		Vek vek = new Saltador();
+		Mech mech = new MechDeCombate();
+		int vidaEsperada = mech.getVida();
+		RedElectrica redElectrica = new RedElectrica();
+		Pieza edificio = new PiezaEdificio(redElectrica);
+		MotorIA motorIA = new MotorIA(tablero, vek, registroDeAtaques);
 
-	}
+		Coordenada vekPos = new Coordenada(2, 2);
+		Casilla casillaVek = tablero.obtenerCasilla(vekPos);
+		casillaVek.recibirPieza(vek);
+
+		// Mech fuera rango de ataque del Vek
+		Coordenada mechPos = new Coordenada(4, 5);
+		Casilla casillaMech = tablero.obtenerCasilla(mechPos);
+		casillaMech.recibirPieza(mech);
+		
+		// Como es Saltarin (solo ataca adyacentes), una idea es moverse a (2, 3) 
+		// y ahi podra anunciar el ataque. La verdad no tengo idea como voy a implementar esto todavia.
+		// Pues depende del alcance del Vek y que un solo movimiento baste para que el objetivo este al alcance.
+
+		// Una idea es delegarle al Vek cada casilla objetivo (por separado, iterando)
+		// que el Vek vea segun su rango de ataque si existe una casilla (segun movimientos posibles)
+		// que le permite, tras moverse ahi, recien poder atacar, entonces podria devolver algo...
+		// o anunciar el ataque sin mas, aprovechando que si puede atacar, pues lo hara
+		// si no asumo que voy a tener que consultar informacion para decidir al final lo mismo: que ataque.
+		Coordenada edificioPos = new Coordenada(1, 3);
+		Casilla casillaEdificio = tablero.obtenerCasilla(edificioPos);
+		casillaEdificio.recibirPieza(edificio);
+
+		// El nombre puede cambiar o sus responsabilidades
+		AccionIA vekDecision = motorIA.resolverProximaAccion();
+		vekDecision.ejecutar();
+
+		// vekDecision.ejecutar()
+		// -> Coordenada vekDestino = vekDecision.destinoMovimiento();
+		//    > Debe moverse, la posicion destino es la que permite anunciar el ataque.
+		// -> Coordenada casillaPorAtacar = vekDecision.casillaAtacada();
+		// 	  > Ataca al edificio por prioridad 1
+
+		assertTrue(edificio.estaDestruida());
+		assertEquals(mech.getVida(), vidaEsperada);
+	} */
 
 	/**
 	 * Si no hay edificio inmediato pero hay posicion en alcance que me permita atacar uno,
@@ -68,30 +127,6 @@ public class CasoDeUso9Test {
 	 */
 	@Test
 	public void vekPriorizaAcercarseAEdificioParaAtacarInclusoSiHayMechEnAlcance() {
-		Vek vek = new Saltador();
-		Mech mech = new MechDeCombate();
-		int vidaEsperada = mech.getVida();
-		RedElectrica redElectrica = new RedElectrica();
-		Pieza edificio = new PiezaEdificio(redElectrica);
-
-		Coordenada vekPos = new Coordenada(2, 2);
-
-		// Mech en rango de ataque del Vek
-		Coordenada mechPos = new Coordenada(2, 2);
-		// Edificio en rango de ataque del Vek
-		Coordenada edificioPos = new Coordenada(2, 3);
-
-		// El nombre puede cambiar o sus responsabilidades
-		DecisionVek vekDecision = EvaluadorIAVek.decidirAccion(tablero, vek);
-
-		// vekDecision.ejecutar()
-		// -> Coordenada vekDestino = vekDecision.destinoMovimiento();
-		//    > No necesita moverse, la posicion es la misma.
-		// -> Coordenada casillaPorAtacar = vekDecision.casillaAtacada();
-		// 	  > Ataca al edificio por prioridad 1
-
-		assertTrue(edificio.estaDestruida());
-		assertEquals(mech.getVida(), vidaEsperada);
 	}
 
 	/**

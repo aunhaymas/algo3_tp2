@@ -23,7 +23,7 @@ public class CasoDeUso3Test {
         Casilla casillaOrigen = new Casilla(posOrigen);
         Casilla casillaAgua = new Casilla(posAgua, new Agua());
 
-        Vek terrestre = new Vek();
+        Vek terrestre = new Saltador();
         casillaOrigen.recibirPieza(terrestre);
         casillaOrigen.empujarA(casillaAgua);
 
@@ -50,7 +50,7 @@ public class CasoDeUso3Test {
         Coordenada posAgua = new Coordenada(1, 1);
         Casilla casillaAgua = new Casilla(posAgua, new Agua());
 
-        Vek objetivo = new Vek();
+        Vek objetivo = new Saltador();
         Mech mech = new Mech();
         casillaAgua.recibirPieza(mech);
 

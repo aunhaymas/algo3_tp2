@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.veks.AnuncioDeAtaque;
+import edu.fiuba.algo3.modelo.veks.AnuncioDeAtaqueReal;
 import edu.fiuba.algo3.modelo.veks.RegistroDeAtaques;
 import edu.fiuba.algo3.modelo.veks.Saltador;
 import org.junit.jupiter.api.Test;
@@ -39,7 +39,7 @@ public class CasoDeUso7Test {
         // Esta entidad puede ser modificada en fase Jugador
         RegistroDeAtaques registroDeAtaques= new RegistroDeAtaques();
         // FaseVek
-        AnuncioDeAtaque anuncioDeAtaque = saltador.anunciarAtaque(casillaMech);
+        AnuncioDeAtaqueReal anuncioDeAtaque = saltador.anunciarAtaque(casillaMech);
         registroDeAtaques.registrarAtaque(anuncioDeAtaque);
         assertEquals(3,mech.getVida());
     }
@@ -53,7 +53,7 @@ public class CasoDeUso7Test {
         // Esta entidad puede ser modificada en fase Jugador
         RegistroDeAtaques registroDeAtaques= new RegistroDeAtaques();
         // FaseVek
-        AnuncioDeAtaque anuncioDeAtaque = saltador.anunciarAtaque(casillaMech);
+        AnuncioDeAtaqueReal anuncioDeAtaque = saltador.anunciarAtaque(casillaMech);
         registroDeAtaques.registrarAtaque(anuncioDeAtaque);
 
         registroDeAtaques.ejecutarSiguienteAtaque();
@@ -75,8 +75,8 @@ public class CasoDeUso7Test {
         // Esta entidad puede ser modificada en fase Jugador
         RegistroDeAtaques registroDeAtaques= new RegistroDeAtaques();
         // FaseVek
-        AnuncioDeAtaque anuncioDeAtaque1 = avispon1.anunciarAtaque(casillaMech);
-        AnuncioDeAtaque anuncioDeAtaque2 = avispon2.anunciarAtaque(casillaMech2);
+        AnuncioDeAtaqueReal anuncioDeAtaque1 = avispon1.anunciarAtaque(casillaMech);
+        AnuncioDeAtaqueReal anuncioDeAtaque2 = avispon2.anunciarAtaque(casillaMech2);
         registroDeAtaques.registrarAtaque(anuncioDeAtaque1);
         registroDeAtaques.registrarAtaque(anuncioDeAtaque2);
         //Act
@@ -101,8 +101,8 @@ public class CasoDeUso7Test {
         // Esta entidad puede ser modificada en fase Jugador
         RegistroDeAtaques registroDeAtaques= new RegistroDeAtaques();
         // FaseVek
-        AnuncioDeAtaque anuncioDeAtaque1 = avispon1.anunciarAtaque(casillaMech);
-        AnuncioDeAtaque anuncioDeAtaque2 = avispon2.anunciarAtaque(casillaMech2);
+        AnuncioDeAtaqueReal anuncioDeAtaque1 = avispon1.anunciarAtaque(casillaMech);
+        AnuncioDeAtaqueReal anuncioDeAtaque2 = avispon2.anunciarAtaque(casillaMech2);
         registroDeAtaques.registrarAtaque(anuncioDeAtaque1);
         registroDeAtaques.registrarAtaque(anuncioDeAtaque2);
         //Act
