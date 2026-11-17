@@ -16,8 +16,7 @@ public class Punio extends Arma {
             throw new ObjetoFueraDeRangoException();
         } else {
             Casilla destino = trayectoria.getDestino();
-            destino.recibirAtaque(new Ataque(2));
-            destino.empujar(trayectoria.getDireccion());
+            destino.recibirAtaque(new AtaquePunio(trayectoria.getDireccion()));
         }
     }
 

@@ -6,7 +6,7 @@ import edu.fiuba.algo3.modelo.Tablero;
 
 public interface Empuje {
     //TODO cambiar tipo de parámetro contexto de tablero a interfaz
-    void empujar(Casilla casilla, Tablero contexto);
+    void empujar(Casilla casilla);
 
     Empuje prepararDesde(Coordenada origen);
 }

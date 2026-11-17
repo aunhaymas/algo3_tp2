@@ -10,7 +10,7 @@ public interface EstadoCasilla {
     public EstadoCasilla recibirEmpuje(Casilla origen, Casilla destino, Pieza pieza);
 
     public  boolean estaLibre();
-    public Empuje recibirAtaque(Ataque ataque, Coordenada origen);
+    public Empuje recibirAtaque(Ataque ataque);
 
     Pieza obtenerPieza();
 

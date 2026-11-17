@@ -21,7 +21,7 @@ public class EstadoVacia implements EstadoCasilla{
     }
 
     @Override
-    public Empuje recibirAtaque(Ataque ataque, Coordenada origen) {
+    public Empuje recibirAtaque(Ataque ataque) {
         return new EmpujeNulo();
     }
 

@@ -6,7 +6,7 @@ import edu.fiuba.algo3.modelo.Tablero;
 
 public class EmpujeNulo implements Empuje {
     @Override
-    public void empujar(Casilla casilla, Tablero contexto) {
+    public void empujar(Casilla casilla) {
         // no empuja!
     }
 

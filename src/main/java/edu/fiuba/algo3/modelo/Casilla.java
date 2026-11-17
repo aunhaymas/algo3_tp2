@@ -119,8 +119,8 @@ public class Casilla implements Atacable{
     @Override
     public void recibirAtaque(Ataque ataque) {
 
-        Empuje empuje = this.estado.recibirAtaque(ataque,this.coordenada);
-        empuje.empujar(this, tablero);
+        Empuje empuje = this.estado.recibirAtaque(ataque);
+        empuje.empujar(this);
     }
 
 
