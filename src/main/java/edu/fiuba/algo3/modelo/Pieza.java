@@ -7,4 +7,5 @@ public interface Pieza {
     public boolean estaDestruida();
     public int getVida();
     // public boolean mover(int fila, int columna);
+    public void reportarA(LocalizadorEntidad localizador, Casilla casilla);
 }

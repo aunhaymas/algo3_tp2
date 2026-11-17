@@ -20,4 +20,9 @@ public class PiezaNula implements Pieza{
     public boolean estaDestruida() {
         return false; // No tiene nada, entonces no hay nada que destruir.
     }
+
+    @Override 
+    public void reportarA(LocalizadorEntidad localizador, Casilla casilla) {
+		localizador.registrar(this, casilla);
+	}
 }

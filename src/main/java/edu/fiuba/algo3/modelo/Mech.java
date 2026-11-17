@@ -74,6 +74,10 @@ public class Mech extends Unidad {
 		yaCanceloMovimiento = true;
 
 		regreso.ejecutarTraslado();
+	}
 
+	@Override
+	public void reportarA(LocalizadorEntidad localizador, Casilla casilla) {
+		localizador.registrar(this, casilla);
 	}
 }

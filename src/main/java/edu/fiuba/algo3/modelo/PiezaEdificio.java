@@ -27,4 +27,9 @@ public class PiezaEdificio implements Pieza {
     public int getVida() {
         return this.vida;
     }
+
+    @Override
+	public void reportarA(LocalizadorEntidad localizador, Casilla casilla) {
+		localizador.registrar(this, casilla);
+	}
 }
