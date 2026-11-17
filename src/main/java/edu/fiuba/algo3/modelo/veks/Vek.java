@@ -13,7 +13,6 @@ public class Vek extends Unidad {
 	}
 
 	public Vek(int vida, int movimientos) {
-
 		super(vida, movimientos);
 		this.anuncioAtaque=new AnuncioNulo();
     }

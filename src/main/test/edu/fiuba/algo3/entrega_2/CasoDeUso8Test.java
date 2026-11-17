@@ -28,7 +28,7 @@ public class CasoDeUso8Test {
     }
 
     @Test
-    public void vekEmpujadoDesplazaSuAtaqueAnunciadoJuntoConEl(){
+    public void vekEmpujadoDesplazaSuAtaqueAnunciadoJuntoConElYnoDaniaASuObjetivo(){
         Casilla casilla1 = new Casilla(new Coordenada(0,0));
         Casilla casilla2 = new Casilla(new Coordenada(1,0));
 
@@ -44,17 +44,28 @@ public class CasoDeUso8Test {
 
         AnuncioDeAtaque anuncio=vek.anunciarAtaque(new Coordenada(0,1));
         casilla1.empujarA(casilla2);
-        //anuncio.desplazarAtaque(new Coordenada(1,0));
         anuncio.ejecutarAtaque(contexto);
+        assertEquals(3,mechObjetivo.getVida());
     }
     @Test
     public void vekEmpujadoEjecutaSuAtaqueAnunciadoYdaniaAOtroVek(){
-        // instancio 2 vek
-        // vek1 anuncia ataque en una casilla
-        // empujo vek1 adyacente a vek2
-        // ejecuto el ataque de vek1
-        // verifico que vek2 recibio el ataque
+            Casilla casilla1 = new Casilla(new Coordenada(0,0));
+            Casilla casilla2 = new Casilla(new Coordenada(1,0));
 
+            Casilla casilla3 = new Casilla(new Coordenada(0,1));//objetivo
+            Casilla casilla4 = new Casilla(new Coordenada(1,1));//victima
+            Tablero contexto = new Tablero(List.of(casilla1,casilla2,casilla3,casilla4));
+            Vek vek = new Avispon();
+            Mech mechObjetivo = new MechDeCanon();
+            Mech mechVictima = new MechDeCanon();
+            casilla1.recibirPieza(vek);
+            casilla3.recibirPieza(mechObjetivo);
+            casilla4.recibirPieza(mechVictima);
+
+            AnuncioDeAtaque anuncio=vek.anunciarAtaque(new Coordenada(0,1));
+            casilla1.empujarA(casilla2);
+            anuncio.ejecutarAtaque(contexto);
+            assertEquals(2,mechVictima.getVida());
     }
 
 }
