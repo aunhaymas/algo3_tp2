@@ -16,7 +16,7 @@ public class PiezaEdificio implements Pieza {
     }
 
     @Override
-    public Empuje recibirAtaque(Ataque ataque, Coordenada origen) {
+    public Empuje recibirAtaqueConEmpuje(Ataque ataque) {
         this.red.edificioDestruido();
         this.vida--; //
         return new EmpujeNulo();
@@ -24,7 +24,7 @@ public class PiezaEdificio implements Pieza {
 
     @Override
     public void recibirAtaque(Ataque ataque) {
-        this.recibirAtaque(ataque,new Coordenada(0,0));
+        this.recibirAtaqueConEmpuje(ataque);
     }
 
     @Override

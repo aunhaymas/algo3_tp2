@@ -25,7 +25,7 @@ public class EstadoOcupada implements EstadoCasilla{
 
     @Override
     public Empuje recibirAtaque(Ataque ataque) {
-        return ataque.efectuarAtaquePieza((Unidad) pieza);
+        return pieza.recibirAtaqueConEmpuje(ataque);
     }
 
     @Override

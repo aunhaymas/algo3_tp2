@@ -10,13 +10,13 @@ public class PiezaNula implements Pieza{
     }
 
     @Override
-    public Empuje recibirAtaque(Ataque ataque, Coordenada origen) {
+    public Empuje recibirAtaqueConEmpuje(Ataque ataque) {
         return new EmpujeNulo();
     }
 
     @Override
     public void recibirAtaque(Ataque ataque) {
-        this.recibirAtaque(ataque,new Coordenada(0,0));
+        this.recibirAtaqueConEmpuje(ataque);
     }
 
     @Override 

@@ -10,7 +10,7 @@ public class PiezaMontania implements Pieza{
     }
 
     @Override
-    public Empuje recibirAtaque(Ataque ataque, Coordenada origen) {
+    public Empuje recibirAtaqueConEmpuje(Ataque ataque) {
         return new EmpujeNulo();
     }
 

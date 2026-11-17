@@ -35,14 +35,12 @@ public abstract class Unidad implements Dañable, Pieza,Atacable {
 	}
 
 	public void recibirAtaque(Ataque ataque) {
-		this.recibirAtaque(ataque,new Coordenada(0,0));
+		this.recibirAtaqueConEmpuje(ataque);
 
 	}
 	@Override
-	public Empuje recibirAtaque(Ataque ataque, Coordenada origen) {
-		this.recibirDaño(ataque.getDanio());
-		ataque.aplicarEfecto(this);
-		return this.estadoUnidad.calcularEmpuje(ataque,origen);
+	public Empuje recibirAtaqueConEmpuje(Ataque ataque) {
+		return ataque.efectuarAtaquePieza(this);
 	};
 
 	// Deberia ser privado, unidad no sabe que tipo de arma la ataco y no puedo aplicar polimorfismo
