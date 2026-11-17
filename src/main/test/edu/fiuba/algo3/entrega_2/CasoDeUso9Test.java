@@ -290,11 +290,75 @@ public class CasoDeUso9Test {
 	 * Verifico que el ultimo movimiento de Vek no termina en Agua.
 	 */
 	@Test 
-	public void vekTerrestreEvitaTerminarMovimientoEnAgua() {}
+	public void vekTerrestreEvitaTerminarMovimientoEnAgua() {
+		RegistroDeAtaques registroDeAtaques = new RegistroDeAtaques();
+        RedElectrica redElectrica = new RedElectrica();
+
+        Tablero tableroConAgua = parserTablero.parsear(List.of(
+                "SAAASSSS",
+                "SSSSSSSS",
+                "SSSSSSSS",
+                "SSSSSSSS",
+                "SSSSSSSS",
+                "SSSSSSSS",
+                "SSSSSSSS",
+                "SSSSSSSS"
+        ));
+
+        Vek vek = new Saltador();
+        Coordenada vekPos = new Coordenada(0, 0);
+
+        Pieza edificio = new PiezaEdificio(redElectrica);
+        Coordenada edificioPos = new Coordenada(2, 5);
+
+        tableroConAgua.colocarPieza(vek, vekPos);
+        tableroConAgua.colocarPieza(edificio, edificioPos);
+
+        MotorIA motor = new MotorIA(tableroConAgua, vek, registroDeAtaques);
+        AccionIA vekDecision = motor.resolverProximaAccion();
+        vekDecision.ejecutar();
+
+        assertTrue(tableroConAgua.obtenerCasilla(new Coordenada(1, 0)).estaLibre());
+        assertTrue(tableroConAgua.obtenerCasilla(new Coordenada(2, 0)).estaLibre());
+        assertTrue(tableroConAgua.obtenerCasilla(new Coordenada(3, 0)).estaLibre());
+        assertEquals(vek, tableroConAgua.obtenerCasilla(new Coordenada(0, 3)).obtenerPieza());
+    }
 
 	/**
 	 * Verifico que el ultimo movimiento de Vek no termina en Acido.
 	 */
 	@Test 
-	public void vekTerrestreEvitaTerminarMovimientoEnAcido() {}
+	public void vekTerrestreEvitaTerminarMovimientoEnAcido() {
+		RegistroDeAtaques registroDeAtaques = new RegistroDeAtaques();
+        RedElectrica redElectrica = new RedElectrica();
+
+        Tablero tableroConAcido = parserTablero.parsear(List.of(
+                "SÁÁÁSSSS",
+                "SSSSSSSS",
+                "SSSSSSSS",
+                "SSSSSSSS",
+                "SSSSSSSS",
+                "SSSSSSSS",
+                "SSSSSSSS",
+                "SSSSSSSS"
+        ));
+
+        Vek vek = new Saltador();
+        Coordenada vekPos = new Coordenada(0, 0);
+
+        Pieza edificio = new PiezaEdificio(redElectrica);
+        Coordenada edificioPos = new Coordenada(2, 5);
+
+        tableroConAcido.colocarPieza(vek, vekPos);
+        tableroConAcido.colocarPieza(edificio, edificioPos);
+
+        MotorIA motor = new MotorIA(tableroConAcido, vek, registroDeAtaques);
+        AccionIA vekDecision = motor.resolverProximaAccion();
+        vekDecision.ejecutar();
+
+        assertTrue(tableroConAcido.obtenerCasilla(new Coordenada(1, 0)).estaLibre());
+        assertTrue(tableroConAcido.obtenerCasilla(new Coordenada(2, 0)).estaLibre());
+        assertTrue(tableroConAcido.obtenerCasilla(new Coordenada(3, 0)).estaLibre());
+        assertEquals(vek, tableroConAcido.obtenerCasilla(new Coordenada(0, 3)).obtenerPieza());
+    }
 }
