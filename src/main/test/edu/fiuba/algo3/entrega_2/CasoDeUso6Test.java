@@ -1,6 +1,12 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.ataques.AtaqueTest;
+import edu.fiuba.algo3.modelo.mechs.Mech;
+import edu.fiuba.algo3.modelo.mechs.MechDeCanon;
+import edu.fiuba.algo3.modelo.terrenos.Acido;
+import edu.fiuba.algo3.modelo.terrenos.Suelo;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

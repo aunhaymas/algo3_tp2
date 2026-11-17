@@ -1,10 +1,10 @@
 package edu.fiuba.algo3.modelo.estadosUnidad;
 
-import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Coordenada;
-import edu.fiuba.algo3.modelo.Unidad;
+import edu.fiuba.algo3.modelo.ataques.Ataque;
 import edu.fiuba.algo3.modelo.empujes.Empuje;
 import edu.fiuba.algo3.modelo.empujes.EmpujeNulo;
+import edu.fiuba.algo3.modelo.unidades.Unidad;
 
 public class Muerta extends EstadoUnidad {
     @Override

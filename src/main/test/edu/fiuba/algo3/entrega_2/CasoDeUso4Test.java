@@ -7,6 +7,11 @@ doble de daño, y que el Avispón no se contamine
  */
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.ataques.Ataque;
+import edu.fiuba.algo3.modelo.mechs.Mech;
+import edu.fiuba.algo3.modelo.mechs.MechDeCombate;
+import edu.fiuba.algo3.modelo.terrenos.Acido;
+import edu.fiuba.algo3.modelo.veks.Avispon;
 import edu.fiuba.algo3.modelo.veks.Vek;
 import org.junit.jupiter.api.Test;
 

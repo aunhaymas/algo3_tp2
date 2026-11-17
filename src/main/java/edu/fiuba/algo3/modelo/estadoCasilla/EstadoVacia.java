@@ -1,12 +1,12 @@
 package edu.fiuba.algo3.modelo.estadoCasilla;
 
-import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Casilla;
 import edu.fiuba.algo3.modelo.Coordenada;
-import edu.fiuba.algo3.modelo.Pieza;
+import edu.fiuba.algo3.modelo.ataques.Ataque;
 import edu.fiuba.algo3.modelo.empujes.Empuje;
 import edu.fiuba.algo3.modelo.empujes.EmpujeNulo;
 import edu.fiuba.algo3.modelo.excepciones.CasillaVaciaException;
+import edu.fiuba.algo3.modelo.unidades.Pieza;
 
 public class EstadoVacia implements EstadoCasilla{
     @Override

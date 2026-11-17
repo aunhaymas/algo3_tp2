@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.ataques;
 
-import edu.fiuba.algo3.modelo.Ataque;
-import edu.fiuba.algo3.modelo.Unidad;
+import edu.fiuba.algo3.modelo.unidades.Unidad;
 
 public class AtaqueAcido extends Ataque {
     public AtaqueAcido() {

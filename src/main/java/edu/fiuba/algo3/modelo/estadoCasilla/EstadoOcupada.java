@@ -1,8 +1,11 @@
 package edu.fiuba.algo3.modelo.estadoCasilla;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.ataques.Ataque;
+import edu.fiuba.algo3.modelo.ataques.DanioColision;
 import edu.fiuba.algo3.modelo.empujes.Empuje;
 import edu.fiuba.algo3.modelo.empujes.EmpujeNulo;
+import edu.fiuba.algo3.modelo.unidades.Pieza;
 
 public class EstadoOcupada implements EstadoCasilla{
     private final Pieza pieza;

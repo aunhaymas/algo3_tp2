@@ -1,11 +1,19 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.ataques.Ataque;
 import edu.fiuba.algo3.modelo.empujes.*;
 import edu.fiuba.algo3.modelo.estadoCasilla.EstadoCasilla;
 import edu.fiuba.algo3.modelo.estadoCasilla.EstadoOcupada;
 import edu.fiuba.algo3.modelo.estadoCasilla.EstadoVacia;
 import edu.fiuba.algo3.modelo.excepciones.CasillaVaciaException;
 import edu.fiuba.algo3.modelo.excepciones.TrayectoriaInvalidaException;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
+import edu.fiuba.algo3.modelo.terrenos.Suelo;
+import edu.fiuba.algo3.modelo.terrenos.TipoTerreno;
+import edu.fiuba.algo3.modelo.unidades.Atacable;
+import edu.fiuba.algo3.modelo.unidades.Pieza;
+import edu.fiuba.algo3.modelo.unidades.PiezaNula;
+import edu.fiuba.algo3.modelo.unidades.Unidad;
 
 import java.util.ArrayList;
 import java.util.Arrays;

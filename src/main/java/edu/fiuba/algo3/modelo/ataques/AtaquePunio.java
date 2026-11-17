@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo.ataques;
 
-import edu.fiuba.algo3.modelo.Ataque;
 import edu.fiuba.algo3.modelo.Direccion;
 import edu.fiuba.algo3.modelo.empujes.EmpujeEfectivo;
 

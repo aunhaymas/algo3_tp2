@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import edu.fiuba.algo3.modelo.mechs.Mech;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
+
 public class GestorFaseJugador {
 	private final Tablero tablero;
 	private Mech mechSeleccionado;

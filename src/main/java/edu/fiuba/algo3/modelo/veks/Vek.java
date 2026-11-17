@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.veks;
 
 import edu.fiuba.algo3.modelo.Casilla;
-import edu.fiuba.algo3.modelo.Unidad;
+import edu.fiuba.algo3.modelo.unidades.Unidad;
 
 public class Vek extends Unidad {
 

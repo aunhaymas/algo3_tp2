@@ -4,6 +4,11 @@ import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.excepciones.MapaInvalidoException;
+import edu.fiuba.algo3.modelo.tablero.ParserTablero;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
+import edu.fiuba.algo3.modelo.terrenos.Suelo;
+import edu.fiuba.algo3.modelo.terrenos.TerrenosFactory;
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
