@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.veks.AnuncioDeAtaque;
 import edu.fiuba.algo3.modelo.veks.RegistroDeAtaques;
+import edu.fiuba.algo3.modelo.veks.*;
 
 public class AccionIA {
 	private final Casilla origen;

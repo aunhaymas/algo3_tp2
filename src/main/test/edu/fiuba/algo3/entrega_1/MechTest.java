@@ -14,6 +14,7 @@ import edu.fiuba.algo3.modelo.tablero.ParserTablero;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.terrenos.TerrenosFactory;
 import edu.fiuba.algo3.modelo.excepciones.ObjetoFueraDeRangoException;
+import edu.fiuba.algo3.modelo.veks.Saltador;
 import edu.fiuba.algo3.modelo.veks.Vek;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,7 +39,7 @@ public class MechTest {
     public void mechDeCombateAtacaAVek() {
         // Arrange
         Mech mech = new MechDeCombate();
-        Vek enemigo = new Vek();
+        Saltador enemigo = new Saltador();
         int vidaInicialEnemigo = enemigo.getVida();
 
         // Act
@@ -51,7 +52,7 @@ public class MechTest {
     public void mechDeCanonAtacaAVek() {
         // Arrange
         Mech mech = new MechDeCanon();
-        Vek enemigo = new Vek();
+        Vek enemigo = new Saltador();
         int vidaInicialEnemigo = enemigo.getVida();
 
         // Act
@@ -64,7 +65,7 @@ public class MechTest {
     public void mechDeArtilleriaAtacaAVek() {
         // Arrange
         Mech mech = new MechDeArtilleria();
-        Vek enemigo = new Vek();
+        Vek enemigo = new Saltador();
         int vidaInicialEnemigo = enemigo.getVida();
 
         // Act
@@ -81,7 +82,7 @@ public class MechTest {
         // Arrange
         Mech mech = new MechDeCombate();
         Coordenada coordenadaMech = new Coordenada(5, 5);
-        Vek enemigoAdyacente = new Vek();
+        Vek enemigoAdyacente = new Saltador();
         Coordenada coordenadaEnemigoAdyacente = new Coordenada(5, 4);
         int vidaInicialEnemigoAdyacente = enemigoAdyacente.getVida();
         // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
@@ -106,7 +107,7 @@ public class MechTest {
         // Arrange
         Mech mech = new MechDeCombate();
         Coordenada coordenadaMech = new Coordenada(5, 5);
-        Vek enemigoNoAdyacente = new Vek();
+        Vek enemigoNoAdyacente = new Saltador();
         Coordenada coordenadaEnemigoNoAdyacente = new Coordenada(4, 4);
         // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
         tablero.colocarPieza(mech, coordenadaMech);
@@ -124,7 +125,7 @@ public class MechTest {
         // Arrange
         Mech mech = new MechDeCombate();
         Coordenada coordenadaMech = new Coordenada(5, 5);
-        Vek enemigoLejano = new Vek();
+        Vek enemigoLejano = new Saltador();
         Coordenada coordenadaEnemigoLejano = new Coordenada(3, 5);
         // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
         tablero.colocarPieza(mech, coordenadaMech);
@@ -161,7 +162,7 @@ public class MechTest {
         // Arrange
         Mech mech = new MechDeCanon();
         Coordenada coordenadaMech = new Coordenada(5, 5);
-        Vek enemigoLineaRecta = new Vek();
+        Vek enemigoLineaRecta = new Saltador();
         Coordenada coordenadaEnemigoLineaRecta = new Coordenada(5, 2);
         int vidaInicialEnemigoLineaRecta = enemigoLineaRecta.getVida();
         // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
@@ -185,10 +186,10 @@ public class MechTest {
         // Arrange
         Mech mech = new MechDeCanon();
         Coordenada coordenadaMech = new Coordenada(5, 5);
-        Vek enemigoLineaRecta = new Vek();
+        Vek enemigoLineaRecta = new Saltador();
         Coordenada coordenadaEnemigoLineaRecta = new Coordenada(5, 1);
         int vidaInicialEnemigoLineaRecta = enemigoLineaRecta.getVida();
-        Vek enemigoObstaculo = new Vek();
+        Vek enemigoObstaculo = new Saltador();
         Coordenada coordenadaObstaculo = new Coordenada(5, 4);
         int vidaInicialEnemigoObstaculo = enemigoLineaRecta.getVida();
         // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
@@ -212,7 +213,7 @@ public class MechTest {
         // Arrange
         Mech mech = new MechDeCombate();
         Coordenada coordenadaMech = new Coordenada(5, 5);
-        Vek enemigoDiagonal = new Vek();
+        Vek enemigoDiagonal = new Saltador();
         Coordenada coordenadaEnemigoDiagonal = new Coordenada(3, 2);
         // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
         tablero.colocarPieza(mech, coordenadaMech);
@@ -230,10 +231,10 @@ public class MechTest {
         // Arrange
         Mech mech = new MechDeArtilleria();
         Coordenada coordenadaMech = new Coordenada(5, 5);
-        Vek enemigoLineaRecta = new Vek();
+        Vek enemigoLineaRecta = new Saltador();
         Coordenada coordenadaEnemigoLineaRecta = new Coordenada(2, 5);
         int vidaInicialEnemigoLineaRecta = enemigoLineaRecta.getVida();
-        Vek enemigoObstaculo = new Vek();
+        Vek enemigoObstaculo = new Saltador();
         Coordenada coordenadaObstaculo = new Coordenada(4, 5);
         int vidaInicialEnemigoObstaculo = enemigoLineaRecta.getVida();
         // Falta la logica para ubicar al mech y al enemigo en las casillas correspondientes
@@ -259,23 +260,23 @@ public class MechTest {
         Mech mech = new MechDeArtilleria();
         Coordenada coordenadaMech = new Coordenada(7, 5);
         tablero.colocarPieza(mech, coordenadaMech);
-        Vek enemigo = new Vek();
+        Vek enemigo = new Saltador();
         Coordenada coordenadaEnemigo = new Coordenada(3, 5);
         tablero.colocarPieza(enemigo, coordenadaEnemigo);
         
-        Vek obstaculoNorte = new Vek();
+        Vek obstaculoNorte = new Saltador();
         Coordenada coordenadaObstaculoNorte = new Coordenada(3, 4);
         tablero.colocarPieza(obstaculoNorte, coordenadaObstaculoNorte);
         
-        Vek obstaculoSur = new Vek();
+        Vek obstaculoSur = new Saltador();
         Coordenada coordenadaObstaculoSur = new Coordenada(3, 6);
         tablero.colocarPieza(obstaculoSur, coordenadaObstaculoSur);
         
-        Vek obstaculoEste = new Vek();
+        Vek obstaculoEste = new Saltador();
         Coordenada coordenadaObstaculoEste = new Coordenada(4, 5);
         tablero.colocarPieza(obstaculoEste, coordenadaObstaculoEste);
         
-        Vek obstaculoOeste = new Vek();
+        Vek obstaculoOeste = new Saltador();
         Coordenada coordenadaObstaculoOeste = new Coordenada(2, 5);
         tablero.colocarPieza(obstaculoOeste, coordenadaObstaculoOeste);
     

@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.unidades;
 
+import edu.fiuba.algo3.modelo.LocalizadorEntidad;
 import edu.fiuba.algo3.modelo.Casilla;
 import edu.fiuba.algo3.modelo.ataques.Ataque;
 import edu.fiuba.algo3.modelo.empujes.Empuje;

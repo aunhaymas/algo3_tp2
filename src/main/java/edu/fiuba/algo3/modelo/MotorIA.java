@@ -1,7 +1,10 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.Arrays;
-
+import edu.fiuba.algo3.modelo.unidades.*;
+import edu.fiuba.algo3.modelo.unidades.*;
+import edu.fiuba.algo3.modelo.veks.*;
+import edu.fiuba.algo3.modelo.tablero.*;
 import edu.fiuba.algo3.modelo.veks.RegistroDeAtaques;
 
 public class MotorIA {

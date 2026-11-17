@@ -5,13 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.Test;
 
-import edu.fiuba.algo3.modelo.Casilla;
-import edu.fiuba.algo3.modelo.Coordenada;
-import edu.fiuba.algo3.modelo.veks.Avispon;
-import edu.fiuba.algo3.modelo.veks.Vek;
-import edu.fiuba.algo3.modelo.excepciones.UnidadSumergidaException;
-import edu.fiuba.algo3.modelo.mechs.Mech;
-import edu.fiuba.algo3.modelo.terrenos.Agua;
+import edu.fiuba.algo3.modelo.tablero.*;
+import edu.fiuba.algo3.modelo.estadosUnidad.*;
+import edu.fiuba.algo3.modelo.mechs.*;
+import edu.fiuba.algo3.modelo.unidades.*;
+import edu.fiuba.algo3.modelo.terrenos.*;
+import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.veks.*;
+import edu.fiuba.algo3.modelo.excepciones.*;
 
 public class CasoDeUso3Test {
     

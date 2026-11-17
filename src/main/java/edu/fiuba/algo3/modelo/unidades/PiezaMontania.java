@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.modelo.unidades;
-
+import edu.fiuba.algo3.modelo.LocalizadorEntidad;
 import edu.fiuba.algo3.modelo.Casilla;
 import edu.fiuba.algo3.modelo.ataques.Ataque;
 import edu.fiuba.algo3.modelo.empujes.Empuje;
@@ -30,4 +30,9 @@ public class PiezaMontania implements Pieza{
     public int getVida() {
         return 1;
     }
+
+    @Override
+	public void reportarA(LocalizadorEntidad localizador, Casilla casilla) {
+		localizador.registrar(this, casilla);
+	}
 }

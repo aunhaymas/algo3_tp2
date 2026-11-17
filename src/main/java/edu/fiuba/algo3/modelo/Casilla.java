@@ -1,7 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.ataques.Ataque;
+import edu.fiuba.algo3.modelo.ataques.DanioColision;
 import edu.fiuba.algo3.modelo.empujes.*;
+import edu.fiuba.algo3.modelo.tablero.*;
 import edu.fiuba.algo3.modelo.estadoCasilla.EstadoCasilla;
 import edu.fiuba.algo3.modelo.estadoCasilla.EstadoOcupada;
 import edu.fiuba.algo3.modelo.estadoCasilla.EstadoVacia;
@@ -207,6 +209,10 @@ public class Casilla implements Atacable{
             destino.recibirAtaque(colision);
             recibirAtaque(colision);
         }
+    }
+    
+    public void recibirEmpuje(Casilla origen, Pieza pieza) {
+        this.estado = this.estado.recibirEmpuje(origen, this, pieza);
     }
 
     public void reportarA(LocalizadorEntidad localizador) {

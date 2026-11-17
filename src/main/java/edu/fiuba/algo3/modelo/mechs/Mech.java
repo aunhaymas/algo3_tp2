@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.Trayectoria;
 import edu.fiuba.algo3.modelo.armas.Arma;
 import edu.fiuba.algo3.modelo.armas.ArmaNula;
 import edu.fiuba.algo3.modelo.estadosUnidad.EstadoUnidad;
+import edu.fiuba.algo3.modelo.LocalizadorEntidad;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.unidades.Atacable;

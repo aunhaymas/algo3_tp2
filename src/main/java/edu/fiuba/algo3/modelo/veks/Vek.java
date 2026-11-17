@@ -1,7 +1,12 @@
 package edu.fiuba.algo3.modelo.veks;
 
+import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.LocalizadorEntidad;
 import edu.fiuba.algo3.modelo.Casilla;
-import edu.fiuba.algo3.modelo.unidades.Unidad;
+import edu.fiuba.algo3.modelo.Direccion;
+import edu.fiuba.algo3.modelo.unidades.*;
+import edu.fiuba.algo3.modelo.tablero.*;
+import edu.fiuba.algo3.modelo.empujes.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;

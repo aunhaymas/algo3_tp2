@@ -14,5 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * la aparición del nuevo Vek y reciba 1 de daño.
  */
 public class CasoDeUso10Test {
-	// WIP
+	@Test
+	public void verificarQueUnidadSobreCasillaEmergenciaBloqueaAparicionNuevoVek() {
+
+	}
+
+	@Test
+	public void verificarQueUnidadSobreCasillaEmergenciaBloqueaAparicionYRecibe1Daño() {
+		
+	}
 }

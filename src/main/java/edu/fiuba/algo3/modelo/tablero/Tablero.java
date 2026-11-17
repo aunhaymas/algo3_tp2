@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.tablero;
 
+import edu.fiuba.algo3.modelo.ComparadorOrdenDeLectura;
 import edu.fiuba.algo3.modelo.Casilla;
+import edu.fiuba.algo3.modelo.LocalizadorEntidad;
 import edu.fiuba.algo3.modelo.Coordenada;
 import edu.fiuba.algo3.modelo.Direccion;
 import edu.fiuba.algo3.modelo.Trayectoria;

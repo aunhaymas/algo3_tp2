@@ -2,10 +2,8 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.List;
 
-import edu.fiuba.algo3.modelo.veks.AnuncioDeAtaque;
-import edu.fiuba.algo3.modelo.veks.AnuncioDeAtaqueReal;
-import edu.fiuba.algo3.modelo.veks.AnuncioNulo;
-import edu.fiuba.algo3.modelo.veks.RegistroDeAtaques;
+import edu.fiuba.algo3.modelo.tablero.*;
+import edu.fiuba.algo3.modelo.veks.*;
 
 public class ReglaAtacarEdificio extends ReglaIA {
 	private LocalizadorEdificio localizador;

@@ -2,13 +2,14 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.excepciones.PosicionOcupadaException;
-import edu.fiuba.algo3.modelo.mechs.Mech;
-import edu.fiuba.algo3.modelo.tablero.ParserTablero;
-import edu.fiuba.algo3.modelo.tablero.Tablero;
-import edu.fiuba.algo3.modelo.terrenos.TerrenosFactory;
-import edu.fiuba.algo3.modelo.unidades.Pieza;
-import edu.fiuba.algo3.modelo.unidades.Unidad;
-import edu.fiuba.algo3.modelo.veks.Vek;
+import edu.fiuba.algo3.modelo.tablero.*;
+import edu.fiuba.algo3.modelo.estadosUnidad.*;
+import edu.fiuba.algo3.modelo.mechs.*;
+import edu.fiuba.algo3.modelo.unidades.*;
+import edu.fiuba.algo3.modelo.terrenos.*;
+import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.veks.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -135,7 +136,7 @@ class TableroTest {
         Coordenada origen = new Coordenada(0, 0);
         Coordenada destino = new Coordenada(0, 1);
         
-        tablero.colocarPieza(new Vek(), origen);
+        tablero.colocarPieza(new Saltador(), origen);
         tablero.colocarPieza(new Mech(), destino);
 
         assertThrows(PosicionOcupadaException.class, () -> {

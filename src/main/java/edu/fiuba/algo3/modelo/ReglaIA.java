@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.veks.RegistroDeAtaques;
+import edu.fiuba.algo3.modelo.tablero.*;
+import edu.fiuba.algo3.modelo.veks.*;
 
 public abstract class ReglaIA {
 	private ReglaIA siguienteRegla;

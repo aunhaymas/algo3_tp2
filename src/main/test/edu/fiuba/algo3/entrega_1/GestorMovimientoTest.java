@@ -1,16 +1,11 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.excepciones.MovimientoNoCancelable;
-import edu.fiuba.algo3.modelo.excepciones.MovimientoYaCancelado;
-import edu.fiuba.algo3.modelo.mechs.Mech;
-import edu.fiuba.algo3.modelo.mechs.MechDeArtilleria;
-import edu.fiuba.algo3.modelo.mechs.MechDeCanon;
-import edu.fiuba.algo3.modelo.mechs.MechDeCombate;
-import edu.fiuba.algo3.modelo.tablero.ParserTablero;
-import edu.fiuba.algo3.modelo.tablero.Tablero;
-import edu.fiuba.algo3.modelo.terrenos.TerrenosFactory;
-import edu.fiuba.algo3.modelo.veks.Vek;
+import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.mechs.*;
+import edu.fiuba.algo3.modelo.tablero.*;
+import edu.fiuba.algo3.modelo.terrenos.*;
+import edu.fiuba.algo3.modelo.veks.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -111,7 +106,7 @@ public class GestorMovimientoTest {
 		Mech mechCombate = new MechDeCombate();
 		origen.recibirPieza(mechCombate);
 		ComandoMover comando = new ComandoMover(mechCombate, camino);
-		Vek vek = new Vek(3,3);
+		Vek vek = new Saltador();
 
 		comando.ejecutar();
 		mechCombate.atacar(vek);

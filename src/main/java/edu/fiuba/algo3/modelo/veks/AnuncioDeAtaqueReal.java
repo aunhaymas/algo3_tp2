@@ -1,17 +1,22 @@
 package edu.fiuba.algo3.modelo.veks;
 
-import edu.fiuba.algo3.modelo.Atacable;
 import edu.fiuba.algo3.modelo.Casilla;
-import edu.fiuba.algo3.modelo.Vek;
+import edu.fiuba.algo3.modelo.Coordenada;
+import edu.fiuba.algo3.modelo.Trayectoria;
+import edu.fiuba.algo3.modelo.veks.*;
+import edu.fiuba.algo3.modelo.unidades.*;
 
-public class AnuncioDeAtaque {
+public class AnuncioDeAtaqueReal implements AnuncioDeAtaque {
     private final Vek vek;
     private Atacable objetivo; //no es final, dado que debe poder modificarse
     private Trayectoria trayectoria;
-    public AnuncioDeAtaque(Vek vek, Atacable objetivo) {
+
+    public AnuncioDeAtaqueReal(Vek vek, Atacable objetivo) {
         this.vek=vek;
         this.objetivo=objetivo;
     }
+    
+    @Override
     public void ejecutarAtaque(){
         vek.atacar(objetivo);
     }

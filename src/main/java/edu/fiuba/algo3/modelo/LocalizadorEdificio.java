@@ -1,5 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.mechs.*;
+import edu.fiuba.algo3.modelo.veks.*;
+import edu.fiuba.algo3.modelo.unidades.*;
+import edu.fiuba.algo3.modelo.tablero.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,10 +26,10 @@ public class LocalizadorEdificio implements LocalizadorEntidad {
 		// No registro Pieza nula
 	}
 
-	/* @Override 
-	public void registrar(PiezaMontaña montaña, Casilla casilla) {
+	@Override 
+	public void registrar(PiezaMontania montaña, Casilla casilla) {
 		// No registro Montaña
-	} */
+	}
 
 	@Override 
 	public void registrar(Vek vek, Casilla casilla) {

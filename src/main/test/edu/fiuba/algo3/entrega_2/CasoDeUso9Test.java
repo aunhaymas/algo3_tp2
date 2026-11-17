@@ -5,6 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import edu.fiuba.algo3.modelo.tablero.*;
+import edu.fiuba.algo3.modelo.estadosUnidad.*;
+import edu.fiuba.algo3.modelo.mechs.*;
+import edu.fiuba.algo3.modelo.unidades.*;
+import edu.fiuba.algo3.modelo.terrenos.*;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.veks.*;
