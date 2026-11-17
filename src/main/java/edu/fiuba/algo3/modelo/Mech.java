@@ -55,9 +55,11 @@ public class Mech extends Unidad {
 	}
 
 	public void atacar(Tablero tablero, Coordenada coordenada) {
-		Casilla origen = tablero.obtenerCasilla(this);
-		Trayectoria trayectoria = tablero.crearTrayectoria(origen.getCoordenada(), coordenada);
-		arma.atacar(trayectoria,tablero);
+		tablero.procesarAtaque(this, coordenada);
+	}
+
+	public void recorrer(Trayectoria trayectoria) {
+		arma.recorrer(trayectoria);
 	}
 
 	public void atacar(Atacable objetivo) {

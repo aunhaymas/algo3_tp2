@@ -11,9 +11,9 @@ public class ArmaAguijon extends Arma{
     }
 
     @Override
-    public void atacar(Trayectoria trayectoria, Tablero contexto) {
+    public void recorrer(Trayectoria trayectoria) {
         Casilla hit = trayectoria.devolverPrimeraCasillaNoLibre();
-        hit.recibirAtaque(new AtaqueAcido(),contexto);
+        hit.recibirAtaque(new AtaqueAcido());
     }
 
     @Override

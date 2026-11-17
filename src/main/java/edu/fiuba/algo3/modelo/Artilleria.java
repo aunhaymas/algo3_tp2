@@ -8,10 +8,12 @@ public class Artilleria extends Arma {
     public void atacar(Dañable objetivo) {
         objetivo.recibirDaño(1);
     }
-    public void atacar(Trayectoria trayectoria,Tablero contexto) {
+
+    @Override
+    public void recorrer(Trayectoria trayectoria) {
         // Deberia recorrer todas las casillas hasta que una NO este libre, De ahi hit!. 
         Casilla destino = trayectoria.getDestino();
-        destino.recibirAtaque(new Ataque(1,trayectoria.getDireccion()),contexto);
+        destino.recibirAtaque(new Ataque(1,trayectoria.getDireccion()));
         // Empuja todos los adyacentes
         destino.empujarAdyacentes();
 

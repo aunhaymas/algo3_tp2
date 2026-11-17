@@ -116,10 +116,11 @@ public class Casilla implements Atacable{
         return piezaGuardada;
     }
 
-    public void recibirAtaque(Ataque ataque, Tablero contexto) {
+    @Override
+    public void recibirAtaque(Ataque ataque) {
 
         Empuje empuje = this.estado.recibirAtaque(ataque,this.coordenada);
-        empuje.empujar(this, contexto);
+        empuje.empujar(this, tablero);
     }
 
 
@@ -178,8 +179,8 @@ public class Casilla implements Atacable{
         this.estado=this.estado.recibirEmpuje(origen,this,pieza);
     }
 
-    @Override
-    public void recibirAtaque(Ataque ataque) {
-        this.estado.recibirAtaque(ataque,this.coordenada);
-    }
+    // @Override
+    // public void recibirAtaque(Ataque ataque) {
+    //     this.estado.recibirAtaque(ataque,this.coordenada);
+    // }
 }

@@ -10,9 +10,9 @@ public class ArmaMordida extends Arma{
     }
 
     @Override
-    public void atacar(Trayectoria trayectoria, Tablero contexto) {
+    public void recorrer(Trayectoria trayectoria) {
         Casilla hit = trayectoria.devolverPrimeraCasillaNoLibre();
-        hit.recibirAtaque(new AtaqueMordida(),contexto);
+        hit.recibirAtaque(new AtaqueMordida());
     }
 
     @Override

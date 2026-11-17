@@ -33,4 +33,10 @@ public class Ataque {
     public Empuje generarEmpujeDesde(Coordenada origen) {
         return this.empuje.prepararDesde(origen);
     }
+
+    public Empuje efectuarAtaquePieza(Unidad pieza, Coordenada origen) {
+		pieza.recibirDaño(danio);
+		this.aplicarEfecto(pieza);
+		return generarEmpujeDesde(origen);
+    }
 }

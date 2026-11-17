@@ -12,7 +12,7 @@ public class ArmaNula extends Arma {
     }
 
     @Override
-    public void atacar(Trayectoria trayectoria, Tablero contexto) {
+    public void recorrer(Trayectoria trayectoria) {
 
     }
 }

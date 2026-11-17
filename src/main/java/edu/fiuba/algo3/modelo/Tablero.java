@@ -89,6 +89,11 @@ public class Tablero {
         List<Casilla> casillas = trayectoria.stream().map(this::obtenerCasilla).collect(Collectors.toList());
         Direccion direccion = new Direccion(origen.direccionA(destino));
         return new Trayectoria(casillas,direccion );
+    }
 
+    public void procesarAtaque(Mech unidad, Coordenada destino) {
+		Casilla origen = this.obtenerCasilla(unidad);
+		Trayectoria trayectoria = this.crearTrayectoria(origen.getCoordenada(), destino);
+		unidad.recorrer(trayectoria);
     }
 }

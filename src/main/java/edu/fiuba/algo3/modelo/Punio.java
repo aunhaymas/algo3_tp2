@@ -9,13 +9,14 @@ public class Punio extends Arma {
         objetivo.recibirDaño(2);
     }
 
-    public void atacar(Trayectoria trayectoria,Tablero contexto) {
+    @Override
+    public void recorrer(Trayectoria trayectoria) {
         // Trayectoria no debe tener longitud mayor a 2.
         if (!trayectoria.esTrayectoriaCorta()) {
             throw new ObjetoFueraDeRangoException();
         } else {
             Casilla destino = trayectoria.getDestino();
-            destino.recibirAtaque(new Ataque(2),contexto);
+            destino.recibirAtaque(new Ataque(2));
             destino.empujar(trayectoria.getDireccion());
         }
     }
