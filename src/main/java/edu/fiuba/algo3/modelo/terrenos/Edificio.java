@@ -12,5 +12,10 @@ public class Edificio implements TipoTerreno {
     public void aplicarEfecto(Unidad unidad) {
         // Implementación del efecto del edificio en la unidad
     }
+
+    @Override
+    public boolean esTransitable() { 
+        return false; 
+    }
     
 }

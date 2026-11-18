@@ -85,4 +85,10 @@ private void recibirDanio(int danio){this.vida -= danio;}
 	public void atacar(Atacable objetivo) {
 		arma.atacar(objetivo);
 	}
+
+	@Override
+    public void entrarEn(Casilla casilla) {
+        this.casillaActual = casilla;
+        casilla.aplicarEfecto(this);
+    }
 }

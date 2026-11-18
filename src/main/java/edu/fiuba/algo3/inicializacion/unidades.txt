@@ -1,0 +1,7 @@
+Mech de Combate (3,1)
+Mech Cañon (4,5)
+Mech de Artillería (1,1)
+
+Saltador (6,1)
+Luciérnaga (7,7)
+Avispón (8,5)

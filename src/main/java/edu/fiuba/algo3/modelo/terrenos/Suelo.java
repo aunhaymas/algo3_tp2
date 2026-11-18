@@ -7,4 +7,9 @@ public class Suelo implements TipoTerreno{
     public void aplicarEfecto(Unidad unidad) {
 
     }
+    
+    @Override
+    public boolean esTransitable() { 
+        return true; 
+    }
 }
