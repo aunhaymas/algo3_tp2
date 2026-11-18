@@ -15,7 +15,7 @@ public class PiezaEdificio implements Pieza {
 
     @Override
     public void entrarEn(Casilla casilla) {
-        casilla.recibirPieza(this);
+        
     }
 
     @Override

@@ -37,6 +37,4 @@ public class ArmadorDePartida {
         return new Partida(tablero);
     }
 
-    public void 
-
 }
