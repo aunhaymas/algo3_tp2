@@ -17,9 +17,10 @@ public class LectorTest {
     
     @Test
     public void LectorLeeCorrectamenteElArchivo() {
+
         LectorArchivo lector = new LectorArchivo();
         List<String> lineas;
-        Path rutaTablero = Paths.get("src/main/java/edu/fiuba/algo3/tablero/tableroTest.txt");
+        Path rutaTablero = Paths.get("src/main/test/edu/fiuba/algo3/tablero/tableroTest.txt");
         lineas = lector.leerArchivo(rutaTablero);
         assertEquals("ESSSEESE", lineas.get(0));
     }
