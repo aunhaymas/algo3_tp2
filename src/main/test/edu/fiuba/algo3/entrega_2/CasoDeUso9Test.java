@@ -69,5 +69,30 @@ public class CasoDeUso9Test {
         assertFalse(casillaEsperada.estaLibre());
         assertTrue(casillavek.estaLibre());
     }
+    @Test
+    void VekSaltadorPrefiereOpcionAtaqueEdificioFrenteAAtaqueMech(){
+        Casilla casillavek=new Casilla(new Coordenada(3,0));
+        Casilla casillaEsperada=new Casilla(new Coordenada(2,0));
+        Casilla casillaEdificio=new Casilla(new Coordenada(1,0));
+        Casilla casillamech=new Casilla(new Coordenada(4,0));
+        // |  E  |    |Vek |Mech |
+        //    1    2    3    4
+        Trayectoria aEdificio = new Trayectoria(List.of(casillavek,casillaEsperada));
+        Trayectoria aMech = new Trayectoria(List.of(casillavek));
 
+        Saltador vek = new Saltador();
+        Mech mech = new MechDeArtilleria();
+        Pieza edificio = new PiezaEdificio(new RedElectrica());
+
+        casillaEdificio.recibirPieza(edificio);
+        casillavek.recibirPieza(vek);
+        casillamech.recibirPieza(mech);
+
+        //Opcion  opcionAtaqueMech = new OpcionAtaqueMech(aMech,new Coordenada(3,0)); // no se hace falta ya que tiene la trayectoria
+        Opcion  opcionAtaqueEdificio = new OpcionAtaqueEdificio(aEdificio,new Coordenada(2,0)); // no se hace falta ya que tiene la trayectoria
+        //Decision decisionTomada= vek.tomarDecision(List.of(opcionAtaqueMech,opcionAtaqueEdificio));
+        //decisionTomada.ejecutar();
+//        assertFalse(casillaEsperada.estaLibre());
+//        assertTrue(casillavek.estaLibre());
+    }
 }
