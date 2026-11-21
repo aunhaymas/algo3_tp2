@@ -4,6 +4,8 @@ import edu.fiuba.algo3.modelo.Casilla;
 import edu.fiuba.algo3.modelo.Coordenada;
 import edu.fiuba.algo3.modelo.unidades.Unidad;
 
+import java.util.List;
+
 public class Vek extends Unidad {
 	AnuncioDeAtaque anuncioAtaque;
     // Temporal
@@ -36,5 +38,9 @@ public class Vek extends Unidad {
     public AnuncioDeAtaque anunciarAtaque(Coordenada objetivo) {
 		this.anuncioAtaque = new AnuncioReal(this,objetivo);
 		return this.anuncioAtaque;
+	}
+
+	public Decision tomarDecision(List<Opcion> opcionAtaqueEdificio) {
+		return new DecisionAtaqueEdificio(opcionAtaqueEdificio.get(0),this);
 	}
 }
