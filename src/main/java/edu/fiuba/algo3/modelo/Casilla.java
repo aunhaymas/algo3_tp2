@@ -11,7 +11,6 @@ import edu.fiuba.algo3.modelo.terrenos.Suelo;
 import edu.fiuba.algo3.modelo.terrenos.TipoTerreno;
 import edu.fiuba.algo3.modelo.unidades.Atacable;
 import edu.fiuba.algo3.modelo.unidades.Pieza;
-import edu.fiuba.algo3.modelo.unidades.PiezaNula;
 import edu.fiuba.algo3.modelo.unidades.Unidad;
 import edu.fiuba.algo3.modelo.veks.Vek;
 
@@ -20,8 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Casilla implements Atacable{
-    private boolean estaLibre;
-    private Pieza pieza;
     private Tablero tablero;
     private Coordenada coordenada;
     private TipoTerreno terrenoCasilla;
@@ -29,13 +26,11 @@ public class Casilla implements Atacable{
     public Casilla(Coordenada coordenada) {
         this.coordenada=coordenada;
         this.estado = new EstadoVacia();
-        this.estaLibre=true;
         this.terrenoCasilla=new Suelo();
         limpiarCasilla();
     }
     public Casilla(Coordenada coordenada, TipoTerreno terreno) {
         this.coordenada=coordenada;
-        this.estaLibre=true;
         this.terrenoCasilla=terreno;
         limpiarCasilla();
     }
@@ -111,10 +106,11 @@ public class Casilla implements Atacable{
     }
 
     public void recibirPieza(Pieza pieza) {
+        if (!this.estaLibre()) {
+            coordenada.throwPosicionOcupada();
+        }
         pieza.entrarEn(this);
-        this.pieza=pieza;
         this.estado = new EstadoOcupada(pieza);
-        // pieza.entrarEn(this) para aplicar efecto
     }
 
     public Pieza removerPieza() {
@@ -139,7 +135,6 @@ public class Casilla implements Atacable{
     }
     private void limpiarCasilla(){
         this.estado = new EstadoVacia();
-        this.pieza=new PiezaNula();
     }
 
     public void aplicarEfecto(Unidad unidad) {
@@ -159,6 +154,9 @@ public class Casilla implements Atacable{
     }
 
     public void moverContenidoA(Casilla destino) {
+        if (!destino.estaLibre()) {
+            coordenada.throwPosicionOcupada();
+        }
         destino.recibirPieza(this.removerPieza());
         this.limpiarCasilla();
     }
