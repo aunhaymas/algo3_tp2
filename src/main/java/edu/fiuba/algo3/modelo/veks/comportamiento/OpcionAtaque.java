@@ -1,13 +1,16 @@
-package edu.fiuba.algo3.modelo.veks;
+package edu.fiuba.algo3.modelo.veks.comportamiento;
 
 import edu.fiuba.algo3.modelo.Coordenada;
 import edu.fiuba.algo3.modelo.Trayectoria;
+import edu.fiuba.algo3.modelo.veks.Opcion;
+import edu.fiuba.algo3.modelo.veks.Vek;
 
-public class OpcionAtaqueEdificio implements Opcion{
+public class OpcionAtaque implements Opcion {
     private final Coordenada objetivo;
-
     private final Trayectoria trayectoria;
-    public OpcionAtaqueEdificio(Trayectoria trayectoria, Coordenada objetivo) {
+    // Recibe la trayectoria a una casilla desde donde pueda atacar
+    // objetivo es la coordenada a atacar
+    public OpcionAtaque(Trayectoria trayectoria, Coordenada objetivo) {
         this.objetivo=objetivo;
         this.trayectoria=trayectoria;
     }

@@ -1,8 +1,10 @@
-package edu.fiuba.algo3.modelo.veks;
+package edu.fiuba.algo3.modelo.veks.comportamiento;
 
-import java.util.List;
+import edu.fiuba.algo3.modelo.veks.Decision;
+import edu.fiuba.algo3.modelo.veks.Opcion;
+import edu.fiuba.algo3.modelo.veks.Vek;
 
-public class DecisionAtaqueEdificio implements Decision{
+public class DecisionAtaqueEdificio implements Decision {
     private final Opcion opcion;
     private final Vek vek;
 

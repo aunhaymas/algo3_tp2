@@ -33,13 +33,13 @@ import edu.fiuba.algo3.modelo.RedElectrica;
 import edu.fiuba.algo3.modelo.Trayectoria;
 import edu.fiuba.algo3.modelo.mechs.Mech;
 import edu.fiuba.algo3.modelo.mechs.MechDeArtilleria;
-import edu.fiuba.algo3.modelo.terrenos.Edificio;
 import edu.fiuba.algo3.modelo.unidades.Pieza;
 import edu.fiuba.algo3.modelo.unidades.PiezaEdificio;
 import edu.fiuba.algo3.modelo.veks.Decision;
 import edu.fiuba.algo3.modelo.veks.Opcion;
-import edu.fiuba.algo3.modelo.veks.OpcionAtaqueEdificio;
+import edu.fiuba.algo3.modelo.veks.comportamiento.OpcionAtaqueEdificio;
 import edu.fiuba.algo3.modelo.veks.Saltador;
+import edu.fiuba.algo3.modelo.veks.comportamiento.OpcionAtaqueMech;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -71,9 +71,9 @@ public class CasoDeUso9Test {
     }
     @Test
     void VekSaltadorPrefiereOpcionAtaqueEdificioFrenteAAtaqueMech(){
-        Casilla casillavek=new Casilla(new Coordenada(3,0));
-        Casilla casillaEsperada=new Casilla(new Coordenada(2,0));
         Casilla casillaEdificio=new Casilla(new Coordenada(1,0));
+        Casilla casillaEsperada=new Casilla(new Coordenada(2,0));
+        Casilla casillavek=new Casilla(new Coordenada(3,0));
         Casilla casillamech=new Casilla(new Coordenada(4,0));
         // |  E  |    |Vek |Mech |
         //    1    2    3    4
@@ -88,11 +88,11 @@ public class CasoDeUso9Test {
         casillavek.recibirPieza(vek);
         casillamech.recibirPieza(mech);
 
-        //Opcion  opcionAtaqueMech = new OpcionAtaqueMech(aMech,new Coordenada(3,0)); // no se hace falta ya que tiene la trayectoria
-        Opcion  opcionAtaqueEdificio = new OpcionAtaqueEdificio(aEdificio,new Coordenada(2,0)); // no se hace falta ya que tiene la trayectoria
-        //Decision decisionTomada= vek.tomarDecision(List.of(opcionAtaqueMech,opcionAtaqueEdificio));
-        //decisionTomada.ejecutar();
-//        assertFalse(casillaEsperada.estaLibre());
-//        assertTrue(casillavek.estaLibre());
+        Opcion  opcionAtaqueEdificio = new OpcionAtaqueEdificio(aEdificio,new Coordenada(1,0));
+        Opcion  opcionAtaqueMech = new OpcionAtaqueMech(aMech,new Coordenada(4,0));
+        Decision decisionTomada= vek.tomarDecision(List.of(opcionAtaqueMech,opcionAtaqueEdificio));
+        decisionTomada.ejecutar();
+        assertFalse(casillaEsperada.estaLibre());
+        assertTrue(casillavek.estaLibre());
     }
 }

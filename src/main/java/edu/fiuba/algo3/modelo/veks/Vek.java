@@ -3,6 +3,10 @@ package edu.fiuba.algo3.modelo.veks;
 import edu.fiuba.algo3.modelo.Casilla;
 import edu.fiuba.algo3.modelo.Coordenada;
 import edu.fiuba.algo3.modelo.unidades.Unidad;
+import edu.fiuba.algo3.modelo.veks.comportamiento.AnuncioDeAtaque;
+import edu.fiuba.algo3.modelo.veks.comportamiento.AnuncioNulo;
+import edu.fiuba.algo3.modelo.veks.comportamiento.AnuncioReal;
+import edu.fiuba.algo3.modelo.veks.comportamiento.DecisionAtaqueEdificio;
 
 import java.util.List;
 
