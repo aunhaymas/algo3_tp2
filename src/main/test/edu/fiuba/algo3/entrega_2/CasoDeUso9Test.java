@@ -36,6 +36,9 @@ import edu.fiuba.algo3.modelo.mechs.MechDeArtilleria;
 import edu.fiuba.algo3.modelo.terrenos.Edificio;
 import edu.fiuba.algo3.modelo.unidades.Pieza;
 import edu.fiuba.algo3.modelo.unidades.PiezaEdificio;
+import edu.fiuba.algo3.modelo.veks.Decision;
+import edu.fiuba.algo3.modelo.veks.Opcion;
+import edu.fiuba.algo3.modelo.veks.OpcionAtaqueEdificio;
 import edu.fiuba.algo3.modelo.veks.Saltador;
 import org.junit.jupiter.api.Test;
 
@@ -60,7 +63,7 @@ public class CasoDeUso9Test {
 
         casillaEdificio.recibirPieza(edificio);
         casillavek.recibirPieza(vek);
-        Opcion  opcionAtaqueEdificio = new OpcionAtaqueEdificio(aEdificio,new Coordenada(2,0)); // no se hace falta ya que tiene la trayectoria
+        Opcion opcionAtaqueEdificio = new OpcionAtaqueEdificio(aEdificio,new Coordenada(1,0));
         Decision decisionTomada= vek.tomarDecision(List.of(opcionAtaqueEdificio));
         decisionTomada.ejecutar();
         assertFalse(casillaEsperada.estaLibre());
