@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.empujes.Empuje;
 import edu.fiuba.algo3.modelo.empujes.EmpujeNulo;
 import edu.fiuba.algo3.modelo.excepciones.CasillaVaciaException;
 import edu.fiuba.algo3.modelo.unidades.Pieza;
+import edu.fiuba.algo3.modelo.veks.Vek;
 
 public class EstadoVacia implements EstadoCasilla{
     @Override
@@ -39,5 +40,15 @@ public class EstadoVacia implements EstadoCasilla{
     @Override
     public void empujarA(Casilla origen, Casilla destino) {
 
+    }
+
+    @Override
+    public EstadoCasilla emergencia(Vek vek){
+        return new EstadoEmergencia(vek);
+    }
+
+    @Override
+    public EstadoCasilla resolverEmergenciaIniciarTurno(){
+        return this;
     }
 }

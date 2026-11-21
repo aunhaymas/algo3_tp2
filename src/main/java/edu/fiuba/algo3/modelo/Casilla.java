@@ -5,7 +5,6 @@ import edu.fiuba.algo3.modelo.empujes.*;
 import edu.fiuba.algo3.modelo.estadoCasilla.EstadoCasilla;
 import edu.fiuba.algo3.modelo.estadoCasilla.EstadoOcupada;
 import edu.fiuba.algo3.modelo.estadoCasilla.EstadoVacia;
-import edu.fiuba.algo3.modelo.excepciones.CasillaVaciaException;
 import edu.fiuba.algo3.modelo.excepciones.TrayectoriaInvalidaException;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.terrenos.Suelo;
@@ -14,6 +13,7 @@ import edu.fiuba.algo3.modelo.unidades.Atacable;
 import edu.fiuba.algo3.modelo.unidades.Pieza;
 import edu.fiuba.algo3.modelo.unidades.PiezaNula;
 import edu.fiuba.algo3.modelo.unidades.Unidad;
+import edu.fiuba.algo3.modelo.veks.Vek;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -196,4 +196,12 @@ public class Casilla implements Atacable{
     // public void recibirAtaque(Ataque ataque) {
     //     this.estado.recibirAtaque(ataque,this.coordenada);
     // }
+
+    public void emergencia(Vek vek){
+        this.estado = this.estado.emergencia(vek);
+    }
+
+    public void resolverEmergencia(){
+        this.estado = this.estado.resolverEmergenciaIniciarTurno();
+    }
 }

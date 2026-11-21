@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.ataques.DanioColision;
 import edu.fiuba.algo3.modelo.empujes.Empuje;
 import edu.fiuba.algo3.modelo.empujes.EmpujeNulo;
 import edu.fiuba.algo3.modelo.unidades.Pieza;
+import edu.fiuba.algo3.modelo.veks.Vek;
 
 public class EstadoOcupada implements EstadoCasilla{
     private final Pieza pieza;
@@ -44,5 +45,15 @@ public class EstadoOcupada implements EstadoCasilla{
     @Override
     public void empujarA(Casilla origen, Casilla destino) {
         destino.recibirEmpuje(origen,this.pieza);
+    }
+
+    @Override
+    public EstadoCasilla emergencia(Vek vek){
+        return new EstadoEmergenciaFallida(this.pieza);
+    }
+
+    @Override
+    public EstadoCasilla resolverEmergenciaIniciarTurno(){
+        return this;
     }
 }

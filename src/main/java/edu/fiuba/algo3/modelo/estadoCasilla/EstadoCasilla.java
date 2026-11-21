@@ -5,6 +5,8 @@ import edu.fiuba.algo3.modelo.Coordenada;
 import edu.fiuba.algo3.modelo.ataques.Ataque;
 import edu.fiuba.algo3.modelo.empujes.Empuje;
 import edu.fiuba.algo3.modelo.unidades.Pieza;
+import edu.fiuba.algo3.modelo.unidades.Unidad;
+import edu.fiuba.algo3.modelo.veks.Vek;
 
 public interface EstadoCasilla {
     public EstadoCasilla recibirEmpuje(Casilla origen, Casilla destino, Pieza pieza);
@@ -17,4 +19,8 @@ public interface EstadoCasilla {
     boolean tienePieza(Pieza pieza);
 
     void empujarA(Casilla origen, Casilla destino);
+
+    EstadoCasilla emergencia(Vek vek);
+
+    EstadoCasilla resolverEmergenciaIniciarTurno();
 }
