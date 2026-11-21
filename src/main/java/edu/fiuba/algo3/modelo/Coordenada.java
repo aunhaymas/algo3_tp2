@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.excepciones.PosicionOcupadaException;
 import edu.fiuba.algo3.modelo.excepciones.TrayectoriaInvalidaException;
 
 import java.util.ArrayList;
@@ -33,6 +34,10 @@ public class Coordenada {
     }
     public Coordenada trasladar(Coordenada cambio) {
         return new Coordenada(this.x + cambio.x,this.y +cambio.y);
+    }
+
+    public void throwPosicionOcupada() {
+        throw new PosicionOcupadaException(x, y);
     }
 
     //obligatorio para usar el hashmap
