@@ -60,9 +60,6 @@ public class Tablero {
             throw new CoordenadaInvalidaException("La coordenada esta fuera de los limites del tablero!");
         }
         Casilla casillaObjetivo = obtenerCasilla(coordenada);
-        if (!casillaObjetivo.estaLibre()) {
-            throw new PosicionOcupadaException(String.format("No se puede colocar la pieza, la posición (%d, %d) ya está ocupada.", coordenada.getX(), coordenada.getY()));
-        }   
         casillaObjetivo.recibirPieza(pieza);
     }
 
@@ -73,9 +70,6 @@ public class Tablero {
     public void moverPieza(Coordenada origen, Coordenada destino) {
         Casilla coordenadaOrigen = obtenerCasilla(origen);
         Casilla coordenadaDestino = obtenerCasilla(destino);
-        if (!coordenadaDestino.estaLibre()) {
-            throw new PosicionOcupadaException(String.format("No se puede mover la pieza, la posición de destino (%d, %d) está ocupada.", destino.getX(), destino.getY()));
-        }
         coordenadaOrigen.moverContenidoA(coordenadaDestino);
     }
 
