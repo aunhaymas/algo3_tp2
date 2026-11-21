@@ -1,13 +1,17 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.excepciones.MovimientoInvalidoException;
 import edu.fiuba.algo3.modelo.excepciones.MovimientoNoCancelable;
 import edu.fiuba.algo3.modelo.excepciones.MovimientoYaCancelado;
-import edu.fiuba.algo3.modelo.excepciones.MovimientoInvalidoException;
-import edu.fiuba.algo3.modelo.excepciones.MovimientoNoCancelable;
+import edu.fiuba.algo3.modelo.mechs.Mech;
+import edu.fiuba.algo3.modelo.mechs.MechDeArtilleria;
+import edu.fiuba.algo3.modelo.mechs.MechDeCanon;
+import edu.fiuba.algo3.modelo.mechs.MechDeCombate;
+import edu.fiuba.algo3.modelo.tablero.ParserTablero;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
+import edu.fiuba.algo3.modelo.terrenos.TerrenosFactory;
+import edu.fiuba.algo3.modelo.veks.Vek;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -111,9 +115,7 @@ public class GestorMovimientoTest {
 
 		comando.ejecutar();
 		mechCombate.atacar(vek);
-		assertThrows(MovimientoNoCancelable.class, () -> {
-			comando.deshacer();
-		});
+		assertThrows(MovimientoNoCancelable.class, comando::deshacer);
 	}
 	@Test
 	public void comandoNoPuedeDeshacerMovimientoMasDeUnaVezPorTurno() {

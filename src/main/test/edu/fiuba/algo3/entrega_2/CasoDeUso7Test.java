@@ -1,9 +1,15 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.mechs.Mech;
+import edu.fiuba.algo3.modelo.mechs.MechDeCanon;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.veks.AnuncioDeAtaque;
+import edu.fiuba.algo3.modelo.veks.Avispon;
 import edu.fiuba.algo3.modelo.veks.RegistroDeAtaques;
 import edu.fiuba.algo3.modelo.veks.Saltador;
+import edu.fiuba.algo3.modelo.veks.Vek;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -29,34 +35,63 @@ Emergencia: aparece el nuevo Vek en la casilla marcada.
 // 1) Todos los vek se mueven
 // 2) Todos los vek anuncian su ataque
 public class CasoDeUso7Test {
+    private Coordenada coordenada01;
+    private Coordenada coordenada02;
+    private Coordenada coordenada03;
+    private Coordenada coordenada04;
+
+    private Coordenada coordenada11;
+    private Coordenada coordenada12;
+    private Coordenada coordenada13;
+    private Coordenada coordenada14;
+    private RegistroDeAtaques registroDeAtaques;
+
+    @BeforeEach
+    public void setUp() {
+        coordenada01 = new Coordenada(0,1);
+        coordenada02 = new Coordenada(0,2);
+        coordenada03 = new Coordenada(0,3);
+        coordenada04 = new Coordenada(0,4);
+
+        coordenada11 = new Coordenada(1,1);
+        coordenada12 = new Coordenada(1,2);
+        coordenada13 = new Coordenada(1,3);
+        coordenada14 = new Coordenada(1,4);
+
+        registroDeAtaques = new RegistroDeAtaques();
+    }
     @Test
     public void anuncioDeAtaqueDelVekNoDaniaAlMech(){
         Vek saltador = new Saltador(); // 2 de daño
         Mech mech = new MechDeCanon(); // 3 de vida
-        Casilla casillaMech = new Casilla(new Coordenada(1,1));
+        Coordenada origen = coordenada01;
+        Coordenada objetivo = coordenada11;
+        Casilla casillaMech = new Casilla(objetivo);
         casillaMech.recibirPieza(mech);
 
         // Esta entidad puede ser modificada en fase Jugador
         RegistroDeAtaques registroDeAtaques= new RegistroDeAtaques();
         // FaseVek
-        AnuncioDeAtaque anuncioDeAtaque = saltador.anunciarAtaque(casillaMech);
-        registroDeAtaques.registrarAtaque(anuncioDeAtaque);
+        AnuncioDeAtaque anuncioReal = saltador.anunciarAtaque(objetivo);
+        registroDeAtaques.registrarAtaque(anuncioReal);
         assertEquals(3,mech.getVida());
     }
     @Test
     public void anuncioDeAtaqueDelVekDaniaAlMechEnFaseDeResolucion(){
         Vek saltador = new Saltador(); // 2 de daño
         Mech mech = new MechDeCanon(); // 3 de vida
-        Casilla casillaMech = new Casilla(new Coordenada(1,1));
+        Casilla casillaOrigen = new Casilla(coordenada01);
+        casillaOrigen.recibirPieza(saltador);
+        Coordenada objetivo = coordenada11;
+        Casilla casillaMech = new Casilla(objetivo);
         casillaMech.recibirPieza(mech);
-
+        Tablero contexto = new Tablero(List.of(casillaOrigen,casillaMech));
         // Esta entidad puede ser modificada en fase Jugador
         RegistroDeAtaques registroDeAtaques= new RegistroDeAtaques();
         // FaseVek
-        AnuncioDeAtaque anuncioDeAtaque = saltador.anunciarAtaque(casillaMech);
-        registroDeAtaques.registrarAtaque(anuncioDeAtaque);
-
-        registroDeAtaques.ejecutarSiguienteAtaque();
+        AnuncioDeAtaque anuncioReal = saltador.anunciarAtaque(objetivo);
+        registroDeAtaques.registrarAtaque(anuncioReal);
+        registroDeAtaques.ejecutarSiguienteAtaque(contexto);
         assertEquals(1,mech.getVida());
     }
 
@@ -67,50 +102,66 @@ public class CasoDeUso7Test {
         Vek avispon2 = new Avispon(); // 2 de daño
         Mech mech1 = new MechDeCanon(); // 3 de vida
         Mech mech2 = new MechDeCanon(); // 3 de vida
-        Casilla casillaMech = new Casilla(new Coordenada(1,1));
-        Casilla casillaMech2 = new Casilla(new Coordenada(1,2));
-        casillaMech.recibirPieza(mech1);
+
+        Coordenada origen1 = coordenada01;
+        Coordenada origen2 = coordenada02;
+        Coordenada objetivo1 = coordenada11;
+        Coordenada objetivo2 = coordenada12;
+
+        Casilla casillaOrigen1 = new Casilla(origen1);
+        Casilla casillaOrigen2 = new Casilla(origen2);
+        Casilla casillaMech1 = new Casilla(objetivo1);
+        Casilla casillaMech2 = new Casilla(objetivo2);
+
+        casillaOrigen1.recibirPieza(avispon1);
+        casillaOrigen2.recibirPieza(avispon2);
+        casillaMech1.recibirPieza(mech1);
         casillaMech2.recibirPieza(mech2);
 
-        // Esta entidad puede ser modificada en fase Jugador
+        Tablero contexto = new Tablero(List.of(casillaOrigen1, casillaOrigen2, casillaMech1, casillaMech2));
         RegistroDeAtaques registroDeAtaques= new RegistroDeAtaques();
+
         // FaseVek
-        AnuncioDeAtaque anuncioDeAtaque1 = avispon1.anunciarAtaque(casillaMech);
-        AnuncioDeAtaque anuncioDeAtaque2 = avispon2.anunciarAtaque(casillaMech2);
-        registroDeAtaques.registrarAtaque(anuncioDeAtaque1);
-        registroDeAtaques.registrarAtaque(anuncioDeAtaque2);
+        AnuncioDeAtaque anuncio1 = avispon1.anunciarAtaque(objetivo1);
+        AnuncioDeAtaque anuncio2 = avispon2.anunciarAtaque(objetivo2);
+
+        registroDeAtaques.registrarAtaque(anuncio1);
+        registroDeAtaques.registrarAtaque(anuncio2);
         //Act
-        registroDeAtaques.ejecutarSiguienteAtaque();
+        registroDeAtaques.ejecutarSiguienteAtaque(contexto);
         //Assert
         assertEquals(2,mech1.getVida());
         assertEquals(3,mech2.getVida());
     }
 
     @Test
-    public void ejecutarSiguienteDosVecesEjecutaElPrimerYultimoAtaque(){
+    public void ejecutarSiguienteDosVecesEjecutaElPrimerYultimoAtaque() {
         //Arrange
         Vek avispon1 = new Avispon(); // 2 de daño
         Vek avispon2 = new Avispon(); // 2 de daño
         Mech mech1 = new MechDeCanon(); // 3 de vida
         Mech mech2 = new MechDeCanon(); // 3 de vida
-        Casilla casillaMech = new Casilla(new Coordenada(1,1));
-        Casilla casillaMech2 = new Casilla(new Coordenada(1,2));
+        Casilla casillaAvispon1 = new Casilla(coordenada01);
+        Casilla casillaAvispon2 = new Casilla(coordenada02);
+        Casilla casillaMech = new Casilla(coordenada11);
+        Casilla casillaMech2 = new Casilla(coordenada12);
+        casillaAvispon1.recibirPieza(avispon1);
+        casillaAvispon2.recibirPieza(avispon2);
         casillaMech.recibirPieza(mech1);
         casillaMech2.recibirPieza(mech2);
-
         // Esta entidad puede ser modificada en fase Jugador
-        RegistroDeAtaques registroDeAtaques= new RegistroDeAtaques();
         // FaseVek
-        AnuncioDeAtaque anuncioDeAtaque1 = avispon1.anunciarAtaque(casillaMech);
-        AnuncioDeAtaque anuncioDeAtaque2 = avispon2.anunciarAtaque(casillaMech2);
-        registroDeAtaques.registrarAtaque(anuncioDeAtaque1);
-        registroDeAtaques.registrarAtaque(anuncioDeAtaque2);
+        AnuncioDeAtaque anuncioReal1 = avispon1.anunciarAtaque(coordenada11);
+        AnuncioDeAtaque anuncioReal2 = avispon2.anunciarAtaque(coordenada12);
+        Tablero contexto = new Tablero(List.of(casillaMech, casillaMech2,casillaAvispon1,casillaAvispon2));
+        registroDeAtaques.registrarAtaque(anuncioReal1);
+        registroDeAtaques.registrarAtaque(anuncioReal2);
         //Act
-        registroDeAtaques.ejecutarSiguienteAtaque();
-        registroDeAtaques.ejecutarSiguienteAtaque();
+        registroDeAtaques.ejecutarSiguienteAtaque(contexto);
+        registroDeAtaques.ejecutarSiguienteAtaque(contexto);
         //Assert
-        assertEquals(2,mech1.getVida());
-        assertEquals(2,mech2.getVida());
+        assertEquals(2, mech1.getVida());
+        assertEquals(2, mech2.getVida());
     }
 
 }

@@ -1,5 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.excepciones.TrayectoriaInvalidaException;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Coordenada {
@@ -27,6 +31,9 @@ public class Coordenada {
     public Coordenada trasladar(int movX, int movY) {
         return new Coordenada(this.x + movX, this.y + movY);
     }
+    public Coordenada trasladar(Coordenada cambio) {
+        return new Coordenada(this.x + cambio.x,this.y +cambio.y);
+    }
 
     //obligatorio para usar el hashmap
     @Override
@@ -42,4 +49,29 @@ public class Coordenada {
         return Objects.hash(x, y); 
     }
 
+    public Coordenada multiplicar(int i) {
+        return new Coordenada(this.x*(i),this.y*(i));
+    }
+    public List<Coordenada> trayectoriaA(Coordenada destino){
+        Coordenada direccion = this.direccionA(destino);
+        List<Coordenada> trayectoria = new ArrayList<Coordenada>();
+        Coordenada actual = this;
+        while (!actual.equals(destino)) {
+            trayectoria.add(actual);
+            actual = actual.trasladar(direccion);
+        }
+        trayectoria.add(actual);
+        return trayectoria;
+    }
+
+    public Coordenada direccionA(Coordenada destino) {
+        if (this.x != destino.x && this.y != destino.y) { throw new TrayectoriaInvalidaException(); }
+        Coordenada desplazo = destino.trasladar(this.multiplicar(-1));
+        return direccion(desplazo);
+    }
+    private Coordenada direccion(Coordenada desplazo){
+        int x = Integer.compare(desplazo.x, 0);
+        int y = Integer.compare(desplazo.y, 0);
+        return new Coordenada(x,y);
+    }
 }

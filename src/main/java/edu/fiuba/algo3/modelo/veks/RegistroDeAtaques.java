@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo.veks;
 
+import edu.fiuba.algo3.modelo.tablero.Tablero;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -10,12 +12,12 @@ public class RegistroDeAtaques {
         this.ataques = new LinkedList<>();
     }
 
-    public void registrarAtaque(AnuncioDeAtaque anuncioDeAtaque) {
-        this.ataques.add(anuncioDeAtaque);
+    public void registrarAtaque(AnuncioDeAtaque anuncioReal) {
+        this.ataques.add(anuncioReal);
     }
 
-    public void ejecutarSiguienteAtaque() {
+    public void ejecutarSiguienteAtaque(Tablero contexto) {
         AnuncioDeAtaque ataque = this.ataques.poll();
-        ataque.ejecutarAtaque();
+        ataque.ejecutarAtaque(contexto);
     }
 }
