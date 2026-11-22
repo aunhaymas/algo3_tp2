@@ -6,6 +6,9 @@ import edu.fiuba.algo3.modelo.mechs.MechDeCanon;
 import edu.fiuba.algo3.modelo.mechs.MechDeCombate;
 
 import edu.fiuba.algo3.modelo.unidades.PiezaMontania;
+import edu.fiuba.algo3.modelo.veks.Luciernaga;
+import edu.fiuba.algo3.modelo.veks.Saltador;
+import edu.fiuba.algo3.modelo.veks.Vek;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Test;
 
@@ -32,6 +35,20 @@ public class MovimientoTerrestreTest {
         Casilla casillaOcupada = Casilla.crearEn(0,0);
         casillaOcupada.recibirPieza(new PiezaMontania());
         assertFalse(mechCanon.puedeTransitar(casillaOcupada));
+    }
+    @Test
+    public void saltadorNoPuedeAtravesarCasillaOcupada(){
+        Vek saltador = new Saltador();
+        Casilla casillaOcupada = Casilla.crearEn(0,0);
+        casillaOcupada.recibirPieza(new PiezaMontania());
+        assertFalse(saltador.puedeTransitar(casillaOcupada));
+    }
+    @Test
+    public void luciernagaNoPuedeAtravesarCasillaOcupada(){
+        Vek lucienrnaga = new Luciernaga();
+        Casilla casillaOcupada = Casilla.crearEn(0,0);
+        casillaOcupada.recibirPieza(new PiezaMontania());
+        assertFalse(lucienrnaga.puedeTransitar(casillaOcupada));
     }
 
 }
