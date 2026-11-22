@@ -23,6 +23,9 @@ public class Casilla implements Atacable{
     private Coordenada coordenada;
     private TipoTerreno terrenoCasilla;
     private EstadoCasilla estado;
+    public static Casilla crearEn(int x, int y){
+        return new Casilla(new Coordenada(x,y));
+    }
     public Casilla(Coordenada coordenada) {
         this.coordenada=coordenada;
         this.estado = new EstadoVacia();

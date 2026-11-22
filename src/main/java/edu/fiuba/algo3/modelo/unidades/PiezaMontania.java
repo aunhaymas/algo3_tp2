@@ -9,7 +9,7 @@ import edu.fiuba.algo3.modelo.empujes.EmpujeNulo;
 public class PiezaMontania implements Pieza{
     @Override
     public void entrarEn(Casilla casilla) {
-        casilla.recibirPieza(this);
+
     }
 
     @Override

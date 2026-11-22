@@ -101,4 +101,7 @@ public abstract class Unidad implements Dañable, Pieza,Atacable {
         this.casillaActual = casilla;
         casilla.aplicarEfecto(this);
     }
+	public boolean puedeTransitar(Casilla casilla){
+		return false;
+	}
 }
