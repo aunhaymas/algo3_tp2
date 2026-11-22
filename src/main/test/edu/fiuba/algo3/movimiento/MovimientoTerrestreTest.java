@@ -58,6 +58,20 @@ public class MovimientoTerrestreTest {
         casillaOcupada.recibirPieza(new PiezaMontania());
         assertTrue(avispon.puedeTransitar(casillaOcupada));
     }
-
-
+    @Test
+    public void todasLasUnidadesPuedeTransitarCasillasVacias(){
+        Vek avispon = new Avispon();
+        Vek saltador = new Saltador();
+        Vek luciernaga = new Luciernaga();
+        Mech mechCanon = new MechDeCanon();
+        Mech mechArtillero = new MechDeArtilleria();
+        Mech mechCombate = new MechDeCombate();
+        Casilla casillaVacia = Casilla.crearEn(0,0);
+        assertTrue(avispon.puedeTransitar(casillaVacia));
+        assertTrue(saltador.puedeTransitar(casillaVacia));
+        assertTrue(luciernaga.puedeTransitar(casillaVacia));
+        assertTrue(mechCanon.puedeTransitar(casillaVacia));
+        assertTrue(mechArtillero.puedeTransitar(casillaVacia));
+        assertTrue(mechCombate.puedeTransitar(casillaVacia));
+    }
 }
