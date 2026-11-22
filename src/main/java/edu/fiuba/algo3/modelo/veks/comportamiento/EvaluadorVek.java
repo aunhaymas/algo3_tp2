@@ -9,8 +9,9 @@ import java.util.List;
 
 public class EvaluadorVek implements Evaluador{
     private Decision decisionTomada;
-    OpcionAtaqueEdificio ataqueEdificio;
-    OpcionAtaqueMech ataqueMech;
+    private OpcionAtaqueEdificio ataqueEdificio;
+    private OpcionAtaqueMech ataqueMech;
+    private OpcionAcercarseAEdificio acercarseAEdificio;
 
     @Override
     public Decision tomarDecision(List<Opcion> opciones, Vek vek) {
@@ -21,7 +22,7 @@ public class EvaluadorVek implements Evaluador{
     private Decision seleccionarMejorOpcion(Vek vek) {
         if (ataqueEdificio != null) return new DecisionAtaqueEdificio(ataqueEdificio,vek);
         if (ataqueMech!=null) return new DecisionAtaqueMech(ataqueMech,vek);
-        return null;
+        return new DecisionAcercarseAEdificio(acercarseAEdificio,vek);
     }
 
     @Override
@@ -32,6 +33,11 @@ public class EvaluadorVek implements Evaluador{
     @Override
     public void evaluarOpcionAtaqueEdificio(OpcionAtaqueEdificio opcion) {
         ataqueEdificio=opcion;
+    }
+
+    @Override
+    public void evaluarOpcionAcercarseEdificio(OpcionAcercarseAEdificio opcion) {
+        acercarseAEdificio = opcion;
     }
 
 

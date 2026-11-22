@@ -12,4 +12,6 @@ public interface Evaluador {
 
     void evaluarOpcionAtaqueMech(OpcionAtaqueMech opcion);
     void evaluarOpcionAtaqueEdificio(OpcionAtaqueEdificio opcion);
+
+    void evaluarOpcionAcercarseEdificio(OpcionAcercarseAEdificio opcion);
 }

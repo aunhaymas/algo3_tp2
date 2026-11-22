@@ -37,6 +37,7 @@ import edu.fiuba.algo3.modelo.unidades.Pieza;
 import edu.fiuba.algo3.modelo.unidades.PiezaEdificio;
 import edu.fiuba.algo3.modelo.veks.Decision;
 import edu.fiuba.algo3.modelo.veks.Opcion;
+import edu.fiuba.algo3.modelo.veks.comportamiento.OpcionAcercarseAEdificio;
 import edu.fiuba.algo3.modelo.veks.comportamiento.OpcionAtaqueEdificio;
 import edu.fiuba.algo3.modelo.veks.Saltador;
 import edu.fiuba.algo3.modelo.veks.comportamiento.OpcionAtaqueMech;
@@ -95,4 +96,32 @@ public class CasoDeUso9Test {
         assertFalse(casillaEsperada.estaLibre());
         assertTrue(casillavek.estaLibre());
     }
+
+    @Test
+    void VekSaltadorPrefiereOpcionAtaqueMechFrenteAAcercarseAEdificio(){
+        Casilla casillaEdificio=new Casilla(new Coordenada(1,0));
+        Casilla casillaEsperada=new Casilla(new Coordenada(2,0));
+        Casilla casillavek=new Casilla(new Coordenada(3,0));
+        Casilla casillamech=new Casilla(new Coordenada(4,0));
+        // |  E  |    |Vek |Mech |
+        //    1    2    3    4
+        Trayectoria aEdificio = new Trayectoria(List.of(casillavek,casillaEsperada));
+        Trayectoria aMech = new Trayectoria(List.of(casillavek));
+
+        Saltador vek = new Saltador();
+        Mech mech = new MechDeArtilleria();
+        Pieza edificio = new PiezaEdificio(new RedElectrica());
+
+        casillaEdificio.recibirPieza(edificio);
+        casillavek.recibirPieza(vek);
+        casillamech.recibirPieza(mech);
+
+        Opcion  opcionAcercarseAEdificio = new OpcionAcercarseAEdificio(aEdificio);
+        Opcion  opcionAtaqueMech = new OpcionAtaqueMech(aMech,new Coordenada(4,0));
+        Decision decisionTomada= vek.tomarDecision(List.of(opcionAcercarseAEdificio,opcionAtaqueMech));
+        decisionTomada.ejecutar();
+        assertFalse(casillavek.estaLibre());
+        assertTrue(casillaEsperada.estaLibre());
+    }
+
 }
