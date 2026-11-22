@@ -122,6 +122,7 @@ public class CasoDeUso9Test {
         decisionTomada.ejecutar();
         assertFalse(casillavek.estaLibre());
         assertTrue(casillaEsperada.estaLibre());
+        assertEquals(2,mech.getVida());
     }
 
 }
