@@ -33,6 +33,11 @@ public class Muerta extends EstadoUnidad {
     }
 
     @Override
+    public boolean estaDestruida() {
+        return true;
+    }
+
+    @Override
     public Empuje calcularEmpuje(Ataque ataque, Coordenada origen) {
         return new EmpujeNulo();
     }

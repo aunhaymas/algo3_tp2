@@ -16,7 +16,7 @@ public abstract class EstadoUnidad {
 	public abstract void aplicarA(Unidad unidad);
 
 	public abstract boolean estaContaminado();
-
+	public  abstract boolean estaDestruida();
 	public Empuje calcularEmpuje(Ataque ataque, Coordenada origen) {
 		return ataque.generarEmpujeDesde(origen);
 	}

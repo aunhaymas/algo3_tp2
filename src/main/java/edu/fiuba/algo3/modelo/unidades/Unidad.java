@@ -6,10 +6,7 @@ import edu.fiuba.algo3.modelo.Trayectoria;
 import edu.fiuba.algo3.modelo.armas.Arma;
 import edu.fiuba.algo3.modelo.ataques.Ataque;
 import edu.fiuba.algo3.modelo.empujes.Empuje;
-import edu.fiuba.algo3.modelo.estadosUnidad.Contaminado;
-import edu.fiuba.algo3.modelo.estadosUnidad.Estable;
-import edu.fiuba.algo3.modelo.estadosUnidad.EstadoUnidad;
-import edu.fiuba.algo3.modelo.estadosUnidad.Sumergido;
+import edu.fiuba.algo3.modelo.estadosUnidad.*;
 import edu.fiuba.algo3.modelo.excepciones.CantidadMovimientosInvalidaException;
 import edu.fiuba.algo3.modelo.excepciones.PuntosVidaInvalidoException;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
@@ -54,11 +51,14 @@ public abstract class Unidad implements Dañable, Pieza,Atacable {
 	// https://docs.google.com/presentation/d/1lf1sGq9iIxYKDetrzGbqh8L9fd5YhxZXutqcoW9jrlM/edit?slide=id.g52d1aa7109_0_15#slide=id.g52d1aa7109_0_15
 	public void recibirDaño(int puntos) {
 		this.vida -= this.estadoUnidad.calcularDañoRecibido(puntos);
+		if (this.vida<=0){
+			this.estadoUnidad = new Muerta();
+		}
 		//this.estadoUnidad = this.estadoUnidad.recibirDanio(puntos);
 	}
-private void recibirDanio(int danio){this.vida -= danio;}
+//private void recibirDanio(int danio){this.vida -= danio;}
 	public boolean estaDestruida() {
-		return this.vida <= 0;
+		return this.estadoUnidad.estaDestruida();
 	}
 
 	public void sumergir() {

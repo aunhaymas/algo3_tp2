@@ -14,7 +14,7 @@ public class DecisionAtaqueMech implements Decision {
     }
 
     @Override
-    public void ejecutar() {
-        opcion.ejecutar(this.vek);
+    public AnuncioDeAtaque ejecutar() {
+        return opcion.ejecutar(this.vek);
     }
 }

@@ -47,4 +47,5 @@ public class Vek extends Unidad {
 		// la estrategia evaluador decide que opcion es la mejor
 		return this.evaluadorOpciones.tomarDecision(opciones,this);
 	}
+
 }

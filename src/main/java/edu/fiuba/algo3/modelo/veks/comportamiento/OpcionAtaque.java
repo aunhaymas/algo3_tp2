@@ -16,8 +16,8 @@ public abstract class OpcionAtaque implements Opcion {
     }
 
     @Override
-    public void ejecutar(Vek vek) {
+    public AnuncioDeAtaque ejecutar(Vek vek) {
         trayectoria.ejecutarTraslado();
-        vek.anunciarAtaque(this.objetivo);
+        return vek.anunciarAtaque(this.objetivo);
     }
 }

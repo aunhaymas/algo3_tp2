@@ -33,15 +33,19 @@ import edu.fiuba.algo3.modelo.RedElectrica;
 import edu.fiuba.algo3.modelo.Trayectoria;
 import edu.fiuba.algo3.modelo.mechs.Mech;
 import edu.fiuba.algo3.modelo.mechs.MechDeArtilleria;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.unidades.Pieza;
 import edu.fiuba.algo3.modelo.unidades.PiezaEdificio;
 import edu.fiuba.algo3.modelo.veks.Decision;
 import edu.fiuba.algo3.modelo.veks.Opcion;
+import edu.fiuba.algo3.modelo.veks.Vek;
+import edu.fiuba.algo3.modelo.veks.comportamiento.AnuncioDeAtaque;
 import edu.fiuba.algo3.modelo.veks.comportamiento.OpcionAcercarseAEdificio;
 import edu.fiuba.algo3.modelo.veks.comportamiento.OpcionAtaqueEdificio;
 import edu.fiuba.algo3.modelo.veks.Saltador;
 import edu.fiuba.algo3.modelo.veks.comportamiento.OpcionAtaqueMech;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.List;
 
@@ -81,9 +85,10 @@ public class CasoDeUso9Test {
         Trayectoria aEdificio = new Trayectoria(List.of(casillavek,casillaEsperada));
         Trayectoria aMech = new Trayectoria(List.of(casillavek));
 
-        Saltador vek = new Saltador();
+        Saltador vek = new Saltador(); // Hace 2 de danio
         Mech mech = new MechDeArtilleria();
-        Pieza edificio = new PiezaEdificio(new RedElectrica());
+        RedElectrica red = new RedElectrica(); // Recibe 1 de danio si edificio se destruye
+        Pieza edificio = new PiezaEdificio(red);
 
         casillaEdificio.recibirPieza(edificio);
         casillavek.recibirPieza(vek);
@@ -92,9 +97,11 @@ public class CasoDeUso9Test {
         Opcion  opcionAtaqueEdificio = new OpcionAtaqueEdificio(aEdificio,new Coordenada(1,0));
         Opcion  opcionAtaqueMech = new OpcionAtaqueMech(aMech,new Coordenada(4,0));
         Decision decisionTomada= vek.tomarDecision(List.of(opcionAtaqueMech,opcionAtaqueEdificio));
-        decisionTomada.ejecutar();
+        AnuncioDeAtaque anuncioDeAtaque =decisionTomada.ejecutar();
+        anuncioDeAtaque.ejecutarAtaque(new Tablero(List.of(casillavek,casillamech,casillaEdificio,casillaEsperada)));
         assertFalse(casillaEsperada.estaLibre());
         assertTrue(casillavek.estaLibre());
+        assertEquals(4,red.integridadActual()); //Se descuenta 1 de red electrica (edificio destruido)
     }
 
     @Test
@@ -103,12 +110,13 @@ public class CasoDeUso9Test {
         Casilla casillaEsperada=new Casilla(new Coordenada(2,0));
         Casilla casillavek=new Casilla(new Coordenada(3,0));
         Casilla casillamech=new Casilla(new Coordenada(4,0));
+        Tablero tablero = new Tablero(List.of(casillavek,casillaEsperada,casillaEdificio,casillamech));
         // |  E  |    |Vek |Mech |
         //    1    2    3    4
         Trayectoria aEdificio = new Trayectoria(List.of(casillavek,casillaEsperada));
         Trayectoria aMech = new Trayectoria(List.of(casillavek));
 
-        Saltador vek = new Saltador();
+        Vek vek = new Saltador();
         Mech mech = new MechDeArtilleria();
         Pieza edificio = new PiezaEdificio(new RedElectrica());
 
@@ -119,10 +127,11 @@ public class CasoDeUso9Test {
         Opcion  opcionAcercarseAEdificio = new OpcionAcercarseAEdificio(aEdificio);
         Opcion  opcionAtaqueMech = new OpcionAtaqueMech(aMech,new Coordenada(4,0));
         Decision decisionTomada= vek.tomarDecision(List.of(opcionAcercarseAEdificio,opcionAtaqueMech));
-        decisionTomada.ejecutar();
+        AnuncioDeAtaque anuncioDeAtaque= decisionTomada.ejecutar(); //Puede retonar un ataque o no
+        anuncioDeAtaque.ejecutarAtaque(tablero);
         assertFalse(casillavek.estaLibre());
         assertTrue(casillaEsperada.estaLibre());
-        assertEquals(2,mech.getVida());
+        assertTrue(mech.estaDestruida());
     }
 
 }

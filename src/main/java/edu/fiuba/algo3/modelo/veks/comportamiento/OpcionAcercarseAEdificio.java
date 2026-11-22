@@ -16,7 +16,8 @@ public class OpcionAcercarseAEdificio implements Opcion {
     }
 
     @Override
-    public void ejecutar(Vek vek) {
+    public AnuncioDeAtaque ejecutar(Vek vek) {
         trayectoria.ejecutarTraslado();
+        return new AnuncioNulo(); // Solo Me Acerco Sin anunciar ataque
     }
 }

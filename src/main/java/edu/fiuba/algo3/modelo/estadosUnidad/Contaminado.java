@@ -28,4 +28,9 @@ public class Contaminado extends EstadoUnidad {
 	public boolean estaContaminado() {
 		return true;
 	}
+
+	@Override
+	public boolean estaDestruida() {
+		return false;
+	}
 }

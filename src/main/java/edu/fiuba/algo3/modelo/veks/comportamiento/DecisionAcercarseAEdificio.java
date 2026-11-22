@@ -14,7 +14,7 @@ public class DecisionAcercarseAEdificio implements Decision {
     }
 
     @Override
-    public void ejecutar() {
-        acercarseAEdificio.ejecutar(vek);
+    public AnuncioDeAtaque ejecutar() {
+        return acercarseAEdificio.ejecutar(vek);
     }
 }
