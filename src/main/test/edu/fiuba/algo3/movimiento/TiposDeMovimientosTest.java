@@ -10,12 +10,11 @@ import edu.fiuba.algo3.modelo.veks.Avispon;
 import edu.fiuba.algo3.modelo.veks.Luciernaga;
 import edu.fiuba.algo3.modelo.veks.Saltador;
 import edu.fiuba.algo3.modelo.veks.Vek;
-import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MovimientoTerrestreTest {
+public class TiposDeMovimientosTest {
     @Test
     public void mechDeCombateNoPuedeAtravesarCasillaOcupada(){
         Mech mechCombate = new MechDeCombate();
