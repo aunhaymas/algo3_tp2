@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.movimiento;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.mechs.Mech;
+import edu.fiuba.algo3.modelo.mechs.MechDeArtilleria;
 import edu.fiuba.algo3.modelo.mechs.MechDeCombate;
 
 import edu.fiuba.algo3.modelo.unidades.PiezaMontania;
@@ -16,6 +17,13 @@ public class MovimientoTerrestreTest {
         Casilla casillaOcupada = Casilla.crearEn(0,0);
         casillaOcupada.recibirPieza(new PiezaMontania());
         assertFalse(mechCombate.puedeTransitar(casillaOcupada));
+    }
+    @Test
+    public void mechDeArtilleriaNoPuedeAtravesarCasillaOcupada(){
+        Mech mechArtillero = new MechDeArtilleria();
+        Casilla casillaOcupada = Casilla.crearEn(0,0);
+        casillaOcupada.recibirPieza(new PiezaMontania());
+        assertFalse(mechArtillero.puedeTransitar(casillaOcupada));
     }
 
 }
