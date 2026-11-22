@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.mechs.MechDeCanon;
 import edu.fiuba.algo3.modelo.mechs.MechDeCombate;
 
 import edu.fiuba.algo3.modelo.unidades.PiezaMontania;
+import edu.fiuba.algo3.modelo.veks.Avispon;
 import edu.fiuba.algo3.modelo.veks.Luciernaga;
 import edu.fiuba.algo3.modelo.veks.Saltador;
 import edu.fiuba.algo3.modelo.veks.Vek;
@@ -50,5 +51,13 @@ public class MovimientoTerrestreTest {
         casillaOcupada.recibirPieza(new PiezaMontania());
         assertFalse(lucienrnaga.puedeTransitar(casillaOcupada));
     }
+    @Test
+    public void avispoSiPuedeAtravesarCasillaOcupada(){
+        Vek avispon = new Avispon();
+        Casilla casillaOcupada = Casilla.crearEn(0,0);
+        casillaOcupada.recibirPieza(new PiezaMontania());
+        assertTrue(avispon.puedeTransitar(casillaOcupada));
+    }
+
 
 }

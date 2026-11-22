@@ -17,6 +17,8 @@ public abstract class Unidad implements Dañable, Pieza,Atacable {
 	protected EstadoUnidad estadoUnidad;
 	private Casilla casillaActual;
 	protected Arma arma;
+	protected TipoMovimiento tipoMovimiento;
+
 	public Unidad(int vida, int movimientos) {
 		if (vida <= 0)
             throw new PuntosVidaInvalidoException("No se pudo crear la unidad. Los puntos de vida deben ser mayores a 0.");
@@ -26,9 +28,13 @@ public abstract class Unidad implements Dañable, Pieza,Atacable {
 
 		this.vida = vida;
 		this.movimientos = movimientos;
+		this.tipoMovimiento = new Terrestre();
 		this.estadoUnidad = new Estable();
 	}
-
+	public Unidad(int vida, int movimientos, TipoMovimiento tipoMovimiento){
+		this(vida,movimientos);
+		this.tipoMovimiento = tipoMovimiento;
+	}
 	public void contaminar() {
 		this.estadoUnidad = new Contaminado();
 	}
@@ -102,6 +108,6 @@ public abstract class Unidad implements Dañable, Pieza,Atacable {
         casilla.aplicarEfecto(this);
     }
 	public boolean puedeTransitar(Casilla casilla){
-		return false;
+		return this.tipoMovimiento.puedeTransitar(casilla);
 	}
 }
