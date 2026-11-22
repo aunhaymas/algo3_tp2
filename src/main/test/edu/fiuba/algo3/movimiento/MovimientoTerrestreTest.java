@@ -15,7 +15,7 @@ public class MovimientoTerrestreTest {
         Mech mechCombate = new MechDeCombate();
         Casilla casillaOcupada = Casilla.crearEn(0,0);
         casillaOcupada.recibirPieza(new PiezaMontania());
-        //assertFalse(mechCombate.puedeTransitar(casillaOcupada));
+        assertFalse(mechCombate.puedeTransitar(casillaOcupada));
     }
 
 }
