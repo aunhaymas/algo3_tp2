@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.Trayectoria;
 import edu.fiuba.algo3.modelo.veks.Opcion;
 import edu.fiuba.algo3.modelo.veks.Vek;
 
-public class OpcionAtaque implements Opcion {
+public abstract class OpcionAtaque implements Opcion {
     private final Coordenada objetivo;
     private final Trayectoria trayectoria;
     // Recibe la trayectoria a una casilla desde donde pueda atacar

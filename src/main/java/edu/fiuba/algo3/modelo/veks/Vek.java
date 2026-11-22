@@ -3,16 +3,15 @@ package edu.fiuba.algo3.modelo.veks;
 import edu.fiuba.algo3.modelo.Casilla;
 import edu.fiuba.algo3.modelo.Coordenada;
 import edu.fiuba.algo3.modelo.unidades.Unidad;
-import edu.fiuba.algo3.modelo.veks.comportamiento.AnuncioDeAtaque;
-import edu.fiuba.algo3.modelo.veks.comportamiento.AnuncioNulo;
-import edu.fiuba.algo3.modelo.veks.comportamiento.AnuncioReal;
-import edu.fiuba.algo3.modelo.veks.comportamiento.DecisionAtaqueEdificio;
+import edu.fiuba.algo3.modelo.veks.comportamiento.*;
 
 import java.util.List;
 
 public class Vek extends Unidad {
 	AnuncioDeAtaque anuncioAtaque;
-    // Temporal
+	private final EvaluadorVek evaluadorOpciones = new EvaluadorVek();
+
+	// Temporal
 	public Vek() {
 		super(3,3);
 		this.anuncioAtaque=new AnuncioNulo();
@@ -44,7 +43,8 @@ public class Vek extends Unidad {
 		return this.anuncioAtaque;
 	}
 
-	public Decision tomarDecision(List<Opcion> opcionAtaqueEdificio) {
-		return new DecisionAtaqueEdificio(opcionAtaqueEdificio.get(0),this);
+	public Decision tomarDecision(List<Opcion> opciones) {
+		// la estrategia evaluador decide que opcion es la mejor
+		return this.evaluadorOpciones.tomarDecision(opciones,this);
 	}
 }

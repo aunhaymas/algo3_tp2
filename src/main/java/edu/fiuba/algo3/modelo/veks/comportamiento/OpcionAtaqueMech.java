@@ -9,4 +9,9 @@ public class OpcionAtaqueMech extends OpcionAtaque {
     public OpcionAtaqueMech(Trayectoria trayectoria, Coordenada objetivo) {
         super(trayectoria, objetivo);
     }
+
+    @Override
+    public void evaluarse(Evaluador evaluador) {
+        evaluador.evaluarOpcionAtaqueMech(this);
+    }
 }
