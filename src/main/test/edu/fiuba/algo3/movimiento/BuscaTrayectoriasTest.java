@@ -17,8 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BuscaTrayectoriasTest {
     @Test
@@ -40,4 +39,25 @@ public class BuscaTrayectoriasTest {
         assertTrue(trayectorias.stream().anyMatch(t -> t.getDestino() == oeste));
     }
 
+    @Test
+    void buscaTrayectoriasNoEncuentraCasillasMasAllaDeUnObstaculo() {
+        Casilla origen = Casilla.crearEn(0, 0);
+        Casilla primera = Casilla.crearEn(1, 0);
+        Casilla obstaculo = Casilla.crearEn(2, 0);
+        Casilla destino = Casilla.crearEn(3, 0);
+        obstaculo.recibirPieza(new PiezaMontania());
+
+        Tablero tablero = new Tablero(
+                List.of(origen,primera,obstaculo,destino)
+        );
+
+        Unidad vek = new Saltador();// movimiento 3
+        BuscaTrayectorias buscador = new BuscadorBfs();
+
+        List<Trayectoria> trayectorias = buscador.trayectoriasDesde(origen.getCoordenada(), vek, tablero);
+
+        assertEquals(1, trayectorias.size());
+        assertTrue(trayectorias.stream().anyMatch(t -> t.getDestino() == primera));
+        assertFalse(trayectorias.stream().anyMatch(t -> t.getDestino() == destino));
+    }
 }

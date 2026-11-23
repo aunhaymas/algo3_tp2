@@ -28,7 +28,7 @@ public class BuscadorBfs implements BuscaTrayectorias {
 
             for (Casilla adyacente : contexto.obtenerAdyacentes(actual)) {
                 if (distancias.containsKey(adyacente)) continue;
-                //if (!unidad.puedeTransitar(adyacente)) continue; //esto puede servirme en el proximo test
+                if (!unidad.puedeTransitar(adyacente)) continue; //esto puede servirme en el proximo test
                 int nuevaDistancia = distanciaActual + 1;
                 anteriores.put(adyacente, actual);
                 distancias.put(adyacente, nuevaDistancia);

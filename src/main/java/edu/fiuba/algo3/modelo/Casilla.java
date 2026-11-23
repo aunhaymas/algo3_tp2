@@ -109,7 +109,7 @@ public class Casilla implements Atacable{
     }
 
     public void recibirPieza(Pieza pieza) {
-        if (!this.estaLibre()) {
+        if (!this.estado.estaLibre()) {
             coordenada.throwPosicionOcupada();
         }
         pieza.entrarEn(this);
