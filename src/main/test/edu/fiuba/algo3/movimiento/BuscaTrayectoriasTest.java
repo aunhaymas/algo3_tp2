@@ -60,4 +60,29 @@ public class BuscaTrayectoriasTest {
         assertTrue(trayectorias.stream().anyMatch(t -> t.getDestino() == primera));
         assertFalse(trayectorias.stream().anyMatch(t -> t.getDestino() == destino));
     }
+    @Test
+    void buscaTrayectoriasPermitrRodearObstaculo(){
+        //  c   c   o
+        //  c   x   c
+
+        Casilla origen = Casilla.crearEn(0, 0);
+        Casilla obstaculo = Casilla.crearEn(1, 0);
+        Casilla primera = Casilla.crearEn(0, 1);
+        Casilla segunda = Casilla.crearEn(1, 1);
+        Casilla destino = Casilla.crearEn(2, 1);
+        obstaculo.recibirPieza(new PiezaMontania());
+
+        Tablero tablero = new Tablero(
+                List.of(origen,primera,segunda,obstaculo,destino)
+        );
+
+        Unidad vek = new Saltador();// movimiento 3
+        BuscaTrayectorias buscador = new BuscadorBfs();
+
+        List<Trayectoria> trayectorias = buscador.trayectoriasDesde(origen.getCoordenada(), vek, tablero);
+
+        assertEquals(3, trayectorias.size()); // hay 3 caminos hasta agotar movimientos
+        assertTrue(trayectorias.stream().anyMatch(t -> t.getDestino() == destino));
+        assertFalse(trayectorias.stream().anyMatch(t -> t.getDestino() == obstaculo));
+    }
 }
