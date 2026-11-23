@@ -102,7 +102,7 @@ public class Tablero {
                 .map(casilla::obtenerAdyacente)
                 .map(this::buscarCasilla)
                 .flatMap(Optional::stream)
-                .toList();
+                .collect(Collectors.toList());
     }
     public Optional<Casilla> buscarCasilla(Coordenada coordenada) {
         return casillas.stream()
