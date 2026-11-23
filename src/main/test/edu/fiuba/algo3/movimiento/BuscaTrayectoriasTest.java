@@ -89,7 +89,7 @@ public class BuscaTrayectoriasTest {
 
 
     @Test
-    void avisponPuedeSaltarObstaculos(){
+    void avisponPuedeSaltarseObstaculos(){
         Casilla origen = Casilla.crearEn(0, 0);
         Casilla primera = Casilla.crearEn(1, 0);
         Casilla obstaculo = Casilla.crearEn(2, 0);
