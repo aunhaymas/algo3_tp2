@@ -85,4 +85,31 @@ public class BuscaTrayectoriasTest {
         assertTrue(trayectorias.stream().anyMatch(t -> t.getDestino() == destino));
         assertFalse(trayectorias.stream().anyMatch(t -> t.getDestino() == obstaculo));
     }
+
+
+
+    @Test
+    void avisponPuedeSaltarObstaculos(){
+        Casilla origen = Casilla.crearEn(0, 0);
+        Casilla primera = Casilla.crearEn(1, 0);
+        Casilla obstaculo = Casilla.crearEn(2, 0);
+        Casilla segunda = Casilla.crearEn(3, 0);
+        Casilla destino = Casilla.crearEn(4, 0);
+        obstaculo.recibirPieza(new PiezaMontania());
+
+        Tablero tablero = new Tablero(
+                List.of(origen,primera,obstaculo,segunda,destino)
+        );
+
+        Unidad vek = new Avispon();// movimiento 4
+        BuscaTrayectorias buscador = new BuscadorBfs();
+
+        List<Trayectoria> trayectorias = buscador.trayectoriasDesde(origen.getCoordenada(), vek, tablero);
+
+        assertEquals(3, trayectorias.size());
+        assertTrue(trayectorias.stream().anyMatch(t -> t.getDestino() == primera));
+        assertTrue(trayectorias.stream().anyMatch(t -> t.getDestino() == segunda));
+        assertTrue(trayectorias.stream().anyMatch(t -> t.getDestino() == destino));
+    }
+
 }
