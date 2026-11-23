@@ -185,7 +185,6 @@ public class Casilla implements Atacable{
     // La precondicion es que, quien llame a este metodo,
     // le envie una casilla valida
     public void empujarA(Casilla destino) {
-        // TODO Refactorizar para eliminar if LISTO!
         this.estado.empujarA(this,destino);
     }
 
@@ -193,16 +192,14 @@ public class Casilla implements Atacable{
         this.estado=this.estado.recibirEmpuje(origen,this,pieza);
     }
 
-    // @Override
-    // public void recibirAtaque(Ataque ataque) {
-    //     this.estado.recibirAtaque(ataque,this.coordenada);
-    // }
-
     public void emergencia(Vek vek){
         this.estado = this.estado.emergencia(vek);
     }
 
     public void resolverEmergencia(){
         this.estado = this.estado.resolverEmergenciaIniciarTurno();
+    }
+    public Coordenada obtenerAdyacente(Direccion direccion){
+        return  direccion.obtenerCoordenadaAdyacente(this.coordenada);
     }
 }

@@ -110,4 +110,8 @@ public abstract class Unidad implements Dañable, Pieza,Atacable {
 	public boolean puedeTransitar(Casilla casilla){
 		return this.tipoMovimiento.puedeTransitar(casilla);
 	}
+
+    public int rangoMovimiento() {
+		return this.movimientos;
+    }
 }

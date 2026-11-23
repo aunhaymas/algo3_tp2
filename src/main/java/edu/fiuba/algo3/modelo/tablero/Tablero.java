@@ -6,13 +6,12 @@ import edu.fiuba.algo3.modelo.Direccion;
 import edu.fiuba.algo3.modelo.Trayectoria;
 import edu.fiuba.algo3.modelo.ataques.Ataque;
 import edu.fiuba.algo3.modelo.excepciones.CoordenadaInvalidaException;
-import edu.fiuba.algo3.modelo.excepciones.PosicionOcupadaException;
-import edu.fiuba.algo3.modelo.excepciones.PosicionVaciaException;
 import edu.fiuba.algo3.modelo.mechs.Mech;
 import edu.fiuba.algo3.modelo.unidades.Pieza;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Tablero {
@@ -97,5 +96,17 @@ public class Tablero {
 		Casilla origen = this.obtenerCasilla(unidad);
 		Trayectoria trayectoria = this.crearTrayectoria(origen.getCoordenada(), destino);
 		unidad.recorrer(trayectoria);
+    }
+    public List<Casilla> obtenerAdyacentes(Casilla casilla) {
+        return Direccion.cardinales().stream()
+                .map(casilla::obtenerAdyacente)
+                .map(this::buscarCasilla)
+                .flatMap(Optional::stream)
+                .toList();
+    }
+    public Optional<Casilla> buscarCasilla(Coordenada coordenada) {
+        return casillas.stream()
+                .filter(casilla -> casilla.getCoordenada().equals(coordenada))
+                .findFirst();
     }
 }
