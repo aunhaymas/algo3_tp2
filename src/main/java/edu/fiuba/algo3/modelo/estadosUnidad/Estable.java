@@ -31,4 +31,9 @@ public class Estable extends EstadoUnidad {
 	public boolean estaContaminado() {
 		return false;
 	}
+
+	@Override
+	public boolean estaDestruida() {
+		return false;
+	}
 }

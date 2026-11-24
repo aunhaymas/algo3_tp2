@@ -6,13 +6,12 @@ import edu.fiuba.algo3.modelo.Direccion;
 import edu.fiuba.algo3.modelo.Trayectoria;
 import edu.fiuba.algo3.modelo.ataques.Ataque;
 import edu.fiuba.algo3.modelo.excepciones.CoordenadaInvalidaException;
-import edu.fiuba.algo3.modelo.excepciones.PosicionOcupadaException;
-import edu.fiuba.algo3.modelo.excepciones.PosicionVaciaException;
 import edu.fiuba.algo3.modelo.mechs.Mech;
 import edu.fiuba.algo3.modelo.unidades.Pieza;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Tablero {
@@ -31,6 +30,10 @@ public class Tablero {
     public void agregarCasilla(Casilla casilla) {
         this.casillas.add(casilla);
         casilla.setTablero(this);
+    }
+
+    public List<Casilla> iterarCasillas() {
+        return this.casillas;
     }
 
     public Casilla obtenerCasilla(Coordenada coordenada) {
@@ -60,9 +63,6 @@ public class Tablero {
             throw new CoordenadaInvalidaException("La coordenada esta fuera de los limites del tablero!");
         }
         Casilla casillaObjetivo = obtenerCasilla(coordenada);
-        if (!casillaObjetivo.estaLibre()) {
-            throw new PosicionOcupadaException(String.format("No se puede colocar la pieza, la posición (%d, %d) ya está ocupada.", coordenada.getX(), coordenada.getY()));
-        }   
         casillaObjetivo.recibirPieza(pieza);
     }
 
@@ -73,9 +73,6 @@ public class Tablero {
     public void moverPieza(Coordenada origen, Coordenada destino) {
         Casilla coordenadaOrigen = obtenerCasilla(origen);
         Casilla coordenadaDestino = obtenerCasilla(destino);
-        if (!coordenadaDestino.estaLibre()) {
-            throw new PosicionOcupadaException(String.format("No se puede mover la pieza, la posición de destino (%d, %d) está ocupada.", destino.getX(), destino.getY()));
-        }
         coordenadaOrigen.moverContenidoA(coordenadaDestino);
     }
 
@@ -103,5 +100,17 @@ public class Tablero {
 		Casilla origen = this.obtenerCasilla(unidad);
 		Trayectoria trayectoria = this.crearTrayectoria(origen.getCoordenada(), destino);
 		unidad.recorrer(trayectoria);
+    }
+    public List<Casilla> obtenerAdyacentes(Casilla casilla) {
+        return Direccion.cardinales().stream()
+                .map(casilla::obtenerAdyacente)
+                .map(this::buscarCasilla)
+                .flatMap(Optional::stream)
+                .collect(Collectors.toList());
+    }
+    public Optional<Casilla> buscarCasilla(Coordenada coordenada) {
+        return casillas.stream()
+                .filter(casilla -> casilla.getCoordenada().equals(coordenada))
+                .findFirst();
     }
 }

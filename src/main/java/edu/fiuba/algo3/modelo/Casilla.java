@@ -11,7 +11,6 @@ import edu.fiuba.algo3.modelo.terrenos.Suelo;
 import edu.fiuba.algo3.modelo.terrenos.TipoTerreno;
 import edu.fiuba.algo3.modelo.unidades.Atacable;
 import edu.fiuba.algo3.modelo.unidades.Pieza;
-import edu.fiuba.algo3.modelo.unidades.PiezaNula;
 import edu.fiuba.algo3.modelo.unidades.Unidad;
 import edu.fiuba.algo3.modelo.veks.Vek;
 
@@ -20,22 +19,21 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Casilla implements Atacable{
-    private boolean estaLibre;
-    private Pieza pieza;
     private Tablero tablero;
     private Coordenada coordenada;
     private TipoTerreno terrenoCasilla;
     private EstadoCasilla estado;
+    public static Casilla crearEn(int x, int y){
+        return new Casilla(new Coordenada(x,y));
+    }
     public Casilla(Coordenada coordenada) {
         this.coordenada=coordenada;
         this.estado = new EstadoVacia();
-        this.estaLibre=true;
         this.terrenoCasilla=new Suelo();
         limpiarCasilla();
     }
     public Casilla(Coordenada coordenada, TipoTerreno terreno) {
         this.coordenada=coordenada;
-        this.estaLibre=true;
         this.terrenoCasilla=terreno;
         limpiarCasilla();
     }
@@ -111,10 +109,11 @@ public class Casilla implements Atacable{
     }
 
     public void recibirPieza(Pieza pieza) {
+        if (!this.estado.estaLibre()) {
+            coordenada.throwPosicionOcupada();
+        }
         pieza.entrarEn(this);
-        this.pieza=pieza;
         this.estado = new EstadoOcupada(pieza);
-        // pieza.entrarEn(this) para aplicar efecto
     }
 
     public Pieza removerPieza() {
@@ -139,7 +138,6 @@ public class Casilla implements Atacable{
     }
     private void limpiarCasilla(){
         this.estado = new EstadoVacia();
-        this.pieza=new PiezaNula();
     }
 
     public void aplicarEfecto(Unidad unidad) {
@@ -159,6 +157,9 @@ public class Casilla implements Atacable{
     }
 
     public void moverContenidoA(Casilla destino) {
+        if (!destino.estaLibre()) {
+            coordenada.throwPosicionOcupada();
+        }
         destino.recibirPieza(this.removerPieza());
         this.limpiarCasilla();
     }
@@ -184,7 +185,6 @@ public class Casilla implements Atacable{
     // La precondicion es que, quien llame a este metodo,
     // le envie una casilla valida
     public void empujarA(Casilla destino) {
-        // TODO Refactorizar para eliminar if LISTO!
         this.estado.empujarA(this,destino);
     }
 
@@ -192,16 +192,14 @@ public class Casilla implements Atacable{
         this.estado=this.estado.recibirEmpuje(origen,this,pieza);
     }
 
-    // @Override
-    // public void recibirAtaque(Ataque ataque) {
-    //     this.estado.recibirAtaque(ataque,this.coordenada);
-    // }
-
     public void emergencia(Vek vek){
         this.estado = this.estado.emergencia(vek);
     }
 
     public void resolverEmergencia(){
         this.estado = this.estado.resolverEmergenciaIniciarTurno();
+    }
+    public Coordenada obtenerAdyacente(Direccion direccion){
+        return  direccion.obtenerCoordenadaAdyacente(this.coordenada);
     }
 }

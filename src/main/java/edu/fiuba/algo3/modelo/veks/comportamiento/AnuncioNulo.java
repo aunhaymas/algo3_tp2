@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.veks;
+package edu.fiuba.algo3.modelo.veks.comportamiento;
 
 import edu.fiuba.algo3.modelo.Coordenada;
 import edu.fiuba.algo3.modelo.tablero.Tablero;

@@ -27,9 +27,8 @@ public class ParserUnidades {
 
         Map<Coordenada, Pieza> unidades = new HashMap<>();
 
-        for (int i = 0; i < CANTIDAD_UNIDADES_FIJA; i++) {
-            
-            String linea = lineas.get(i);
+        for (String linea : lineas) {
+
             int inicioParentesis = linea.lastIndexOf('(');
             int finParentesis = linea.lastIndexOf(')');
 

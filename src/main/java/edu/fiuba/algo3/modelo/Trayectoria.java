@@ -27,6 +27,7 @@ public class Trayectoria {
     }
 
     public void ejecutarTraslado() {
+        if (origen == destino) return;
         origen.moverContenidoA(destino);
     }
 

@@ -31,4 +31,9 @@ public class Sumergido extends EstadoUnidad {
 	public boolean estaContaminado() {
 		return false;
 	}
+
+	@Override
+	public boolean estaDestruida() {
+		return false;
+	}
 }

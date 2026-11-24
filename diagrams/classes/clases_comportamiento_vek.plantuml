@@ -1,0 +1,97 @@
+@startuml
+interface Opcion {
+    + evaluarse(evaluador: Evaluador)
+    + ejecutar(vek: Vek): AnuncioDeAtaque
+}
+class Vek {
+    - evaluadorOpciones: EvaluadorVek
+    + tomarDecision(opciones: List<Opcion>): Decision
+    + anunciarAtaque(objetivo: Coordenada): AnuncioDeAtaque
+    +...()
+}
+
+interface Evaluador {
+    + tomarDecision(opciones: List<Opcion>, vek: Vek): Decision
+    + evaluarOpcionAtaqueEdificio(opcion: OpcionAtaqueEdificio)
+    + evaluarOpcionAtaqueMech(opcion: OpcionAtaqueMech)
+    + evaluarOpcionAcercarseEdificio(opcion: OpcionAcercarseAEdificio)
+}
+
+class EvaluadorVek {
+    - decisionTomada: Decision
+    + tomarDecision(opciones: List<Opcion>, vek: Vek): Decision
+    + evaluarOpcionAtaqueEdificio(opcion: OpcionAtaqueEdificio)
+    + evaluarOpcionAtaqueMech(opcion: OpcionAtaqueMech)
+    + evaluarOpcionAcercarseEdificio(opcion: OpcionAcercarseAEdificio)
+}
+
+
+abstract class OpcionAtaque {
+    - objetivo: Coordenada
+    - trayectoria: Trayectoria
+    + ejecutar(vek: Vek): AnuncioDeAtaque
+}
+
+class OpcionAtaqueEdificio
+class OpcionAtaqueMech
+
+class OpcionAcercarseAEdificio {
+    - trayectoria: Trayectoria
+    + evaluarse(evaluador: Evaluador)
+    + ejecutar(vek: Vek): AnuncioDeAtaque
+}
+
+interface Decision {
+    + ejecutar(): AnuncioDeAtaque
+}
+
+class DecisionAtaqueEdificio {
+    - opcion: Opcion
+    - vek: Vek
+    + ejecutar(): AnuncioDeAtaque
+}
+
+class DecisionAcercarseAEdificio {
+    - acercarseAEdificio: OpcionAcercarseAEdificio
+    - vek: Vek
+    + ejecutar(): AnuncioDeAtaque
+}
+
+interface AnuncioDeAtaque {
+    + ejecutarAtaque(contexto: Tablero)
+    + desplazarAtaque(cambio: Coordenada)
+}
+
+class AnuncioReal {
+    - vek: Vek
+    - objetivo: Coordenada
+    + ejecutarAtaque(contexto: Tablero)
+    + desplazarAtaque(cambio: Coordenada)
+}
+
+class AnuncioNulo
+
+class Trayectoria
+
+Vek *-- EvaluadorVek
+EvaluadorVek ..|> Evaluador
+EvaluadorVek ..> Opcion : evalúa
+Opcion <|.. OpcionAtaque
+Opcion <|.. OpcionAcercarseAEdificio
+OpcionAtaque <|-- OpcionAtaqueEdificio
+OpcionAtaque <|-- OpcionAtaqueMech
+
+Decision <|.. DecisionAtaqueEdificio
+Decision <|.. DecisionAcercarseAEdificio
+
+AnuncioDeAtaque <|.. AnuncioReal
+AnuncioDeAtaque <|.. AnuncioNulo
+
+OpcionAtaque --> Trayectoria
+OpcionAcercarseAEdificio --> Trayectoria
+
+DecisionAtaqueEdificio --> Opcion
+DecisionAcercarseAEdificio --> OpcionAcercarseAEdificio
+
+AnuncioReal --> Vek
+@enduml

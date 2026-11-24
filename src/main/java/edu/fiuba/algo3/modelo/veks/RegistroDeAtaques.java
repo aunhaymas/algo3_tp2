@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.veks;
 
 import edu.fiuba.algo3.modelo.tablero.Tablero;
+import edu.fiuba.algo3.modelo.veks.comportamiento.AnuncioDeAtaque;
 
 import java.util.LinkedList;
 import java.util.Queue;

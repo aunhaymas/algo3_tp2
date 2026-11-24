@@ -1,7 +1,8 @@
-package edu.fiuba.algo3.modelo.veks;
+package edu.fiuba.algo3.modelo.veks.comportamiento;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
+import edu.fiuba.algo3.modelo.veks.Vek;
 
 public class AnuncioReal implements AnuncioDeAtaque {
     private final Vek vek;
