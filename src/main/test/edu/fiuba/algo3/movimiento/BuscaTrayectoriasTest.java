@@ -111,5 +111,28 @@ public class BuscaTrayectoriasTest {
         assertTrue(trayectorias.stream().anyMatch(t -> t.getDestino() == segunda));
         assertTrue(trayectorias.stream().anyMatch(t -> t.getDestino() == destino));
     }
+    @Test
+    void buscaTrayectoriasRespetaRangoDeMovimiento(){
+        Casilla origen = Casilla.crearEn(0, 0);
+        Casilla primera = Casilla.crearEn(1, 0);
+        Casilla tercera = Casilla.crearEn(2, 0);
+        Casilla segunda = Casilla.crearEn(3, 0);
+        Casilla cuarta = Casilla.crearEn(4, 0);
+
+        Tablero tablero = new Tablero(
+                List.of(origen,primera,tercera,segunda,cuarta)
+        );
+
+        Unidad mech = new MechDeCombate();// movimiento 3
+        BuscaTrayectorias buscador = new BuscadorBfs();
+
+        List<Trayectoria> trayectorias = buscador.trayectoriasDesde(origen.getCoordenada(), mech, tablero);
+
+        assertEquals(3, trayectorias.size());
+        assertTrue(trayectorias.stream().anyMatch(t -> t.getDestino() == primera));
+        assertTrue(trayectorias.stream().anyMatch(t -> t.getDestino() == segunda));
+        assertTrue(trayectorias.stream().anyMatch(t -> t.getDestino() == tercera));
+        assertFalse(trayectorias.stream().anyMatch(t -> t.getDestino() == cuarta));
+    }
 
 }
