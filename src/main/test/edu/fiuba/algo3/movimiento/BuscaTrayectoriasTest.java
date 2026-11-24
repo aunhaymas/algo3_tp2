@@ -134,5 +134,50 @@ public class BuscaTrayectoriasTest {
         assertTrue(trayectorias.stream().anyMatch(t -> t.getDestino() == tercera));
         assertFalse(trayectorias.stream().anyMatch(t -> t.getDestino() == cuarta));
     }
+    @Test
+    void avisponNoPuedeTerminarEnCasillaOcupada(){
+        Casilla origen = Casilla.crearEn(0, 0);
+        Casilla obstaculo = Casilla.crearEn(1, 0);
+        Casilla primera = Casilla.crearEn(2, 0);
+        Casilla segunda = Casilla.crearEn(3, 0);
+        Casilla destino = Casilla.crearEn(4, 0);
+        obstaculo.recibirPieza(new PiezaMontania());
 
+        Tablero tablero = new Tablero(
+                List.of(origen,primera,obstaculo,segunda,destino)
+        );
+
+        Unidad vek = new Avispon();// movimiento 4
+        BuscaTrayectorias buscador = new BuscadorBfs();
+
+        List<Trayectoria> trayectorias = buscador.trayectoriasDesde(origen.getCoordenada(), vek, tablero);
+        assertFalse(trayectorias.stream().anyMatch(t -> t.getDestino() == obstaculo));
+    }
+
+    @Test
+    void buscaCasillasIntentaBuscarCaminosPeroNoHayNingunoValido(){
+        Casilla origen = Casilla.crearEn(0, 0);
+        Casilla primera = Casilla.crearEn(1, 0);
+        Casilla obstaculo = Casilla.crearEn(2, 0);
+        Casilla segunda = Casilla.crearEn(3, 0);
+        Casilla destino = Casilla.crearEn(4, 0);
+        obstaculo.recibirPieza(new PiezaMontania());
+        primera.recibirPieza(new PiezaMontania());
+        segunda.recibirPieza(new PiezaMontania());
+        destino.recibirPieza(new PiezaMontania());
+
+        Tablero tablero = new Tablero(
+                List.of(origen,primera,obstaculo,segunda,destino)
+        );
+
+        Unidad vek = new MechDeCombate();
+        BuscaTrayectorias buscador = new BuscadorBfs();
+
+        List<Trayectoria> trayectorias = buscador.trayectoriasDesde(origen.getCoordenada(), vek, tablero);
+
+        assertEquals(0, trayectorias.size());
+        assertFalse(trayectorias.stream().anyMatch(t -> t.getDestino() == primera));
+        assertFalse(trayectorias.stream().anyMatch(t -> t.getDestino() == segunda));
+        assertFalse(trayectorias.stream().anyMatch(t -> t.getDestino() == destino));
+    }
 }
