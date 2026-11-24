@@ -33,6 +33,10 @@ public class Tablero {
         casilla.setTablero(this);
     }
 
+    public List<Casilla> iterarCasillas() {
+        return this.casillas;
+    }
+
     public Casilla obtenerCasilla(Coordenada coordenada) {
         return this.casillas.stream()
             .filter(c -> c.getCoordenada().equals(coordenada))
