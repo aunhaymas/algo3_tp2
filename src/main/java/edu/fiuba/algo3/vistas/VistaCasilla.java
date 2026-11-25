@@ -19,7 +19,7 @@ public class VistaCasilla {
 
     public void dibujar() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.setFill(Color.WHEAT);
+        gc.setFill(casilla.colorCasilla());
         gc.fillRect(getCoordenadaX(coordenada),getCoordenadaY(coordenada), 60, 60);
         gc.setStroke(Color.BLACK);
         gc.setLineWidth(5);

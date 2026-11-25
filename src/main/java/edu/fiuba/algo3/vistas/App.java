@@ -41,14 +41,14 @@ public class App extends Application {
         
         ParserTablero parserTablero = new ParserTablero(new TerrenosFactory());
         Tablero tablero = parserTablero.parsear(List.of(
+                "AAAASSSS",
+                "AAAASSSS",
+                "AASSSÁSS",
+                "AASSSSSS",
+                "SSESESES",
                 "SSSSSSSS",
-                "SSSSSSSS",
-                "SSSSSSSS",
-                "SSSSSSSS",
-                "SSSSSSSS",
-                "SSSSSSSS",
-                "SSSSSSSS",
-                "SSSSSSSS"
+                "SSESESES",
+                "MMMMMMMM"
         ));
         return tablero;
     }

@@ -13,6 +13,7 @@ import edu.fiuba.algo3.modelo.unidades.Atacable;
 import edu.fiuba.algo3.modelo.unidades.Pieza;
 import edu.fiuba.algo3.modelo.unidades.Unidad;
 import edu.fiuba.algo3.modelo.veks.Vek;
+import javafx.scene.paint.Paint;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,6 +69,10 @@ public class Casilla implements Atacable{
 
     public boolean tiene(Pieza pieza) {
         return estado.tienePieza(pieza);
+    }
+
+    public Paint colorCasilla() {
+        return terrenoCasilla.color();
     }
 
     private Trayectoria obtenerTrayectoriaPorDistanciaYDireccion(Direccion direccion, int distancia) {

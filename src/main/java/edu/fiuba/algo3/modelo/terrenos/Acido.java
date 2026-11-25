@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.terrenos;
 
 import edu.fiuba.algo3.modelo.unidades.Unidad;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public class Acido implements TipoTerreno{
 
@@ -12,5 +14,10 @@ public class Acido implements TipoTerreno{
     @Override
     public boolean esTransitable() { 
         return true; 
+    }
+
+    @Override
+    public Paint color() {
+        return Color.YELLOWGREEN;
     }
 }
