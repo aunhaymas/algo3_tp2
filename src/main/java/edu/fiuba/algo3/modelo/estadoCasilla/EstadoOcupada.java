@@ -56,4 +56,9 @@ public class EstadoOcupada implements EstadoCasilla{
     public EstadoCasilla resolverEmergenciaIniciarTurno(){
         return this;
     }
+
+    @Override
+    public void serSeleccionadoPor(Seleccionador seleccionador) {
+        this.pieza.serSeleccionadoPor(seleccionador);
+    }
 }

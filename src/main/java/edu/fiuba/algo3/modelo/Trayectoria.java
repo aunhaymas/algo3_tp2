@@ -48,7 +48,9 @@ public class Trayectoria {
     public Casilla getDestino(){
         return destino;
     }
-
+    public Coordenada getCoordenadaDestino(){
+        return this.destino.getCoordenada();
+    }
     public Casilla devolverPrimeraCasillaNoLibre(){
         boolean primero = true;
         for (Casilla casilla : casillas) {

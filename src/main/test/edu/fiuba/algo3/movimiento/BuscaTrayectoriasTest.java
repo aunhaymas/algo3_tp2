@@ -1,8 +1,5 @@
 package edu.fiuba.algo3.movimiento;
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.mechs.Mech;
-import edu.fiuba.algo3.modelo.mechs.MechDeArtilleria;
-import edu.fiuba.algo3.modelo.mechs.MechDeCanon;
 import edu.fiuba.algo3.modelo.mechs.MechDeCombate;
 
 import edu.fiuba.algo3.modelo.tablero.BuscadorBfs;
@@ -10,9 +7,7 @@ import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.unidades.PiezaMontania;
 import edu.fiuba.algo3.modelo.unidades.Unidad;
 import edu.fiuba.algo3.modelo.veks.Avispon;
-import edu.fiuba.algo3.modelo.veks.Luciernaga;
 import edu.fiuba.algo3.modelo.veks.Saltador;
-import edu.fiuba.algo3.modelo.veks.Vek;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

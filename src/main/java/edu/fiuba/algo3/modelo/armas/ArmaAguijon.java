@@ -24,4 +24,9 @@ public class ArmaAguijon extends Arma{
     public void atacar(Atacable objetivo) {
         objetivo.recibirAtaque(new AtaqueAguijon());
     }
+
+    @Override
+    public boolean puedeAtacar(Trayectoria trayectoria) {
+        return trayectoria.logitud()==1;
+    }
 }

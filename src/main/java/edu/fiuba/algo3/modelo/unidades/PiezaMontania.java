@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.unidades;
 
 import edu.fiuba.algo3.modelo.Casilla;
 import edu.fiuba.algo3.modelo.Coordenada;
+import edu.fiuba.algo3.modelo.Seleccionador;
 import edu.fiuba.algo3.modelo.ataques.Ataque;
 import edu.fiuba.algo3.modelo.empujes.Empuje;
 import edu.fiuba.algo3.modelo.empujes.EmpujeNulo;
@@ -35,5 +36,10 @@ public class PiezaMontania implements Pieza{
     @Override
     public void notificarEmpuje(Coordenada direccion) {
 
+    }
+
+    @Override
+    public void serSeleccionadoPor(Seleccionador seleccionador) {
+        seleccionador.seleccionarMontania(this);
     }
 }

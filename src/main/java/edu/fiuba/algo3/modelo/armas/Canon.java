@@ -23,4 +23,9 @@ public class Canon extends Arma {
     public void atacar(Atacable objetivo) {
         objetivo.recibirAtaque(new AtaqueCanon());
     }
+
+    @Override
+    public boolean puedeAtacar(Trayectoria trayectoria) {
+        throw new RuntimeException("Implementar?");
+    }
 }

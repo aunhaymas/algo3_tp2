@@ -23,4 +23,9 @@ public class ArmaAcido extends Arma{
     public void atacar(Atacable objetivo) {
         objetivo.recibirAtaque(new AtaqueAcido());
     }
+
+    @Override
+    public boolean puedeAtacar(Trayectoria trayectoria) {
+        return trayectoria.tieneObstaculos();
+    }
 }
