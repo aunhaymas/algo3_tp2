@@ -27,12 +27,13 @@ public class SeleccionadorObjetivosVek implements Seleccionador {
     @Override
     public void seleccionarEdificio(PiezaEdificio edificio) {
         OpcionAtaqueEdificio opcion = new OpcionAtaqueEdificio(this.trayectoria,this.objetivo);
-        opciones.add(opcion);
+        agregarOpcion(opcion);
     }
 
     @Override
     public void seleccionarMech(Mech mech) {
-
+        OpcionAtaqueMech opcion = new OpcionAtaqueMech(this.trayectoria,this.objetivo);
+        agregarOpcion(opcion);
     }
 
     @Override
@@ -48,5 +49,8 @@ public class SeleccionadorObjetivosVek implements Seleccionador {
     @Override
     public void seleccionarCasilla(Casilla casilla) {
 
+    }
+    private void agregarOpcion(Opcion opcion){
+        opciones.add(opcion);
     }
 }

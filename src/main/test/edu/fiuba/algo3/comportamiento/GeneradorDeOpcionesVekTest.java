@@ -2,9 +2,12 @@ package edu.fiuba.algo3.comportamiento;
 
 import edu.fiuba.algo3.modelo.Casilla;
 import edu.fiuba.algo3.modelo.RedElectrica;
+import edu.fiuba.algo3.modelo.mechs.Mech;
+import edu.fiuba.algo3.modelo.mechs.MechDeArtilleria;
 import edu.fiuba.algo3.modelo.tablero.BuscadorBfs;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.unidades.PiezaEdificio;
+import edu.fiuba.algo3.modelo.veks.Avispon;
 import edu.fiuba.algo3.modelo.veks.Opcion;
 import edu.fiuba.algo3.modelo.veks.Saltador;
 import edu.fiuba.algo3.modelo.veks.Vek;
@@ -40,5 +43,29 @@ public class GeneradorDeOpcionesVekTest {
 
         assertTrue(posicionAtaque.tiene(vek));
         assertTrue(edificio.estaDestruida());
+    }
+
+    @Test
+    void generadorDeOpcionesAAvisponGeneraLaOpcionAtaqueAMechDeArtilleria() {
+        Casilla origen = Casilla.crearEn(0, 0);
+        Casilla posicionAtaque = Casilla.crearEn(1, 0);
+        Casilla casillaMech = Casilla.crearEn(2, 0);
+        Mech mech = new MechDeArtilleria(); // tiene 2 de vida
+        casillaMech.recibirPieza(mech);
+
+        Vek vek = new Avispon(); // hace 1 de danio
+        origen.recibirPieza(vek);
+
+        Tablero tablero = new Tablero(List.of(origen, posicionAtaque, casillaMech));
+        GeneradorDeOpcionesVek generador = new GeneradorDeOpcionesVek(new BuscadorBfs());
+
+        List<Opcion> opciones = generador.generarOpcionesPara(vek, tablero);
+
+        AnuncioDeAtaque anuncioDeAtaque = opciones.get(0).ejecutar(vek);
+        anuncioDeAtaque.ejecutarAtaque(tablero);
+
+        //Avispon le hace 1 de danio a mech que tiene 2 de vida
+        assertTrue(posicionAtaque.tiene(vek));
+        assertEquals(1, mech.getVida());
     }
 }
