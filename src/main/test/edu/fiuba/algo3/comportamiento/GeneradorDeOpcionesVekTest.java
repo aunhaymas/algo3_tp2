@@ -1,11 +1,13 @@
 package edu.fiuba.algo3.comportamiento;
 
 import edu.fiuba.algo3.modelo.Casilla;
+import edu.fiuba.algo3.modelo.Coordenada;
 import edu.fiuba.algo3.modelo.RedElectrica;
 import edu.fiuba.algo3.modelo.mechs.Mech;
 import edu.fiuba.algo3.modelo.mechs.MechDeArtilleria;
 import edu.fiuba.algo3.modelo.tablero.BuscadorBfs;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
+import edu.fiuba.algo3.modelo.terrenos.Acido;
 import edu.fiuba.algo3.modelo.unidades.Pieza;
 import edu.fiuba.algo3.modelo.unidades.PiezaEdificio;
 import edu.fiuba.algo3.modelo.unidades.PiezaMontania;
@@ -142,4 +144,28 @@ public class GeneradorDeOpcionesVekTest {
 
         assertEquals(0,opciones.size());
     }
+    @Test
+    void luciernagaTieneUnaCasillaConAcidoDesdeDondeAtacarYnoGeneraOpcion(){
+        Casilla origen = Casilla.crearEn(1, 1);
+        Casilla casilla2 = new Casilla(new Coordenada(1,0),new Acido());
+        Casilla casilla3 = new Casilla(new Coordenada(2,0),new Acido());
+        Casilla casilla4 = Casilla.crearEn(3,0);
+        Casilla casilla5 = Casilla.crearEn(4,0);
+        Casilla casilla6 = Casilla.crearEn(5,0);
+        Casilla casillaEdificio = Casilla.crearEn(6, 0);
+        RedElectrica red = new RedElectrica();
+        Pieza edificio = new PiezaEdificio(red); // tiene 2 de vida
+        casillaEdificio.recibirPieza(edificio);
+
+        Vek vek = new Luciernaga(); // hace 1 de danio, movimiento 2
+        origen.recibirPieza(vek);
+
+        Tablero tablero = new Tablero(List.of(origen, casillaEdificio,casilla2,casilla3,casilla4,casilla5,casilla6));
+        GeneradorDeOpcionesVek generador = new GeneradorDeOpcionesVek(new BuscadorBfs());
+
+        List<Opcion> opciones = generador.generarOpcionesPara(vek, tablero);
+
+        assertEquals(0,opciones.size());
+    }
+
 }

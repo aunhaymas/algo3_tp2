@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.terrenos;
 
+import edu.fiuba.algo3.modelo.unidades.TipoMovimiento;
 import edu.fiuba.algo3.modelo.unidades.Unidad;
 
 public class Montaña implements TipoTerreno {
@@ -12,5 +13,10 @@ public class Montaña implements TipoTerreno {
     @Override
     public boolean esTransitable() { 
         return false; 
+    }
+
+    @Override
+    public boolean puedeTerminarAca(TipoMovimiento mov) {
+        return false;
     }
 }

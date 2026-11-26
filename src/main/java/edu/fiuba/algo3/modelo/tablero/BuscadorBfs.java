@@ -33,7 +33,8 @@ public class BuscadorBfs implements BuscaTrayectorias {
                 anteriores.put(adyacente, actual);
                 distancias.put(adyacente, nuevaDistancia);
                 pendientes.add(adyacente);
-                if (adyacente.estaLibre()) {
+                //Aca esta el bug de luciernaga pudiendo terminar en acido
+                if (unidad.puedeTerminarEn(adyacente)) {
                     trayectorias.add(reconstruirTrayectoria(casillaOrigen, adyacente, anteriores)
                     );
                 }
