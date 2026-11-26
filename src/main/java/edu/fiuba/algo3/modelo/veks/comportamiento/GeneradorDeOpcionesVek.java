@@ -4,7 +4,6 @@ import edu.fiuba.algo3.modelo.BuscaTrayectorias;
 import edu.fiuba.algo3.modelo.Casilla;
 import edu.fiuba.algo3.modelo.Coordenada;
 import edu.fiuba.algo3.modelo.Trayectoria;
-import edu.fiuba.algo3.modelo.tablero.BuscadorBfs;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.veks.Opcion;
 import edu.fiuba.algo3.modelo.veks.Vek;
@@ -22,24 +21,31 @@ public class GeneradorDeOpcionesVek {
 
         List<Trayectoria> trayectorias =
                 buscaTrayectorias.trayectoriasDesde(origen.getCoordenada(), vek, tablero);
-        //Tambien considero la trayectoria de no moverse
         trayectorias.add(new Trayectoria(List.of(origen)));
-        List<Opcion> opciones = new ArrayList<>();
 
+        List<Opcion> opciones = generarOpcionesDeAtaque(vek, tablero, trayectorias);
+        generarOpcionAcercamiento(tablero,trayectorias,opciones);
+        return opciones;
+    }
+    private List<Opcion> generarOpcionesDeAtaque(Vek vek, Tablero tablero, List<Trayectoria> trayectorias) {
+        List<Opcion> opciones = new ArrayList<>();
         for (Trayectoria trayectoria : trayectorias) {
             Coordenada posicionAtaque = trayectoria.getCoordenadaDestino();
-
             for (Casilla casilla : tablero.obtenerCasillas()) {
                 Coordenada objetivo = casilla.getCoordenada();
+                if (!vek.puedeAtacarDesde(tablero, posicionAtaque, objetivo)) continue;
+                casilla.serSeleccionadoPor(new SeleccionadorObjetivosAtaqueVek(trayectoria, objetivo, opciones));
 
-                if (vek.puedeAtacarDesde(tablero, posicionAtaque, objetivo)) {
-                    casilla.serSeleccionadoPor(
-                            new SeleccionadorObjetivosVek(trayectoria, objetivo, opciones)
-                    );
-                }
             }
         }
-
         return opciones;
+    }
+
+    private void generarOpcionAcercamiento(Tablero tablero, List<Trayectoria> trayectorias, List<Opcion> opciones) {
+        SeleccionadorAcercamientoAEdificioVek seleccionador = new SeleccionadorAcercamientoAEdificioVek();
+        for (Casilla casilla : tablero.obtenerCasillas()) {
+            casilla.serSeleccionadoPor(seleccionador);
+        }
+        seleccionador.agregarMejorOpcion(trayectorias, opciones);
     }
 }

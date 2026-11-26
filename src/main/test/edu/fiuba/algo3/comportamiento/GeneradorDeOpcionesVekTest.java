@@ -117,7 +117,7 @@ public class GeneradorDeOpcionesVekTest {
         anuncioDeAtaque.ejecutarAtaque(tablero);
         assertEquals(3,opciones.size());// puede atacar desde 3 lugares distintos
         //Avispon le hace 1 de danio a edificio que tiene 2 de vida
-        assertEquals(red.integridadActual(),4);
+        assertEquals(4, red.integridadActual());
     }
 
     @Test
@@ -188,5 +188,31 @@ public class GeneradorDeOpcionesVekTest {
         anuncioDeAtaque.ejecutarAtaque(tablero);
         assertEquals(1,opciones.size());
         assertTrue(edificio.estaDestruida());
+    }
+    @Test
+    public void generadorDeOpcionesParaAvisponGeneraOpcionAcercarseAEdificioSiNoHayNadaParaAtacar(){
+        Casilla origen = Casilla.crearEn(1, 1);
+        Casilla casillaAcido = new Casilla(new Coordenada(1,0),new Acido());
+        Casilla casilla2 = new Casilla(new Coordenada(2,0),new Acido());
+        Casilla casilla3 = Casilla.crearEn(3,0);
+        Casilla casilla4 = Casilla.crearEn(4,0);
+        Casilla casilla5 = Casilla.crearEn(5,0);
+        Casilla casillaEdificio = Casilla.crearEn(6, 0);
+        Pieza edificio = new PiezaEdificio(new RedElectrica());
+        casillaEdificio.recibirPieza(edificio);
+
+        Vek vek = new Avispon(); // hace 1 de danio, movimiento 4
+        origen.recibirPieza(vek);
+
+        Tablero tablero = new Tablero(List.of(origen, casillaEdificio,casillaAcido,casilla3,casilla4,casilla5,casilla2));
+        GeneradorDeOpcionesVek generador = new GeneradorDeOpcionesVek(new BuscadorBfs());
+
+        List<Opcion> opciones = generador.generarOpcionesPara(vek, tablero);
+        Opcion opcion =opciones.get(0);
+        AnuncioDeAtaque anuncioDeAtaque = opcion.ejecutar(vek);
+        anuncioDeAtaque.ejecutarAtaque(tablero);
+        assertTrue(casilla4.tiene(vek)); // El vek se acerca a 4 posiciones
+        // assertEquals(1,opciones.size()); no hace falta esto, testeo por comportamiento
+        assertFalse(edificio.estaDestruida());
     }
 }
