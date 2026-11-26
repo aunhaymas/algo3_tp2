@@ -16,6 +16,8 @@ public class Partida {
     private int turnoActual = 1;
     private FaseTurno faseActual = new FaseVek();
     private List<SolicitudEmergencia> emergenciaTurnos;
+    private boolean esGameOver;
+    private boolean sePerdio;
 
 
     public Partida(Tablero tablero) {
@@ -53,5 +55,25 @@ public class Partida {
 
     public void ejecutarFaseEmergencia() {
         tablero.resolverEmergencia();
+    }
+
+    public void verificarGameOver() {
+        boolean apagon = this.red.estaDestruida();
+        boolean flotaDerrotada = true;
+        for (Mech mech:this.mechsVivos){
+            if (!mech.estaDestruida()) flotaDerrotada =false;
+        }
+        boolean victoria = this.turnoActual == 5;
+        this.esGameOver = apagon || flotaDerrotada || victoria;
+        this.sePerdio = apagon || flotaDerrotada;
+
+    }
+
+    public boolean esGameOver() {
+        return this.esGameOver;
+    }
+
+    public boolean sePerdio() {
+        return this.sePerdio;
     }
 }
