@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Casilla implements Atacable{
+public class Casilla implements Atacable,Seleccionable{
     private Tablero tablero;
     private Coordenada coordenada;
     private TipoTerreno terrenoCasilla;
@@ -201,5 +201,11 @@ public class Casilla implements Atacable{
     }
     public Coordenada obtenerAdyacente(Direccion direccion){
         return  direccion.obtenerCoordenadaAdyacente(this.coordenada);
+    }
+
+    @Override
+    public void serSeleccionadoPor(Seleccionador seleccionador) {
+        seleccionador.seleccionarCasilla(this);
+        this.estado.serSeleccionadoPor(seleccionador);
     }
 }

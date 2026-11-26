@@ -26,4 +26,9 @@ public class Artilleria extends Arma {
     public void atacar(Atacable objetivo) {
         objetivo.recibirAtaque(ataque);
     }
+
+    @Override
+    public boolean puedeAtacar(Trayectoria trayectoria) {
+        return false;
+    }
 }

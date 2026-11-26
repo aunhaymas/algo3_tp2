@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.estadoCasilla;
 
 import edu.fiuba.algo3.modelo.Casilla;
+import edu.fiuba.algo3.modelo.Seleccionador;
 import edu.fiuba.algo3.modelo.ataques.Ataque;
 import edu.fiuba.algo3.modelo.ataques.DanioColision;
 import edu.fiuba.algo3.modelo.empujes.Empuje;
@@ -56,5 +57,10 @@ public class EstadoEmergenciaFallida implements EstadoCasilla {
     public EstadoCasilla resolverEmergenciaIniciarTurno() {
         this.pieza.recibirAtaque(new DanioColision());
         return new EstadoOcupada(this.pieza);
+    }
+
+    @Override
+    public void serSeleccionadoPor(Seleccionador seleccionador) {
+        // de fase emergencia a fase vek nadie puede seleccionarl
     }
 }

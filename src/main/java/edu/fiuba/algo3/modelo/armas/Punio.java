@@ -28,4 +28,10 @@ public class Punio extends Arma {
     public void atacar(Atacable objetivo) {
         objetivo.recibirAtaque(new AtaquePunio());
     }
+
+    @Override
+    public boolean puedeAtacar(Trayectoria trayectoria) {
+        // las armas mech, tal vez no deberian implementar esto
+        throw new RuntimeException("implementar?");
+    }
 }

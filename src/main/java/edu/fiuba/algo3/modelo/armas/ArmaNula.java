@@ -11,6 +11,11 @@ public class ArmaNula extends Arma {
     }
 
     @Override
+    public boolean puedeAtacar(Trayectoria trayectoria) {
+        return false;
+    }
+
+    @Override
     public void atacar(Dañable objetivo) {
 
     }

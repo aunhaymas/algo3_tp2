@@ -17,26 +17,24 @@ public class GeneradorDeOpcionesVek {
     public GeneradorDeOpcionesVek(BuscaTrayectorias buscador) {
         buscaTrayectorias=buscador;
     }
-
     public List<Opcion> generarOpcionesPara(Vek vek, Tablero tablero) {
-        Casilla origen = tablero.casillaQueContiene(vek);
+        Casilla origen = tablero.obtenerCasilla(vek);
 
         List<Trayectoria> trayectorias =
-                buscaTrayectorias.trayectoriasDesde(
-                        origen.getCoordenada(), vek, tablero
-                );
+                buscaTrayectorias.trayectoriasDesde(origen.getCoordenada(), vek, tablero);
 
         List<Opcion> opciones = new ArrayList<>();
 
-        for (Casilla casillaEdificio : tablero.casillasConEdificios()) {
-            Coordenada objetivo = casillaEdificio.getCoordenada();
+        for (Trayectoria trayectoria : trayectorias) {
+            Coordenada posicionAtaque = trayectoria.getCoordenadaDestino();
 
-            for (Trayectoria trayectoria : trayectorias) {
-                Coordenada posicionAtaque =
-                        trayectoria.getDestino().getCoordenada();
+            for (Casilla casilla : tablero.obtenerCasillas()) {
+                Coordenada objetivo = casilla.getCoordenada();
 
                 if (vek.puedeAtacarDesde(tablero, posicionAtaque, objetivo)) {
-                    opciones.add(new OpcionAtaqueEdificio(trayectoria, objetivo));
+                    casilla.serSeleccionadoPor(
+                            new SeleccionadorObjetivosVek(trayectoria, objetivo, opciones)
+                    );
                 }
             }
         }

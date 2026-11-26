@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.veks;
 
 import edu.fiuba.algo3.modelo.Casilla;
 import edu.fiuba.algo3.modelo.Coordenada;
+import edu.fiuba.algo3.modelo.Seleccionador;
 import edu.fiuba.algo3.modelo.unidades.Unidad;
 import edu.fiuba.algo3.modelo.veks.comportamiento.*;
 
@@ -30,6 +31,11 @@ public class Vek extends Unidad {
 	@Override
 	public void notificarEmpuje(Coordenada direccion) {
 		anuncioAtaque.desplazarAtaque(direccion);
+	}
+
+	@Override
+	public void serSeleccionadoPor(Seleccionador seleccionador) {
+		seleccionador.seleccionarVek(this);
 	}
 
 

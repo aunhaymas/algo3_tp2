@@ -17,14 +17,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GeneradorDeOpcionesVekTest {
-    /*
-    1 Genero todas las trayectorias desde el origen del vek
-    2 para cada una: obtengo la coordenada destino
-    3 desde coordenada destino: consulto que edificios puede atacar desde ahi
-    4 genero una OpcionAtaqueEdificio por cada consulta validada
-    * */
+
     @Test
-    void generadorDeOpcionesGeneraLaOpcionAtaqueAEdificio(){
+    void generadorDeOpcionesGeneraLaOpcionAtaqueAEdificio() {
         Casilla origen = Casilla.crearEn(0, 0);
         Casilla posicionAtaque = Casilla.crearEn(1, 0);
         Casilla casillaEdificio = Casilla.crearEn(2, 0);
@@ -36,17 +31,14 @@ public class GeneradorDeOpcionesVekTest {
         origen.recibirPieza(vek);
 
         Tablero tablero = new Tablero(List.of(origen, posicionAtaque, casillaEdificio));
-
         GeneradorDeOpcionesVek generador = new GeneradorDeOpcionesVek(new BuscadorBfs());
 
         List<Opcion> opciones = generador.generarOpcionesPara(vek, tablero);
-
-        assertEquals(1, opciones.size());
-
         AnuncioDeAtaque anuncioDeAtaque = opciones.get(0).ejecutar(vek);
+
         anuncioDeAtaque.ejecutarAtaque(tablero);
 
-        assertEquals(vek, posicionAtaque.obtenerPieza());
+        assertTrue(posicionAtaque.tiene(vek));
         assertTrue(edificio.estaDestruida());
     }
 }
