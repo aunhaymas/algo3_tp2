@@ -217,4 +217,28 @@ public class GeneradorDeOpcionesVekTest {
         // assertEquals(1,opciones.size()); no hace falta esto, testeo por comportamiento
         assertFalse(edificio.estaDestruida());
     }
+    @Test
+    void acercarseAEdificioEligeMenorFilaYLuegoMenorColumna() {
+        Casilla origen = Casilla.crearEn(0, 0);
+        Casilla opcionFila0 = Casilla.crearEn(1, 0); // distancia ortogonal a (3,3) = 5, y=0
+        Casilla opcionFila1 = Casilla.crearEn(0, 1); // distancia ortogonal a (3,3) = 5, y=1
+        Casilla casillaEdificio = Casilla.crearEn(3, 3);
+
+        Pieza edificio = new PiezaEdificio(new RedElectrica());
+        casillaEdificio.recibirPieza(edificio);
+        Vek vek = new Saltador();
+        origen.recibirPieza(vek);
+
+        Tablero tablero = new Tablero(List.of(origen, opcionFila0, opcionFila1, casillaEdificio));
+        GeneradorDeOpcionesVek generador = new GeneradorDeOpcionesVek(new BuscadorBfs());
+
+        List<Opcion> opciones = generador.generarOpcionesPara(vek, tablero);
+        Decision decision = vek.tomarDecision(opciones);
+        AnuncioDeAtaque anuncio = decision.ejecutar();
+        anuncio.ejecutarAtaque(tablero);
+
+        assertTrue(opcionFila0.tiene(vek));
+        assertFalse(edificio.estaDestruida());
+    }
+
 }
