@@ -240,5 +240,28 @@ public class GeneradorDeOpcionesVekTest {
         assertTrue(opcionFila0.tiene(vek));
         assertFalse(edificio.estaDestruida());
     }
+    @Test
+    void DosOpcionesDeAtaqueAEdificioEligeMenorFilaYLuegoMenorColumnaParaDesempatar() {
+        Casilla origen = Casilla.crearEn(0, 0);
+        Casilla opcionFila0 = Casilla.crearEn(1, 0); // ataca a (1,1), y=0
+        Casilla opcionFila1 = Casilla.crearEn(0, 1); // ataca a (1,1), y=1
+        Casilla casillaEdificio = Casilla.crearEn(1, 1);
 
+        Pieza edificio = new PiezaEdificio(new RedElectrica());
+        casillaEdificio.recibirPieza(edificio);
+
+        Vek vek = new Saltador();
+        origen.recibirPieza(vek);
+
+        Tablero tablero = new Tablero(List.of(origen, opcionFila0, opcionFila1, casillaEdificio));
+        GeneradorDeOpcionesVek generador = new GeneradorDeOpcionesVek(new BuscadorBfs());
+        List<Opcion> opciones = generador.generarOpcionesPara(vek, tablero);
+
+        Decision decision = vek.tomarDecision(opciones);
+        AnuncioDeAtaque anuncio = decision.ejecutar();
+        anuncio.ejecutarAtaque(tablero);
+
+        assertTrue(opcionFila0.tiene(vek));
+        assertTrue(edificio.estaDestruida());
+    }
 }
