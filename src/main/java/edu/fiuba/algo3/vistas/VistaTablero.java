@@ -11,22 +11,30 @@ public class VistaTablero implements Observer {
     Tablero tablero;
     Canvas canvas;
     // List<VistaCasilla> casillas;
-    public VistaTablero(Tablero tablero, Canvas canvas) {
+    public VistaTablero(Tablero tablero, Canvas canvas, Observable observable) {
         this.tablero = tablero;
         this.canvas = canvas;
-        // this.casillas = new ArrayList<VistaCasilla>();
+        observable.agregarObserver(this);
+        for (Casilla casilla: tablero.iterarCasillas()) {
+            VistaCasilla vistaCasilla = new VistaCasilla(casilla, canvas, observable);
+            // vistaCasilla.dibujar();
+        }
     }
 
     public void dibujar() {
-        for (Casilla casilla: tablero.iterarCasillas()) {
-            VistaCasilla vistaCasilla = new VistaCasilla(casilla, canvas);
-            vistaCasilla.dibujar();
-        }
+        // for (Casilla casilla: tablero.iterarCasillas()) {
+        //     VistaCasilla vistaCasilla = new VistaCasilla(casilla, canvas);
+        //     vistaCasilla.dibujar();
+        // }
     }
 
     @Override 
     public void update() {
         dibujar();
+    }
+
+    @Override 
+    public void deseleccionar(Observer o) {
     }
 
 }

@@ -23,4 +23,9 @@ public class ArmaMordida extends Arma{
     public void atacar(Atacable objetivo) {
         objetivo.recibirAtaque(new AtaqueMordida());
     }
+
+    @Override
+    public boolean puedeAtacar(Trayectoria trayectoria) {
+        return trayectoria.logitud()==1;
+    }
 }

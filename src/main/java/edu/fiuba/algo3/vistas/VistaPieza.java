@@ -9,6 +9,7 @@ import edu.fiuba.algo3.modelo.unidades.PiezaEdificio;
 import edu.fiuba.algo3.modelo.veks.Vek;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -16,19 +17,19 @@ public class VistaPieza implements Observer {
     Pieza pieza;
     Coordenada coordenada;
     Canvas canvas;
-    VistaTablero tablero;
+    Observable observable;
     boolean seleccionado;
-    GraphicsContext gc;
-    public VistaPieza(Pieza pieza, Coordenada coordenada, Canvas canvas, VistaTablero tablero) {
+    public VistaPieza(Pieza pieza, Coordenada coordenada, Canvas canvas, Observable observable) {
         this.pieza = pieza;
         this.coordenada = coordenada;
         this.canvas = canvas;
-        this.tablero = tablero;
+        this.observable = observable;
         this.seleccionado = false;
+        observable.agregarObserver(this);
     }
 
     public void dibujar() {
-        gc = canvas.getGraphicsContext2D();
+        GraphicsContext gc = canvas.getGraphicsContext2D();
         if (pieza instanceof PiezaEdificio) {
             gc.setFill(Color.BLACK);
             gc.fillRect(getCoordenadaX(coordenada),getCoordenadaY(coordenada), 30, 30);
@@ -57,8 +58,8 @@ public class VistaPieza implements Observer {
     }
 
     public void setearClickable() {
-        ClickEnMechEventHandler handler = new ClickEnMechEventHandler(this, this.tablero);
-        gc.setOnMouseClick(handler);
+        ClickEnMechEventHandler handler = new ClickEnMechEventHandler(this, this.coordenada, this.observable);
+        canvas.setOnMouseClicked(handler);
     }
 
     public void seleccionar() {
@@ -68,6 +69,11 @@ public class VistaPieza implements Observer {
     @Override 
     public void update() {
         dibujar();
+    }
+
+    @Override 
+    public void deseleccionar(Observer o) {
+        seleccionado = (this == o);
     }
 
 }

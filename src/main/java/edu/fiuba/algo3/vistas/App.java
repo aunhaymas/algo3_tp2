@@ -27,7 +27,7 @@ public class App extends Application {
         // var javaVersion = SystemInfo.javaVersion();
         // var javafxVersion = SystemInfo.javafxVersion();
 
-        ContenedorTablero contenedorTablero = new ContenedorTablero(stage, inicializarTablero());
+        ContenedorTablero contenedorTablero = new ContenedorTablero(stage);
         var scene = new Scene(contenedorTablero, 640, 640);
 
         ContenedorBienvenido contenedorBienvenido = new ContenedorBienvenido(stage, scene);
@@ -40,28 +40,6 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
-    }
-
-    public Tablero inicializarTablero() {
-        
-        ParserTablero parserTablero = new ParserTablero(new TerrenosFactory());
-        Tablero tablero = parserTablero.parsear(List.of(
-                "AAAASSSS",
-                "AAAASSSS",
-                "AASSSÁSS",
-                "AASSSSSS",
-                "SSESESES",
-                "SSSSSSSS",
-                "SSESESES",
-                "MMMMMMMM"
-        ));
-        Mech mech1 = new MechDeCombate();
-        tablero.colocarPieza(mech1, new Coordenada(3, 4));
-        Mech mech2 = new MechDeCanon();
-        tablero.colocarPieza(mech2, new Coordenada(5, 4));
-        Mech mech3 = new MechDeArtilleria();
-        tablero.colocarPieza(mech3, new Coordenada(7, 3));
-        return tablero;
     }
 
 }

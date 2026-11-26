@@ -11,10 +11,14 @@ public class VistaCasilla implements Observer {
     Casilla casilla;
     Coordenada coordenada;
     Canvas canvas;
-    public VistaCasilla(Casilla casilla, Canvas canvas) {
+    public VistaCasilla(Casilla casilla, Canvas canvas, Observable observable) {
         this.casilla = casilla;
         this.coordenada = casilla.getCoordenada();
         this.canvas = canvas;
+        observable.agregarObserver(this);
+        if (!casilla.estaLibre()) {
+            VistaPieza vistapieza = new VistaPieza(casilla.obtenerPieza(), coordenada, canvas, observable);
+        }
     }
 
     public void dibujar() {
@@ -23,10 +27,6 @@ public class VistaCasilla implements Observer {
         gc.fillRect(getCoordenadaX(coordenada),getCoordenadaY(coordenada), 60, 60);
         gc.setStroke(Color.BLACK);
         gc.setLineWidth(5);
-        if (!casilla.estaLibre()) {
-            VistaPieza vistapieza = new VistaPieza(casilla.obtenerPieza(), coordenada, canvas);
-            vistapieza.dibujar();
-        }
         gc.strokeRect(getCoordenadaX(coordenada),getCoordenadaY(coordenada), 60, 60);
     }
 
@@ -41,6 +41,10 @@ public class VistaCasilla implements Observer {
     @Override 
     public void update() {
         dibujar();
+    }
+
+    @Override 
+    public void deseleccionar(Observer o) {
     }
 
 }
