@@ -167,5 +167,26 @@ public class GeneradorDeOpcionesVekTest {
 
         assertEquals(0,opciones.size());
     }
+    @Test
+    void AvisponTieneUnaCasillaConAcidoDesdeDondeAtacarYSiGeneraOpcion(){
+        Casilla origen = Casilla.crearEn(1, 1);
+        Casilla casillaAcido = new Casilla(new Coordenada(1,0),new Acido());
+        Casilla casillaEdificio = Casilla.crearEn(2, 0);
+        RedElectrica red = new RedElectrica();
+        Pieza edificio = new PiezaEdificio(red); // tiene 2 de vida
+        casillaEdificio.recibirPieza(edificio);
 
+        Vek vek = new Avispon(); // hace 1 de danio, movimiento 4
+        origen.recibirPieza(vek);
+
+        Tablero tablero = new Tablero(List.of(origen, casillaEdificio,casillaAcido));
+        GeneradorDeOpcionesVek generador = new GeneradorDeOpcionesVek(new BuscadorBfs());
+
+        List<Opcion> opciones = generador.generarOpcionesPara(vek, tablero);
+        Opcion opcion =opciones.get(0);
+        AnuncioDeAtaque anuncioDeAtaque = opcion.ejecutar(vek);
+        anuncioDeAtaque.ejecutarAtaque(tablero);
+        assertEquals(1,opciones.size());
+        assertTrue(edificio.estaDestruida());
+    }
 }
