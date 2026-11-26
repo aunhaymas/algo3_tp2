@@ -16,11 +16,16 @@ public class ArmaAcido extends Arma{
     public void recorrer(Trayectoria trayectoria) {
         Casilla hit = trayectoria.devolverPrimeraCasillaNoLibre();
         hit.recibirAtaque(new AtaqueAcido());
-        hit.empujar(trayectoria.getDireccion());
+
     }
 
     @Override
     public void atacar(Atacable objetivo) {
         objetivo.recibirAtaque(new AtaqueAcido());
+    }
+
+    @Override
+    public boolean puedeAtacar(Trayectoria trayectoria) {
+        return !trayectoria.tieneObstaculos();
     }
 }

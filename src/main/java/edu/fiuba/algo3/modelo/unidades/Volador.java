@@ -7,4 +7,19 @@ public class Volador implements TipoMovimiento{
     public boolean puedeTransitar(Casilla casilla) {
         return true;
     }
+
+    @Override
+    public boolean puedeTerminarEn(Casilla casilla) {
+        return casilla.puedeTerminarAca(this);
+    }
+
+    @Override
+    public boolean puedeTerminarEnAcido() {
+        return true;
+    }
+
+    @Override
+    public boolean puedeTerminarEnAgua() {
+        return true;
+    }
 }

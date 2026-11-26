@@ -70,9 +70,12 @@ public class Coordenada {
     }
 
     public Coordenada direccionA(Coordenada destino) {
-        if (this.x != destino.x && this.y != destino.y) { throw new TrayectoriaInvalidaException(); }
+        if (!estaAlineadaCon(destino)) { throw new TrayectoriaInvalidaException(); }
         Coordenada desplazo = destino.trasladar(this.multiplicar(-1));
         return direccion(desplazo);
+    }
+    public boolean estaAlineadaCon(Coordenada otra) {
+        return this.x == otra.x || this.y == otra.y;
     }
     private Coordenada direccion(Coordenada desplazo){
         int x = Integer.compare(desplazo.x, 0);

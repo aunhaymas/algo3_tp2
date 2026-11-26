@@ -1,9 +1,6 @@
 package edu.fiuba.algo3.modelo.mechs;
 
-import edu.fiuba.algo3.modelo.Casilla;
-import edu.fiuba.algo3.modelo.Coordenada;
-import edu.fiuba.algo3.modelo.Memento;
-import edu.fiuba.algo3.modelo.Trayectoria;
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.armas.Arma;
 import edu.fiuba.algo3.modelo.armas.ArmaNula;
 import edu.fiuba.algo3.modelo.estadosUnidad.EstadoUnidad;
@@ -45,6 +42,11 @@ public class Mech extends Unidad {
 	@Override
 	public void notificarEmpuje(Coordenada direccion) {
 
+	}
+
+	@Override
+	public void serSeleccionadoPor(Seleccionador seleccionador) {
+		seleccionador.seleccionarMech(this);
 	}
 
 	// @Override

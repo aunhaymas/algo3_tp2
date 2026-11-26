@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.estadoCasilla;
 
 import edu.fiuba.algo3.modelo.Casilla;
 import edu.fiuba.algo3.modelo.Coordenada;
+import edu.fiuba.algo3.modelo.Seleccionador;
 import edu.fiuba.algo3.modelo.ataques.Ataque;
 import edu.fiuba.algo3.modelo.empujes.Empuje;
 import edu.fiuba.algo3.modelo.unidades.Pieza;
@@ -23,4 +24,6 @@ public interface EstadoCasilla {
     EstadoCasilla emergencia(Vek vek);
 
     EstadoCasilla resolverEmergenciaIniciarTurno();
+
+    void serSeleccionadoPor(Seleccionador seleccionador);
 }

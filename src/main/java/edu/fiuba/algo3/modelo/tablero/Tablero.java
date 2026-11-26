@@ -10,6 +10,7 @@ import edu.fiuba.algo3.modelo.mechs.Mech;
 import edu.fiuba.algo3.modelo.unidades.Pieza;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -112,5 +113,9 @@ public class Tablero {
         return casillas.stream()
                 .filter(casilla -> casilla.getCoordenada().equals(coordenada))
                 .findFirst();
+    }
+
+    public List<Casilla> obtenerCasillas() {
+        return Collections.unmodifiableList(casillas);
     }
 }

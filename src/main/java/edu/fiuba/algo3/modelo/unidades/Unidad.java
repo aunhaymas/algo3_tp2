@@ -110,8 +110,16 @@ public abstract class Unidad implements Dañable, Pieza,Atacable {
 	public boolean puedeTransitar(Casilla casilla){
 		return this.tipoMovimiento.puedeTransitar(casilla);
 	}
-
+	public boolean puedeTerminarEn(Casilla casilla){
+		return this.tipoMovimiento.puedeTerminarEn(casilla);
+	}
     public int rangoMovimiento() {
 		return this.movimientos;
     }
+
+	public boolean puedeAtacarDesde(Tablero tablero, Coordenada origenAtaque, Coordenada destinoAtaque) {;
+		if (origenAtaque.equals(destinoAtaque)) return false;
+		if (!origenAtaque.estaAlineadaCon(destinoAtaque)) return false;
+		return this.arma.puedeAtacar(tablero.crearTrayectoria(origenAtaque,destinoAtaque));
+	}
 }

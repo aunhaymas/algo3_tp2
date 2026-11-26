@@ -9,16 +9,14 @@ import edu.fiuba.algo3.modelo.excepciones.TrayectoriaInvalidaException;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.terrenos.Suelo;
 import edu.fiuba.algo3.modelo.terrenos.TipoTerreno;
-import edu.fiuba.algo3.modelo.unidades.Atacable;
-import edu.fiuba.algo3.modelo.unidades.Pieza;
-import edu.fiuba.algo3.modelo.unidades.Unidad;
+import edu.fiuba.algo3.modelo.unidades.*;
 import edu.fiuba.algo3.modelo.veks.Vek;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Casilla implements Atacable{
+public class Casilla implements Atacable,Seleccionable{
     private Tablero tablero;
     private Coordenada coordenada;
     private TipoTerreno terrenoCasilla;
@@ -201,5 +199,15 @@ public class Casilla implements Atacable{
     }
     public Coordenada obtenerAdyacente(Direccion direccion){
         return  direccion.obtenerCoordenadaAdyacente(this.coordenada);
+    }
+
+    @Override
+    public void serSeleccionadoPor(Seleccionador seleccionador) {
+        seleccionador.seleccionarCasilla(this);
+        this.estado.serSeleccionadoPor(seleccionador);
+    }
+
+    public boolean puedeTerminarAca(TipoMovimiento mov) {
+        return  this.terrenoCasilla.puedeTerminarAca(mov) && this.estado.estaLibre();
     }
 }
