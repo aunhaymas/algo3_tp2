@@ -1,9 +1,11 @@
 package edu.fiuba.algo3.entrega_3;
 
 import edu.fiuba.algo3.modelo.Casilla;
+import edu.fiuba.algo3.modelo.Coordenada;
 import edu.fiuba.algo3.modelo.RedElectrica;
 import edu.fiuba.algo3.modelo.mechs.Mech;
 import edu.fiuba.algo3.modelo.mechs.MechDeCombate;
+import edu.fiuba.algo3.modelo.partida.EmergenciaTurno;
 import edu.fiuba.algo3.modelo.partida.Partida;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.unidades.PiezaEdificio;
@@ -38,8 +40,8 @@ public class ManejoDeTurnosTest {
 
         Tablero tablero = new Tablero(List.of(origenVek, ataqueVek, casillaEdificio, casillaMech,casilla3));
         Partida partida = new Partida(tablero, red,List.of(mech));
-
-        // 1. Fase Vek: mueve al Vek y anuncia ataque, pero NO daña el edificio todavía
+        // FaseVek - FaseJugador- FaseResolucion-FaseEmergencia
+        // 1. Fase Vek: mueve al Vek y anuncia ataque, sin daniar al edificio todavía
         partida.avanzarFase();
         assertTrue(ataqueVek.tiene(saltador));
         assertFalse(edificio.estaDestruida());
@@ -51,6 +53,34 @@ public class ManejoDeTurnosTest {
         assertEquals(4, red.integridadActual());
 
         partida.avanzarFase();
+        assertEquals(2, partida.turnoActual());
+    }
+
+
+    @Test
+    void faseVekMarcaCasillaDeEmergenciaYFaseEmergenciaInvocaAlNuevoVek() {
+        Casilla origenMech = Casilla.crearEn(0, 0);
+        Casilla casillaEmergencia = Casilla.crearEn(1, 0);
+
+        Mech mech = new MechDeCombate();
+        origenMech.recibirPieza(mech);
+
+        Tablero tablero = new Tablero(List.of(origenMech, casillaEmergencia));
+        EmergenciaTurno emergenciaTurno = new EmergenciaTurno(new Coordenada(1,0),new Saltador());
+        Partida partida = new Partida(tablero, new RedElectrica(), List.of(mech),List.of(emergenciaTurno));
+
+        // 1. Fase Vek: marca emergencia en casillaEmergencia porque es la unica libre
+        partida.avanzarFase();
+
+        // 2. Fase Jugador
+        partida.avanzarFase();
+
+        // 3. Fase Resolucion
+        partida.avanzarFase();
+
+        // 4. Fase Emergencia: aca aparece el vej
+        partida.avanzarFase();
+        assertFalse(casillaEmergencia.estaLibre());
         assertEquals(2, partida.turnoActual());
     }
 }

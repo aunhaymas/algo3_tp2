@@ -15,6 +15,7 @@ public class Partida {
     private final JugadorVek jugadorVek= new JugadorVek();
     private int turnoActual = 1;
     private FaseTurno faseActual = new FaseVek();
+    private List<SolicitudEmergencia> emergenciaTurnos;
 
 
     public Partida(Tablero tablero) {
@@ -25,12 +26,18 @@ public class Partida {
         this(tablero);
         this.mechsVivos = mechs;
         this.red=red;
+        this.emergenciaTurnos = List.of(new SinEmergencia());
+    }
+    public Partida(Tablero tablero, RedElectrica red, List<Mech> mechs, List<SolicitudEmergencia> emergenciaTurnos) {
+        this(tablero,red,mechs);
+        this.emergenciaTurnos = emergenciaTurnos;
     }
 
     public void avanzarFase() {
         this.faseActual= this.faseActual.avanzarFase(this);
     }
     public void ejecutarFaseVek(){
+        this.emergenciaTurnos.get(0).solicitarEmergenciaEn(tablero);
         this.jugadorVek.anunciarAtaques(this.tablero);
     }
     public void ejecutarFaseResolucion(){
@@ -45,6 +52,6 @@ public class Partida {
     }
 
     public void ejecutarFaseEmergencia() {
-
+        tablero.resolverEmergencia();
     }
 }

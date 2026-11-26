@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.ataques.Ataque;
 import edu.fiuba.algo3.modelo.excepciones.CoordenadaInvalidaException;
 import edu.fiuba.algo3.modelo.mechs.Mech;
 import edu.fiuba.algo3.modelo.unidades.Pieza;
+import edu.fiuba.algo3.modelo.veks.Vek;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -119,6 +120,16 @@ public class Tablero {
     public void serSeleccionadorPor(Seleccionador seleccionador) {
         for (Casilla casilla : this.casillas) {
             casilla.serSeleccionadoPor(seleccionador);
+        }
+    }
+
+    public void solicitarEmergenciaEn(Coordenada objetivo, Vek vek) {
+        obtenerCasilla(objetivo).emergencia(vek);
+    }
+
+    public void resolverEmergencia() {
+        for (Casilla casilla : this.casillas) {
+            casilla.resolverEmergencia();
         }
     }
 }
