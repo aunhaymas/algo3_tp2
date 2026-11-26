@@ -6,11 +6,9 @@ import edu.fiuba.algo3.modelo.mechs.Mech;
 import edu.fiuba.algo3.modelo.mechs.MechDeArtilleria;
 import edu.fiuba.algo3.modelo.tablero.BuscadorBfs;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
+import edu.fiuba.algo3.modelo.unidades.Pieza;
 import edu.fiuba.algo3.modelo.unidades.PiezaEdificio;
-import edu.fiuba.algo3.modelo.veks.Avispon;
-import edu.fiuba.algo3.modelo.veks.Opcion;
-import edu.fiuba.algo3.modelo.veks.Saltador;
-import edu.fiuba.algo3.modelo.veks.Vek;
+import edu.fiuba.algo3.modelo.veks.*;
 import edu.fiuba.algo3.modelo.veks.comportamiento.AnuncioDeAtaque;
 import edu.fiuba.algo3.modelo.veks.comportamiento.GeneradorDeOpcionesVek;
 import org.junit.jupiter.api.Test;
@@ -90,5 +88,32 @@ public class GeneradorDeOpcionesVekTest {
         //Avispon le hace 1 de danio a mech que tiene 2 de vida
         assertTrue(origen.tiene(vek));
         assertEquals(1, mech.getVida());
+    }
+    @Test
+    void luciernagaOpcionAtaqueEdificioLejano(){
+        Casilla origen = Casilla.crearEn(0, 0);
+        Casilla casilla2 = Casilla.crearEn(1,0);
+        Casilla casilla3 = Casilla.crearEn(2,0);
+        Casilla casilla4 = Casilla.crearEn(3,0);
+        Casilla casilla5 = Casilla.crearEn(4,0);
+        Casilla casilla6 = Casilla.crearEn(5,0);
+        Casilla casillaEdificio = Casilla.crearEn(6, 0);
+        RedElectrica red = new RedElectrica();
+        Pieza edificio = new PiezaEdificio(red); // tiene 2 de vida
+        casillaEdificio.recibirPieza(edificio);
+
+        Vek vek = new Luciernaga(); // hace 1 de danio, movimiento 2
+        origen.recibirPieza(vek);
+
+        Tablero tablero = new Tablero(List.of(origen, casillaEdificio,casilla2,casilla3,casilla4,casilla5,casilla6));
+        GeneradorDeOpcionesVek generador = new GeneradorDeOpcionesVek(new BuscadorBfs());
+
+        List<Opcion> opciones = generador.generarOpcionesPara(vek, tablero);
+        assertEquals(3,opciones.size());// puede atacar desde 3 lugares distintos
+        AnuncioDeAtaque anuncioDeAtaque = opciones.get(0).ejecutar(vek);
+        anuncioDeAtaque.ejecutarAtaque(tablero);
+
+        //Avispon le hace 1 de danio a edificio que tiene 2 de vida
+        assertEquals(red.integridadActual(),4);
     }
 }
