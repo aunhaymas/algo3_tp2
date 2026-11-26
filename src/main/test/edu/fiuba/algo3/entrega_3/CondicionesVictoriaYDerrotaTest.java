@@ -66,8 +66,6 @@ Al terminar la partida, el sistema muestra el resultado, la cantidad de Vek elim
             partida.avanzarFase();
         }
 
-        partida.verificarGameOver();
-
         assertTrue(partida.esGameOver());
         assertTrue(partida.sePerdio());
     }
@@ -105,7 +103,6 @@ Al terminar la partida, el sistema muestra el resultado, la cantidad de Vek elim
         for (int i = 0; i < 4; i++) {
             partida.avanzarFase();
         }
-        partida.verificarGameOver();
         assertTrue(partida.sePerdio());
     }
 }

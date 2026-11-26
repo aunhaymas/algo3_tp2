@@ -44,6 +44,8 @@ public class Partida {
     }
     public void ejecutarFaseResolucion(){
         this.jugadorVek.ejecutarAtaques(this.tablero);
+        // aca tiene sentido que se verifique
+        verificarGameOver();
     }
     public void siguienteTurno(){
         this.turnoActual+=1;
@@ -57,7 +59,7 @@ public class Partida {
         tablero.resolverEmergencia();
     }
 
-    public void verificarGameOver() {
+    private void verificarGameOver() {
         boolean apagon = this.red.estaDestruida();
         boolean flotaDerrotada = true;
         for (Mech mech:this.mechsVivos){
