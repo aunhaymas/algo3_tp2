@@ -3,6 +3,11 @@ package edu.fiuba.algo3.vistas;
 import java.util.List;
 
 import edu.fiuba.algo3.SystemInfo;
+import edu.fiuba.algo3.modelo.Coordenada;
+import edu.fiuba.algo3.modelo.mechs.Mech;
+import edu.fiuba.algo3.modelo.mechs.MechDeArtilleria;
+import edu.fiuba.algo3.modelo.mechs.MechDeCanon;
+import edu.fiuba.algo3.modelo.mechs.MechDeCombate;
 import edu.fiuba.algo3.modelo.tablero.ParserTablero;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.terrenos.TerrenosFactory;
@@ -22,7 +27,7 @@ public class App extends Application {
         // var javaVersion = SystemInfo.javaVersion();
         // var javafxVersion = SystemInfo.javafxVersion();
 
-        ContenedorTablero contenedorTablero = new ContenedorTablero(stage, getTablero());
+        ContenedorTablero contenedorTablero = new ContenedorTablero(stage, inicializarTablero());
         var scene = new Scene(contenedorTablero, 640, 640);
 
         ContenedorBienvenido contenedorBienvenido = new ContenedorBienvenido(stage, scene);
@@ -37,7 +42,7 @@ public class App extends Application {
         launch();
     }
 
-    public Tablero getTablero() {
+    public Tablero inicializarTablero() {
         
         ParserTablero parserTablero = new ParserTablero(new TerrenosFactory());
         Tablero tablero = parserTablero.parsear(List.of(
@@ -50,6 +55,12 @@ public class App extends Application {
                 "SSESESES",
                 "MMMMMMMM"
         ));
+        Mech mech1 = new MechDeCombate();
+        tablero.colocarPieza(mech1, new Coordenada(3, 4));
+        Mech mech2 = new MechDeCanon();
+        tablero.colocarPieza(mech2, new Coordenada(5, 4));
+        Mech mech3 = new MechDeArtilleria();
+        tablero.colocarPieza(mech3, new Coordenada(7, 3));
         return tablero;
     }
 

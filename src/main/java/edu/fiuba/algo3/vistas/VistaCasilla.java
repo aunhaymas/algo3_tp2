@@ -7,7 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class VistaCasilla {
+public class VistaCasilla implements Observer {
     Casilla casilla;
     Coordenada coordenada;
     Canvas canvas;
@@ -23,15 +23,24 @@ public class VistaCasilla {
         gc.fillRect(getCoordenadaX(coordenada),getCoordenadaY(coordenada), 60, 60);
         gc.setStroke(Color.BLACK);
         gc.setLineWidth(5);
+        if (!casilla.estaLibre()) {
+            VistaPieza vistapieza = new VistaPieza(casilla.obtenerPieza(), coordenada, canvas);
+            vistapieza.dibujar();
+        }
         gc.strokeRect(getCoordenadaX(coordenada),getCoordenadaY(coordenada), 60, 60);
     }
 
     public int getCoordenadaX(Coordenada coordenada) {
-        return (coordenada.getX() - 1)*60;
+        return (coordenada.getX())*60;
     }
 
     public int getCoordenadaY(Coordenada coordenada) {
-        return (coordenada.getY() - 1)*60;
+        return (coordenada.getY())*60;
+    }
+
+    @Override 
+    public void update() {
+        dibujar();
     }
 
 }
