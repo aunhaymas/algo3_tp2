@@ -13,6 +13,7 @@ public class AnuncioReal implements AnuncioDeAtaque {
         this.objetivo=objetivo;
     }
     public void ejecutarAtaque(Tablero contexto){
+        if (this.vek.estaDestruida()) return;
         this.vek.atacar(contexto,objetivo);
     }
     public void desplazarAtaque(Coordenada cambio){

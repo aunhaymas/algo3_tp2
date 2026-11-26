@@ -1,13 +1,11 @@
 package edu.fiuba.algo3.modelo.tablero;
 
-import edu.fiuba.algo3.modelo.Casilla;
-import edu.fiuba.algo3.modelo.Coordenada;
-import edu.fiuba.algo3.modelo.Direccion;
-import edu.fiuba.algo3.modelo.Trayectoria;
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.ataques.Ataque;
 import edu.fiuba.algo3.modelo.excepciones.CoordenadaInvalidaException;
 import edu.fiuba.algo3.modelo.mechs.Mech;
 import edu.fiuba.algo3.modelo.unidades.Pieza;
+import edu.fiuba.algo3.modelo.veks.Vek;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -117,5 +115,21 @@ public class Tablero {
 
     public List<Casilla> obtenerCasillas() {
         return Collections.unmodifiableList(casillas);
+    }
+
+    public void serSeleccionadorPor(Seleccionador seleccionador) {
+        for (Casilla casilla : this.casillas) {
+            casilla.serSeleccionadoPor(seleccionador);
+        }
+    }
+
+    public void solicitarEmergenciaEn(Coordenada objetivo, Vek vek) {
+        obtenerCasilla(objetivo).emergencia(vek);
+    }
+
+    public void resolverEmergencia() {
+        for (Casilla casilla : this.casillas) {
+            casilla.resolverEmergencia();
+        }
     }
 }

@@ -9,9 +9,7 @@ import edu.fiuba.algo3.modelo.excepciones.TrayectoriaInvalidaException;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
 import edu.fiuba.algo3.modelo.terrenos.Suelo;
 import edu.fiuba.algo3.modelo.terrenos.TipoTerreno;
-import edu.fiuba.algo3.modelo.unidades.Atacable;
-import edu.fiuba.algo3.modelo.unidades.Pieza;
-import edu.fiuba.algo3.modelo.unidades.Unidad;
+import edu.fiuba.algo3.modelo.unidades.*;
 import edu.fiuba.algo3.modelo.veks.Vek;
 import javafx.scene.paint.Paint;
 
@@ -212,5 +210,9 @@ public class Casilla implements Atacable,Seleccionable{
     public void serSeleccionadoPor(Seleccionador seleccionador) {
         seleccionador.seleccionarCasilla(this);
         this.estado.serSeleccionadoPor(seleccionador);
+    }
+
+    public boolean puedeTerminarAca(TipoMovimiento mov) {
+        return  this.terrenoCasilla.puedeTerminarAca(mov) && this.estado.estaLibre();
     }
 }

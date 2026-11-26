@@ -12,11 +12,11 @@ import edu.fiuba.algo3.modelo.veks.Vek;
 
 import java.util.List;
 
-public class SeleccionadorObjetivosVek implements Seleccionador {
+public class SeleccionadorObjetivosAtaqueVek implements Seleccionador {
     private final Coordenada objetivo;
     private final List<Opcion> opciones;
     private final Trayectoria trayectoria;
-    public SeleccionadorObjetivosVek(Trayectoria trayectoria, Coordenada objetivo, List<Opcion> opciones) {
+    public SeleccionadorObjetivosAtaqueVek(Trayectoria trayectoria, Coordenada objetivo, List<Opcion> opciones) {
         this.trayectoria=trayectoria;
         this.objetivo=objetivo;
         this.opciones=opciones;

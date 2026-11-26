@@ -27,6 +27,35 @@ public class Coordenada {
     public int distanciaA(Coordenada otra) {
         return Math.max(Math.abs(this.x - otra.getX()), Math.abs(this.y - otra.getY()));
     }
+    // En Coordenada
+    public int distanciaCuadricula(Coordenada otra) {
+        int cambioX = Math.abs(this.x - otra.x);
+        int cambioY = Math.abs(this.y - otra.y);
+        return cambioX + cambioY;
+    }
+
+
+    public boolean estaMasCercaQue(Coordenada otra, List<Coordenada> objetivos) {
+        int miDistancia = this.distanciaMinimaA(objetivos);
+        int otraDistancia = otra.distanciaMinimaA(objetivos);
+        if (miDistancia != otraDistancia) {
+            return miDistancia < otraDistancia;
+        }
+        return this.precedeA(otra);
+    }
+
+    private int distanciaMinimaA(List<Coordenada> objetivos) {
+        int menor = this.distanciaCuadricula(objetivos.get(0));
+        for (Coordenada objetivo : objetivos) {
+            menor = Math.min(menor, this.distanciaCuadricula(objetivo));
+        }
+        return menor;
+    }
+
+    private boolean precedeA(Coordenada otra) {
+        if (this.y != otra.y) return this.y < otra.y; // ajustá y/x según cuál sea fila y cuál columna en tu tablero
+        return this.x < otra.x;
+    }
 
 
     public Coordenada trasladar(int movX, int movY) {

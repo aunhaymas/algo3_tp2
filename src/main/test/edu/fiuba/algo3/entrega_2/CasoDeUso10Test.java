@@ -13,6 +13,16 @@ import static org.junit.Assert.assertEquals;
 
 public class CasoDeUso10Test {
 
+    @Test
+    public void voidcasillaDeEmergenciaSobreCasillaLibreInvocaVekEnElProximoTurno(){
+        Casilla casilla = new Casilla(new Coordenada(1,1), new Suelo());
+        Vek avispon = new Avispon();
+
+        casilla.recibirPieza(avispon);
+        casilla.emergencia(avispon);
+
+        assertEquals(avispon, casilla.obtenerPieza());
+    }
     /*
     Verificar que una unidad sobre la casilla de emergencia bloquee la aparición del nuevo Vek
     y reciba 1 de daño.
