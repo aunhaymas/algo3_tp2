@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class GeneradorDeOpcionesVekTest {
 
     @Test
-    void generadorDeOpcionesGeneraLaOpcionAtaqueAEdificio() {
+    void generadorDeOpcionesASaltadorGeneraLaOpcionAtaqueAEdificio() {
         Casilla origen = Casilla.crearEn(0, 0);
         Casilla posicionAtaque = Casilla.crearEn(1, 0);
         Casilla casillaEdificio = Casilla.crearEn(2, 0);
@@ -30,7 +30,7 @@ public class GeneradorDeOpcionesVekTest {
         PiezaEdificio edificio = new PiezaEdificio(red);
         casillaEdificio.recibirPieza(edificio);
 
-        Vek vek = new Saltador();
+        Vek vek = new Saltador(); //hace 2 de danio
         origen.recibirPieza(vek);
 
         Tablero tablero = new Tablero(List.of(origen, posicionAtaque, casillaEdificio));
@@ -66,6 +66,29 @@ public class GeneradorDeOpcionesVekTest {
 
         //Avispon le hace 1 de danio a mech que tiene 2 de vida
         assertTrue(posicionAtaque.tiene(vek));
+        assertEquals(1, mech.getVida());
+    }
+
+    @Test
+    void seGeneraOpcionAtaqueAMechDeArtilleriaSinNecesidadDeMoverse(){
+        Casilla origen = Casilla.crearEn(0, 0);
+        Casilla casillaMech = Casilla.crearEn(1, 0);
+        Mech mech = new MechDeArtilleria(); // tiene 2 de vida
+        casillaMech.recibirPieza(mech);
+
+        Vek vek = new Avispon(); // hace 1 de danio
+        origen.recibirPieza(vek);
+
+        Tablero tablero = new Tablero(List.of(origen, casillaMech));
+        GeneradorDeOpcionesVek generador = new GeneradorDeOpcionesVek(new BuscadorBfs());
+
+        List<Opcion> opciones = generador.generarOpcionesPara(vek, tablero);
+
+        AnuncioDeAtaque anuncioDeAtaque = opciones.get(0).ejecutar(vek);
+        anuncioDeAtaque.ejecutarAtaque(tablero);
+
+        //Avispon le hace 1 de danio a mech que tiene 2 de vida
+        assertTrue(origen.tiene(vek));
         assertEquals(1, mech.getVida());
     }
 }

@@ -22,7 +22,8 @@ public class GeneradorDeOpcionesVek {
 
         List<Trayectoria> trayectorias =
                 buscaTrayectorias.trayectoriasDesde(origen.getCoordenada(), vek, tablero);
-
+        //Tambien considero la trayectoria de no moverse
+        trayectorias.add(new Trayectoria(List.of(origen)));
         List<Opcion> opciones = new ArrayList<>();
 
         for (Trayectoria trayectoria : trayectorias) {
