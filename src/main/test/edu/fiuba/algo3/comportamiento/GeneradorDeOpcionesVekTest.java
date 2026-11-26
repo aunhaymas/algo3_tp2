@@ -115,7 +115,6 @@ public class GeneradorDeOpcionesVekTest {
 
         AnuncioDeAtaque anuncioDeAtaque = opciones.get(0).ejecutar(vek);
         anuncioDeAtaque.ejecutarAtaque(tablero);
-        //Avispon le hace 1 de danio a edificio que tiene 2 de vida
         assertEquals(4, red.integridadActual());
     }
 
@@ -189,7 +188,7 @@ public class GeneradorDeOpcionesVekTest {
         Opcion opcion =opciones.get(0);
         AnuncioDeAtaque anuncioDeAtaque = opcion.ejecutar(vek);
         anuncioDeAtaque.ejecutarAtaque(tablero);
-        //assertEquals(1,opciones.size()); se genera una opcion de acercamiento
+        //assertEquals(1,opciones.size()); se genera una opcion de acercamiento, deben ser 2
         assertTrue(edificio.estaDestruida());
     }
     @Test
