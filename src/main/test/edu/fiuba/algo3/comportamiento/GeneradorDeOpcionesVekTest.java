@@ -115,13 +115,12 @@ public class GeneradorDeOpcionesVekTest {
 
         AnuncioDeAtaque anuncioDeAtaque = opciones.get(0).ejecutar(vek);
         anuncioDeAtaque.ejecutarAtaque(tablero);
-        assertEquals(3,opciones.size());// puede atacar desde 3 lugares distintos
         //Avispon le hace 1 de danio a edificio que tiene 2 de vida
         assertEquals(4, red.integridadActual());
     }
 
     @Test
-    void luciernagaTieneUnObstaculoEnMedioDelEdificioYnoGeneraOpcion(){
+    void luciernagaTieneUnObstaculoEnMedioDelEdificioYnoGeneraOpcionAtaque(){
         Casilla origen = Casilla.crearEn(0, 0);
         Casilla casilla2 = Casilla.crearEn(1,0);
         Casilla casilla3 = Casilla.crearEn(2,0);
@@ -142,10 +141,12 @@ public class GeneradorDeOpcionesVekTest {
 
         List<Opcion> opciones = generador.generarOpcionesPara(vek, tablero);
 
-        assertEquals(0,opciones.size());
+        AnuncioDeAtaque anuncioDeAtaque = opciones.get(0).ejecutar(vek);
+        anuncioDeAtaque.ejecutarAtaque(tablero);
+        assertFalse(edificio.estaDestruida());
     }
     @Test
-    void luciernagaTieneUnaCasillaConAcidoDesdeDondeAtacarYnoGeneraOpcion(){
+    void luciernagaTieneUnaCasillaConAcidoDesdeDondeAtacarYnoGeneraOpcionAtaque(){
         Casilla origen = Casilla.crearEn(1, 1);
         Casilla casilla2 = new Casilla(new Coordenada(1,0),new Acido());
         Casilla casilla3 = new Casilla(new Coordenada(2,0),new Acido());
@@ -165,10 +166,12 @@ public class GeneradorDeOpcionesVekTest {
 
         List<Opcion> opciones = generador.generarOpcionesPara(vek, tablero);
 
-        assertEquals(0,opciones.size());
+        AnuncioDeAtaque anuncioDeAtaque = opciones.get(0).ejecutar(vek);
+        anuncioDeAtaque.ejecutarAtaque(tablero);
+        assertFalse(edificio.estaDestruida());
     }
     @Test
-    void AvisponTieneUnaCasillaConAcidoDesdeDondeAtacarYSiGeneraOpcion(){
+    void AvisponTieneUnaCasillaConAcidoDesdeDondeAtacarYSiGeneraOpcionAtaque(){
         Casilla origen = Casilla.crearEn(1, 1);
         Casilla casillaAcido = new Casilla(new Coordenada(1,0),new Acido());
         Casilla casillaEdificio = Casilla.crearEn(2, 0);
@@ -186,7 +189,7 @@ public class GeneradorDeOpcionesVekTest {
         Opcion opcion =opciones.get(0);
         AnuncioDeAtaque anuncioDeAtaque = opcion.ejecutar(vek);
         anuncioDeAtaque.ejecutarAtaque(tablero);
-        assertEquals(1,opciones.size());
+        //assertEquals(1,opciones.size()); se genera una opcion de acercamiento
         assertTrue(edificio.estaDestruida());
     }
     @Test
