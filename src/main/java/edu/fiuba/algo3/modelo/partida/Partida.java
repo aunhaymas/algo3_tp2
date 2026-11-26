@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.partida;
 
+import edu.fiuba.algo3.modelo.Coordenada;
 import edu.fiuba.algo3.modelo.RedElectrica;
 import edu.fiuba.algo3.modelo.mechs.Mech;
 import edu.fiuba.algo3.modelo.partida.fase.FaseTurno;
@@ -18,6 +19,8 @@ public class Partida {
     private List<SolicitudEmergencia> emergenciaTurnos;
     private boolean esGameOver;
     private boolean sePerdio;
+    private Mech mechSeleccionado = null;
+    Coordenada coordenadaSeleccionada = null;
 
 
     public Partida(Tablero tablero) {
@@ -77,5 +80,20 @@ public class Partida {
 
     public boolean sePerdio() {
         return this.sePerdio;
+    }
+
+    public void seleccionarMechEn(Coordenada coordenada) {
+        SeleccionadorDeMechs seleccionadorDeMechs = new SeleccionadorDeMechs();
+        this.tablero.serSeleccionadorPor(coordenada,seleccionadorDeMechs);
+        this.mechSeleccionado = seleccionadorDeMechs.obtenerMechSeleccionado();
+        this.coordenadaSeleccionada = coordenada;
+
+    }
+
+    public void moverMechSeleccionado(Coordenada destino) {
+        this.tablero.moverPieza(this.coordenadaSeleccionada,destino);
+        /*Podria ser tambien
+        this.mechSeleccionado.moverseA(tablero.crearTrayectoria(coordenadaSeleccionada,destino));
+        * */
     }
 }

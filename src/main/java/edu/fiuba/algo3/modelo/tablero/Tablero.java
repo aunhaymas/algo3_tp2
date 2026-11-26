@@ -122,6 +122,9 @@ public class Tablero {
             casilla.serSeleccionadoPor(seleccionador);
         }
     }
+    public void serSeleccionadorPor(Coordenada coordenada,Seleccionador seleccionador) {
+        this.obtenerCasilla(coordenada).serSeleccionadoPor(seleccionador);
+    }
 
     public void solicitarEmergenciaEn(Coordenada objetivo, Vek vek) {
         obtenerCasilla(objetivo).emergencia(vek);
